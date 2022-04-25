@@ -10,13 +10,24 @@ export const Register = () => {
         <div className="input-container1">
           <form>
             <label>
-              Login:
+              E-mail:
               <input type="text" />
             </label>
             <label>
               <br></br>Haslo:
               <input type="password" />
             </label>
+            <label>
+              <br></br>Powtórz hasło:
+              <input type="password" />
+            </label>
+            <label>
+              <br></br>Numer telefonu:
+              <input type="password" />
+            </label>
+            <button type="submit" className="registerbutton">
+              Potwierdź
+            </button>
           </form>
         </div>
       </div>

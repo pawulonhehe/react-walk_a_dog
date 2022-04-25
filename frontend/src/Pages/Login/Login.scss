@@ -1,3 +1,67 @@
 .login {
   background-color: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .form {
+    background-color: #15172b;
+    border-radius: 20px;
+    box-sizing: border-box;
+    height: 40%;
+    padding: 8%;
+    width: 90%;
+  }
+
+  .title {
+    color: #eee;
+    font-family: "Montserrat", sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 8%;
+  }
+
+  .subtitle {
+    color: #eee;
+    opacity: 0.7;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 3%;
+  }
+  .input-container1 {
+    height: 7%;
+    position: relative;
+    width: 100%;
+    margin-top: 5%;
+  }
+
+  input {
+    background-color: #fff;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #000;
+    font-size: 20px;
+    height: 100%;
+    outline: 0;
+    padding: 5px 20px 0;
+    width: 100%;
+  }
+  label {
+    color: rgb(201, 201, 201);
+  }
+
+  .loginbutton {
+    background-color: #3498db;
+    border-radius: 5px;
+    border: solid transparent;
+    height: 3rem;
+    width: 10rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-top: 1rem;
+  }
 }
