@@ -1,0 +1,25 @@
+-r requirements.txt
+
+codecov
+coloredlogs
+coverage
+django-naomi
+factory_boy
+flake8
+flake8-blind-except
+flake8-commas
+flake8-docstrings
+flake8-isort
+flake8-pep3101
+flake8-quotes
+flake8-string-format
+ipython
+isort
+mock
+pydocstyle
+pyexcel-xlsxr
+pytest
+pytest-cov
+pytest-django
+python-coveralls
+sort-requirements
