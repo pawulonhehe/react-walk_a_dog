@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # custom apps
-    'core.apps.CoreConfig',
-    'core.user.apps.UserConfig',
+    'accounts.apps.AccountsConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +71,6 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = 'core_user.User'
 
 OAUTH2_PROVIDER = {
     'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
@@ -83,8 +82,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
-    ),
-
+    )
 }
 WSGI_APPLICATION = 'project.wsgi.application'
 
