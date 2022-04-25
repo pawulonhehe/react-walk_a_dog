@@ -1,26 +1,22 @@
 import React from "react";
-import Login from "./Pages/Login/Login";
-import Home from "./Pages/Home/Home";
-import "./App.module.scss";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import classes from "./App.module.scss";
+import { Home } from "./Pages/Home/Home";
+import { Login } from "./Pages/Login/Login";
+import { Register } from "./Pages/Register/Register";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "./App.scss";
 
-function App() {
+export const App = () => {
   return (
-    <div className={classes["main-app"]}>
+    <div className="main-app">
       <Router>
-        <nav>
-          <h1>MENU</h1>
-          <Link to="/">Home</Link>
-          <Link to="/login">Login</Link>
-        </nav>
-        <Route>
+        <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-        </Route>
+          <Route path="/register" element={<Register />} />
+        </Routes>
       </Router>
     </div>
   );
-}
+};
 
 export default App;

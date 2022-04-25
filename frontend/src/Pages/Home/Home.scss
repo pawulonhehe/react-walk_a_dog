@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap");
+
+.home {
+  background-image: url("../../Assets/Images/homedog.jpg");
+  display: flex;
+  height: 100vh;
+
+  .hometitle--container {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    display: flex;
+    width: 90%;
+    height: 12%;
+    margin: 0 auto;
+    margin-top: 2rem;
+  }
+
+  .hometitle {
+    font-size: 1.6rem;
+    font-family: "Montserrat", sans-serif;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    color: #fff;
+  }
+
+  .buttoncontainer {
+    display: flex;
+    width: 80%;
+    height: 22%;
+    justify-content: space-between;
+    flex-direction: column;
+    position: absolute;
+    left: 10%;
+    align-items: center;
+    top: 67%;
+  }
+
+  .button {
+    border-radius: 5px;
+    border: solid transparent;
+    background-color: #f1c40f;
+    height: 5rem;
+    width: 20rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #000000;
+  }
+}

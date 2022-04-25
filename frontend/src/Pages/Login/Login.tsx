@@ -1,8 +1,10 @@
 import React from "react";
-import classes from "./Login.module.scss";
+import "./Login.scss";
 
-const Login = () => {
-  return <div className={classes["login-screen"]}>Login</div>;
+export const Login = () => {
+  return (
+    <div className="login">
+      <h1>Login</h1>
+    </div>
+  );
 };
-
-export default Login;

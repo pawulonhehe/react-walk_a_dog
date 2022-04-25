@@ -1,0 +1,22 @@
+.register {
+  background-color: blue;
+
+  .form {
+    background-color: #fff;
+  }
+
+  .title {
+    background-color: grey;
+  }
+
+  .subtitle {
+    background-color: blue;
+  }
+  .input-container1 {
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    flex-direction: column;
+  }
+}
