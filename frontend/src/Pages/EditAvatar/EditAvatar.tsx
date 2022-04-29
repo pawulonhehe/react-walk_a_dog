@@ -28,7 +28,22 @@ export const EditAvatar = () => {
           </Link>
         </div>
       </div>
-      <div className="RightSideContainer">ok</div>
+      <div className="RightSideContainer">
+        <h3>Podgląd</h3>
+        <div className="RightSideContainer--avatar">
+          <img src={pudzilla} alt="Pudzilla" width="100" height="100"></img>
+        </div>
+        <div className="RightSideContainer--form">
+          <form>
+            <label>
+              <br></br>Zmień zdjęcie poglądowe
+            </label>
+            <div className="RightSideContainer--AvatarChange">
+              <input type="file" id="avatar" name="avatar" />
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

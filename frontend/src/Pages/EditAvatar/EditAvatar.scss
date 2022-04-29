@@ -25,7 +25,7 @@
     }
 
     img {
-      border-radius: 50%;
+      border-radius: 50%; // to tez nie dziala
     }
 
     .LeftSideBar--buttonContainer {
@@ -65,7 +65,29 @@
     flex-direction: column;
     border-radius: 15px;
     height: 39%;
-    justify-content: space-between;
     background-color: #3498db;
+
+    h3 {
+      font-family: "Montserrat", sans-serif;
+      color: rgba(255, 255, 255, 1);
+    }
+
+    .RightSideContainer--avatar {
+      display: flex;
+      justify-content: center;
+      // nie dziala xd border-radius: 50%;
+    }
+
+    .RightSideContainer--form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .RightSideContainer--AvatarChange {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
