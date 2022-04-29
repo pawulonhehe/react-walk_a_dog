@@ -75,7 +75,9 @@
     .RightSideContainer--avatar {
       display: flex;
       justify-content: center;
-      // nie dziala xd border-radius: 50%;
+    }
+    .RightSideContainer--avatar img{
+      border-radius: 50%;  
     }
 
     .RightSideContainer--form {
@@ -83,11 +85,29 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      flex-direction: row;
+      padding: .5rem;
     }
 
     .RightSideContainer--AvatarChange {
       display: flex;
       justify-content: center;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    .RightSideContainer--fileUpload {
+      cursor: pointer;
+      margin-top: 3rem;
+      background-color: #DCDCDC;
+      padding: .25rem;
+      border-radius: .25rem;
+    }
+    .RightSideContainer--url {
+      background-color: #DCDCDC;
+      padding: .25rem;
+      border-radius: .25rem;
+      border: none;
     }
   }
 }

@@ -35,12 +35,12 @@ export const EditAvatar = () => {
         </div>
         <div className="RightSideContainer--form">
           <form>
-            <label>
-              <br></br>Zmień zdjęcie poglądowe
+            <input type="text" name="" id="" className="RightSideContainer--url" placeholder="wpisz url..."/>
+            <p>lub</p>
+            <label className="RightSideContainer--fileUpload">
+              <input type="file" id="avatar" name="avatar"/>
+              Załącz...
             </label>
-            <div className="RightSideContainer--AvatarChange">
-              <input type="file" id="avatar" name="avatar" />
-            </div>
           </form>
         </div>
       </div>
