@@ -4,6 +4,8 @@ import { Login } from "./Pages/Login/Login";
 import { Register } from "./Pages/Register/Register";
 import { AfterLogin } from "./Pages/AfterLogin/AfterLogin";
 import { EditProfile } from "./Pages/EditProfile/EditProfile";
+import { EditAvatar } from "./Pages/EditAvatar/EditAvatar";
+import { EditAccount } from "./Pages/EditAccount/EditAccount";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.scss";
 
@@ -17,6 +19,8 @@ export const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/afterlogin" element={<AfterLogin />} />
           <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/editavatar" element={<EditAvatar />} />
+          <Route path="/editaccount" element={<EditAccount />} />
         </Routes>
       </Router>
     </div>

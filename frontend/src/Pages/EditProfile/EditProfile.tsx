@@ -1,6 +1,6 @@
 import "./EditProfile.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const EditProfile = () => {
   return (
@@ -11,43 +11,67 @@ export const EditProfile = () => {
           <img src={pudzilla} alt="Pudzilla" width="100" height="100"></img>
         </div>
         <div className="LeftSideBar--buttonContainer">
-          <button type="submit" className="LeftSideBar-button">
-            Profil
-          </button>
-          <button type="submit" className="LeftSideBar-button">
-            Zdjęcie
-          </button>
-          <button type="submit" className="LeftSideBar-button">
-            Konto
-          </button>
+          <Link to="/editprofile">
+            <button type="submit" className="LeftSideBar-button">
+              Profil
+            </button>
+          </Link>
+          <Link to="/editavatar">
+            <button type="submit" className="LeftSideBar-button">
+              Zdjęcie
+            </button>
+          </Link>
+          <Link to="/editaccount">
+            <button type="submit" className="LeftSideBar-button">
+              Konto
+            </button>
+          </Link>
         </div>
       </div>
       <div className="RightSideContainer">
         <form>
           <label>
-            Imie:
+            Imie:<br></br>
             <input type="text" name="firstname" />
           </label>
+          <button type="submit" className="RightSideContainer--changeButton">
+            Zmień
+          </button>
           <label>
             Nazwisko:
             <input type="text" name="lastname" />
           </label>
+          <button type="submit" className="RightSideContainer--changeButton">
+            Zmień
+          </button>
           <label>
             Numer telefonu:
             <input type="number" name="phone" />
           </label>
+          <button type="submit" className="RightSideContainer--changeButton">
+            Zmień
+          </button>
           <label>
             Data urodzenia:
             <input type="date" name="birthdate" />
           </label>
+          <button type="submit" className="RightSideContainer--changeButton">
+            Zmień
+          </button>
           <label>
             Haslo:
             <input type="password" name="password" />
           </label>
+          <button type="submit" className="RightSideContainer--changeButton">
+            Zmień
+          </button>
           <label>
             Adres:
             <input type="text" name="address" />
           </label>
+          <button type="submit" className="RightSideContainer--changeButton">
+            Zmień
+          </button>
         </form>
       </div>
     </div>
