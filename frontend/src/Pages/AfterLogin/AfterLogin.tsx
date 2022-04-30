@@ -1,14 +1,14 @@
 import React from "react";
 import "./AfterLogin.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
-import { Icon } from "@iconify/react";
+import {Icon} from "@iconify/react";
 // import { Link } from "react-router-dom";
 
 export const AfterLogin = () => {
   return (
     <div className="AfterLogin">
       <div className="Avatar">
-        <img src={pudzilla} alt="Pudzilla" width="140" height="140"></img>
+        <img src={pudzilla} alt="Pudzilla" width="140" height="140"/>
       </div>
       <div className="MainContainer">
         <div className="WelcomeMessage">Witaj Mariusz!</div>
@@ -16,7 +16,7 @@ export const AfterLogin = () => {
           <div className="Icon">
             <Icon
               icon="material-symbols:manage-accounts"
-              style={{ fontSize: "54px" }}
+              style={{fontSize: "54px"}}
             />
           </div>
           <div className="title">
@@ -30,7 +30,7 @@ export const AfterLogin = () => {
           <div className="Icon">
             <Icon
               icon="material-symbols:sound-detection-dog-barking"
-              style={{ fontSize: "54px" }}
+              style={{fontSize: "54px"}}
             />
           </div>
           <div className="title">
@@ -44,7 +44,7 @@ export const AfterLogin = () => {
           <div className="Icon">
             <Icon
               icon="material-symbols:calendar-month-outline"
-              style={{ fontSize: "54px" }}
+              style={{fontSize: "54px"}}
             />
           </div>
           <div className="title">
@@ -56,7 +56,7 @@ export const AfterLogin = () => {
         </div>
         <div className="NiceButton">
           <div className="Icon">
-            <Icon icon="material-symbols:person" style={{ fontSize: "54px" }} />
+            <Icon icon="material-symbols:person" style={{fontSize: "54px"}}/>
           </div>
           <div className="title">
             <h3>Trenerzy</h3>

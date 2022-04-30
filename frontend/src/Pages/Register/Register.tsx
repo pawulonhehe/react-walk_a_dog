@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
 import "./Register.scss";
 import {useNavigate} from "react-router";
-import axiosInstance from "../../axios/login";
+import axiosInstance from "../../axios/axios";
 
 const API_URL = "http://127.0.0.1:8000/api/v1/";
 
@@ -35,10 +35,9 @@ export const Register = () => {
       .then((res) => {
         sessionStorage.setItem('token', res.data.key);
         navigate('/');
-        window.location.reload();
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error.response.status, error.response.data.statusText);
       })
   }
   return (
@@ -47,7 +46,7 @@ export const Register = () => {
         <div className="title">Zarejestruj</div>
         <div className="subtitle">Stwórz konto wypełniając pola</div>
         <div className="input-container1">
-          <form>
+          <form onSubmit={handleSubmit}>
             <label>
               E-mail:
               <input type="text"
@@ -71,7 +70,6 @@ export const Register = () => {
             </label>
             <button type="submit"
                     className="registerbutton"
-                    onClick={handleSubmit}
             >
               Potwierdź
             </button>

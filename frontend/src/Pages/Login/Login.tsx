@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./Login.scss";
 import {useNavigate} from "react-router";
-import axiosInstance from "../../axios/login";
+import axiosInstance from "../../axios/axios";
 
 const API_URL = "http://127.0.0.1:8000/api/v1/";
 
