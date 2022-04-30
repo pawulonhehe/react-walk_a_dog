@@ -2,7 +2,6 @@ import React from "react";
 import "./AfterLogin.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import { Icon } from "@iconify/react";
-import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 export const AfterLogin = () => {
