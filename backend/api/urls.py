@@ -7,7 +7,7 @@ app_name = 'api'
 urlpatterns = [
     # path('rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
     path('auth/', include('dj_rest_auth.urls')),
-    path('auth/registration/', include('dj_rest_auth.registration.urls')),
-    url(r"^auth/registration/account-confirm-email/(?P<key>[\s\d\w().+-_',:&]+)/$", confirm_email,
+    path('auth/register/', include('dj_rest_auth.registration.urls')),
+    url(r"^auth/register/account-confirm-email/(?P<key>[\s\d\w().+-_',:&]+)/$", confirm_email,
         name="account_confirm_email"),
 ]

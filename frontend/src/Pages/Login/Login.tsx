@@ -3,7 +3,7 @@ import "./Login.scss";
 import {useNavigate} from "react-router";
 import axiosInstance from "../../axios/login";
 
-
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 export const Login = () => {
 
   const navigate = useNavigate();
@@ -23,21 +23,15 @@ export const Login = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(formData);
-
     axiosInstance
-      .post('auth/token', {
-        grant_type: 'password',
-        username: formData.email,
+      .post(BACKEND_URL + 'auth/login/', {
+        email: formData.email,
         password: formData.password,
-        client_id: 'Li6fdB8b9CAAtJSpQ6Xt42B4fMmuAmK905WbceMR',
-        client_secret: 'jYyHojpnnB8po6nW0d9V3eXGePNzljG2pzhA3GWLfV0Q7SkQUxkE33MqMZv8bhunbVagMzUikx8MDPuZCTU4BmlXlAeGObkGB5vJuS3gAkaUhPS1jNRRFkTIkhJSrkOk'
       })
       .then((res) => {
-        localStorage.setItem('access_token', res.data.access_token);
-        localStorage.setItem('refresh_token', res.data.refresh_token);
+        localStorage.setItem('access_key', res.data.key);
+        console.log(res.data.key);
         navigate('/');
-        window.location.reload();
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -54,7 +48,7 @@ export const Login = () => {
           <form noValidate>
             <label>
               E-mail:
-              <input type="text"
+              <input type="email"
                      name="email"
                      onChange={handleChange}
               />

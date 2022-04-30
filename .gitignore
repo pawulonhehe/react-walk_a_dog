@@ -38,7 +38,6 @@ apps_static
 *.pyc
 sqlite3.db
 db.sqlite3
-*.db
 db.*
 wsgi_local*
 settings_local.py
@@ -52,7 +51,6 @@ dump.rdb
 media/
 src/*
 .cache
-.coverage
 .uwsgi.pid
 .virtualenvs/
 project.sock
@@ -60,5 +58,6 @@ static/theme/sass/custom/.sass-cache/*
 static/init-firebase-local.js
 qrcode.svg
 .venv
-.vscode
 .docker_env.dev
+
+.env
