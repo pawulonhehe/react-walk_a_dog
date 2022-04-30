@@ -96,6 +96,24 @@ class UserDetails(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
+    phone_number = models.CharField(
+        max_length=20,
+        blank=True,
+    )
+    date_of_birth = models.DateField(
+        blank=True,
+        null=True,
+    )
+    # zmienić kiedyś na oddzielny model/oddzielne pola
+    address = models.CharField(
+        max_length=255,
+        blank=True,
+    )
+    image = models.ImageField(
+        upload_to='profile_images',
+        blank=True,
+    )
+
 
     def __str__(self):
         return self.user.email
