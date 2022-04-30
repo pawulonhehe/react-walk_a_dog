@@ -1,40 +1,27 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {useState} from "react";
 import "./Login.scss";
 import {useNavigate} from "react-router";
 import axiosInstance from "../../axios/login";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = "http://127.0.0.1:8000/api/v1/";
+
 export const Login = () => {
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const initialFormData = Object.freeze({
-    email: '',
-    password: '',
-  })
 
-  const [formData, updateFormData] = useState(initialFormData);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    updateFormData({
-      ...formData,
-      [e.currentTarget.name]: e.currentTarget.value.trim(),
-    });
-  }
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    const user = {email, password};
     axiosInstance
-      .post(BACKEND_URL + 'auth/login/', {
-        email: formData.email,
-        password: formData.password,
-      })
+      .post(API_URL + 'auth/login/', user)
       .then((res) => {
-        localStorage.setItem('access_key', res.data.key);
-        console.log(res.data.key);
-        navigate('/');
+        sessionStorage.setItem('token', res.data.key);
+        navigate("/");
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error.response.status, error.response.data.statusText);
       })
   }
 
@@ -50,14 +37,14 @@ export const Login = () => {
               E-mail:
               <input type="email"
                      name="email"
-                     onChange={handleChange}
+                     onChange={e => setEmail(e.target.value)}
               />
             </label>
             <label>
               <br/>Haslo:
               <input type="password"
                      name="password"
-                     onChange={handleChange}
+                     onChange={e => setPassword(e.target.value)}
               />
             </label>
             <button type="submit" className="loginbutton" onClick={handleSubmit}>
