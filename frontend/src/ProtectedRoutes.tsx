@@ -1,7 +1,7 @@
 // In ProtectedRoutes.js
-import {Navigate, Outlet} from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-const ProtectedRoutes = ({auth}: any) => {
-  return (auth === true ? <Outlet/> : <Navigate to="/" replace/>)
-}
+const ProtectedRoutes = ({ auth }: any) => {
+  return auth === true ? <Outlet /> : <Navigate to="/" replace />;
+};
 export default ProtectedRoutes;

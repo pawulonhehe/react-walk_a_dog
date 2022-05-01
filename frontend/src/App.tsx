@@ -6,7 +6,7 @@ import Views from "./Views";
 export const App = () => {
   return (
     <div className="main-app">
-      <Views/>
+      <Views />
     </div>
   );
 };
