@@ -21,7 +21,7 @@ docs.zip
 archive.zip
 *.db
 *.sqlite
-
+apps_static
 # vim temporary files
 *~
 .*.sw?
