@@ -175,3 +175,17 @@ try:
     from .settings_local import *
 except ImportError:
     pass
+
+import django_heroku
+import dj_database_url
+DATABASES = {}
+DATABASES['default]'] = dj_database_url.config(conn_max_age=600)
+
+CORS_ORIGIN_WHITELIST = [
+    'https://frontend-wad.herokuapp.com',
+]
+django_heroku.settings(locals())
+
+# Add these at the very last line of settings.py
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
