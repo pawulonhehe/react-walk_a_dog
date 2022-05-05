@@ -51,6 +51,7 @@ export const Reservations = () => {
             </div>
           </div>
         </div>
+        
       </div>
       <div className="Reservations--book">
         <button>
