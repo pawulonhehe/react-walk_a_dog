@@ -12,6 +12,7 @@ import { AddDog } from "./Pages/AddDog/AddDog";
 import { Reservations } from "./Pages/Reservations/Reservations";
 import { Statute } from "./Pages/Statute/Statute";
 import { Mapa } from "./Pages/Mapa/Mapa";
+import { EditDog } from "./Pages/EditDog/EditDog";
 import React from "react";
 
 const Views = () => {
@@ -39,6 +40,7 @@ const Views = () => {
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/testymapa" element={<Mapa />} />
           <Route path="/statute" element={<Statute />} />
+          <Route path="/editdog" element={<EditDog />} />
         </Route>
         <Route path="*" element={<h1>404 Not Found!</h1>} />
       </Routes>

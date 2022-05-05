@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 export const MyDogs = () => {
   const navigate = useNavigate();
   const switchToAddDog = () => navigate("/addDog"); // wazne
+
+  const switchToEditDog = () => navigate("/editDog");
+
   return (
     <div className="MyDogs">
       <div className="MyDogs--topText">Twoje Pieski</div>
@@ -27,7 +30,9 @@ export const MyDogs = () => {
           <div className="MyDogs--dog__Rtext">
             Labrador <br></br> 5 <br></br> Samiec <br></br>60kg
           </div>
-          <button className="MyDogs--dog__button">Edytuj</button>
+          <button className="MyDogs--dog__button" onClick={switchToEditDog}>
+            Edytuj
+          </button>
         </div>
         <div className="MyDogs--dog">
           <div className="MyDogs--dog__title">Azor</div>
@@ -40,7 +45,9 @@ export const MyDogs = () => {
           <div className="MyDogs--dog__Rtext">
             Jamnik <br></br> 15 <br></br> Samiec <br></br>20kg
           </div>
-          <button className="MyDogs--dog__button">Edytuj</button>
+          <button className="MyDogs--dog__button" onClick={switchToEditDog}>
+            Edytuj
+          </button>
         </div>
       </div>
       {/* <Link to="/addDog"> */}
