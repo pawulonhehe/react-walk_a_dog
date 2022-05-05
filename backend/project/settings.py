@@ -178,11 +178,16 @@ except ImportError:
 
 import django_heroku
 import dj_database_url
-DATABASES = {}
-DATABASES['default]'] = dj_database_url.config(conn_max_age=600)
-
+DATABASES = {
+    'default': dj_database_url.config(conn_max_age=600)
+}
+DEBUG = True
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
     'https://frontend-wad.herokuapp.com',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
 ]
 django_heroku.settings(locals())
 

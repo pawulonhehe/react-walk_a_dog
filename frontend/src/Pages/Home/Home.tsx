@@ -3,12 +3,11 @@ import "./Home.scss";
 import {Link} from "react-router-dom";
 import axiosInstance from "../../axios/axios";
 
-const API_URL = "http://127.0.0.1:8000/api/v1/"
 export const Home = () => {
 
   const handleLogout = () => {
     axiosInstance
-      .post(API_URL + "auth/logout/")
+      .post('auth/logout/')
       .then(() => {
         sessionStorage.removeItem("token");
         window.location.reload();

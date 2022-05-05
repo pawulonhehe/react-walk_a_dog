@@ -3,7 +3,6 @@ import "./Register.scss";
 import {useNavigate} from "react-router";
 import axiosInstance from "../../axios/axios";
 
-const API_URL = "http://127.0.0.1:8000/api/v1/";
 
 export const Register = () => {
 
@@ -27,7 +26,7 @@ export const Register = () => {
     e.preventDefault();
 
     axiosInstance
-      .post(API_URL + 'auth/register/', {
+      .post('auth/register/', {
         email: formData.email,
         password1: formData.password1,
         password2: formData.password2,

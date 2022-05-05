@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://127.0.0.1:8000/';
+const baseUrl = 'https://backend-wad.herokuap.com/api/';
 
 const axiosInstance = axios.create({
     baseURL: baseUrl,
