@@ -3,9 +3,11 @@ import "./MyDogs.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import pies from "../../Assets/Images/pies.jpg";
 import pies2 from "../../Assets/Images/pies2.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const MyDogs = () => {
+  const navigate = useNavigate();
+  const switchToAddDog = () => navigate("/addDog"); // wazne
   return (
     <div className="MyDogs">
       <div className="MyDogs--topText">Twoje Pieski</div>
@@ -41,11 +43,11 @@ export const MyDogs = () => {
           <button className="MyDogs--dog__button">Edytuj</button>
         </div>
       </div>
-      <Link to="/addDog">
-        <button type="submit" className="MyDogs--addDog">
-          Dodaj pieska
-        </button>
-      </Link>
+      {/* <Link to="/addDog"> */}
+      <button type="submit" className="MyDogs--addDog" onClick={switchToAddDog}>
+        Dodaj pieska
+      </button>
+      {/* </Link> */}
     </div>
   );
 };
