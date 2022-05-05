@@ -3,7 +3,6 @@ import "./Login.scss";
 import {useNavigate} from "react-router";
 import axiosInstance from "../../axios/axios";
 
-const API_URL = "http://127.0.0.1:8000/api/v1/";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +14,7 @@ export const Login = () => {
     e.preventDefault();
     const user = {email, password};
     axiosInstance
-      .post(API_URL + 'auth/login/', user)
+      .post('auth/login/', user)
       .then((res) => {
         sessionStorage.setItem('token', res.data.key);
         navigate("/");
