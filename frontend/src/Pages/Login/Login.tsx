@@ -20,7 +20,7 @@ export const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error.response.status, error.response.data.statusText);
+        console.log(error.response.status);
       })
   }
 
