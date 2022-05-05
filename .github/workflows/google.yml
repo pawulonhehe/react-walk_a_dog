@@ -23,7 +23,7 @@ env:
   GKE_CLUSTER: walk-a-dog2
   GKE_ZONE: europe-central2-a
   DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
-  REPOSITORY: samples # TODO: update to Artifact Registry docker repository
+  REPOSITORY: walk-a-dog2 # TODO: update to Artifact Registry docker repository
   IMAGE: static-site
 
 jobs:
