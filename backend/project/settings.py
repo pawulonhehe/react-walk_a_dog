@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 # Standard Library
+import dj_database_url
+import django_heroku
 from pathlib import Path
 import os
 
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
+    'corsheaders',
 
     # allauth social providers
     'allauth.socialaccount.providers.facebook',
@@ -170,21 +173,18 @@ ACCOUNT_USERNAME_REQUIRED = False
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-try:
-    # Local
-    from .settings_local import *
-except ImportError:
-    pass
 
-import django_heroku
-import dj_database_url
 DATABASES = {
     'default': dj_database_url.config(conn_max_age=600)
 }
 DEBUG = True
 ALLOWED_HOSTS = ['*']
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = [
+CORS_ALLOWED_ORIGINS = [
+    'https://frontend-wad.herokuapp.com',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
+CSRF_TRUSTED_ORIGINS = [
     'https://frontend-wad.herokuapp.com',
     'http://localhost:3000',
     'http://127.0.0.1:3000',
@@ -194,3 +194,8 @@ django_heroku.settings(locals())
 # Add these at the very last line of settings.py
 options = DATABASES['default'].get('OPTIONS', {})
 options.pop('sslmode', None)
+
+try:
+    from .settings_local import *
+except ImportError:
+    pass
