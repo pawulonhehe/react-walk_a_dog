@@ -34,7 +34,7 @@ export const Register = () => {
         navigate("/");
       })
       .catch((error: any) => {
-        console.log(error.response.status, error.response.data.statusText);
+        console.log(error.response.data);
       });
   };
   return (
