@@ -1,6 +1,7 @@
 import React from "react";
 import "./Reservations.scss";
 import {Icon} from "@iconify/react";
+import pudzilla from "../../Assets/Images/pudzilla.jpg";
 // import { Link } from "react-router-dom";
 
 export const Reservations = () => {
@@ -42,12 +43,12 @@ export const Reservations = () => {
         <div className="Reservations--hisList">
           <div className="Reservations--incomingResList">
             <div className="Reservations--hisDate">
-              <p>Czwartek</p>
-              <p>30gru 12:15</p>
+              <div className="Reservations--dateWeek">Czwartek</div>
+              <div className="Reservations--dateTime">30gru 12:15</div>
             </div>
             <p className="dot"></p>
             <div className="Reservations--hisReservation">
-
+              <p>Spacer</p>
             </div>
           </div>
         </div>
