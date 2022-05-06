@@ -17,7 +17,6 @@
   .Reservations--incomingResList{
     display: flex;
     flex-direction: row;
-    // justify-content: space-between;
     margin: 0.5rem 0 0.5rem  0;
   }
   .Reservations--date{
@@ -115,5 +114,14 @@
   .Reservations--book button:hover{
     background-color: #2c7eb5;
 
+  }
+  // .Reservations--history{
+  //   display: flex;
+  //   flex-direction: row;
+  //   margin: 0.5rem 0 0.5rem  0;
+  // }
+  .Reservations--hisList{
+    display: flex;
+    flex-direction: column;
   }
 }

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import "./Login.scss";
 import { useNavigate } from "react-router";
@@ -11,14 +12,15 @@ export const Login = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const user = { email, password };
+
     axios
       .post("/auth/login/", user)
       .then((res: any) => {
         sessionStorage.setItem("token", res.data.key);
         navigate("/");
       })
-      .catch((error: any) => {
-        console.log(error);
+      .catch((error) => {
+        console.log(error.response);
       });
   };
 
