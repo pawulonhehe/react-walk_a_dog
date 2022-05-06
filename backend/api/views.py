@@ -3,15 +3,24 @@ from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.generics import ListAPIView, RetrieveAPIView
+from accounts.serializers import CustomUserSerializer
+from accounts.models import CustomUser
 
 
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
 
 
-class UserDetailView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+class CustomUserListView(ListAPIView):
+    name = 'customuser-list'
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    permission_classes = [permissions.AllowAny]
 
-    @staticmethod
-    def get(request, *args, **kwargs):
-        return Response({'email': request.user.email})
+
+class CustomUserDetailView(RetrieveAPIView):
+    name = 'customuser-details'
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    permission_classes = [permissions.AllowAny]

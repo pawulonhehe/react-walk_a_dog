@@ -13,6 +13,7 @@ import { Reservations } from "./Pages/Reservations/Reservations";
 import { Statute } from "./Pages/Statute/Statute";
 import { Mapa } from "./Pages/Mapa/Mapa";
 import { EditDog } from "./Pages/EditDog/EditDog";
+import { Users } from "./Pages/Users/Users";
 import React from "react";
 
 const Views = () => {
@@ -30,6 +31,7 @@ const Views = () => {
           path="/register"
           element={isAuth ? <Navigate to={"/"} /> : <Register />}
         />
+        <Route path="/get-users" element={<Users/>}/>
         <Route element={<ProtectedRoutes auth={isAuth} />}>
           <Route path="/afterlogin" element={<AfterLogin />} />
           <Route path="/editprofile" element={<EditProfile />} />
