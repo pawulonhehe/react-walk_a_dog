@@ -14,6 +14,8 @@ import { Statute } from "./Pages/Statute/Statute";
 import { Mapa } from "./Pages/Mapa/Mapa";
 import { EditDog } from "./Pages/EditDog/EditDog";
 import { Users } from "./Pages/Users/Users";
+import { Owner } from "./Pages/Trener/Owner/Owner";
+import { Dog } from "./Pages/Trener/Dog/Dog";
 import React from "react";
 
 const Views = () => {
@@ -43,6 +45,11 @@ const Views = () => {
           <Route path="/testymapa" element={<Mapa />} />
           <Route path="/statute" element={<Statute />} />
           <Route path="/editdog" element={<EditDog />} />
+
+          {/* nizej trener */}
+
+          <Route path="/owner" element={<Owner />} />
+          <Route path="/dog" element={<Dog />} />
         </Route>
         <Route path="*" element={<h1>404 Not Found!</h1>} />
       </Routes>
