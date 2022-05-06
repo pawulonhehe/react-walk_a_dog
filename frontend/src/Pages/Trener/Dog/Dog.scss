@@ -1,0 +1,59 @@
+.Dog {
+  height: 100vh;
+  background-color: #fff;
+
+  .dog--topText {
+    font-family: "Montserrat", sans-serif;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 4%;
+  }
+
+  .dog--topContainer {
+    width: 90%;
+    height: 16%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%;
+
+    .dog--topContainer__leftSide {
+      justify-content: flex-start;
+      display: flex;
+      justify-content: space-between;
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 5%;
+      margin-left: 5%;
+
+      .leftSide__left {
+        justify-content: flex-start;
+        text-align: left;
+        color: rgba(0, 0, 0, 0.5);
+      }
+
+      .leftSide__right {
+        justify-content: flex-end;
+        margin-left: 30%;
+        text-align: right;
+      }
+    }
+
+    .dog--topContainer__rightSide {
+      justify-content: flex-end;
+      margin-top: 5%;
+      margin-right: 5%;
+    }
+
+    .dog--dogGrade {
+      background-color: grey;
+      width: 85%;
+    }
+  }
+
+  img {
+    border-radius: 50%;
+  }
+}
