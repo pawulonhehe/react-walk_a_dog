@@ -13,11 +13,11 @@ export const Login = () => {
     const user = { email, password };
     axios
       .post("/auth/login/", user)
-      .then((res) => {
+      .then((res: any) => {
         sessionStorage.setItem("token", res.data.key);
         navigate("/");
       })
-      .catch((error) => {
+      .catch((error: any) => {
         console.log(error);
       });
   };
