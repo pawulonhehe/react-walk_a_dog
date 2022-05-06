@@ -11,14 +11,15 @@ export const Login = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const user = { email, password };
+
     axios
       .post("/auth/login/", user)
-      .then((res) => {
+      .then((res: any) => {
         sessionStorage.setItem("token", res.data.key);
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
 
