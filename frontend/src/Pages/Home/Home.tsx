@@ -1,12 +1,11 @@
 import React from "react";
 import "./Home.scss";
 import {Link} from "react-router-dom";
-import axiosInstance from "../../axios/axios";
-
+import axios from "axios";
 export const Home = () => {
 
   const handleLogout = () => {
-    axiosInstance
+    axios
       .post('auth/logout/')
       .then(() => {
         sessionStorage.removeItem("token");
