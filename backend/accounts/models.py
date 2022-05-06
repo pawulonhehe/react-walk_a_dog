@@ -112,10 +112,10 @@ class UserDetails(models.Model):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    details = models.ForeignKey(
+    details = models.OneToOneField(
         UserDetails,
         verbose_name='Dane użytkownika',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
     )
