@@ -46,11 +46,63 @@
       margin-top: 5%;
       margin-right: 5%;
     }
+  }
 
-    .dog--dogGrade {
-      background-color: grey;
-      width: 85%;
-    }
+  .dog--dogGrade {
+    width: 85%;
+    margin: 0 auto;
+  }
+
+  .dog--midContainer__owner {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 85%;
+    margin: 0 auto;
+    height: 60%;
+    margin-top: 3%;
+    border-radius: 15px;
+    flex-direction: column;
+  }
+
+  .dog--midContainer__topText {
+    font-family: "Montserrat", sans-serif;
+    color: #3498db;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 3%;
+  }
+  .dog--midContainer__avatar {
+    margin-top: 2%;
+  }
+
+  .dog--midContainer__infoTitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 2%;
+  }
+
+  .dog--midContainer__info {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    margin-top: 3%;
+    text-align: left;
+    margin-left: 8%;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  .dog--midContainer__lastSeen {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.4);
+    text-align: right;
+    margin-right: 10%;
+    margin-top: 3%;
+  }
+
+  .dog--midContainer__map {
+    color: red;
   }
 
   img {

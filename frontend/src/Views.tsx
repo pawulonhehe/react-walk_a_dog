@@ -15,6 +15,8 @@ import { Mapa } from "./Pages/Mapa/Mapa";
 import { EditDog } from "./Pages/EditDog/EditDog";
 import { Owner } from "./Pages/Trener/Owner/Owner";
 import { Dog } from "./Pages/Trener/Dog/Dog";
+import { TrenerAfterLogin } from "./Pages/Trener/AfterLogin/AfterLogin";
+import { YourClients } from "./Pages/Trener/YourClients/YourClients";
 import React from "react";
 
 const Views = () => {
@@ -48,6 +50,8 @@ const Views = () => {
 
           <Route path="/owner" element={<Owner />} />
           <Route path="/dog" element={<Dog />} />
+          <Route path="/trenerafterlogin" element={<TrenerAfterLogin />} />
+          <Route path="/yourclients" element={<YourClients />} />
         </Route>
         <Route path="*" element={<h1>404 Not Found!</h1>} />
       </Routes>
