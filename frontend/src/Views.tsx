@@ -13,6 +13,7 @@ import { Reservations } from "./Pages/Reservations/Reservations";
 import { Statute } from "./Pages/Statute/Statute";
 import { Mapa } from "./Pages/Mapa/Mapa";
 import { EditDog } from "./Pages/EditDog/EditDog";
+import { Users } from "./Pages/Users/Users";
 import { Owner } from "./Pages/Trener/Owner/Owner";
 import { Dog } from "./Pages/Trener/Dog/Dog";
 import { TrenerAfterLogin } from "./Pages/Trener/AfterLogin/AfterLogin";
@@ -34,7 +35,8 @@ const Views = () => {
           path="/register"
           element={isAuth ? <Navigate to={"/"} /> : <Register />}
         />
-        <Route element={<ProtectedRoutes auth={true} />}>
+        <Route path="/get-users" element={<Users/>}/>
+        <Route element={<ProtectedRoutes auth={isAuth} />}>
           <Route path="/afterlogin" element={<AfterLogin />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/editavatar" element={<EditAvatar />} />

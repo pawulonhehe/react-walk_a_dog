@@ -1,9 +1,10 @@
+from re import T
 from django.db import models
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
-
+from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -44,7 +45,80 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
+class UserAddress(models.Model):
+    city = models.CharField(
+        'Miasto',
+        max_length=40,
+    )
+    postal_code = models.CharField(
+        'Kod pocztowy',
+        max_length=6,
+        validators=[
+            RegexValidator(
+                regex='^\d{2}-\d{3}$',
+                message='Kod pocztowy musi być w formacie XX-XXX',
+            ),
+        ]
+    )
+    street = models.CharField(
+        'Ulica',
+        max_length=100,
+    )
+    house_number = models.CharField(
+        'Numer domu',
+        max_length=10,
+    )
+    flat_number = models.CharField(
+        'Numer mieszkania',
+        max_length=10,
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name = 'Adres'
+        verbose_name_plural = 'Adresy'
+
+
+class UserDetails(models.Model):
+    address = models.ForeignKey(
+        UserAddress,
+        verbose_name='Adres',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    phone_number = models.CharField(
+        'Numer telefonu',
+        max_length=20,
+        blank=True,
+    )
+    date_of_birth = models.DateField(
+        'Data urodzenia',
+        blank=True,
+        null=True,
+    )
+    image = models.ImageField(
+        'Zdjęcie profilowe',
+        upload_to='profile_images',
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name = 'Dane użytkownika'
+        verbose_name_plural = 'Dane użytkowników'
+
+    def __str__(self):
+        return str(self.pk)
+
+
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    details = models.OneToOneField(
+        UserDetails,
+        verbose_name='Dane użytkownika',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
     email = models.EmailField(
         unique=True,
         max_length=255,
@@ -83,37 +157,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         default=timezone.now,
     )
 
-    # Add additional fields here if needed
-
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
 
-
-class UserDetails(models.Model):
-    user = models.OneToOneField(
-        CustomUser,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
-    phone_number = models.CharField(
-        max_length=20,
-        blank=True,
-    )
-    date_of_birth = models.DateField(
-        blank=True,
-        null=True,
-    )
-    # zmienić kiedyś na oddzielny model/oddzielne pola
-    address = models.CharField(
-        max_length=255,
-        blank=True,
-    )
-    image = models.ImageField(
-        upload_to='profile_images',
-        blank=True,
-    )
-
-
-    def __str__(self):
-        return self.user.email
+    class Meta:
+        verbose_name = 'Użytkownik'
+        verbose_name_plural = 'Użytkownicy'
