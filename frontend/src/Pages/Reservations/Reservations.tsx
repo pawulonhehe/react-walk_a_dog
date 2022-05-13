@@ -1,7 +1,6 @@
 import React from "react";
 import "./Reservations.scss";
-import {Icon} from "@iconify/react";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import { Icon } from "@iconify/react";
 // import { Link } from "react-router-dom";
 
 export const Reservations = () => {
@@ -13,7 +12,7 @@ export const Reservations = () => {
           <div className="Reservations--date">Dziś</div>
           <p className="dot"></p>
           <div className="Reservations--reservation">
-          Nie masz dziś zaplanowanych żadnych spacerów ani trenigów
+            Nie masz dziś zaplanowanych żadnych spacerów ani trenigów
           </div>
         </div>
       </div>
@@ -22,21 +21,15 @@ export const Reservations = () => {
         <div className="Reservations--filters">
           Filtruj
           <button>
-          <Icon
-              icon="material-symbols:calendar-month-outline"
-            />
+            <Icon icon="material-symbols:calendar-month-outline" />
             Data
           </button>
           <button>
-          <Icon
-              icon="material-symbols:sound-detection-dog-barking"
-            />
+            <Icon icon="material-symbols:sound-detection-dog-barking" />
             Pies
           </button>
-          <button> 
-          <Icon
-              icon="material-symbols:person"
-            />
+          <button>
+            <Icon icon="material-symbols:person" />
             Trener
           </button>
         </div>
@@ -52,12 +45,9 @@ export const Reservations = () => {
             </div>
           </div>
         </div>
-        
       </div>
       <div className="Reservations--book">
-        <button>
-          Rezerwuj spacer
-        </button>
+        <button>Rezerwuj spacer</button>
       </div>
     </div>
   );

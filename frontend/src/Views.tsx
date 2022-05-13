@@ -18,6 +18,7 @@ import { Owner } from "./Pages/Trener/Owner/Owner";
 import { Dog } from "./Pages/Trener/Dog/Dog";
 import { TrenerAfterLogin } from "./Pages/Trener/AfterLogin/AfterLogin";
 import { YourClients } from "./Pages/Trener/YourClients/YourClients";
+import { BookWalk } from "./Pages/BookWalk/BookWalk";
 import React from "react";
 
 const Views = () => {
@@ -47,6 +48,7 @@ const Views = () => {
           <Route path="/testymapa" element={<Mapa />} />
           <Route path="/statute" element={<Statute />} />
           <Route path="/editdog" element={<EditDog />} />
+          <Route path="/bookwalk" element={<BookWalk />} />
 
           {/* nizej trener */}
 
