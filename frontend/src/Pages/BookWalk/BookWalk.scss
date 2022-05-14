@@ -2,6 +2,10 @@ $blue: #3498db;
 $black: #000;
 $white: #fff;
 $lightblue: #aec7ea;
+$darkgreen: #42945E;
+$green: #6ECC8E;
+$darkpink: #DE38B9;
+$pink: #EEAFE0;
 
 .BookWalk {
   background-color: #f3f3f3;
@@ -65,6 +69,7 @@ $lightblue: #aec7ea;
     padding: 0.5rem;
     border-radius: 0.5rem;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
   }
   .BookWalk--info {
     text-align: left;

@@ -2,6 +2,7 @@ import React from "react";
 import "./Reservations.scss";
 import { Icon } from "@iconify/react";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
+
 // import { Link } from "react-router-dom";
 
 export const Reservations = () => {
