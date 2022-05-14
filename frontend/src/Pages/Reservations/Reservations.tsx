@@ -1,6 +1,7 @@
 import React from "react";
 import "./Reservations.scss";
 import { Icon } from "@iconify/react";
+import pudzilla from "../../Assets/Images/pudzilla.jpg";
 // import { Link } from "react-router-dom";
 
 export const Reservations = () => {
@@ -79,7 +80,18 @@ export const Reservations = () => {
             </div>
             <p className="dot"></p>
             <div className="Reservations--hisReservation">
-              <p>Spacer</p>
+              <div className="Reservations--bottomInfo">
+                <div className="Reservations--Avatar">
+                  <img src={pudzilla} alt="pudzilla" />
+                </div>
+                <div>
+                  Jacek Szyuła <br></br> Azor, Rocky, Maciej
+                </div>
+              </div>
+              <div className="Reservations--infoButtons">
+                <button>Szczegóły</button>
+                <button>Oceń</button>
+              </div>
             </div>
           </div>
         </div>
