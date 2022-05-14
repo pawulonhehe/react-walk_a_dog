@@ -15,6 +15,26 @@ export const Reservations = () => {
             Nie masz dziś zaplanowanych żadnych spacerów ani trenigów
           </div>
         </div>
+        <div className="Reservations--incomingResList">
+          <div className="Reservations--date">
+            Czwartek <br></br>
+            10 mar 10:15
+          </div>
+          <p className="dot"></p>
+          <div className="Reservations--reservation">
+            <div className="Reservations--info">
+              <span>Jacek Szyuła - Azor, Rocky, Maciej</span>
+              <div>
+                <Icon icon="material-symbols:pin-drop-sharp" />
+                Aleja Warszawska 107, <br></br>10-720 Olsztyn
+              </div>
+            </div>
+            <div className="Reservations--infoButtons">
+              <button>Anuluj</button>
+              <button>Szczegóły</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="Reservations--history">
         <h4>Historia</h4>
