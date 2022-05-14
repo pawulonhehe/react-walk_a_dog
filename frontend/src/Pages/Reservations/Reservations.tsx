@@ -9,17 +9,17 @@ export const Reservations = () => {
       <div className="Reservations--topText">Twoje Rezerwacje</div>
       <div className="Reservations--incomingRes">
         <div className="Reservations--incomingResList">
-          <div className="Reservations--date">Dziś</div>
+          <span className="Reservations--date">Dziś</span>
           <p className="dot"></p>
           <div className="Reservations--reservation">
             Nie masz dziś zaplanowanych żadnych spacerów ani trenigów
           </div>
         </div>
         <div className="Reservations--incomingResList">
-          <div className="Reservations--date">
+          <span className="Reservations--date">
             Czwartek <br></br>
             10 mar 10:15
-          </div>
+          </span>
           <p className="dot"></p>
           <div className="Reservations--reservation">
             <div className="Reservations--info">
@@ -44,10 +44,28 @@ export const Reservations = () => {
             <Icon icon="material-symbols:calendar-month-outline" />
             Data
           </button>
-          <button>
-            <Icon icon="material-symbols:sound-detection-dog-barking" />
-            Pies
-          </button>
+          <li className="tooltip">
+            <button className="tooltip">
+              <Icon icon="material-symbols:sound-detection-dog-barking" />
+              Pies
+            </button>
+            <div className="tooltipMenu bottomSide">
+              <ul>
+                <li>
+                  <label>
+                    <input type="checkbox" />
+                    Azor
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" />
+                    Rocky
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </li>
           <button>
             <Icon icon="material-symbols:person" />
             Trener
