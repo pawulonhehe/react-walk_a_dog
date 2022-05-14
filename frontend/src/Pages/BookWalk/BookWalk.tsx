@@ -18,7 +18,7 @@ export const BookWalk = () => {
           <select name="" id=""></select>
         </div>
         <div className="BookWalk--select">
-          <span>Psy</span>
+          <span>Wybierz psy</span>
           <select name="" id=""></select>
         </div>
       </div>
