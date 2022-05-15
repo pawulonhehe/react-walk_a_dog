@@ -151,69 +151,7 @@ $lightblue: #aec7ea;
     display: flex;
     flex-direction: column;
   }
-  // tooltip
-  li{
-    list-style: none;
-  }
-  // --
-  .tooltipMenu{
-    // width: 7rem;
-  }
-  
-  .tooltipMenu ul li{
-    width: 100%;
-    color: #0d77b6;
-    padding: .25rem;
-    background: #fff;
-  }
-  
-  
-  .tooltipMenu ul li:hover{
-    background: $lightblue;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  // ---
-  .tooltip{
-    position: relative;
-    display: inline-block;
-  }
-  
-  .tooltipMenu {
-    visibility: hidden;
-    position: absolute;
-    z-index: 1;
-  }
-  
-  .tooltip:hover .tooltipMenu{
-    visibility: visible;
-    cursor: pointer;
-  }
-  
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-  .bottomSide {
-    top: 100%;
-  }
-  .tooltipMenu::after {
-      content: " ";
-      position: absolute;
-  }
-  
-  .bottomSide.tooltipMenu::after {
-      bottom: 100%;
-      left: 45%;
-      border-color: transparent transparent white transparent;
-  }
-  label{
-    display: flex;
-    align-items: center;
-    justify-content: left;
-  }
-  .Reservations--hisReservation p{
+    .Reservations--hisReservation p{
     margin: 0;
   }
   .Reservations--Avatar img{
@@ -224,5 +162,4 @@ $lightblue: #aec7ea;
   .Reservations--bottomInfo{
     display: flex;
   }
-
 }

@@ -3,7 +3,8 @@ import "./Reservations.scss";
 import { Icon } from "@iconify/react";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import BasicModal from "../BasicModal/BasicModal";
-import Modal from "@mui/material/Modal";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
 
 // import { Link } from "react-router-dom";
 
@@ -11,6 +12,21 @@ export const Reservations = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseP = () => {
+    setAnchorEl(null);
+  };
+
+  const show = Boolean(anchorEl);
+  const id = show ? "simple-popover" : undefined;
 
   return (
     <div className="Reservations">
@@ -39,7 +55,10 @@ export const Reservations = () => {
             </div>
             <div className="Reservations--infoButtons">
               <button>Anuluj</button>
-              <button>Szczegóły</button>
+              <button type="button" onClick={handleOpen}>
+                Szczegóły
+              </button>
+              <BasicModal open={open} onClose={handleClose} />
             </div>
           </div>
         </div>
@@ -52,44 +71,29 @@ export const Reservations = () => {
             <Icon icon="material-symbols:calendar-month-outline" />
             Data
           </button>
-          <li className="tooltip">
-            <button className="tooltip">
-              <Icon icon="material-symbols:sound-detection-dog-barking" />
-              Pies
-            </button>
-            <div className="tooltipMenu bottomSide">
-              <ul>
-                <li>
-                  <label>
-                    <input type="checkbox" />
-                    Azor
-                  </label>
-                </li>
-                <li>
-                  <label>
-                    <input type="checkbox" />
-                    Rocky
-                  </label>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li className="tooltip">
-            <button className="tooltip">
-              <Icon icon="material-symbols:person" />
-              Trener
-            </button>
-            <div className="tooltipMenu bottomSide">
-              <ul>
-                <li>
-                  <label>
-                    <input type="checkbox" />
-                    Jacek
-                  </label>
-                </li>
-              </ul>
-            </div>
-          </li>
+          <button className="tooltip" onClick={handleClick}>
+            <Icon icon="material-symbols:sound-detection-dog-barking" />
+            Pies
+          </button>
+          <Popover
+            id={id}
+            open={show}
+            anchorEl={anchorEl}
+            onClose={handleCloseP}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+          >
+            <label htmlFor="">
+              <input type="checkbox" name="" id="" />
+              Azor
+            </label>
+          </Popover>
+          <button className="tooltip">
+            <Icon icon="material-symbols:person" />
+            Trener
+          </button>
         </div>
         <div className="Reservations--hisList">
           <div className="Reservations--incomingResList">
