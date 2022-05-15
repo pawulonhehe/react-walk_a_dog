@@ -78,7 +78,7 @@ $lightblue: #aec7ea;
   .Reservations--filters{
     display: flex;
     flex-direction: row;
-    justify-content: right;
+    justify-content: center;
     padding-bottom: .5rem;
     margin-right: .5rem;
   }
@@ -157,7 +157,7 @@ $lightblue: #aec7ea;
   }
   // --
   .tooltipMenu{
-    width: 5rem;
+    // width: 7rem;
   }
   
   .tooltipMenu ul li{

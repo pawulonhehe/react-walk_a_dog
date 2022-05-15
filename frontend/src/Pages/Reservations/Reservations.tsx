@@ -68,10 +68,22 @@ export const Reservations = () => {
               </ul>
             </div>
           </li>
-          <button>
-            <Icon icon="material-symbols:person" />
-            Trener
-          </button>
+          <li className="tooltip">
+            <button className="tooltip">
+              <Icon icon="material-symbols:person" />
+              Trener
+            </button>
+            <div className="tooltipMenu bottomSide">
+              <ul>
+                <li>
+                  <label>
+                    <input type="checkbox" />
+                    Jacek
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </li>
         </div>
         <div className="Reservations--hisList">
           <div className="Reservations--incomingResList">
