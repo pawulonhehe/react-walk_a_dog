@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Reservations.scss";
 import { Icon } from "@iconify/react";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import BasicModal from "../BasicModal/BasicModal";
+import Modal from "@mui/material/Modal";
 
 // import { Link } from "react-router-dom";
 
 export const Reservations = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <div className="Reservations">
       <div className="Reservations--topText">Twoje Rezerwacje</div>
@@ -102,7 +108,10 @@ export const Reservations = () => {
                 </div>
               </div>
               <div className="Reservations--infoButtons">
-                <button>Szczegóły</button>
+                <button type="button" onClick={handleOpen}>
+                  Szczegóły
+                </button>
+                <BasicModal open={open} onClose={handleClose} />
                 <button>Oceń</button>
               </div>
             </div>
