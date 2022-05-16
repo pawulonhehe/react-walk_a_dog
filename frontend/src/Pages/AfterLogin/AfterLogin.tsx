@@ -3,6 +3,9 @@ import "./AfterLogin.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
+import { User } from "../../Models/Users";
+import axios from "axios";
+import { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 
 export const AfterLogin = () => {
@@ -11,6 +14,25 @@ export const AfterLogin = () => {
   const switchToMyDogs = () => navigate("/mydogs");
   const switchToReservations = () => navigate("/reservations");
   const switchToTrainers = () => navigate("/trainers");
+  const token = sessionStorage.getItem("token");
+  const [user, setUser] = useState<User>();
+  // const user: User = JSON.parse(sessionStorage.getItem("data")!);
+
+  useEffect(() => {
+    axios
+      .get("/auth/user/", {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res: any) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setUser(res.data);
+        console.log(user);
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
 
   return (
     <div className="AfterLogin">
@@ -18,7 +40,7 @@ export const AfterLogin = () => {
         <img src={pudzilla} alt="Pudzilla" width="140" height="140" />
       </div>
       <div className="MainContainer">
-        <div className="WelcomeMessage">Witaj Mariusz!</div>
+        <div className="WelcomeMessage">Witaj {user?.first_name} </div>
         <div className="NiceButton" onClick={switchToMyProfile}>
           <div className="Icon">
             <Icon

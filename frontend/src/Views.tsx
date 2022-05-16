@@ -13,7 +13,7 @@ import { Reservations } from "./Pages/Reservations/Reservations";
 import { Statute } from "./Pages/Statute/Statute";
 import { Mapa } from "./Pages/Mapa/Mapa";
 import { EditDog } from "./Pages/EditDog/EditDog";
-import { Users } from "./Pages/Users/Users";
+import { Users } from "./Models/Users";
 import { Owner } from "./Pages/Trener/Owner/Owner";
 import { Dog } from "./Pages/Trener/Dog/Dog";
 import { AfterTrener } from "./Pages/Trener/AfterTrener/AfterTrener";

@@ -22,7 +22,7 @@ interface Details {
   image: string;
 }
 
-interface User {
+export interface User {
   email: string;
   first_name: string;
   last_name: string;

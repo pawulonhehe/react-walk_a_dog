@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Reservations.scss";
 import { Icon } from "@iconify/react";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
-<<<<<<< mui
 import { useNavigate } from "react-router-dom";
 
 // import { Link } from "react-router-dom";
@@ -10,33 +9,6 @@ import { useNavigate } from "react-router-dom";
 export const Reservations = () => {
   const navigate = useNavigate();
   const switchToBook = () => navigate("/bookwalk");
-=======
-import BasicModal from "../BasicModal/BasicModal";
-import Popover from "@mui/material/Popover";
-                   
-// import { Link } from "react-router-dom";
-
-export const Reservations = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleCloseP = () => {
-    setAnchorEl(null);
-  };
-
-  const show = Boolean(anchorEl);
-  const id = show ? "simple-popover" : undefined;
-
->>>>>>> main
   return (
     <div className="Reservations">
       <div className="Reservations--topText">Twoje Rezerwacje</div>
@@ -64,10 +36,7 @@ export const Reservations = () => {
             </div>
             <div className="Reservations--infoButtons">
               <button>Anuluj</button>
-              <button type="button" onClick={handleOpen}>
-                Szczegóły
-              </button>
-              <BasicModal open={open} onClose={handleClose} />
+              <button>Szczegóły</button>
             </div>
           </div>
         </div>
@@ -80,29 +49,29 @@ export const Reservations = () => {
             <Icon icon="material-symbols:calendar-month-outline" />
             Data
           </button>
-          <button className="tooltip" onClick={handleClick}>
-            <Icon icon="material-symbols:sound-detection-dog-barking" />
-            Pies
-          </button>
-          <Popover
-            id={id}
-            open={show}
-            anchorEl={anchorEl}
-            onClose={handleCloseP}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-          > 
-            <div className="popover">
-              <label htmlFor="">
-              <input type="checkbox" name="" id="" />
-              Azor
-            </label>
+          <li className="tooltip">
+            <button className="tooltip">
+              <Icon icon="material-symbols:sound-detection-dog-barking" />
+              Pies
+            </button>
+            <div className="tooltipMenu bottomSide">
+              <ul>
+                <li>
+                  <label>
+                    <input type="checkbox" />
+                    Azor
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" />
+                    Rocky
+                  </label>
+                </li>
+              </ul>
             </div>
-            
-          </Popover>
-          <button className="tooltip">
+          </li>
+          <button>
             <Icon icon="material-symbols:person" />
             Trener
           </button>
@@ -124,10 +93,7 @@ export const Reservations = () => {
                 </div>
               </div>
               <div className="Reservations--infoButtons">
-                <button type="button" onClick={handleOpen}>
-                  Szczegóły
-                </button>
-                <BasicModal open={open} onClose={handleClose} />
+                <button>Szczegóły</button>
                 <button>Oceń</button>
               </div>
             </div>
