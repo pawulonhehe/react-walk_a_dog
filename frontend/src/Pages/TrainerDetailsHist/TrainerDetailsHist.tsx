@@ -26,6 +26,7 @@ export const TrainerDetailsHist = () => {
           <div className="one--dogAvatar">
             <img src={pies} alt="pies" />
           </div>
+          <div className="one--dogDate">Data</div>
         </div>
         <div className="midContainer--one">
           <div className="one--title">Spacer</div>
@@ -41,6 +42,7 @@ export const TrainerDetailsHist = () => {
           <div className="one--dogAvatar">
             <img src={pies} alt="pies" />
           </div>
+          <div className="one--dogDate">Data</div>
         </div>
       </div>
     </div>

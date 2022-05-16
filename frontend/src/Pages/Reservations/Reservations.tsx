@@ -2,10 +2,13 @@ import React from "react";
 import "./Reservations.scss";
 import { Icon } from "@iconify/react";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import { useNavigate } from "react-router-dom";
 
 // import { Link } from "react-router-dom";
 
 export const Reservations = () => {
+  const navigate = useNavigate();
+  const switchToBook = () => navigate("/bookwalk");
   return (
     <div className="Reservations">
       <div className="Reservations--topText">Twoje Rezerwacje</div>
@@ -98,7 +101,7 @@ export const Reservations = () => {
         </div>
       </div>
       <div className="Reservations--book">
-        <button>Rezerwuj spacer</button>
+        <button onClick={switchToBook}>Rezerwuj spacer</button>
       </div>
     </div>
   );

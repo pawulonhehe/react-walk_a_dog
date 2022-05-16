@@ -76,8 +76,8 @@
       display: flex;
       justify-content: center;
     }
-    .RightSideContainer--avatar img{
-      border-radius: 50%;  
+    .RightSideContainer--avatar img {
+      border-radius: 50%;
     }
 
     .RightSideContainer--form {
@@ -86,7 +86,7 @@
       align-items: center;
       text-align: center;
       flex-direction: row;
-      padding: .5rem;
+      padding: 0.5rem;
     }
 
     .RightSideContainer--AvatarChange {
@@ -99,15 +99,16 @@
     .RightSideContainer--fileUpload {
       cursor: pointer;
       margin-top: 3rem;
-      background-color: #DCDCDC;
-      padding: .25rem;
-      border-radius: .25rem;
+      background-color: #dcdcdc;
+      padding: 0.25rem;
+      border-radius: 0.25rem;
     }
     .RightSideContainer--url {
-      background-color: #DCDCDC;
-      padding: .25rem;
-      border-radius: .25rem;
+      background-color: #dcdcdc;
+      padding: 0.25rem;
+      border-radius: 0.25rem;
       border: none;
+      font-family: "Montserrat", sans-serif;
     }
   }
 }

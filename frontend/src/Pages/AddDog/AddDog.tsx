@@ -2,6 +2,7 @@ import React from "react";
 import "./AddDog.scss";
 import Select from "react-select";
 import pies2 from "../../Assets/Images/pies2.png";
+import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 const options = [
@@ -14,6 +15,8 @@ const options2 = [
   { value: "jamnik", label: "Jamnik" },
 ];
 export const AddDog = () => {
+  const navigate = useNavigate();
+  const switchToMyDogs = () => navigate("/mydogs");
   return (
     <div className="AddDog">
       <div className="AddDog--topText">Dodaj pieska</div>
@@ -48,7 +51,7 @@ export const AddDog = () => {
           <img src={pies2} alt="pies2" width="100" height="100"></img>
           <div className="MiddleForm--lowerText">Wybierz rasę psa</div>
           <Select options={options2} />
-          <button type="submit" className="AddDog">
+          <button type="submit" className="AddDog" onClick={switchToMyDogs}>
             Prześlij
           </button>
         </div>

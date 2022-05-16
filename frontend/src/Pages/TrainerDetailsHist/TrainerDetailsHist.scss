@@ -21,7 +21,7 @@
   }
   .TDS--midContainer {
     width: 95%;
-    background-color: grey;
+    background-color: rgb(223, 223, 223);
     margin: 0 auto;
     border-radius: 12px;
     height: 63%;
@@ -32,7 +32,7 @@
     .midContainer--one {
       width: 80%;
       margin-left: 18%;
-      background-color: rgb(155, 155, 155);
+      background-color: rgb(255, 255, 255);
       height: 20%;
       border-radius: 12px;
       display: flex;
@@ -42,7 +42,7 @@
         font-family: "Montserrat", sans-serif;
         font-size: 18px;
         font-weight: bold;
-        color: rgba(255, 255, 255, 0.5);
+        color: #3498db;
         margin-left: 2%;
         margin-top: 0.5%;
       }
@@ -50,7 +50,7 @@
         font-family: "Montserrat", sans-serif;
         font-size: 15px;
         font-weight: bold;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(58, 58, 58, 0.5);
         margin-left: -21.5%;
         margin-top: 22%;
       }
@@ -58,7 +58,7 @@
         font-family: "Montserrat", sans-serif;
         font-size: 14px;
         font-weight: bold;
-        color: rgba(255, 255, 255, 1);
+        color: rgb(0, 0, 0);
         margin-left: 2%;
         margin-top: 21%;
         position: absolute;
@@ -92,11 +92,15 @@
       .one--dogAvatar {
         position: absolute;
         margin-left: -15%;
-        margin-top: 7.5%;
+        margin-top: 5%;
 
         img {
           width: 50px;
         }
+      }
+      .one--dogDate {
+        margin-left: -111%;
+        margin-top: 23%;
       }
     }
   }

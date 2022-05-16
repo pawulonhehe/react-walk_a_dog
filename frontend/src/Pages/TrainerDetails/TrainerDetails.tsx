@@ -1,8 +1,12 @@
 import React from "react";
 import "./TrainerDetails.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import { useNavigate } from "react-router-dom";
 
 export const TrainerDetails = () => {
+  const navigate = useNavigate();
+  const switchToBook = () => navigate("/bookwalk");
+  const switchToHist = () => navigate("/trainerdetailshist");
   return (
     <div className="TrainerDetails">
       <div className="TrainerDetails--topText">Szczegóły trenera</div>
@@ -38,12 +42,20 @@ export const TrainerDetails = () => {
           <div className="Opinion__Stars">gwiazdki</div>
           <div className="Opinion__Article">lorem ipsum cos tam cos</div>
         </div>
-        <button type="submit" className="Opinion--button">
+        <button
+          type="submit"
+          className="Opinion--button"
+          onClick={switchToHist}
+        >
           Zobacz całą historię
         </button>
       </div>
       <div className="TrainerDetails--BottomContainer">
-        <button type="submit" className="BottomContainer--lbutton">
+        <button
+          type="submit"
+          className="BottomContainer--lbutton"
+          onClick={switchToBook}
+        >
           Zamów
         </button>
         <button type="submit" className="BottomContainer--rbutton">

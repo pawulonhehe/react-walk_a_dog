@@ -1,17 +1,10 @@
 import React from "react";
-import "./AfterLogin.scss";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import "./AfterTrener.scss";
+import pudzilla from "../../../Assets/Images/pudzilla.jpg";
 import { Icon } from "@iconify/react";
-import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
-export const AfterLogin = () => {
-  const navigate = useNavigate();
-  const switchToMyProfile = () => navigate("/editaccount");
-  const switchToMyDogs = () => navigate("/mydogs");
-  const switchToReservations = () => navigate("/reservations");
-  const switchToTrainers = () => navigate("/trainers");
-
+export const AfterTrener = () => {
   return (
     <div className="AfterLogin">
       <div className="Avatar">
@@ -19,7 +12,7 @@ export const AfterLogin = () => {
       </div>
       <div className="MainContainer">
         <div className="WelcomeMessage">Witaj Mariusz!</div>
-        <div className="NiceButton" onClick={switchToMyProfile}>
+        <div className="NiceButton">
           <div className="Icon">
             <Icon
               icon="material-symbols:manage-accounts"
@@ -33,21 +26,7 @@ export const AfterLogin = () => {
             Zaaktualizuj swoje dane kontaktowe i inne szczegóły
           </div>
         </div>
-        <div className="NiceButton" onClick={switchToMyDogs}>
-          <div className="Icon">
-            <Icon
-              icon="material-symbols:sound-detection-dog-barking"
-              style={{ fontSize: "54px" }}
-            />
-          </div>
-          <div className="title">
-            <h3>Psy</h3>
-          </div>
-          <div className="subtitle">
-            Dodaj i zaaktualizuj dane swojego zwierzaka
-          </div>
-        </div>
-        <div className="NiceButton" onClick={switchToReservations}>
+        <div className="NiceButton">
           <div className="Icon">
             <Icon
               icon="material-symbols:calendar-month-outline"
@@ -61,17 +40,24 @@ export const AfterLogin = () => {
             Zobacz swoje nadchodzące usługi lub rezerwuj nowe
           </div>
         </div>
-        <div className="NiceButtonb" onClick={switchToTrainers}>
+        <div className="NiceButton">
           <div className="Icon">
-            <Icon icon="material-symbols:person" style={{ fontSize: "54px" }} />
+            <Icon
+              icon="material-symbols:account-circle"
+              style={{ fontSize: "54px" }}
+            />
           </div>
           <div className="title">
-            <h3>Trenerzy</h3>
+            <h3>Klienci</h3>
           </div>
           <div className="subtitle">
-            Przeglądaj profile potenclajnych trenerów
+            Przeglądaj profile potencjalnych klientów{" "}
           </div>
         </div>
+        <button type="submit" className="startWork">
+          Zacznij pracę!
+        </button>
+        <div className="sloty">tu beda sloty spacerowe</div>
       </div>
     </div>
   );

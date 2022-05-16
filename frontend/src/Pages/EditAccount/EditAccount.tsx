@@ -1,8 +1,12 @@
 import "./EditAccount.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const EditAccount = () => {
+  const navigate = useNavigate();
+  const switchToMyDogs = () => navigate("/mydogs");
+  const switchToStatute = () => navigate("/statute");
   return (
     <div className="EditAccount">
       <div className="EditAccount--topText">Edycja Konta</div>
@@ -29,13 +33,21 @@ export const EditAccount = () => {
         </div>
       </div>
       <div className="RightSideContainer">
-        <button type="submit" className="RightSideButton">
+        <button
+          type="submit"
+          className="RightSideButton"
+          onClick={switchToMyDogs}
+        >
           Twoje Pieski
         </button>
         <button type="submit" className="RightSideButton">
           Twoja historia
         </button>
-        <button type="submit" className="RightSideButton">
+        <button
+          type="submit"
+          className="RightSideButton"
+          onClick={switchToStatute}
+        >
           Regulamin
         </button>
         <button type="submit" className="RightSideButton">

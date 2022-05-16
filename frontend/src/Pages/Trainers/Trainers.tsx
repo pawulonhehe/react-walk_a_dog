@@ -1,8 +1,11 @@
 import React from "react";
 import "./Trainers.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import { useNavigate } from "react-router-dom";
 
 export const Trainers = () => {
+  const navigate = useNavigate();
+  const switchToDetails = () => navigate("/trainerdetails");
   return (
     <div className="Trainers">
       <div className="Trainers--topText">Nasi Trenerzy</div>
@@ -13,7 +16,11 @@ export const Trainers = () => {
           </div>
           <div className="midContainer__trainer--Title">Jacek Szyuła</div>
           <div className="midContainer__trainer--Stars">gwiazdki</div>
-          <button type="submit" className="trainersbutton">
+          <button
+            type="submit"
+            className="trainersbutton"
+            onClick={switchToDetails}
+          >
             Odwiedź profil trenera
           </button>
         </div>
@@ -23,7 +30,11 @@ export const Trainers = () => {
           </div>
           <div className="midContainer__trainer--Title">Jacek Szyuła</div>
           <div className="midContainer__trainer--Stars">gwiazdki</div>
-          <button type="submit" className="trainersbutton">
+          <button
+            type="submit"
+            className="trainersbutton"
+            onClick={switchToDetails}
+          >
             Odwiedź profil trenera
           </button>
         </div>

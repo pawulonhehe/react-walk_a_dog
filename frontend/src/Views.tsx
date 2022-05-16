@@ -16,7 +16,7 @@ import { EditDog } from "./Pages/EditDog/EditDog";
 import { Users } from "./Pages/Users/Users";
 import { Owner } from "./Pages/Trener/Owner/Owner";
 import { Dog } from "./Pages/Trener/Dog/Dog";
-import { TrenerAfterLogin } from "./Pages/Trener/AfterLogin/AfterLogin";
+import { AfterTrener } from "./Pages/Trener/AfterTrener/AfterTrener";
 import { YourClients } from "./Pages/Trener/YourClients/YourClients";
 import { BookWalk } from "./Pages/BookWalk/BookWalk";
 import { Trainers } from "./Pages/Trainers/Trainers";
@@ -54,13 +54,13 @@ const Views = () => {
           <Route path="/bookwalk" element={<BookWalk />} />
           <Route path="/trainers" element={<Trainers />} />
           <Route path="/trainerdetails" element={<TrainerDetails />} />
-          <Route path="/trainersdetailshist" element={<TrainerDetailsHist />} />
+          <Route path="/trainerdetailshist" element={<TrainerDetailsHist />} />
 
           {/* nizej trener */}
 
           <Route path="/owner" element={<Owner />} />
           <Route path="/dog" element={<Dog />} />
-          <Route path="/trenerafterlogin" element={<TrenerAfterLogin />} />
+          <Route path="/aftertrener" element={<AfterTrener />} />
           <Route path="/yourclients" element={<YourClients />} />
         </Route>
         <Route path="*" element={<h1>404 Not Found!</h1>} />
