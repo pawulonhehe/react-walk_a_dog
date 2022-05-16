@@ -78,7 +78,7 @@ $lightblue: #aec7ea;
   .Reservations--filters{
     display: flex;
     flex-direction: row;
-    justify-content: right;
+    justify-content: center;
     padding-bottom: .5rem;
     margin-right: .5rem;
   }
@@ -120,12 +120,7 @@ $lightblue: #aec7ea;
     align-items: center;
     
   }
-  .Reservations--book{
-    justify-content: center;
-    // position: absolute;
-    // bottom: 0;
-    // left: 30%;
-  }
+
   .Reservations--book button{
     border: none;
     background-color: #2f89c6;
@@ -142,78 +137,12 @@ $lightblue: #aec7ea;
     background-color: #2c7eb5;
 
   }
-  // .Reservations--history{
-  //   display: flex;
-  //   flex-direction: row;
-  //   margin: 0.5rem 0 0.5rem  0;
-  // }
+
   .Reservations--hisList{
     display: flex;
     flex-direction: column;
   }
-  // tooltip
-  li{
-    list-style: none;
-  }
-  // --
-  .tooltipMenu{
-    width: 5rem;
-  }
-  
-  .tooltipMenu ul li{
-    width: 100%;
-    color: #0d77b6;
-    padding: .25rem;
-    background: #fff;
-  }
-  
-  
-  .tooltipMenu ul li:hover{
-    background: $lightblue;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  // ---
-  .tooltip{
-    position: relative;
-    display: inline-block;
-  }
-  
-  .tooltipMenu {
-    visibility: hidden;
-    position: absolute;
-    z-index: 1;
-  }
-  
-  .tooltip:hover .tooltipMenu{
-    visibility: visible;
-    cursor: pointer;
-  }
-  
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-  .bottomSide {
-    top: 100%;
-  }
-  .tooltipMenu::after {
-      content: " ";
-      position: absolute;
-  }
-  
-  .bottomSide.tooltipMenu::after {
-      bottom: 100%;
-      left: 45%;
-      border-color: transparent transparent white transparent;
-  }
-  label{
-    display: flex;
-    align-items: center;
-    justify-content: left;
-  }
-  .Reservations--hisReservation p{
+    .Reservations--hisReservation p{
     margin: 0;
   }
   .Reservations--Avatar img{
@@ -224,5 +153,4 @@ $lightblue: #aec7ea;
   .Reservations--bottomInfo{
     display: flex;
   }
-
 }
