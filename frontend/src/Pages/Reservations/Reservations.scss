@@ -120,12 +120,7 @@ $lightblue: #aec7ea;
     align-items: center;
     
   }
-  .Reservations--book{
-    justify-content: center;
-    // position: absolute;
-    // bottom: 0;
-    // left: 30%;
-  }
+
   .Reservations--book button{
     border: none;
     background-color: #2f89c6;
@@ -142,11 +137,7 @@ $lightblue: #aec7ea;
     background-color: #2c7eb5;
 
   }
-  // .Reservations--history{
-  //   display: flex;
-  //   flex-direction: row;
-  //   margin: 0.5rem 0 0.5rem  0;
-  // }
+
   .Reservations--hisList{
     display: flex;
     flex-direction: column;

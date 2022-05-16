@@ -4,8 +4,7 @@ import { Icon } from "@iconify/react";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import BasicModal from "../BasicModal/BasicModal";
 import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
-
+                   
 // import { Link } from "react-router-dom";
 
 export const Reservations = () => {
@@ -84,11 +83,14 @@ export const Reservations = () => {
               vertical: "bottom",
               horizontal: "left",
             }}
-          >
-            <label htmlFor="">
+          > 
+            <div className="popover">
+              <label htmlFor="">
               <input type="checkbox" name="" id="" />
               Azor
             </label>
+            </div>
+            
           </Popover>
           <button className="tooltip">
             <Icon icon="material-symbols:person" />
