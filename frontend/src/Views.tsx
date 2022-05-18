@@ -13,9 +13,15 @@ import { Reservations } from "./Pages/Reservations/Reservations";
 import { Statute } from "./Pages/Statute/Statute";
 import { Mapa } from "./Pages/Mapa/Mapa";
 import { EditDog } from "./Pages/EditDog/EditDog";
-import { Users } from "./Pages/Users/Users";
+import { Users } from "./Models/Users";
 import { Owner } from "./Pages/Trener/Owner/Owner";
 import { Dog } from "./Pages/Trener/Dog/Dog";
+import { AfterTrener } from "./Pages/Trener/AfterTrener/AfterTrener";
+import { YourClients } from "./Pages/Trener/YourClients/YourClients";
+import { BookWalk } from "./Pages/BookWalk/BookWalk";
+import { Trainers } from "./Pages/Trainers/Trainers";
+import { TrainerDetails } from "./Pages/TrainerDetails/TrainerDetails";
+import { TrainerDetailsHist } from "./Pages/TrainerDetailsHist/TrainerDetailsHist";
 import React from "react";
 
 const Views = () => {
@@ -33,7 +39,7 @@ const Views = () => {
           path="/register"
           element={isAuth ? <Navigate to={"/"} /> : <Register />}
         />
-        <Route path="/get-users" element={<Users/>}/>
+        <Route path="/get-users" element={<Users />} />
         <Route element={<ProtectedRoutes auth={isAuth} />}>
           <Route path="/afterlogin" element={<AfterLogin />} />
           <Route path="/editprofile" element={<EditProfile />} />
@@ -45,11 +51,17 @@ const Views = () => {
           <Route path="/testymapa" element={<Mapa />} />
           <Route path="/statute" element={<Statute />} />
           <Route path="/editdog" element={<EditDog />} />
+          <Route path="/bookwalk" element={<BookWalk />} />
+          <Route path="/trainers" element={<Trainers />} />
+          <Route path="/trainerdetails" element={<TrainerDetails />} />
+          <Route path="/trainerdetailshist" element={<TrainerDetailsHist />} />
 
           {/* nizej trener */}
 
           <Route path="/owner" element={<Owner />} />
           <Route path="/dog" element={<Dog />} />
+          <Route path="/aftertrener" element={<AfterTrener />} />
+          <Route path="/yourclients" element={<YourClients />} />
         </Route>
         <Route path="*" element={<h1>404 Not Found!</h1>} />
       </Routes>

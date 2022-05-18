@@ -1,0 +1,76 @@
+.Clients {
+  height: 100vh;
+  background-color: #fff;
+
+  .Clients--topText {
+    font-family: "Montserrat", sans-serif;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 5%;
+  }
+
+  .Clients--clientsContainer {
+    width: 85%;
+    background-color: rgb(192, 192, 192);
+    margin: 0 auto;
+    height: 75%;
+    border-radius: 15px;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+  }
+  .Clients--oneClient {
+    background-color: rgb(255, 255, 255);
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+    height: 20%;
+    border-radius: 15px;
+
+    .Clients--oneClient__avatar {
+      margin-top: 3%;
+      position: absolute;
+      margin-left: 2%;
+    }
+
+    .Clients--oneClient__infoCointainer {
+      display: flex;
+      flex-direction: column;
+      margin-top: 3%;
+      margin-left: 35%;
+      border-radius: 10px;
+      width: 65%;
+
+      .oneClient__infoContainer__title {
+        font-family: "Montserrat", "sans-serif";
+        font-weight: bold;
+      }
+      .oneClient__infoContainer__dogs {
+        margin-top: 8%;
+        display: flex;
+        margin-left: 16%;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 38%;
+        .imgpies {
+          width: 30px;
+          height: 30px;
+        }
+      }
+
+      .ZobaczZlecenie {
+        border: solid transparent;
+        background-color: #3498db;
+        width: 80%;
+        margin-left: 15%;
+        margin-top: 10%;
+        margin-bottom: 5%;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: bold;
+        font-family: "Montserrat", "sans-serif";
+      }
+    }
+  }
+}

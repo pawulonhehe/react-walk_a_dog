@@ -10,7 +10,7 @@ export const EditProfile = () => {
         <div className="LeftSideBar--avatar">
           <img src={pudzilla} alt="Pudzilla" width="100" height="100"></img>
         </div>
-        <div className="LeftSideBar--buttonContainer">
+        <div className="LeftSideBarr--buttonContainer">
           <Link to="/editprofile">
             <button type="submit" className="LeftSideBar-button">
               Profil
@@ -28,7 +28,7 @@ export const EditProfile = () => {
           </Link>
         </div>
       </div>
-      <div className="RightSideContainer">
+      <div className="RightSideContainerr">
         <form>
           <label>
             Imie:<br></br>

@@ -1,3 +1,8 @@
+$blue: #3498db;
+$black: #000;
+$white: #fff;
+$lightblue: #aec7ea;
+
 .Reservations {
   background-color: #F3F3F3;
   height: 100vh;
@@ -20,11 +25,14 @@
     margin: 0.5rem 0 0.5rem  0;
   }
   .Reservations--date{
-    font-weight: 700;
+    font-size: 70%;
+    font-weight: 600;
     background-color: #C4C4C4;
     width: 7rem;
     padding: 0.5rem;
+    display: flex;
     justify-content: left;
+    align-items: center;
     -webkit-border-top-right-radius: 0.5rem;
     -webkit-border-bottom-right-radius: 0.5rem;
     -moz-border-radius-topright: 0.5rem;
@@ -33,17 +41,32 @@
     border-bottom-right-radius: 0.5rem;
   }
   .Reservations--reservation{
-    border-left: 0.5rem solid #3498DB;
+    display: flex;
+    max-height: 3rem;
+    border-left: 0.5rem solid $blue;
     background-color: #C4C4C4;
-    justify-content: center;
+    justify-content: space-between;
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: .25rem;
     margin: 0 0.5rem 0 0;
     width: 100%;
-    max-height: 2rem;
-    text-align: center;
-    align-content: center;
-    font-size: 0.75rem;
+    // max-height: 2rem;
+    align-items: center;
+    font-size: 65%;
+  }
+  .Reservations--info{
+    text-align: left;
+  }
+  .Reservations--infoButtons{
+    display: flex;
+    flex-direction: column;
+  }
+  .Reservations--infoButtons button{
+    border: none;
+    background-color: transparent;
+    color: $blue;
+    cursor: pointer;
+    margin: 0;
   }
   .dot{
     background-color: #3498DB;
@@ -55,7 +78,7 @@
   .Reservations--filters{
     display: flex;
     flex-direction: row;
-    justify-content: right;
+    justify-content: center;
     padding-bottom: .5rem;
     margin-right: .5rem;
   }
@@ -66,6 +89,9 @@
     background-color: #FFFFFF;
     cursor: pointer;
     width: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
   .Reservations--hisDate{
     font-size: .75rem;
@@ -80,25 +106,21 @@
     margin: 0;
   }
   .Reservations--hisReservation{
+    padding: .25rem;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
     border-left: 0.5rem solid #C4C4C4;
     background-color: #C4C4C4;
-    justify-content: center;
     border-radius: 0.5rem;
-    padding: 1rem;
     margin: 0 0.5rem 0 0;
     width: 100%;
-    max-height: 2rem;
-    text-align: center;
-    align-content: center;
-    font-size: 0.75rem;
+    max-height: 4rem;
+    font-size: 0.65rem;
+    align-items: center;
     
   }
-  .Reservations--book{
-    justify-content: center;
-    // position: absolute;
-    // bottom: 0;
-    // left: 30%;
-  }
+
   .Reservations--book button{
     border: none;
     background-color: #2f89c6;
@@ -115,13 +137,20 @@
     background-color: #2c7eb5;
 
   }
-  // .Reservations--history{
-  //   display: flex;
-  //   flex-direction: row;
-  //   margin: 0.5rem 0 0.5rem  0;
-  // }
+
   .Reservations--hisList{
     display: flex;
     flex-direction: column;
+  }
+    .Reservations--hisReservation p{
+    margin: 0;
+  }
+  .Reservations--Avatar img{
+    border-radius: 50%;
+    width: 2rem;
+    margin: 0 .5rem 0 0;
+  }
+  .Reservations--bottomInfo{
+    display: flex;
   }
 }
