@@ -1,4 +1,3 @@
-from re import T
 from django.db import models
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
@@ -151,6 +150,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             'treated as active. Unselect this instead '
             'of deleting accounts.'
         ),
+    )
+    is_trainer = models.BooleanField(
+        'Trener',
+        default=False,
     )
     date_joined = models.DateTimeField(
         _('date joined'),

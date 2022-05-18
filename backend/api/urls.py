@@ -1,7 +1,7 @@
 from allauth.account.views import confirm_email
 from django.conf.urls import url
 from django.urls import path, include
-from .views import CustomUserDetailView, CustomUserListView
+from .views import CustomUserDetailView, CustomUserListView, DogListView, DogDetailView, WalkDetailView, WalkListView
 # from .views import FacebookLogin
 app_name = 'api'
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
         confirm_email,
         name="account_confirm_email",
     ),
+    # users
     path(
         'users/',
         CustomUserListView.as_view(),
@@ -23,4 +24,27 @@ urlpatterns = [
         CustomUserDetailView.as_view(),
         name=CustomUserDetailView.name,
     ),
+    # dogs
+    path(
+        'dogs/',
+        DogListView.as_view(),
+        name=DogListView.name,
+    ),
+    path(
+        'dogs/<int:pk>/',
+        DogDetailView.as_view(),
+        name=DogDetailView.name,
+    ),
+    # walks
+    path(
+        'walks/',
+        WalkListView.as_view(),
+        name=WalkListView.name,
+    ),
+    path(
+        'walks/<int:pk>/',
+        WalkDetailView.as_view(),
+        name=WalkDetailView.name,
+    ),
+    # trainers
 ]

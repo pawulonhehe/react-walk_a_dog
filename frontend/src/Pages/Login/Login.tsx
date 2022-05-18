@@ -20,7 +20,8 @@ export const Login = () => {
       })
       .catch((error) => {
         console.log(error.response);
-      });
+      })
+      .finally(() => {});
   };
 
   return (

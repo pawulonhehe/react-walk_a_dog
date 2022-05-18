@@ -1,3 +1,19 @@
 from django.contrib import admin
+from .models import Dog, Walk
 
-# Register your models here.
+
+@admin.register(Dog)
+class DogADmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'breed',
+        'owner',
+    )
+
+
+@admin.register(Walk)
+class WalkAdmin(admin.ModelAdmin):
+    list_display = (
+        'date',
+        'trainer',
+    )
