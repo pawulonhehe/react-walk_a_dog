@@ -7,7 +7,7 @@ import { AfterLogin } from "./Pages/AfterLogin/AfterLogin";
 import { EditProfile } from "./Pages/EditProfile/EditProfile";
 import { EditAvatar } from "./Pages/EditAvatar/EditAvatar";
 import { EditAccount } from "./Pages/EditAccount/EditAccount";
-import { MyDogs } from "./Pages/MyDogs/MyDogs";
+import { DogList } from "./Pages/DogsList/DogList";
 import { AddDog } from "./Pages/AddDog/AddDog";
 import { Reservations } from "./Pages/Reservations/Reservations";
 import { Statute } from "./Pages/Statute/Statute";
@@ -45,12 +45,12 @@ const Views = () => {
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/editavatar" element={<EditAvatar />} />
           <Route path="/editaccount" element={<EditAccount />} />
-          <Route path="/mydogs" element={<MyDogs />} />
+          <Route path="/mydogs" element={<DogList />} />
           <Route path="/addDog" element={<AddDog />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/testymapa" element={<Mapa />} />
           <Route path="/statute" element={<Statute />} />
-          <Route path="/editdog" element={<EditDog />} />
+          <Route path="/editdog/:id" element={<EditDog />} />
           <Route path="/bookwalk" element={<BookWalk />} />
           <Route path="/trainers" element={<Trainers />} />
           <Route path="/trainerdetails" element={<TrainerDetails />} />

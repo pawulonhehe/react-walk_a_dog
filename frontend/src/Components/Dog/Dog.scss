@@ -1,0 +1,62 @@
+.MyDogs--dog {
+  background-color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  height: 25%;
+  width: 90%;
+  border-radius: 15px;
+  margin-top: 5%;
+  margin-left: 5%;
+  flex-direction: row;
+
+  .MyDogs--dog__title {
+    display: flex;
+    justify-content: center;
+    font-weight: 1000;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #3498db;
+  }
+
+  .MyDogs--dog__image {
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    margin-left: 3.5%;
+    margin-top: -1.5%;
+  }
+
+  .MyDogs--dog__Ltext {
+    display: flex;
+    font-weight: normal;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 2.5%;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: left;
+  }
+
+  .MyDogs--dog__Rtext {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    text-align: right;
+    margin-left: 66%;
+    margin-top: -24%;
+  }
+
+  .MyDogs--dog__button {
+    border: solid transparent;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 1000;
+    background-color: #3498db;
+    width: 30%;
+    border-radius: 10px;
+    color: #fff;
+    margin-top: 2%;
+  }
+}
