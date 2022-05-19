@@ -1,7 +1,11 @@
 from accounts.models import CustomUser, UserAddress, UserDetails
 from .models import Dog, Walk
 from rest_framework import serializers
-
+from rest_framework.authtoken.models import Token
+class TokenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Token
+        fields = ('key','user',)
 
 class UserAddressSerializer(serializers.ModelSerializer):
     class Meta:

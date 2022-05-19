@@ -173,7 +173,9 @@ ACCOUNT_USERNAME_REQUIRED = False
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'api.serializers.TokenSerializer',
+}
 DATABASES = {
     'default': dj_database_url.config(conn_max_age=600)
 }

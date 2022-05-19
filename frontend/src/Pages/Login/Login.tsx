@@ -16,6 +16,8 @@ export const Login = () => {
       .post("/auth/login/", user)
       .then((res: any) => {
         sessionStorage.setItem("token", res.data.key);
+        console.log(res.data);
+        
         navigate("/");
       })
       .catch((error) => {
