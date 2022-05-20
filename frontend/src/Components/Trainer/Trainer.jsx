@@ -20,8 +20,9 @@ export const Trainer = (props) => {
         className="trainersbutton"
         onClick={switchToDetails}
       >
-        Odwiedź profil trenera
+        Odwiedź profil treneraa
       </button>
+
     </div>
   );
 };
