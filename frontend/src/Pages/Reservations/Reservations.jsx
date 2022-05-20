@@ -15,11 +15,9 @@ export const Reservations = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -28,8 +26,7 @@ export const Reservations = () => {
   };
 
   const show = Boolean(anchorEl);
-  const id = show ? "simple-popover" : undefined;
-
+  const id = show ? 'simple-popover' : undefined;
   return (
     <div className="Reservations">
       <div className="Reservations--topText">Twoje Rezerwacje</div>
