@@ -39,12 +39,14 @@ export const AfterLogin = () => {
         </div>
         <div className="MainContainer">
           <div className="WelcomeMessage">Witaj {user?.first_name}!</div>
+
           <div className="NiceButton" onClick={switchToMyProfile}>
             <div className="Icon">
               <Icon
                 icon="material-symbols:manage-accounts"
                 style={{ fontSize: "54px" }}
               />
+
             </div>
             <div className="title">
               <h3>Mój Profil</h3>
