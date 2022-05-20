@@ -49,12 +49,14 @@ export const EditDog = () => {
     );
   };
 
-  const deleteDog = () =>
+  const deleteDog = (event) => {
+    event.preventDefault();
     axios
       .delete(`/dogs/${params.id}/`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then(() => navigate("/mydogs"));
+  };
 
   return (
     <div className="EditProfile">

@@ -53,7 +53,7 @@ const Views = () => {
           <Route path="/editdog/:id" element={<EditDog />} />
           <Route path="/bookwalk" element={<BookWalk />} />
           <Route path="/trainers" element={<Trainers />} />
-          <Route path="/trainerdetails" element={<TrainerDetails />} />
+          <Route path="/trainerdetails/:id" element={<TrainerDetails />} />
           <Route path="/trainerdetailshist" element={<TrainerDetailsHist />} />
 
           {/* nizej trener */}

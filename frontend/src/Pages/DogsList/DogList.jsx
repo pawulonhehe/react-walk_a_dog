@@ -44,7 +44,7 @@ export const DogList = () => {
           <Dog {...dog} />
         ))}
       </div>
-      <button type="submit" className="MyDogs--addDog" onClick={switchToAddDog}>
+      <button className="MyDogs--addDog" onClick={switchToAddDog}>
         Dodaj pieska
       </button>
     </div>

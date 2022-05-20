@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 export const Trainer = (props) => {
   const navigate = useNavigate();
-  const switchToDetails = () => navigate(`/trainerdetails/${props.id}`);
-
+  const switchToDetails = () => navigate(`/trainerdetails/${props.details.id}`);
+  console.log(props);
   return (
     <div className="Trainers--midContainer__trainer">
       <div className="midContainer__trainer--Avatar">

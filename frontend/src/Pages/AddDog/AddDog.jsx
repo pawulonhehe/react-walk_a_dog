@@ -7,8 +7,8 @@ import axios from "axios";
 // import { Link } from "react-router-dom";
 
 const options = [
-  { value: "samiec", label: "Samiec" },
-  { value: "samica", label: "Samica" },
+  { value: "M", label: "Samiec" },
+  { value: "F", label: "Samica" },
 ];
 
 const options2 = [
@@ -34,7 +34,7 @@ export const AddDog = () => {
     setDog({ ...dog, breed: selectedOption.label });
   const addWeight = (event) => setDog({ ...dog, weight: event.target.value });
   const addGender = (selectedOption) =>
-    setDog({ ...dog, gender: selectedOption.label });
+    setDog({ ...dog, gender: selectedOption.value });
   const addAge = (event) => setDog({ ...dog, age: event.target.value });
 
   const addDog = (event) => {
@@ -42,8 +42,9 @@ export const AddDog = () => {
 
     axios
       .post(
-        "/dogs/",
+        "/dogs/create/",
         {
+          owner: sessionStorage.getItem("user"),
           name: dog.name,
           breed: dog.breed,
           weight: dog.weight,
@@ -84,7 +85,7 @@ export const AddDog = () => {
           />
         </form>
         <div className="UpperForm--selectRace">
-          <Select options={options} onChange={addBreed} />
+          <Select options={options} onChange={addGender} />
         </div>
       </div>
       <div className="MiddleForm--container">
@@ -108,7 +109,7 @@ export const AddDog = () => {
           </div>
           <img src={pies2} alt="pies2" width="100" height="100"></img>
           <div className="MiddleForm--lowerText">Wybierz rasę psa</div>
-          <Select options={options2} onChange={addGender} />
+          <Select options={options2} onChange={addBreed} />
           <button type="submit" className="AddDog" onClick={addDog}>
             Prześlij
           </button>

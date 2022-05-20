@@ -9,30 +9,34 @@ export const EditProfile = () => {
   const token = sessionStorage.getItem("token");
   const params = useParams();
 
-  // const changeName = (event) => setUser({ ...user, name: event.target.value });
-  // const changeBreed = (event) =>
-  //   setUser({ ...user, breed: event.target.value });
-  // const changeWeight = (event) =>
-  //   setUser({ ...user, weight: event.target.value });
-  // const changeGender = (event) =>
-  //   setUser({ ...user, gender: event.target.value });
+  const changeFirstName = (event) =>
+    setUser({ ...user, first_name: event.target.value });
+  const changeLastName = (event) =>
+    setUser({ ...user, last_name: event.target.value });
+  const changePhoneNumber = (event) =>
+    setUser({ ...user, phone_number: event.target.value });
+  const changePassword = (event) =>
+    setUser({ ...user, password: event.target.value });
+  const changeEmail = (event) =>
+    setUser({ ...user, email: event.target.value });
 
   const editProfile = (event) => {
     event.preventDefault();
     axios.patch(
-      `/dogs/${params.id}/`,
+      `/users/${params.id}/`,
       {
-        name: user.name,
-        breed: user.breed,
-        weight: user.weight,
-        gender: user.gender,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        phone_number: user.phone_number,
+        email: user.email,
+        // password: user.password,
       },
       {
         headers: { Authorization: `Token ${token}` },
       }
     );
   };
-
+  console.log(user);
   useEffect(() => {
     axios
       .get(`/users/${params.id}`, {
@@ -77,30 +81,49 @@ export const EditProfile = () => {
         <form>
           <label>
             Imie:<br></br>
-            <input type="text" name="firstname" value={user.first_name} />
+            <input
+              type="text"
+              name="firstname"
+              value={user.first_name}
+              onChange={changeFirstName}
+            />
           </label>
           <label>
             Nazwisko:
-            <input type="text" name="lastname" value={user.last_name} />
+            <input
+              type="text"
+              name="lastname"
+              value={user.last_name}
+              onChange={changeLastName}
+            />
           </label>
           <label>
             Numer telefonu:
-            <input type="number" name="phone" value={user.phone_number} />
+            <input
+              type="number"
+              name="phone"
+              value={user.phone_number}
+              onChange={changePhoneNumber}
+            />
           </label>
           <label>
-            Data urodzenia:
-            <input type="date" name="birthdate" />
+            <br></br>e-mail:<br></br>
+            <input
+              type="text"
+              name="email"
+              value={user.email}
+              onChange={changeEmail}
+            />
           </label>
           <label>
             Haslo:
             <input type="password" name="password" />
           </label>
-
-          <label>
-            Adres:
-            <input type="text" name="address" />
-          </label>
-          <button type="submit" className="Container--changeButton">
+          <button
+            type="submit"
+            className="Container--changeButton"
+            onClick={editProfile}
+          >
             Zmień
           </button>
         </form>
