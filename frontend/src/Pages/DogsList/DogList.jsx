@@ -11,8 +11,7 @@ export const DogList = () => {
   const [dogs, setDogs] = useState([]);
 
   const navigate = useNavigate();
-  const switchToAddDog = () => navigate("/addDog"); // wazne
-  const switchToEditDog = () => navigate("/editDog");
+  const switchToAddDog = () => navigate("/addDog");
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {
@@ -32,6 +31,7 @@ export const DogList = () => {
         console.log(error.response);
       });
   }, []);
+
   return (
     <div className="MyDogs">
       <div className="MyDogs--topText">Twoje Pieski</div>

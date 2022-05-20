@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const EditDog = () => {
   const [dog, setDog] = useState([]);
   const token = sessionStorage.getItem("token");
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -46,6 +48,13 @@ export const EditDog = () => {
       }
     );
   };
+
+  const deleteDog = () =>
+    axios
+      .delete(`/dogs/${params.id}/`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then(() => navigate("/mydogs"));
 
   return (
     <div className="EditProfile">
@@ -110,6 +119,12 @@ export const EditDog = () => {
             onClick={editProfile}
           >
             Zmień
+          </button>
+          <button
+            className="RightSideContainer--deleteButton"
+            onClick={deleteDog}
+          >
+            Usuń pieska
           </button>
         </form>
       </div>

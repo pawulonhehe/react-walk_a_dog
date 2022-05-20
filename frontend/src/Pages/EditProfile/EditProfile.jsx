@@ -1,8 +1,53 @@
 import "./EditProfile.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const EditProfile = () => {
+  const [user, setUser] = useState([]);
+  const token = sessionStorage.getItem("token");
+  const params = useParams();
+
+  // const changeName = (event) => setUser({ ...user, name: event.target.value });
+  // const changeBreed = (event) =>
+  //   setUser({ ...user, breed: event.target.value });
+  // const changeWeight = (event) =>
+  //   setUser({ ...user, weight: event.target.value });
+  // const changeGender = (event) =>
+  //   setUser({ ...user, gender: event.target.value });
+
+  const editProfile = (event) => {
+    event.preventDefault();
+    axios.patch(
+      `/dogs/${params.id}/`,
+      {
+        name: user.name,
+        breed: user.breed,
+        weight: user.weight,
+        gender: user.gender,
+      },
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    );
+  };
+
+  useEffect(() => {
+    axios
+      .get(`/users/${params.id}`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setUser(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+  console.log(user);
+
   return (
     <div className="EditProfile">
       <div className="EditProfile--topText">Edycja Profilu</div>
@@ -32,44 +77,30 @@ export const EditProfile = () => {
         <form>
           <label>
             Imie:<br></br>
-            <input type="text" name="firstname" />
+            <input type="text" name="firstname" value={user.first_name} />
           </label>
-          <button type="submit" className="RightSideContainer--changeButton">
-            Zmień
-          </button>
           <label>
             Nazwisko:
-            <input type="text" name="lastname" />
+            <input type="text" name="lastname" value={user.last_name} />
           </label>
-          <button type="submit" className="RightSideContainer--changeButton">
-            Zmień
-          </button>
           <label>
             Numer telefonu:
-            <input type="number" name="phone" />
+            <input type="number" name="phone" value={user.phone_number} />
           </label>
-          <button type="submit" className="RightSideContainer--changeButton">
-            Zmień
-          </button>
           <label>
             Data urodzenia:
             <input type="date" name="birthdate" />
           </label>
-          <button type="submit" className="RightSideContainer--changeButton">
-            Zmień
-          </button>
           <label>
             Haslo:
             <input type="password" name="password" />
           </label>
-          <button type="submit" className="RightSideContainer--changeButton">
-            Zmień
-          </button>
+
           <label>
             Adres:
             <input type="text" name="address" />
           </label>
-          <button type="submit" className="RightSideContainer--changeButton">
+          <button type="submit" className="Container--changeButton">
             Zmień
           </button>
         </form>

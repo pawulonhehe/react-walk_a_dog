@@ -5,7 +5,7 @@ import { Register } from "./Pages/Register/Register";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { AfterLogin } from "./Pages/AfterLogin/AfterLogin";
 import { EditProfile } from "./Pages/EditProfile/EditProfile";
-import { EditAvatar } from "./Pages/EditAvatar/EditAvatar";
+import { EditDogAvatar } from "./Pages/EditDogAvatar/EditDogAvatar";
 import { EditAccount } from "./Pages/EditAccount/EditAccount";
 import { DogList } from "./Pages/DogsList/DogList";
 import { AddDog } from "./Pages/AddDog/AddDog";
@@ -42,8 +42,8 @@ const Views = () => {
         <Route path="/get-users" element={<Users />} />
         <Route element={<ProtectedRoutes auth={isAuth} />}>
           <Route path="/afterlogin" element={<AfterLogin />} />
-          <Route path="/editprofile" element={<EditProfile />} />
-          <Route path="/editavatar" element={<EditAvatar />} />
+          <Route path="/editprofile/:id" element={<EditProfile />} />
+          <Route path="/editavatar" element={<EditDogAvatar />} />
           <Route path="/editaccount" element={<EditAccount />} />
           <Route path="/mydogs" element={<DogList />} />
           <Route path="/addDog" element={<AddDog />} />

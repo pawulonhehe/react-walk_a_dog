@@ -37,7 +37,7 @@ export const EditAccount = () => {
           <img src={pudzilla} alt="Pudzilla" width="100" height="100"></img>
         </div>
         <div className="LeftSideBar--buttonContainer">
-          <Link to="/editprofile">
+          <Link to={`/editprofile/${sessionStorage.getItem("user")}`}>
             <button type="submit" className="LeftSideBar-button">
               Profil
             </button>
