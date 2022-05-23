@@ -1,5 +1,7 @@
 .register {
-  background-image: url("../../Assets/Images/registerdog.jpg");
+  background-image: url("../../Assets/Images/homedog.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,6 +64,6 @@
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
     font-size: 1.4rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
 }

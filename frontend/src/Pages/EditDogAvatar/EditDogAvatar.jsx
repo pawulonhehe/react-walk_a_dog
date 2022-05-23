@@ -1,8 +1,8 @@
-import "./EditAvatar.scss";
+import "./EditDogAvatar.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import { Link } from "react-router-dom";
 
-export const EditAvatar = () => {
+export const EditDogAvatar = () => {
   return (
     <div className="EditAvatar">
       <div className="EditAvatar--topText">Edycja Zdjęcia</div>

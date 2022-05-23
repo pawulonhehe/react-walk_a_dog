@@ -1,37 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-interface Dog {
-  id: number;
-  name: string;
-  age: number;
-  breed: string;
-}
-interface Address {
-  city: string;
-  street: string;
-  postal_code: string;
-  house_number: string;
-  flat_number: string;
-}
-
-interface Details {
-  address: Address;
-  phone_number: string;
-  date_of_birth: string;
-  image: string;
-}
-
-export interface User {
-  email: string;
-  first_name: string;
-  last_name: string;
-  details: Details[];
-  dogs: Dog[];
-}
-
 export const Users = () => {
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     axios
       .get("users/")

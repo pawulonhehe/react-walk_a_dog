@@ -5,7 +5,7 @@ import Modal from "@mui/material/Modal";
 import "./BasicModal.scss";
 
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -14,7 +14,7 @@ const style = {
   p: 4,
 };
 
-const BasicModal = (props: any) => {
+const BasicModal = (props) => {
   return (
     <div>
       <Modal

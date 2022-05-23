@@ -8,17 +8,17 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const user = { email, password };
 
     axios
       .post("/auth/login/", user)
-      .then((res: any) => {
+      .then((res) => {
         sessionStorage.setItem("token", res.data.key);
-        console.log(res.data);
-        
+        sessionStorage.setItem("user", res.data.user);
         navigate("/");
+        console.log(res.data);
       })
       .catch((error) => {
         console.log(error.response);

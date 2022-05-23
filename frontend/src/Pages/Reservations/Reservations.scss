@@ -4,14 +4,14 @@ $white: #fff;
 $lightblue: #aec7ea;
 
 .Reservations {
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
   height: 100vh;
   .Reservations--topText {
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
     text-align: center;
     font-size: 1.4rem;
-    color: rgba(0, 0, 0, 1);
+    color: rgba(0, 0, 0, 0.4);
     // margin-top: 2%;
     padding: 1rem;
   }
@@ -19,15 +19,15 @@ $lightblue: #aec7ea;
     display: flex;
     flex-direction: column;
   }
-  .Reservations--incomingResList{
+  .Reservations--incomingResList {
     display: flex;
     flex-direction: row;
-    margin: 0.5rem 0 0.5rem  0;
+    margin: 0.5rem 0 0.5rem 0;
   }
-  .Reservations--date{
+  .Reservations--date {
     font-size: 70%;
     font-weight: 600;
-    background-color: #C4C4C4;
+    background-color: #c4c4c4;
     width: 7rem;
     padding: 0.5rem;
     display: flex;
@@ -40,61 +40,61 @@ $lightblue: #aec7ea;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
   }
-  .Reservations--reservation{
+  .Reservations--reservation {
     display: flex;
     max-height: 3rem;
     border-left: 0.5rem solid $blue;
-    background-color: #C4C4C4;
+    background-color: #c4c4c4;
     justify-content: space-between;
     border-radius: 0.5rem;
-    padding: .25rem;
+    padding: 0.25rem;
     margin: 0 0.5rem 0 0;
     width: 100%;
     // max-height: 2rem;
     align-items: center;
     font-size: 65%;
   }
-  .Reservations--info{
+  .Reservations--info {
     text-align: left;
   }
-  .Reservations--infoButtons{
+  .Reservations--infoButtons {
     display: flex;
     flex-direction: column;
   }
-  .Reservations--infoButtons button{
+  .Reservations--infoButtons button {
     border: none;
     background-color: transparent;
     color: $blue;
     cursor: pointer;
     margin: 0;
   }
-  .dot{
-    background-color: #3498DB;
+  .dot {
+    background-color: #3498db;
     width: 15px;
     height: 9px;
     border-radius: 50%;
     margin: 1.6rem 0.5rem 1.6rem 0.5rem;
   }
-  .Reservations--filters{
+  .Reservations--filters {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-bottom: .5rem;
-    margin-right: .5rem;
+    padding-bottom: 0.5rem;
+    margin-right: 0.5rem;
   }
-  .Reservations--filters button{
+  .Reservations--filters button {
     border: none;
-    border-radius: .5rem;
-    margin: 0 0 0 .5rem;
-    background-color: #FFFFFF;
+    border-radius: 0.5rem;
+    margin: 0 0 0 0.5rem;
+    background-color: #ffffff;
     cursor: pointer;
     width: 4rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
   }
-  .Reservations--hisDate{
-    font-size: .75rem;
+  .Reservations--hisDate {
+    font-size: 0.75rem;
     width: 7rem;
     padding: 0.5rem;
     justify-content: left;
@@ -102,55 +102,56 @@ $lightblue: #aec7ea;
     flex-direction: column;
     align-items: center;
   }
-  .Reservations--hisDate p{
+  .Reservations--hisDate p {
     margin: 0;
   }
-  .Reservations--hisReservation{
-    padding: .25rem;
+  .Reservations--hisReservation {
+    padding: 0.25rem;
     text-align: left;
     display: flex;
     justify-content: space-between;
-    border-left: 0.5rem solid #C4C4C4;
-    background-color: #C4C4C4;
+    border-left: 0.5rem solid #c4c4c4;
+    background-color: #c4c4c4;
     border-radius: 0.5rem;
     margin: 0 0.5rem 0 0;
     width: 100%;
     max-height: 4rem;
     font-size: 0.65rem;
     align-items: center;
-    
   }
 
-  .Reservations--book button{
+  .Reservations--book button {
     border: none;
     background-color: #2f89c6;
-    color: #FFFFFF;
+    color: #ffffff;
     font-weight: 700;
     padding: 1rem;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     cursor: pointer;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
     font-weight: 700;
-
   }
-  .Reservations--book button:hover{
+  .Reservations--book button:hover {
     background-color: #2c7eb5;
-
   }
 
-  .Reservations--hisList{
+  .Reservations--hisList {
     display: flex;
     flex-direction: column;
   }
-    .Reservations--hisReservation p{
+  .Reservations--hisReservation p {
     margin: 0;
   }
-  .Reservations--Avatar img{
+  .Reservations--Avatar img {
     border-radius: 50%;
     width: 2rem;
-    margin: 0 .5rem 0 0;
+    margin: 0 0.5rem 0 0;
   }
-  .Reservations--bottomInfo{
+  .Reservations--bottomInfo {
     display: flex;
   }
+}
+.popover {
+  padding: 0.25rem;
+  min-width: 5rem;
 }
