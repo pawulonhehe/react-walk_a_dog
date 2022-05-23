@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 # Standard Library
 import os
 from pathlib import Path
+from tkinter import E
 
 # 3rd-party
 import dj_database_url
@@ -199,8 +200,8 @@ django_heroku.settings(locals())
 options = DATABASES['default'].get('OPTIONS', {})
 options.pop('sslmode', None)
 
+
 try:
-    # Local
     from .settings_local import *
 except ImportError:
     pass

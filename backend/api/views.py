@@ -80,13 +80,13 @@ class SlotCreateView(CreateAPIView):
 
 class TrainerListView(ListAPIView):
     name = 'trainer-list'
-    queryset = Trainer.objects.all()
+    queryset = CustomUser.objects.filter(is_trainer=True)
     serializer_class = CustomUserSerializer
     permission_classes = [permissions.AllowAny]
 
 
 class TrainerDetailView(RetrieveUpdateDestroyAPIView):
     name = 'trainer-detail'
-    queryset = Trainer.objects.all()
+    queryset = CustomUser.objects.filter(is_trainer=True)
     serializer_class = CustomUserSerializer
     permission_classes = [permissions.AllowAny]

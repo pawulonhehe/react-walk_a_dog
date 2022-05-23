@@ -36,6 +36,24 @@ class Dog(models.Model):  # noqa: D101
         verbose_name = 'Pies'
         verbose_name_plural = 'Psy'
 
+    def __str__(self):
+        return f'{self.name} - {self.owner}'
+
+
+class Trainer(models.Model):
+    user = models.OneToOneField(
+        CustomUser,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+
+    class Meta:
+        verbose_name = 'Trener'
+        verbose_name_plural = 'Trenerzy'
+
+    def __str__(self):
+        return self.user.get_full_name()
+
 
 class Slot(models.Model):
     date = models.DateField(verbose_name='Data')
@@ -49,22 +67,19 @@ class Slot(models.Model):
     dogs = models.ManyToManyField(
         Dog,
         verbose_name='Psy',
-        max_length=3,
+        blank=True,
+        default=None,
+    )
+    trainer = models.ForeignKey(
+        CustomUser,
+        verbose_name='Trener',
+        on_delete=models.CASCADE,
+        default=None,
     )
 
     class Meta:
         verbose_name = 'Spacer'
         verbose_name_plural = 'Spacery'
 
-
-class Trainer(models.Model):
-    user = models.OneToOneField(
-        CustomUser,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
-    slots = models.ManyToManyField(
-        Slot,
-        verbose_name='Spacery',
-        related_name='trainers',
-    )
+    def __str__(self):
+        return f'{self.date} {self.start_time}-{self.end_time}'

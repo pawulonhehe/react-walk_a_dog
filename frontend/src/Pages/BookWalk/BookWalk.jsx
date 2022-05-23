@@ -17,13 +17,16 @@ export const BookWalk = () => {
       })
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
-        setUser(res.data);
+        let trainer_list = [];
+        for (const [key, value] of Object.entries(res.data)) {
+          trainer_list.push(value["user"]);
+        }
+        setUser(trainer_list);
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, []);
-  console.log(user);
 
   useEffect(() => {
     axios
@@ -42,7 +45,6 @@ export const BookWalk = () => {
         console.log(error.response);
       });
   }, []);
-  console.log(dog);
 
   const walkTrainer = (event) =>
     setWalk({ ...walk, trainer: event.target.value });
