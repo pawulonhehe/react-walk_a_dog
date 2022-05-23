@@ -1,7 +1,7 @@
 # Django
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-
+from api.models import Trainer
 User = get_user_model()
 # Local
 from .models import UserAddress
@@ -18,4 +18,8 @@ class UserAdmin(admin.ModelAdmin):  # noqa: D101
 
 @admin.register(UserAddress)
 class UserAddressAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Trainer)
+class TrainerAdmin(admin.ModelAdmin):
     pass

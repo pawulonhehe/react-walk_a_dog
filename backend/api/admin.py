@@ -19,5 +19,4 @@ class DogADmin(admin.ModelAdmin):
 class SlotAdmin(admin.ModelAdmin):
     list_display = (
         'date',
-        'trainer',
     )

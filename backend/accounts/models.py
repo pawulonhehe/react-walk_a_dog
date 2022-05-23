@@ -132,6 +132,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         _('date joined'),
         default=timezone.now,
     )
+    is_trainer = models.BooleanField(
+        'Trener',
+        default=False,
+    )
 
     objects = UserManager()
 
@@ -141,3 +145,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'Użytkownik'
         verbose_name_plural = 'Użytkownicy'
 
+    def get_full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
+    def __str__(self):
+        return self.get_full_name()

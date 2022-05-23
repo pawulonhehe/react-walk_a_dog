@@ -1,3 +1,4 @@
 apps_static
 __pycache__
 settings_local.py
+.idea

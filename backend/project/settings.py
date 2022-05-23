@@ -199,8 +199,8 @@ django_heroku.settings(locals())
 options = DATABASES['default'].get('OPTIONS', {})
 options.pop('sslmode', None)
 
+
 try:
-    # Local
     from .settings_local import *
 except ImportError:
     pass
