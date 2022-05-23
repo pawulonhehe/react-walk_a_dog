@@ -13,17 +13,18 @@ export const Trainers = () => {
 
   useEffect(() => {
     axios
-      .get("/users", {
+      .get("/trainers", {
         headers: { Authorization: `Token ${token}` },
       })
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
-        setUser(res.data.filter(({ is_trainer }) => is_trainer));
+        setUser(res.data);
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, []);
+  
   console.log(user);
   return (
     <div className="Trainers">

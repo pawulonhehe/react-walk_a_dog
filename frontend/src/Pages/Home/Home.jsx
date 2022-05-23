@@ -1,16 +1,13 @@
 import React from "react";
 import "./Home.scss";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 export const Home = () => {
-
   const handleLogout = () => {
-    axios
-      .post('auth/logout/')
-      .then(() => {
-        sessionStorage.removeItem("token");
-        window.location.reload();
-      });
+    axios.post("auth/logout/").then(() => {
+      sessionStorage.removeItem("token");
+      window.location.reload();
+    });
   };
 
   if (sessionStorage.getItem("token"))

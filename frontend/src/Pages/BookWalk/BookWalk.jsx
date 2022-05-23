@@ -1,9 +1,66 @@
 import React from "react";
 import "./BookWalk.scss";
 import { Icon } from "@iconify/react";
-// import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export const BookWalk = () => {
+  const [user, setUser] = useState([]);
+  const [dog, setDogs] = useState([]);
+  const [walk, setWalk] = useState([]);
+  const token = sessionStorage.getItem("token");
+
+  useEffect(() => {
+    axios
+      .get("/trainers", {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setUser(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+  console.log(user);
+
+  useEffect(() => {
+    axios
+      .get("/dogs", {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setDogs(
+          res.data.filter(
+            ({ owner }) => +`${sessionStorage.getItem("user")}` === owner.id
+          )
+        );
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+  console.log(dog);
+
+  const walkTrainer = (event) =>
+    setWalk({ ...walk, trainer: event.target.value });
+  const walkDogs = (event) => setWalk({ ...walk, dog: event.target.value });
+
+  const bookWalk = (event) => {
+    event.preventDefault();
+    axios.post(
+      "/walks/new/",
+      {
+        trainer: walk.trainer,
+        dog: walk.dog,
+      },
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    );
+  };
   return (
     <div className="BookWalk">
       <div className="BookWalk--topText">
@@ -12,15 +69,26 @@ export const BookWalk = () => {
       <div className="BookWalk--select">
         <div className="BookWalk--select">
           <span>Wybierz datę</span>
-          <select name="" id=""></select>
+          <select name="" id="date-select"></select>
         </div>
         <div className="BookWalk--select">
           <span>Trener</span>
-          <select name="" id=""></select>
+          <select name="" id="trainer-selection">
+            {user.map((user) => (
+              <option value={walk.trainer}>
+                {user.first_name}
+                {user.last_name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="BookWalk--select">
           <span>Wybierz psy</span>
-          <select name="" id=""></select>
+          <select name="" id="dog-selection">
+            {dog.map((dog) => (
+              <option value={walk.dog}>{dog.name}</option>
+            ))}
+          </select>
         </div>
       </div>
       <div className="BookWalk--availableWalks">

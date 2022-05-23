@@ -9,18 +9,19 @@ export const Register = () => {
     email: "",
     password1: "",
     password2: "",
+    phonenumber: "",
   });
 
   const [formData, updateFormData] = useState(initialFormData);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     updateFormData({
       ...formData,
       [e.currentTarget.name]: e.currentTarget.value.trim(),
     });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     axios
@@ -28,12 +29,13 @@ export const Register = () => {
         email: formData.email,
         password1: formData.password1,
         password2: formData.password2,
+        phonenumber: formData.phonenumber,
       })
-      .then((res: any) => {
+      .then((res) => {
         sessionStorage.setItem("token", res.data.key);
         navigate("/");
       })
-      .catch((error: any) => {
+      .catch((error) => {
         console.log(error.response.data);
       });
   };
@@ -57,6 +59,11 @@ export const Register = () => {
               <br />
               Powtórz hasło:
               <input type="password" name="password2" onChange={handleChange} />
+            </label>
+            <label>
+              <br />
+              Numer telefonu:
+              <input type="number" name="phonenumber" onChange={handleChange} />
             </label>
             <button type="submit" className="registerbutton">
               Potwierdź

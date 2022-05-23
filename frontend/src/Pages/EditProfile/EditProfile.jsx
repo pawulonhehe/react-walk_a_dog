@@ -15,8 +15,6 @@ export const EditProfile = () => {
     setUser({ ...user, last_name: event.target.value });
   const changePhoneNumber = (event) =>
     setUser({ ...user, phone_number: event.target.value });
-  const changePassword = (event) =>
-    setUser({ ...user, password: event.target.value });
   const changeEmail = (event) =>
     setUser({ ...user, email: event.target.value });
 
@@ -29,7 +27,6 @@ export const EditProfile = () => {
         last_name: user.last_name,
         phone_number: user.phone_number,
         email: user.email,
-        // password: user.password,
       },
       {
         headers: { Authorization: `Token ${token}` },
@@ -114,10 +111,6 @@ export const EditProfile = () => {
               value={user.email}
               onChange={changeEmail}
             />
-          </label>
-          <label>
-            Haslo:
-            <input type="password" name="password" />
           </label>
           <button
             type="submit"
