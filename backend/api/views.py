@@ -1,13 +1,23 @@
+# 3rd-party
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import permissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
-from .serializers import CustomUserSerializer
+from rest_framework.generics import CreateAPIView
+from rest_framework.generics import ListAPIView
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
+
+# Project
 from accounts.models import CustomUser
-from .models import Dog, Walk
-from .serializers import DogSerializer, WalkSerializer
+
+# Local
+from .models import Dog
+from .models import Slot
+from .models import Trainer
+from .serializers import CustomUserSerializer
+from .serializers import DogCreateSerializer
+from .serializers import DogSerializer
+from .serializers import SlotSerializer
 
 
 class FacebookLogin(SocialLoginView):
@@ -16,22 +26,15 @@ class FacebookLogin(SocialLoginView):
 
 class CustomUserListView(ListAPIView):
     name = 'customuser-list'
-    queryset = CustomUser.objects.all()
+    queryset = CustomUser.objects.filter(is_active=True)
     serializer_class = CustomUserSerializer
     permission_classes = [permissions.AllowAny]
 
 
-class CustomUserDetailView(RetrieveAPIView):
+class CustomUserDetailView(RetrieveUpdateDestroyAPIView):
     name = 'customuser-detail'
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
-    permission_classes = [permissions.AllowAny]
-
-
-class DogDetailView(RetrieveUpdateDestroyAPIView):
-    name = 'dog-detail'
-    serializer_class = DogSerializer
-    queryset = Dog.objects.all()
     permission_classes = [permissions.AllowAny]
 
 
@@ -42,15 +45,48 @@ class DogListView(ListAPIView):
     permission_classes = [permissions.AllowAny]
 
 
-class WalkDetailView(RetrieveUpdateDestroyAPIView):
-    name = 'walk-detail'
-    queryset = Walk.objects.all()
-    serializer_class = WalkSerializer
+class DogDetailView(RetrieveUpdateDestroyAPIView):
+    name = 'dog-detail'
+    serializer_class = DogSerializer
+    queryset = Dog.objects.all()
     permission_classes = [permissions.AllowAny]
 
 
-class WalkListView(ListAPIView):
-    name = 'walk-list'
-    queryset = Walk.objects.all()
-    serializer_class = WalkSerializer
+class DogCreateView(CreateAPIView):
+    name = 'dog-create'
+    serializer_class = DogCreateSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class SlotListView(ListAPIView):
+    name = 'Slot-list'
+    queryset = Slot.objects.all()
+    serializer_class = SlotSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class SlotDetailView(RetrieveUpdateDestroyAPIView):
+    name = 'Slot-detail'
+    queryset = Slot.objects.all()
+    serializer_class = SlotSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class SlotCreateView(CreateAPIView):
+    name = 'Slot-create'
+    serializer_class = SlotSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class TrainerListView(ListAPIView):
+    name = 'trainer-list'
+    queryset = Trainer.objects.all()
+    serializer_class = CustomUserSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class TrainerDetailView(RetrieveUpdateDestroyAPIView):
+    name = 'trainer-detail'
+    queryset = Trainer.objects.all()
+    serializer_class = CustomUserSerializer
     permission_classes = [permissions.AllowAny]

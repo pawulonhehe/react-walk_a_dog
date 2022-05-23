@@ -1,4 +1,7 @@
+# Django
 from django.db import models
+
+# Project
 from accounts.models import CustomUser
 
 
@@ -34,8 +37,10 @@ class Dog(models.Model):  # noqa: D101
         verbose_name_plural = 'Psy'
 
 
-class Walk(models.Model):
+class Slot(models.Model):
     date = models.DateField(verbose_name='Data')
+    start_time = models.TimeField(verbose_name='Początek')
+    end_time = models.TimeField(verbose_name='Koniec')
     location = models.DecimalField(
         verbose_name='Aktualna lokalizacja',
         max_digits=9,
@@ -43,16 +48,23 @@ class Walk(models.Model):
     )
     dogs = models.ManyToManyField(
         Dog,
-        verbose_name='Pies',
+        verbose_name='Psy',
         max_length=3,
-    )
-    trainer = models.ForeignKey(
-        CustomUser, 
-        verbose_name='Trener',
-        on_delete=models.SET_NULL,
-        null=True,
     )
 
     class Meta:
         verbose_name = 'Spacer'
         verbose_name_plural = 'Spacery'
+
+
+class Trainer(models.Model):
+    user = models.OneToOneField(
+        CustomUser,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    slots = models.ManyToManyField(
+        Slot,
+        verbose_name='Spacery',
+        related_name='trainers',
+    )

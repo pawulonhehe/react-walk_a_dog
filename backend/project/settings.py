@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 # Standard Library
+import os
+from pathlib import Path
+
+# 3rd-party
 import dj_database_url
 import django_heroku
-from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -198,6 +200,7 @@ options = DATABASES['default'].get('OPTIONS', {})
 options.pop('sslmode', None)
 
 try:
+    # Local
     from .settings_local import *
 except ImportError:
     pass

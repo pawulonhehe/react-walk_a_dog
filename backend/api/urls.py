@@ -1,7 +1,23 @@
-from allauth.account.views import confirm_email
+# Django
 from django.conf.urls import url
-from django.urls import path, include
-from .views import CustomUserDetailView, CustomUserListView, DogListView, DogDetailView, WalkDetailView, WalkListView
+from django.urls import include
+from django.urls import path
+
+# 3rd-party
+from allauth.account.views import confirm_email
+
+# Local
+from .views import CustomUserDetailView
+from .views import CustomUserListView
+from .views import DogCreateView
+from .views import DogDetailView
+from .views import DogListView
+from .views import TrainerDetailView
+from .views import TrainerListView
+from .views import SlotCreateView
+from .views import SlotDetailView
+from .views import SlotListView
+
 # from .views import FacebookLogin
 app_name = 'api'
 urlpatterns = [
@@ -35,16 +51,36 @@ urlpatterns = [
         DogDetailView.as_view(),
         name=DogDetailView.name,
     ),
+    path(
+        'dogs/create/',
+        DogCreateView.as_view(),
+        name=DogCreateView.name,
+    ),
     # walks
     path(
         'walks/',
-        WalkListView.as_view(),
-        name=WalkListView.name,
+        SlotListView.as_view(),
+        name=SlotListView.name,
     ),
     path(
         'walks/<int:pk>/',
-        WalkDetailView.as_view(),
-        name=WalkDetailView.name,
+        SlotDetailView.as_view(),
+        name=SlotDetailView.name,
+    ),
+    path(
+        'walks/new/',
+        SlotCreateView.as_view(),
+        name=SlotCreateView.name,
     ),
     # trainers
+    path(
+        'trainers/',
+        TrainerListView.as_view(),
+        name=TrainerListView.name,
+    ),
+    path(
+        'trainers/<int:pk>/',
+        TrainerDetailView.as_view(),
+        name=TrainerDetailView.name,
+    ),
 ]

@@ -1,9 +1,10 @@
-from django.db import models
-
-from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+# Django
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
-from django.utils import timezone
 from django.core.validators import RegexValidator
+from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -78,14 +79,7 @@ class UserAddress(models.Model):
         verbose_name_plural = 'Adresy'
 
 
-class UserDetails(models.Model):
-    address = models.ForeignKey(
-        UserAddress,
-        verbose_name='Adres',
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(
         'Numer telefonu',
         max_length=20,
@@ -99,23 +93,6 @@ class UserDetails(models.Model):
     image = models.ImageField(
         'Zdjęcie profilowe',
         upload_to='profile_images',
-        blank=True,
-    )
-
-    class Meta:
-        verbose_name = 'Dane użytkownika'
-        verbose_name_plural = 'Dane użytkowników'
-
-    def __str__(self):
-        return str(self.pk)
-
-
-class CustomUser(AbstractBaseUser, PermissionsMixin):
-    details = models.OneToOneField(
-        UserDetails,
-        verbose_name='Dane użytkownika',
-        on_delete=models.SET_NULL,
-        null=True,
         blank=True,
     )
     email = models.EmailField(
@@ -151,10 +128,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             'of deleting accounts.'
         ),
     )
-    is_trainer = models.BooleanField(
-        'Trener',
-        default=False,
-    )
     date_joined = models.DateTimeField(
         _('date joined'),
         default=timezone.now,
@@ -167,3 +140,4 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'Użytkownik'
         verbose_name_plural = 'Użytkownicy'
+

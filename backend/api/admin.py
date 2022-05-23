@@ -1,5 +1,9 @@
+# Django
 from django.contrib import admin
-from .models import Dog, Walk
+
+# Local
+from .models import Dog
+from .models import Slot
 
 
 @admin.register(Dog)
@@ -11,8 +15,8 @@ class DogADmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Walk)
-class WalkAdmin(admin.ModelAdmin):
+@admin.register(Slot)
+class SlotAdmin(admin.ModelAdmin):
     list_display = (
         'date',
         'trainer',

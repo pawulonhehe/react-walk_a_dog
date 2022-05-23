@@ -1,8 +1,10 @@
+# Django
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-from .models import UserAddress, UserDetails
+# Local
+from .models import UserAddress
 
 
 @admin.register(User)
@@ -13,10 +15,6 @@ class UserAdmin(admin.ModelAdmin):  # noqa: D101
         'email',
         'is_staff',
     )
-
-@admin.register(UserDetails)
-class UserDetailsAdmin(admin.ModelAdmin):
-    pass
 
 @admin.register(UserAddress)
 class UserAddressAdmin(admin.ModelAdmin):
