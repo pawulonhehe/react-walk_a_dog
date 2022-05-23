@@ -24,7 +24,7 @@ export const Trainers = () => {
         console.log(error.response);
       });
   }, []);
-  
+
   console.log(user);
   return (
     <div className="Trainers">

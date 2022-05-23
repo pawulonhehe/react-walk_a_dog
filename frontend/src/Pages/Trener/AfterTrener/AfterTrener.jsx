@@ -2,6 +2,7 @@ import React from "react";
 import "./AfterTrener.scss";
 import pudzilla from "../../../Assets/Images/pudzilla.jpg";
 import { Icon } from "@iconify/react";
+import { Slots } from "../../../Components/Slots/Slots";
 // import { Link } from "react-router-dom";
 
 export const AfterTrener = () => {
@@ -57,7 +58,9 @@ export const AfterTrener = () => {
         <button type="submit" className="startWork">
           Zacznij pracę!
         </button>
-        <div className="sloty">tu beda sloty spacerowe</div>
+        <div className="sloty">
+          <Slots />
+        </div>
       </div>
     </div>
   );

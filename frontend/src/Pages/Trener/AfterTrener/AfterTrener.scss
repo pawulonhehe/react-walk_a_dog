@@ -16,7 +16,7 @@
   }
 
   .MainContainer {
-    height: 50%;
+    height: 55%;
     width: 90%;
     background-color: #ecf0f1;
     display: flex;
@@ -24,6 +24,7 @@
     align-items: center;
     flex-direction: column;
     border-radius: 12px;
+    margin-top: 6%;
 
     .WelcomeMessage {
       font-family: "Montserrat", sans-serif;
@@ -85,7 +86,8 @@
     }
 
     .sloty {
-      color: red;
+      width: 75%;
+      margin-top: 3%;
     }
   }
 }
