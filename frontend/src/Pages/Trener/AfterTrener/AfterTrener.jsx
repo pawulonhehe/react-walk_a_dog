@@ -1,18 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./AfterTrener.scss";
 import pudzilla from "../../../Assets/Images/pudzilla.jpg";
 import { Icon } from "@iconify/react";
 import { Slots } from "../../../Components/Slots/Slots";
+import axios from "axios";
 // import { Link } from "react-router-dom";
 
 export const AfterTrener = () => {
+
+const token = sessionStorage.getItem("token");
+const [trainer,setTrainer] = useState();
+console.log(sessionStorage.getItem("user"))
+useEffect(() => {
+  axios
+  
+    .get(`/trainers/${sessionStorage.getItem("user")}`, {
+        headers: { Authorization: `Token ${token}` },
+    })
+    .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setTrainer(res.data);
+    })
+    .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+
   return (
     <div className="AfterLogin">
       <div className="Avatar">
         <img src={pudzilla} alt="Pudzilla" width="140" height="140" />
       </div>
       <div className="MainContainer">
-        <div className="WelcomeMessage">Witaj Mariusz!</div>
+        <div className="WelcomeMessage">Witaj {trainer?.first_name}!</div>
         <div className="NiceButton">
           <div className="Icon">
             <Icon
