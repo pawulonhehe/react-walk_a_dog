@@ -66,6 +66,10 @@ export const BookWalk = () => {
       })
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
+        
+        //TODO 
+        //const data = res.data
+        
         const data = [
           {
             'id': 11,
