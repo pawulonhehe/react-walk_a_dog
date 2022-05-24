@@ -4,24 +4,28 @@ import pudzilla from "../../../Assets/Images/pudzilla.jpg";
 import { Icon } from "@iconify/react";
 import { Slots } from "../../../Components/Slots/Slots";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 export const AfterTrener = () => {
+  const navigate = useNavigate();
+  const switchToMyProfile = () => navigate("/editaccount");
+  const switchToYourClients = () => navigate("/yourclients");
 
-const token = sessionStorage.getItem("token");
-const [trainer,setTrainer] = useState();
-console.log(sessionStorage.getItem("user"))
-useEffect(() => {
-  axios
-  
-    .get(`/trainers/${sessionStorage.getItem("user")}`, {
+  const token = sessionStorage.getItem("token");
+  const [trainer, setTrainer] = useState();
+  console.log(sessionStorage.getItem("user"));
+  useEffect(() => {
+    axios
+
+      .get(`/trainers/${sessionStorage.getItem("user")}`, {
         headers: { Authorization: `Token ${token}` },
-    })
-    .then((res) => {
+      })
+      .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setTrainer(res.data);
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         console.log(error.response);
       });
   }, []);
@@ -33,7 +37,7 @@ useEffect(() => {
       </div>
       <div className="MainContainer">
         <div className="WelcomeMessage">Witaj {trainer?.first_name}!</div>
-        <div className="NiceButton">
+        <div className="NiceButton" onClick={switchToMyProfile}>
           <div className="Icon">
             <Icon
               icon="material-symbols:manage-accounts"
@@ -61,7 +65,7 @@ useEffect(() => {
             Zobacz swoje nadchodzące usługi lub rezerwuj nowe
           </div>
         </div>
-        <div className="NiceButton">
+        <div className="NiceButton" onClick={switchToYourClients}>
           <div className="Icon">
             <Icon
               icon="material-symbols:account-circle"
