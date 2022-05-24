@@ -1,21 +1,31 @@
-import React from "react";
-import "./BookWalk.scss";
-import { Icon } from "@iconify/react";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Select from "react-select";
-import { Walk } from "../../Components/Walk/Walk";
-import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
-import * as moment from "moment";
+import React, { useEffect, useState } from 'react';
+import './BookWalk.scss';
+import { Icon } from '@iconify/react';
+import axios from 'axios';
+import Select from 'react-select';
+import TextField from '@mui/material/TextField';
+import * as moment from 'moment';
+require("moment/min/locales.min");
 
 export const BookWalk = () => {
   const [user, setUser] = useState([]);
   const [dog, setDogs] = useState([]);
   const [selectedDog, setSelectedDog] = useState([]);
   const [walk, setWalk] = useState([]);
+  const [currentWalk, setCurrentWalk] = useState([]);
+  const [myDate, setMyDate] = useState([moment(new Date()).locale("pl").format("MMM Do YY")]);
   const token = sessionStorage.getItem("token");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
+  let selectedDate = moment(new Date()).locale("pl").format("MMM Do YY")
+
+  function changeDate(event) {
+    selectedDate = moment(event.target.value).locale("pl").format("MMM Do YY")
+    setMyDate(selectedDate)
+  }
+
+  function changeTrainer(event) {
+    console.log(event.target.value)
+  }
 
   useEffect(() => {
     axios
@@ -56,15 +66,83 @@ export const BookWalk = () => {
       })
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
-        setWalk(res.data);
-        console.log(res.data);
+        const data = [
+          {
+            'id': 11,
+            'dog_count': 1,
+            'date': '2022-05-24',
+            'start_time': '12:00:00',
+            'end_time': '14:00:00',
+            'location': '1.000000',
+            'trainer': {
+              'first_name' : 1,
+              'last_name' : 2,
+            },
+            'dogs': [15],
+          },
+          {
+            'id': 11,
+            'dog_count': 2,
+            'date': '2022-05-25',
+            'start_time': '12:00:00',
+            'end_time': '14:00:00',
+            'location': '1.000000',
+            'trainer': {
+              'first_name' : 3,
+              'last_name' : 4,
+            },
+            'dogs': [15],
+          },
+          {
+            'id': 11,
+            'dog_count': 3,
+            'date': '2022-05-26',
+            'start_time': '12:00:00',
+            'end_time': '14:00:00',
+            'location': '1.000000',
+            'trainer': {
+              'first_name' : 3,
+              'last_name' : 4,
+            },
+            'dogs': [15],
+          },
+          {
+            'id': 11,
+            'dog_count': 3,
+            'date': '2022-05-27',
+            'start_time': '12:00:00',
+            'end_time': '14:00:00',
+            'location': '1.000000',
+            'trainer': {
+              'first_name' : 3,
+              'last_name' : 4,
+            },
+            'dogs': [15],
+          },
+        ]
+
+
+        setWalk(data);
+        setCurrentWalk(data)
+        console.log([]);
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, []);
 
-  const selectDog = (selectedOption) => setSelectedDog(selectedOption);
+
+
+
+  const selectDog = (selectedOption) => {
+    setSelectedDog(selectedOption)
+    changeDog(selectedOption)
+  };
+
+  function changeDog(selectedOption) {
+    setCurrentWalk(walk)
+    setCurrentWalk(walk.filter(w => w.dog_count >= selectedOption.length))
+  }
   // const walkTrainer = (event) =>
   //   setWalk({ ...walk, trainer: event.target.value });
   // const walkDogs = (event) => setWalk({ ...walk, dog: event.target.value });
@@ -82,8 +160,8 @@ export const BookWalk = () => {
   //     }
   //   );
   // };
-  console.log(selectedDog);
-  console.log(user);
+  // console.log(selectedDog);
+  // console.log(user);
 
   return (
     <div className="BookWalk">
@@ -97,6 +175,7 @@ export const BookWalk = () => {
             <TextField
               id="date"
               type="date"
+              onChange={changeDate}
               defaultValue={currentDate}
               sx={{ width: 220 }}
               InputLabelProps={{
@@ -107,9 +186,9 @@ export const BookWalk = () => {
         </div>
         <div className="BookWalk--select">
           <span>Trener</span>
-          <select name="" id="trainer-selection">
+          <select name="" id="trainer-selection" onChange={changeTrainer}>
             {user.map((user) => (
-              <option value={walk.trainer}>
+              <option value={walk.trainer} key={user.first_name}>
                 {user.first_name}&nbsp;
                 {user.last_name}
               </option>
@@ -129,10 +208,11 @@ export const BookWalk = () => {
         </div>
       </div>
       <div className="BookWalk--availableWalks">
-        <span>poniedziałek, 7 marca 2022</span>
-        {walk.map((walk) => (
+        <span>{myDate}</span>
+        {currentWalk.map((walk) => (
           <div className="BookWalk--availableWalksChoose">
             <div>
+              {walk.date}<br/>
               {walk.start_time.substr(0, 5)} <br></br>
               {walk.end_time.substr(0, 5)}
             </div>
