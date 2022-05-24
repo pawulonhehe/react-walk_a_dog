@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
 import { Walk } from "../../Components/Walk/Walk";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import * as moment from "moment";
 
 export const BookWalk = () => {
   const [user, setUser] = useState([]);
@@ -12,6 +15,7 @@ export const BookWalk = () => {
   const [selectedDog, setSelectedDog] = useState([]);
   const [walk, setWalk] = useState([]);
   const token = sessionStorage.getItem("token");
+  const currentDate = moment(new Date()).format("YYYY-MM-DD");
 
   useEffect(() => {
     axios
@@ -80,6 +84,7 @@ export const BookWalk = () => {
   // };
   console.log(selectedDog);
   console.log(user);
+
   return (
     <div className="BookWalk">
       <div className="BookWalk--topText">
@@ -88,7 +93,17 @@ export const BookWalk = () => {
       <div className="BookWalk--select">
         <div className="BookWalk--select">
           <span>Wybierz datę</span>
-          <select name="" id="date-select"></select>
+          <div className="calendar">
+            <TextField
+              id="date"
+              type="date"
+              defaultValue={currentDate}
+              sx={{ width: 220 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </div>
         </div>
         <div className="BookWalk--select">
           <span>Trener</span>
