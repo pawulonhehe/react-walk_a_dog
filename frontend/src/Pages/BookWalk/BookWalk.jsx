@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
+import { Walk } from "../../Components/Walk/Walk";
 
 export const BookWalk = () => {
   const [user, setUser] = useState([]);
@@ -19,11 +20,7 @@ export const BookWalk = () => {
       })
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
-        let trainer_list = [];
-        for (const [key, value] of Object.entries(res.data)) {
-          trainer_list.push(value["user"]);
-        }
-        setUser(trainer_list);
+        setUser(res.data);
       })
       .catch((error) => {
         console.log(error.response);
@@ -56,31 +53,33 @@ export const BookWalk = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setWalk(res.data);
+        console.log(res.data);
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, []);
-  console.log(walk);
 
   const selectDog = (selectedOption) => setSelectedDog(selectedOption);
-  const walkTrainer = (event) =>
-    setWalk({ ...walk, trainer: event.target.value });
-  const walkDogs = (event) => setWalk({ ...walk, dog: event.target.value });
-  const bookWalk = (event) => {
-    event.preventDefault();
-    axios.post(
-      "/walks/new/",
-      {
-        trainer: walk.trainer,
-        dog: walk.dog,
-      },
-      {
-        headers: { Authorization: `Token ${token}` },
-      }
-    );
-  };
+  // const walkTrainer = (event) =>
+  //   setWalk({ ...walk, trainer: event.target.value });
+  // const walkDogs = (event) => setWalk({ ...walk, dog: event.target.value });
+
+  // const bookWalk = (event) => {
+  //   event.preventDefault();
+  //   axios.post(
+  //     "/walks/new/",
+  //     {
+  //       trainer: walk.trainer,
+  //       dog: walk.dog,
+  //     },
+  //     {
+  //       headers: { Authorization: `Token ${token}` },
+  //     }
+  //   );
+  // };
   console.log(selectedDog);
+  console.log(user);
   return (
     <div className="BookWalk">
       <div className="BookWalk--topText">
