@@ -11,6 +11,7 @@ export const AfterTrener = () => {
   const navigate = useNavigate();
   const switchToMyProfile = () => navigate("/editaccount");
   const switchToYourClients = () => navigate("/yourclients");
+  const switchToStartWork = () => navigate("/startwork");
 
   const token = sessionStorage.getItem("token");
   const [trainer, setTrainer] = useState();
@@ -79,12 +80,10 @@ export const AfterTrener = () => {
             Przeglądaj profile potencjalnych klientów{" "}
           </div>
         </div>
-        <button type="submit" className="startWork">
+        <button type="submit" className="startWork" onClick={switchToStartWork}>
           Zacznij pracę!
         </button>
-        <div className="sloty">
-          <Slots />
-        </div>
+        {/* <div className="sloty"><Slots /></div> */}
       </div>
     </div>
   );
