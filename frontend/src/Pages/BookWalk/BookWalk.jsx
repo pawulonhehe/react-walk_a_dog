@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import './BookWalk.scss';
-import { Icon } from '@iconify/react';
-import axios from 'axios';
-import Select from 'react-select';
-import TextField from '@mui/material/TextField';
-import * as moment from 'moment';
+import React, { useEffect, useState } from "react";
+import "./BookWalk.scss";
+import { Icon } from "@iconify/react";
+import axios from "axios";
+import Select from "react-select";
+import TextField from "@mui/material/TextField";
+import * as moment from "moment";
 require("moment/min/locales.min");
 
 export const BookWalk = () => {
@@ -13,18 +13,20 @@ export const BookWalk = () => {
   const [selectedDog, setSelectedDog] = useState([]);
   const [walk, setWalk] = useState([]);
   const [currentWalk, setCurrentWalk] = useState([]);
-  const [myDate, setMyDate] = useState([moment(new Date()).locale("pl").format("MMM Do YY")]);
+  const [myDate, setMyDate] = useState([
+    moment(new Date()).locale("pl").format("MMM Do YY"),
+  ]);
   const token = sessionStorage.getItem("token");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
-  let selectedDate = moment(new Date()).locale("pl").format("MMM Do YY")
+  let selectedDate = moment(new Date()).locale("pl").format("MMM Do YY");
 
   function changeDate(event) {
-    selectedDate = moment(event.target.value).locale("pl").format("MMM Do YY")
-    setMyDate(selectedDate)
+    selectedDate = moment(event.target.value).locale("pl").format("MMM Do YY");
+    setMyDate(selectedDate);
   }
 
   function changeTrainer(event) {
-    console.log(event.target.value)
+    console.log(event.target.value);
   }
 
   useEffect(() => {
@@ -66,68 +68,13 @@ export const BookWalk = () => {
       })
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
-        
-        //TODO 
-        //const data = res.data
-        
-        const data = [
-          {
-            'id': 11,
-            'dog_count': 1,
-            'date': '2022-05-24',
-            'start_time': '12:00:00',
-            'end_time': '14:00:00',
-            'location': '1.000000',
-            'trainer': {
-              'first_name' : 1,
-              'last_name' : 2,
-            },
-            'dogs': [15],
-          },
-          {
-            'id': 11,
-            'dog_count': 2,
-            'date': '2022-05-25',
-            'start_time': '12:00:00',
-            'end_time': '14:00:00',
-            'location': '1.000000',
-            'trainer': {
-              'first_name' : 3,
-              'last_name' : 4,
-            },
-            'dogs': [15],
-          },
-          {
-            'id': 11,
-            'dog_count': 3,
-            'date': '2022-05-26',
-            'start_time': '12:00:00',
-            'end_time': '14:00:00',
-            'location': '1.000000',
-            'trainer': {
-              'first_name' : 3,
-              'last_name' : 4,
-            },
-            'dogs': [15],
-          },
-          {
-            'id': 11,
-            'dog_count': 3,
-            'date': '2022-05-27',
-            'start_time': '12:00:00',
-            'end_time': '14:00:00',
-            'location': '1.000000',
-            'trainer': {
-              'first_name' : 3,
-              'last_name' : 4,
-            },
-            'dogs': [15],
-          },
-        ]
+
+        //TODO
+        const data = res.data;
 
 
         setWalk(data);
-        setCurrentWalk(data)
+        setCurrentWalk(data);
         console.log([]);
       })
       .catch((error) => {
@@ -135,17 +82,15 @@ export const BookWalk = () => {
       });
   }, []);
 
-
-
-
   const selectDog = (selectedOption) => {
-    setSelectedDog(selectedOption)
-    changeDog(selectedOption)
+    setSelectedDog(selectedOption);
+    changeDog(selectedOption);
   };
 
   function changeDog(selectedOption) {
-    setCurrentWalk(walk)
-    setCurrentWalk(walk.filter(w => w.dog_count >= selectedOption.length))
+    setCurrentWalk(walk);
+    setCurrentWalk(walk.filter(
+      (w) =>  3 - w.dogs.length >= selectedOption.length));
   }
   // const walkTrainer = (event) =>
   //   setWalk({ ...walk, trainer: event.target.value });
@@ -216,7 +161,8 @@ export const BookWalk = () => {
         {currentWalk.map((walk) => (
           <div className="BookWalk--availableWalksChoose">
             <div>
-              {walk.date}<br/>
+              {walk.date}
+              <br />
               {walk.start_time.substr(0, 5)} <br></br>
               {walk.end_time.substr(0, 5)}
             </div>
