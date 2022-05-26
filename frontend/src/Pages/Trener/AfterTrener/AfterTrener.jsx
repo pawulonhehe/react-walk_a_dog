@@ -10,7 +10,6 @@ export const AfterTrener = () => {
 
 const token = sessionStorage.getItem("token");
 const [trainer,setTrainer] = useState();
-console.log(sessionStorage.getItem("user"))
 useEffect(() => {
   axios
   

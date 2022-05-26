@@ -2,9 +2,16 @@ import React from "react";
 import "./YourClients.scss";
 import pudzilla from "../../../Assets/Images/pudzilla.jpg";
 import pies from "../../../Assets/Images/pies.jpg";
+import { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 
 export const YourClients = () => {
+  const [clients, setClients] = useState([]);
+
+
+
+
+
   return (
     <div className="Clients">
       <div className="Clients--topText">Twoi Klienci</div>
