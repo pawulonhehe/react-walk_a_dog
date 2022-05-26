@@ -11,7 +11,7 @@ $pink: #eeafe0;
   background-color: #aec7ea;
   position: absolute;
   width: 80%;
-  height: 50%;
+  height: 46%;
   margin-left: 10%;
   margin-top: -70%;
   border-radius: 10px;
@@ -22,12 +22,17 @@ $pink: #eeafe0;
       color: rgb(78, 78, 78);
       margin-top: -2%;
     }
-
     .starttime {
       margin-top: 5%;
     }
     .endtime {
       margin-top: 5%;
+    }
+    span {
+      font-family: "Montserrat", sans-serif;
+      font-weight: regular;
+      color: rgb(78, 78, 78);
+      margin-left: 9%;
     }
     .selectt {
       display: flex;
@@ -47,12 +52,16 @@ $pink: #eeafe0;
       padding: 0.5rem 0.25rem;
     }
 
-    .btnAddWalk {
-      border-radius: 10px;
+    .select-react {
+      width: 80%;
+    }
+    .AddWalkButton {
+      border-radius: 12px;
       background-color: #3498db;
       border: solid transparent;
       color: #fff;
       width: 50%;
+      height: 35px;
       font-family: "Montserrat", sans-serif;
       font-weight: bold;
       margin-top: 3%;

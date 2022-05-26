@@ -171,30 +171,6 @@ export const BookWalk = () => {
                 selectedTrainer || selectedTrainer === "Dowolny"
           )
           .map((walk) => (
-            // <div className="BookWalk--availableWalksChoose">
-            //   <div>
-            //     {walk.date}
-            //     <br />
-            //     {walk.start_time.substr(0, 5)} <br></br>
-            //     {walk.end_time.substr(0, 5)}
-            //   </div>
-            //   <div className="line"></div>
-            //   <div className="BookWalk--box">
-            //     <div className="BookWalk--info">
-            //       <h5>Spacer</h5>
-            //       <span>
-            //         {walk.trainer.first_name + " " + walk.trainer.last_name}
-            //       </span>
-            //       <div>
-            //         <Icon icon="material-symbols:sound-detection-dog-barking" />
-            //         {3 - walk.dogs.length} wolnych miejsc
-            //       </div>
-            //     </div>
-            //     <div className="BookWalk--button">
-            //       <button>Zapisz się</button>
-            //     </div>
-            //   </div>
-            // </div>
             <Walk {...walk} />
           ))}
       </div>
