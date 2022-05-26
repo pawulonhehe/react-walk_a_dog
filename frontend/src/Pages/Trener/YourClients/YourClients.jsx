@@ -3,14 +3,18 @@ import "./YourClients.scss";
 import pudzilla from "../../../Assets/Images/pudzilla.jpg";
 import pies from "../../../Assets/Images/pies.jpg";
 import { useState, useEffect } from "react";
+import axios from "axios";
 // import { Link } from "react-router-dom";
 
 export const YourClients = () => {
+
   const [clients, setClients] = useState([]);
+  const token = sessionStorage.getItem ("token");
 
-
-
-
+  useEffect(()=> {
+    axios
+    .get()
+  })
 
   return (
     <div className="Clients">
