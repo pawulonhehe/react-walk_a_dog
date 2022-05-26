@@ -15,19 +15,19 @@ export const BookWalk = () => {
   const [walk, setWalk] = useState([]);
   const [currentWalk, setCurrentWalk] = useState([]);
   const [myDate, setMyDate] = useState([
-    moment(new Date()).locale("pl").format("MMM Do YY"),
+    moment(new Date()).locale("pl").format("dddd, DD MMMM yyyy "),
   ]);
   const [selectedDate, setSelectedDate] = useState([]);
 
   const token = sessionStorage.getItem("token");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
-  let selectedDateFormat = moment(new Date()).locale("pl").format("MMM Do YY");
+  let selectedDateFormat = moment(new Date()).locale("pl").format("dddd, DD MMMM yyyy ");
   let chosenDate = moment(new Date()).format("YYYY-MM-DD");
 
   const changeDate = (event) => {
     selectedDateFormat = moment(event.target.value)
       .locale("pl")
-      .format("MMM Do YY");
+      .format("dddd, DD MMMM yyyy ");
     setMyDate(selectedDateFormat);
 
     chosenDate = moment(event.target.value).format("YYYY-MM-DD");
