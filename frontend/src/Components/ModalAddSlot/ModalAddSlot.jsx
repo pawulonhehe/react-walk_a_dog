@@ -14,11 +14,10 @@ export const ModalAddSlot = () => {
     selectedDate = moment(event.target.value).locale("pl").format("MMM Do YY");
     setMyDate(selectedDate);
   };
+  const currentTime = moment(new Date()).format("HH:mm");
 
   const [dogs, setDogs] = useState([]);
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState([]);
-  const [selectedDogs, setSelectedDogs] = useState([]);
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {
@@ -69,34 +68,35 @@ export const ModalAddSlot = () => {
             inputLabelProps={{ shrink: true }}
           />
         </div>
-        <div className="time">
+        <div className="starttime">
           <TextField
-            id="datetime-local"
-            type="datetime-local"
-            label="Wybierz czas"
-            // defaultValue={currentTime}
+            id="time"
+            type="time"
+            label="Wybierz czas rozpoczęcia"
+            defaultValue={currentTime}
+            sx={{ width: 280 }}
+            inputLabelProps={{ shrink: true }}
+          />
+        </div>
+        <div className="endtime">
+          <TextField
+            id="time"
+            type="time"
+            label="Wybierz czas zakończenia"
+            defaultValue={currentTime}
             sx={{ width: 280 }}
             inputLabelProps={{ shrink: true }}
           />
         </div>
         <div className="selectt">
-          <select name="" value={selectedUser} id="user-selection">
-            {users.map((user) => (
-              <option value={user.first_name}>
-                {user.first_name + " " + user.last_name}
-              </option>
-            ))}
+          <select name="">
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
           </select>
         </div>
-        <div className="selectt">
-          <select name="" value={selectedDogs} id="dog-selection">
-            {dogs.map((dog) => (
-              <option value={dog.name}>{dog.name}</option>
-            ))}
-          </select>
-        </div>
-        <button className="btnAddWalk">Zatwierdź</button>
       </div>
+      <button className="btnAddWalk">Zatwierdź</button>
     </div>
   );
 };

@@ -23,7 +23,10 @@ $pink: #eeafe0;
       margin-top: -2%;
     }
 
-    .time {
+    .starttime {
+      margin-top: 5%;
+    }
+    .endtime {
       margin-top: 5%;
     }
     .selectt {
@@ -31,9 +34,10 @@ $pink: #eeafe0;
       flex-direction: column;
       justify-content: left;
       text-align: left;
-      width: 90%;
+      width: 105%;
       margin: 0 auto;
       margin-top: 2%;
+      margin-left: -2.5%;
     }
     .selectt select {
       margin: 0.25rem 1.5rem;
