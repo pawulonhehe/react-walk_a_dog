@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./BookWalk.scss";
-import { Icon } from "@iconify/react";
 import axios from "axios";
 import Select from "react-select";
 import TextField from "@mui/material/TextField";
@@ -23,16 +22,17 @@ export const BookWalk = () => {
   const token = sessionStorage.getItem("token");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
   let selectedDateFormat = moment(new Date()).locale("pl").format("MMM Do YY");
-  let chosenDate = moment(new Date()).format("YYYY-MM-DD");;
+  let chosenDate = moment(new Date()).format("YYYY-MM-DD");
 
   const changeDate = (event) => {
-    selectedDateFormat = moment(event.target.value).locale("pl").format("MMM Do YY");
+    selectedDateFormat = moment(event.target.value)
+      .locale("pl")
+      .format("MMM Do YY");
     setMyDate(selectedDateFormat);
 
-    chosenDate  = moment(event.target.value).format("YYYY-MM-DD");
+    chosenDate = moment(event.target.value).format("YYYY-MM-DD");
     setSelectedDate(chosenDate);
-  }
- 
+  };
 
   const changeTrainer = (event) => setSelectedTrainer(event.target.value);
 
@@ -76,9 +76,7 @@ export const BookWalk = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
 
-        //TODO
         const data = res.data;
-
 
         setWalk(data);
         setCurrentWalk(data);
@@ -99,7 +97,7 @@ export const BookWalk = () => {
     setCurrentWalk(
       walk.filter((w) => 3 - w.dogs.length >= selectedOption.length)
     );
-  }
+  };
   // const walkTrainer = (event) =>
   //   setWalk({ ...walk, trainer: event.target.value });
   // const walkDogs = (event) => setWalk({ ...walk, dog: event.target.value });
@@ -175,8 +173,9 @@ export const BookWalk = () => {
           .filter(
             (walk) =>
               walk.trainer.first_name + " " + walk.trainer.last_name ===
-                selectedTrainer || selectedTrainer === "Dowolny"
-                || walk.date === selectedDate
+                selectedTrainer ||
+              selectedTrainer === "Dowolny" ||
+              walk.date === selectedDate
           )
           .map((walk) => (
             <Walk {...walk} />

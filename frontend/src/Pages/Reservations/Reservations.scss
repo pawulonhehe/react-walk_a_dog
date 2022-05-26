@@ -150,6 +150,9 @@ $lightblue: #aec7ea;
   .Reservations--bottomInfo {
     display: flex;
   }
+  .Reservations--dateWeek{
+    text-transform: capitalize;
+  }
 }
 .popover {
   padding: 0.25rem;

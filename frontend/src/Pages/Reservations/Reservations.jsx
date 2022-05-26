@@ -1,19 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Reservations.scss";
 import { Icon } from "@iconify/react";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import { useNavigate } from "react-router-dom";
 import BasicModal from "../BasicModal/BasicModal";
 import Popover from "@mui/material/Popover";
+import axios from "axios";
+import moment from "moment";
 
 // import { Link } from "react-router-dom";
 
 export const Reservations = () => {
+  const token = sessionStorage.getItem("token");
+  const [walk, setWalk] = useState([]);
+  const [currentWalk, setCurrentWalk] = useState([]);
   const navigate = useNavigate();
   const switchToBook = () => navigate("/bookwalk");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const currentDate = moment(new Date()).format("YYYY-MM-DD");
+  const currentTime = new Date().toLocaleTimeString();
+
+  const dayOfTheWeek = moment(new Date()).locale("pl").format("dddd");
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -26,7 +35,95 @@ export const Reservations = () => {
   };
 
   const show = Boolean(anchorEl);
-  const id = show ? 'simple-popover' : undefined;
+  const id = show ? "simple-popover" : undefined;
+
+
+
+  useEffect(() => {
+    axios
+      .get("/walks/", {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+
+        // const data = res.data;
+        const data = [
+          {
+            'id': 11,
+            'dog_count': 1,
+            'date': '2022-05-24',
+            'start_time': '12:00:00',
+            'end_time': '14:00:00',
+            'location': '1.000000',
+            'trainer': {
+              'first_name' : 1,
+              'last_name' : 2,
+            },
+            'dogs': [15],
+          },
+          {
+            'id': 11,
+            'dog_count': 2,
+            'date': '2022-05-25',
+            'start_time': '12:00:00',
+            'end_time': '14:00:00',
+            'location': '1.000000',
+            'trainer': {
+              'first_name' : 3,
+              'last_name' : 4,
+            },
+            'dogs': [15],
+          },
+          {
+            'id': 11,
+            'dog_count': 3,
+            'date': '2022-01-26',
+            'start_time': '12:00:00',
+            'end_time': '18:00:00',
+            'location': '1.000000',
+            'trainer': {
+              'first_name' : 3,
+              'last_name' : 4,
+            },
+            'dogs': [15],
+          },
+          {
+            'id': 11,
+            'dog_count': 3,
+            'date': '2022-05-27',
+            'start_time': '12:00:00',
+            'end_time': '14:00:00',
+            'location': '1.000000',
+            'trainer': {
+              'first_name' : 3,
+              'last_name' : 4,
+            },
+            'dogs': [15],
+          },
+          {
+            'id': 11,
+            'dog_count': 3,
+            'date': '2022-05-26',
+            'start_time': '12:00:00',
+            'end_time': '21:00:00',
+            'location': '1.000000',
+            'trainer': {
+              'first_name' : 3,
+              'last_name' : 4,
+            },
+            'dogs': [15],
+          },
+        ]
+
+        setWalk(data);
+        setCurrentWalk(data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+
   return (
     <div className="Reservations">
       <div className="Reservations--topText">Twoje Rezerwacje</div>
@@ -97,30 +194,42 @@ export const Reservations = () => {
           </button>
         </div>
         <div className="Reservations--hisList">
-          <div className="Reservations--incomingResList">
-            <div className="Reservations--hisDate">
-              <div className="Reservations--dateWeek">Czwartek</div>
-              <div className="Reservations--dateTime">30gru 12:15</div>
-            </div>
-            <p className="dot"></p>
-            <div className="Reservations--hisReservation">
-              <div className="Reservations--bottomInfo">
-                <div className="Reservations--Avatar">
-                  <img src={pudzilla} alt="pudzilla" />
+          {currentWalk
+            .filter(
+              (walk) =>
+                walk.date <= currentDate && walk.end_time < currentTime
+            )
+            .sort((a, b) => a - b)
+            .map((walk) => (
+              <div className="Reservations--incomingResList">
+                <div className="Reservations--hisDate">
+                  <div className="Reservations--dateWeek">{moment(walk.date).locale("pl").format("dddd")}</div>
+                  <div className="Reservations--dateTime">
+                    {moment(walk.date).locale("pl").format("MMM DD") +' '+ walk.start_time.substr(0, 5)}
+                  </div>
                 </div>
-                <div>
-                  Jacek Szyuła <br></br> Azor, Rocky, Maciej
+                <p className="dot"></p>
+                <div className="Reservations--hisReservation">
+                  <div className="Reservations--bottomInfo">
+                    <div className="Reservations--Avatar">
+                      <img src={pudzilla} alt="awatar" />
+                      {/* <img src={walk.trainer.image} alt="awatar" /> */}
+                    </div>
+                    <div>
+                      {walk.trainer.first_name + " " + walk.trainer.last_name}
+                      <br></br> Azor, Rocky, Maciej
+                    </div>
+                  </div>
+                  <div className="Reservations--infoButtons">
+                    <button type="button" onClick={handleOpen}>
+                      Szczegóły
+                    </button>
+                    <BasicModal open={open} onClose={handleClose} />
+                    <button>Oceń</button>
+                  </div>
                 </div>
               </div>
-              <div className="Reservations--infoButtons">
-                <button type="button" onClick={handleOpen}>
-                  Szczegóły
-                </button>
-                <BasicModal open={open} onClose={handleClose} />
-                <button>Oceń</button>
-              </div>
-            </div>
-          </div>
+            ))}
         </div>
       </div>
       <div className="Reservations--book">
