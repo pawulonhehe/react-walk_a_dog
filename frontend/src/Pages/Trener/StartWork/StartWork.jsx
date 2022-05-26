@@ -26,6 +26,7 @@ export const StartWork = () => {
       });
   }, []);
 
+  console.log(walk);
   return (
     <div className="StartWork">
       <div className="welcomeMessage">Witaj trenerze!</div>
@@ -37,8 +38,6 @@ export const StartWork = () => {
       </div>
 
       <div className="mainContainer">
-        {/* ZROBIC MODAL W KTORYM PODAJE DANE NA NOWY WALK
-        WYSWIETLANIE ISTNIEJACYCH WALKOW TRENERA */}
         <div className="ContainerTopText">twoje istniejące sloty</div>
         {walk.map((walk) => (
           <Walk {...walk} />
