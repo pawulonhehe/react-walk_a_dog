@@ -22,6 +22,7 @@ import { BookWalk } from "./Pages/BookWalk/BookWalk";
 import { Trainers } from "./Pages/Trainers/Trainers";
 import { TrainerDetails } from "./Pages/TrainerDetails/TrainerDetails";
 import { TrainerDetailsHist } from "./Pages/TrainerDetailsHist/TrainerDetailsHist";
+import { StartWork } from "./Pages/Trener/StartWork/StartWork";
 import React from "react";
 
 const Views = () => {
@@ -61,7 +62,8 @@ const Views = () => {
           <Route path="/owner" element={<Owner />} />
           <Route path="/dog" element={<Dog />} />
           <Route path="/aftertrener" element={<AfterTrener />} />
-          <Route path="/yourclients" element={<YourClients />} />
+          <Route path="/yourclients:id" element={<YourClients />} />
+          <Route path="/startwork" element={<StartWork />} />
         </Route>
         <Route path="*" element={<h1>404 Not Found!</h1>} />
       </Routes>

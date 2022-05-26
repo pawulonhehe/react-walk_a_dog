@@ -16,6 +16,7 @@ $pink: #eeafe0;
     text-align: center;
     color: rgba(0, 0, 0, 0.4);
     padding: 0.5rem;
+    margin-top: -3%;
   }
   .BookWalk--select {
     display: flex;
@@ -28,7 +29,7 @@ $pink: #eeafe0;
     border: 1px solid $blue;
     background-color: $white;
     border-radius: 0.5rem;
-    padding: 0.25rem;
+    padding: 0.5rem 0.25rem;
   }
   .BookWalk--select span {
     margin: 0 1.5rem;
@@ -80,5 +81,44 @@ $pink: #eeafe0;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+  .calendar {
+    display: flex;
+    justify-content: center;
+  }
+  .calendar input{
+    display: flex;
+    justify-content: center;
+  }
+  #date{
+    margin: 0.25rem 1.5rem;
+    border: 1px solid $blue;
+    background-color: $white;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.25rem;
+    width: 100%;
+    font-size: 0.75rem;
+  }
+
+  .MuiOutlinedInput-notchedOutline{
+    border: none;
+  }
+  .MuiFormControl-root{
+    width: 100%;
+  }
+
+  .css-1s2u09g-control {
+    border: 1px solid $blue;
+    margin: 0 1.5rem;
+    border-radius: 0.5rem;
+  }
+  .css-1pahdxg-control{
+    border: 1px solid $blue;
+    margin: 0 1.5rem;
+    border-radius: 0.5rem;
+  }
+  .css-26l3qy-menu {
+    width: 80%;
+    margin: 0 0 0 2.5rem;
   }
 }

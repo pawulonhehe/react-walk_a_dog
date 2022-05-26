@@ -1,0 +1,57 @@
+$blue: #3498db;
+$black: #000;
+$white: #fff;
+$lightblue: #aec7ea;
+$darkgreen: #42945e;
+$green: #6ecc8e;
+$darkpink: #de38b9;
+$pink: #eeafe0;
+
+.ModalAddSlot {
+  background-color: #aec7ea;
+  position: absolute;
+  width: 80%;
+  height: 50%;
+  margin-left: 10%;
+  margin-top: -70%;
+  border-radius: 10px;
+  .AddSlotForm {
+    .AddSlotForm--title {
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      color: rgb(78, 78, 78);
+      margin-top: -2%;
+    }
+
+    .time {
+      margin-top: 5%;
+    }
+    .selectt {
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      text-align: left;
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 2%;
+    }
+    .selectt select {
+      margin: 0.25rem 1.5rem;
+      border: 1px solid $blue;
+      background-color: $white;
+      border-radius: 0.5rem;
+      padding: 0.5rem 0.25rem;
+    }
+
+    .btnAddWalk {
+      border-radius: 10px;
+      background-color: #3498db;
+      border: solid transparent;
+      color: #fff;
+      width: 50%;
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      margin-top: 3%;
+    }
+  }
+}
