@@ -178,9 +178,10 @@ export const Reservations = () => {
               }}
             />
           </div> */}
-
-
-          <button className="tooltip Reservations--filterButton" onClick={handleClick}>
+          <button
+            className="tooltip Reservations--filterButton"
+            onClick={handleClick}
+          >
             <Icon icon="material-symbols:sound-detection-dog-barking" />
             Pies
           </button>
@@ -206,7 +207,7 @@ export const Reservations = () => {
             Trener
           </button>
           <button className="Reservations--filtersClean">
-          <Icon icon="bi:x-lg" />
+            <Icon icon="bi:x-lg" />
             wyczyść
           </button>
         </div>
@@ -217,7 +218,7 @@ export const Reservations = () => {
             )
             .sort((a, b) => a - b)
             .map((walk) => (
-              <WalkHistory {...walk}/>
+              <WalkHistory {...walk} />
             ))}
         </div>
       </div>

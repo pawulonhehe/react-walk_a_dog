@@ -21,7 +21,9 @@ export const BookWalk = () => {
 
   const token = sessionStorage.getItem("token");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
-  let selectedDateFormat = moment(new Date()).locale("pl").format("dddd, DD MMMM yyyy ");
+  let selectedDateFormat = moment(new Date())
+    .locale("pl")
+    .format("dddd, DD MMMM yyyy ");
   let chosenDate = moment(new Date()).format("YYYY-MM-DD");
 
   const changeDate = (event) => {

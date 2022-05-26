@@ -16,7 +16,7 @@ export const WalkHistory = (props) => {
           {moment(props.date).locale("pl").format("dddd")}
         </div>
         <div className="Reservations--dateTime">
-          {moment(props.date).locale("pl").format("MMM DD") +
+          {moment(props.date).locale("pl").format("DD MMM") +
             " " +
             props.start_time.substr(0, 5)}
         </div>

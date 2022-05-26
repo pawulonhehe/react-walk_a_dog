@@ -150,17 +150,17 @@ $lightblue: #aec7ea;
   .Reservations--bottomInfo {
     display: flex;
   }
-  .Reservations--dateWeek{
+  .Reservations--dateWeek {
     text-transform: capitalize;
   }
-  .Reservations--filtersClean{
+  .Reservations--filtersClean {
     background: transparent;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
     color: rgb(88, 88, 88);
-    padding: 0 0 0 .5rem ;
+    padding: 0 0 0 0.5rem;
   }
 }
 .popover {
