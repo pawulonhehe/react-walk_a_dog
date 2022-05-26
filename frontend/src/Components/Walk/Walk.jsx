@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon } from "@iconify/react";
+import "./Walk.scss";
 
 export const Walk = (props) => {
   console.log(props);

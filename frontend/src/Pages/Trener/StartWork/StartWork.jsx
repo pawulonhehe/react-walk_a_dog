@@ -1,20 +1,25 @@
-import { Modal } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Walk } from "../../../Components/Walk/Walk";
+import { ModalAddSlot } from "../../../Components/ModalAddSlot/ModalAddSlot";
 import "./StartWork.scss";
 
 export const StartWork = () => {
-  const [user, setUser] = useState([]);
+  const [walk, setWalk] = useState([]);
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {
     axios
-      .get("/trainers/", {
+      .get("/walks/", {
         headers: { Authorization: `Token ${token}` },
       })
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
-        setUser(res.data);
+        const data = res.data;
+        setWalk(data);
+        res.data.filter(
+          ({ trainer }) => +`${sessionStorage.getItem("user")}` === trainer.id
+        );
       })
       .catch((error) => {
         console.log(error.response);
@@ -32,13 +37,15 @@ export const StartWork = () => {
       </div>
 
       <div className="mainContainer">
-        {/* <Modal>Fancy modal</Modal> */}
-
         {/* ZROBIC MODAL W KTORYM PODAJE DANE NA NOWY WALK
         WYSWIETLANIE ISTNIEJACYCH WALKOW TRENERA */}
-        <div className="singleWalk">s</div>
+        <div className="ContainerTopText">twoje istniejące sloty</div>
+        {walk.map((walk) => (
+          <Walk {...walk} />
+        ))}
         <button className="addWalkButton">Dodaj slot</button>
       </div>
+      <ModalAddSlot />
     </div>
   );
 };
