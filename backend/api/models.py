@@ -76,6 +76,11 @@ class Slot(models.Model):
         on_delete=models.CASCADE,
         default=None,
     )
+    dog_count = models.PositiveSmallIntegerField(
+        'Liczba zapisanych psów',
+        blank=True,
+        default=0,
+    )
 
     class Meta:
         verbose_name = 'Spacer'

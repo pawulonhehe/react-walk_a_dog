@@ -8,6 +8,7 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import datetime
+import time
 
 # Project
 from accounts.models import CustomUser
@@ -19,8 +20,8 @@ from .models import Trainer
 from .serializers import CustomUserSerializer
 from .serializers import DogCreateSerializer
 from .serializers import DogSerializer
-from .serializers import SlotSerializer
-
+from .serializers import SlotSerializer, SlotListSerializer
+from django.utils.dateparse import parse_datetime
 
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
@@ -63,8 +64,22 @@ class DogCreateView(CreateAPIView):
 class SlotListView(ListAPIView):
     name = 'Slot-list'
     queryset = Slot.objects.all()
-    serializer_class = SlotSerializer
+    serializer_class = SlotListSerializer
     permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        date_time = datetime.datetime.now()
+        current_date = datetime.date.today()
+        qs_filter = qs.filter(date__gte=current_date)
+        id_list = []
+        for obj in qs_filter:
+            date_time2 = f'{obj.date}T{obj.start_time}' 
+            date_time2 = parse_datetime(date_time2)
+            if date_time2 < date_time:
+                id_list.append(obj.id)
+        qs_exclude = qs_filter.exclude(id__in=id_list)
+        return qs_exclude.order_by('date', 'start_time')
 
 
 class SlotDetailView(RetrieveUpdateDestroyAPIView):
