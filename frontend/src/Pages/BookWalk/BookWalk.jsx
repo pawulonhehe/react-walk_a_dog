@@ -18,15 +18,21 @@ export const BookWalk = () => {
   const [myDate, setMyDate] = useState([
     moment(new Date()).locale("pl").format("MMM Do YY"),
   ]);
+  const [selectedDate, setSelectedDate] = useState([]);
 
   const token = sessionStorage.getItem("token");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
-  let selectedDate = moment(new Date()).locale("pl").format("MMM Do YY");
+  let selectedDateFormat = moment(new Date()).locale("pl").format("MMM Do YY");
+  let chosenDate = moment(new Date()).format("YYYY-MM-DD");;
 
-  function changeDate(event) {
-    selectedDate = moment(event.target.value).locale("pl").format("MMM Do YY");
-    setMyDate(selectedDate);
+  const changeDate = (event) => {
+    selectedDateFormat = moment(event.target.value).locale("pl").format("MMM Do YY");
+    setMyDate(selectedDateFormat);
+
+    chosenDate  = moment(event.target.value).format("YYYY-MM-DD");
+    setSelectedDate(chosenDate);
   }
+ 
 
   const changeTrainer = (event) => setSelectedTrainer(event.target.value);
 
@@ -73,6 +79,7 @@ export const BookWalk = () => {
         //TODO
         const data = res.data;
 
+
         setWalk(data);
         setCurrentWalk(data);
         console.log([]);
@@ -87,7 +94,7 @@ export const BookWalk = () => {
     changeDog(selectedOption);
   };
 
-  function changeDog(selectedOption) {
+  const changeDog = (selectedOption) => {
     setCurrentWalk(walk);
     setCurrentWalk(
       walk.filter((w) => 3 - w.dogs.length >= selectedOption.length)
@@ -112,7 +119,7 @@ export const BookWalk = () => {
   // };
   // console.log(selectedDog);
   // console.log(user);
-  console.log(selectedTrainer);
+
   return (
     <div className="BookWalk">
       <div className="BookWalk--topText">
@@ -142,7 +149,7 @@ export const BookWalk = () => {
             id="trainer-selection"
             onChange={changeTrainer}
           >
-            <option value="Dowolny">Dowolny</option>
+            <option value="Dowolny">Dowolny trener</option>
             {user.map((user) => (
               <option value={walk.trainer} key={user.first_name}>
                 {user.first_name + " " + user.last_name}
@@ -169,6 +176,7 @@ export const BookWalk = () => {
             (walk) =>
               walk.trainer.first_name + " " + walk.trainer.last_name ===
                 selectedTrainer || selectedTrainer === "Dowolny"
+                || walk.date === selectedDate
           )
           .map((walk) => (
             <Walk {...walk} />
