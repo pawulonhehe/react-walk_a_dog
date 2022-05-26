@@ -19,6 +19,7 @@
     margin-top: 10%;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
   }
   .Clients--oneClient {
     background-color: rgb(255, 255, 255);
@@ -30,8 +31,7 @@
 
     .Clients--oneClient__avatar {
       margin-top: 3%;
-      position: absolute;
-      margin-left: 2%;
+      margin-left: -52%;
     }
 
     .Clients--oneClient__infoCointainer {
@@ -43,6 +43,7 @@
       width: 65%;
 
       .oneClient__infoContainer__title {
+        margin-top: -66%;
         font-family: "Montserrat", "sans-serif";
         font-weight: bold;
       }

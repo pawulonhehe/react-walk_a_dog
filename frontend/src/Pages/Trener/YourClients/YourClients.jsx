@@ -50,6 +50,66 @@ export const YourClients = () => {
             </button>
           </div>
         </div>
+        <div className="Clients--oneClient">
+          <div className="Clients--oneClient__avatar">
+            <img src={pudzilla} alt="pudzilla" />
+          </div>
+          <div className="Clients--oneClient__infoCointainer">
+            <div className="oneClient__infoContainer__title">Robert Kubica</div>
+            <div className="oneClient__infoContainer__dogs">
+              <img src={pies} alt="pies" className="imgpies" />
+              <img src={pies} alt="pies" className="imgpies" />
+            </div>
+            <button type="submit" className="ZobaczZlecenie">
+              Zobacz zlecenie
+            </button>
+          </div>
+        </div>
+        <div className="Clients--oneClient">
+          <div className="Clients--oneClient__avatar">
+            <img src={pudzilla} alt="pudzilla" />
+          </div>
+          <div className="Clients--oneClient__infoCointainer">
+            <div className="oneClient__infoContainer__title">Robert Kubica</div>
+            <div className="oneClient__infoContainer__dogs">
+              <img src={pies} alt="pies" className="imgpies" />
+              <img src={pies} alt="pies" className="imgpies" />
+            </div>
+            <button type="submit" className="ZobaczZlecenie">
+              Zobacz zlecenie
+            </button>
+          </div>
+        </div>
+        <div className="Clients--oneClient">
+          <div className="Clients--oneClient__avatar">
+            <img src={pudzilla} alt="pudzilla" />
+          </div>
+          <div className="Clients--oneClient__infoCointainer">
+            <div className="oneClient__infoContainer__title">Robert Kubica</div>
+            <div className="oneClient__infoContainer__dogs">
+              <img src={pies} alt="pies" className="imgpies" />
+              <img src={pies} alt="pies" className="imgpies" />
+            </div>
+            <button type="submit" className="ZobaczZlecenie">
+              Zobacz zlecenie
+            </button>
+          </div>
+        </div>
+        <div className="Clients--oneClient">
+          <div className="Clients--oneClient__avatar">
+            <img src={pudzilla} alt="pudzilla" />
+          </div>
+          <div className="Clients--oneClient__infoCointainer">
+            <div className="oneClient__infoContainer__title">Robert Kubica</div>
+            <div className="oneClient__infoContainer__dogs">
+              <img src={pies} alt="pies" className="imgpies" />
+              <img src={pies} alt="pies" className="imgpies" />
+            </div>
+            <button type="submit" className="ZobaczZlecenie">
+              Zobacz zlecenie
+            </button>
+          </div>
+        </div>
       </div>
       tu jeszcze scroll jakis po prawej dodac trzeba
     </div>

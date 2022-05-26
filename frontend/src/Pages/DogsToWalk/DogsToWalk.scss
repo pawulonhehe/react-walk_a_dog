@@ -1,0 +1,126 @@
+.MyDogs {
+    display: flex;
+    background-color: #fff;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+  
+    .MyDogs--topText {
+      width: 100%;
+      margin-top: 0.3rem;
+      opacity: 0.3;
+      display: flex;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      text-align: center;
+      position: absolute;
+    }
+  
+    .MyDogs--avatar {
+      display: flex;
+      justify-content: center;
+      margin-top: 15%;
+      width: 100%;
+    }
+  
+    img {
+      border-radius: 50%;
+    }
+  
+    .MyDogs--Text {
+      display: flex;
+      justify-content: center;
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      color: rgba(0, 0, 0, 0.4);
+      width: 100%;
+      margin-top: 3%;
+    }
+  
+    .MyDogs--dogsContainer {
+      background-color: rgba(0, 0, 0, 0.15);
+      height: 60%;
+      width: 90%;
+      justify-content: center;
+      border-radius: 15px;
+      margin-top: 5%;
+    }
+  
+    .MyDogs--dog {
+      background-color: #fff;
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      height: 25%;
+      width: 90%;
+      border-radius: 15px;
+      margin-top: 5%;
+      margin-left: 5%;
+      flex-direction: row;
+  
+      .MyDogs--dog__title {
+        display: flex;
+        justify-content: center;
+        font-weight: 1000;
+        align-items: center;
+        text-align: center;
+        font-size: 1.2rem;
+        color: #3498db;
+      }
+  
+      .MyDogs--dog__image {
+        display: flex;
+        justify-content: flex-start;
+        position: absolute;
+        margin-left: 3.5%;
+        margin-top: -1.5%;
+      }
+  
+      .MyDogs--dog__Ltext {
+        display: flex;
+        font-weight: normal;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+        width: 30%;
+        margin-left: 35%;
+        margin-top: 2.5%;
+        color: rgba(0, 0, 0, 0.5);
+        text-align: left;
+      }
+  
+      .MyDogs--dog__Rtext {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        text-align: right;
+        margin-left: 66%;
+        margin-top: -24%;
+      }
+  
+      .MyDogs--dog__button {
+        border: solid transparent;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 1000;
+        background-color: #3498db;
+        width: 30%;
+        border-radius: 10px;
+        color: #fff;
+        margin-top: 2%;
+      }
+    }
+    .MyDogs--addDog {
+      border: solid transparent;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 1000;
+      font-size: 1.2rem;
+      color: #fff;
+      background-color: #3498db;
+      margin-top: 10%;
+      width: 40%;
+      height: 6%;
+      border-radius: 10px;
+    }
+  }
+  
