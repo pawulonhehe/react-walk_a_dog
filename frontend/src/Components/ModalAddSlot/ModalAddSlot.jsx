@@ -5,10 +5,18 @@ import * as moment from "moment";
 import axios from "axios";
 
 export const ModalAddSlot = () => {
+  const calculateWalkEndTime = (time) => {
+    let [hours, minutes] = time.split(":");
+    hours = +hours + 1;
+    return moment(new Date()).set({ hours, minutes }).format("HH:mm");
+  };
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
   const currentTime = moment(new Date()).format("HH:mm");
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [selectedTime, setSelectedTime] = useState(currentTime);
+  const [walkEndTime, setWalkEndTime] = useState(
+    calculateWalkEndTime(currentTime)
+  );
   const [myDate, setMyDate] = useState([
     moment(new Date()).locale("pl").format("MMM Do YY"),
   ]);
@@ -17,7 +25,7 @@ export const ModalAddSlot = () => {
   };
 
   const changeTime = (event) => {
-    setSelectedTime(event.target.value);
+    setWalkEndTime(calculateWalkEndTime(event.target.value));
   };
 
   const [selectedDog, setSelectedDog] = useState([]);
@@ -25,7 +33,7 @@ export const ModalAddSlot = () => {
 
   const selectDog = (selectedOption) => {
     setSelectedDog(selectedOption);
-    console.log(selectedOption.target.value);
+    // console.log(selectedOption.target.value);
   };
 
   const addWalk = (event) => {
@@ -41,8 +49,6 @@ export const ModalAddSlot = () => {
       }
     );
   };
-  console.log(selectedDate);
-  console.log(selectedTime);
 
   return (
     <div className="ModalAddSlot">
@@ -72,7 +78,7 @@ export const ModalAddSlot = () => {
             inputLabelProps={{ shrink: true }}
           />
         </div>
-        <div className="endtime">Koniec spaceru {selectedTime}</div>
+        <div className="endtime">Koniec spaceru {walkEndTime}</div>
         <div className="selectt">
           <span>Wybierz maksymalną ilość psów</span>
           <select
