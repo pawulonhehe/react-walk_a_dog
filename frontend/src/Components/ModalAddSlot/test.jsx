@@ -1,14 +1,16 @@
 import { Select, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import moment from "moment";
 import "./ModalAddSlot.scss";
-import * as moment from "moment";
 import axios from "axios";
+
 const calculateWalkEndTime = (time) => {
   let [hours, minutes, seconds] = time.split(":");
   hours = +hours + 1;
   return moment(new Date()).set({ hours, minutes, seconds }).format("HH:mm:ss");
 };
-export const ModalAddSlot = () => {
+
+export const  ModalAddSlot = () => {
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
   const currentTime = moment(new Date()).format("HH:mm:ss");
 
@@ -24,10 +26,7 @@ export const ModalAddSlot = () => {
   // const addDogs = (selectedDog) =>
   //   setWalk({ ...walk, dogs: selectedDog.value });
 
-  // const addDogs = (selectedDog) =>
-  //   setWalk({ ...walk, dogs: selectedDog.value });
-
-  const addWalk = (event) => {
+  const addWalk = () => {
     const obj = {
       trainer: sessionStorage.getItem("user"),
       date: selectedDate,
@@ -36,17 +35,10 @@ export const ModalAddSlot = () => {
       dogs: [],
       location: 1,
     };
-    axios
-      .post(
-        "/walks/new/",
-        { obj },
-        { headers: { Authorization: `Token ${token}` } }
-      )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err.response.data));
+    console.log(obj);
+    // axios request
   };
+
   return (
     <div className="ModalAddSlot">
       <div className="AddSlotForm">
@@ -81,11 +73,24 @@ export const ModalAddSlot = () => {
           />
         </div>
         <div className="endtime">Koniec spaceru {walkEndTime}</div>
-
+        {/* <div className="selectt">
+          <span>Wybierz maksymalną ilość psów</span>
+          <select
+            id="dog-selection"
+            name="dogs"
+            label="dogs"
+            onChange={selectDogsaddDogs}
+            defaultValue={1}
+          >
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+          </select>
+        </div> */}
         <button type="button" className="AddWalkButton" onClick={addWalk}>
           Zatwierdź
         </button>
       </div>
     </div>
   );
-};
+}
