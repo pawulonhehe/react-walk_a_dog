@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./WalkHistory.scss";
 import moment from "moment";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
-import BasicModal from "../../Pages/BasicModal/BasicModal";
+import BasicModal from "../BasicModal/BasicModal";
 
 export const WalkHistory = (props) => {
   const [open, setOpen] = useState(false);

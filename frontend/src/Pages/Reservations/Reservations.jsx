@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Reservations.scss";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
-// import BasicModal from "../../Components/BasicModal/BasicModal";
-import BasicModal from "../BasicModal/BasicModal";
+import BasicModal from "../../Components/BasicModal/BasicModal";
 import Popover from "@mui/material/Popover";
 import { WalkHistory } from "../../Components/WalkHistory/WalkHistory";
 import axios from "axios";
@@ -41,14 +40,16 @@ export const Reservations = () => {
   const id = show ? "simple-popover" : undefined;
 
   const [selectedDate, setSelectedDate] = useState([]);
-  console.log("date: ", selectedDate);
   const changeDate = (event) => {
     setSelectedDate(event.target.value);
-    console.log(selectedDate);
   };
 
-  const handleChange = () => {
-    setChecked(!checked);
+  const handleChange = (position) => {
+    const updatedCheckedState = checked.map((item, index) =>
+    index === position ? !item : item
+  );
+  setChecked(updatedCheckedState);
+  console.log(position)
   };
 
   useEffect(() => {
@@ -217,6 +218,9 @@ export const Reservations = () => {
               InputLabelProps={{
                 shrink: true,
               }}
+              inputProps={{
+                max: "2022-05-27",
+              }}
             />
           </div>
           <button
@@ -237,7 +241,21 @@ export const Reservations = () => {
             }}
           >
             <div className="popover">
-              {dog.map((dog, i) => (
+              {dog.map((dog, index) => (
+                <ul>
+                  <li key={index}>
+                    <label htmlFor="">
+                      <input
+                        type="checkbox"
+                        // checked={checked}
+                        onChange={handleChange}
+                      />
+                      {dog.name}
+                    </label>
+                  </li>
+                </ul>
+              ))}
+              {/* {dog.map((dog, i) => (
                 <div key={i}>
                   <label htmlFor="">
                     <input
@@ -249,7 +267,7 @@ export const Reservations = () => {
                     {dog.name}
                   </label>
                 </div>
-              ))}
+              ))} */}
             </div>
           </Popover>
           <button className="tooltip Reservations--filterButton">
