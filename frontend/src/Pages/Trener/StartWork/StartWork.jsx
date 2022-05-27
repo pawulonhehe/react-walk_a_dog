@@ -20,7 +20,6 @@ export const StartWork = () => {
           ({ trainer }) => +`${sessionStorage.getItem("user")}` === trainer.id
         );
         setWalk(data);
-
       })
       .catch((error) => {
         console.log(error.response);
