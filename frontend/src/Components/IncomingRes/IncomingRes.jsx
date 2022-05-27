@@ -24,8 +24,8 @@ export const IncomingRes = (props) => {
           </span>
           <div>
             <Icon icon="material-symbols:pin-drop-sharp" />
-            {props.location}
-            {/* Aleja Warszawska 107, <br></br>10-720 Olsztyn */}
+            {/* {props.location} */}
+            Aleja Warszawska 107, <br></br>10-720 Olsztyn
           </div>
         </div>
         <div className="Reservations--infoButtons">

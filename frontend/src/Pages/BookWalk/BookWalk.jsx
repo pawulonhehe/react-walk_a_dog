@@ -154,6 +154,9 @@ export const BookWalk = () => {
               InputLabelProps={{
                 shrink: true,
               }}
+              inputProps={{
+                min: currentDate,
+              }}
             />
           </div>
         </div>
