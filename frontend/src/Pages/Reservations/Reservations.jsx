@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./Reservations.scss";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
-import BasicModal from "../../Components/BasicModal/BasicModal";
 import Popover from "@mui/material/Popover";
 import { WalkHistory } from "../../Components/WalkHistory/WalkHistory";
 import axios from "axios";
 import moment from "moment";
 import TextField from "@mui/material/TextField";
+import { IncomingRes } from "../../Components/IncomingRes/IncomingRes";
 
 // import { Link } from "react-router-dom";
 
@@ -21,12 +21,10 @@ export const Reservations = () => {
   const [checked, setChecked] = React.useState(true);
   const switchToBook = () => navigate("/bookwalk");
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
 
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
-  const currentTime = new Date().toLocaleTimeString();
+  const currentTime = moment(new Date()).format("HH:mm:ss");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -40,16 +38,20 @@ export const Reservations = () => {
   const id = show ? "simple-popover" : undefined;
 
   const [selectedDate, setSelectedDate] = useState([]);
+  console.log("data: ", moment(selectedDate).format("YYYY-MM-DD"));
+
   const changeDate = (event) => {
     setSelectedDate(event.target.value);
-  };
+    console.log("datechange: ", moment(selectedDate).format("YYYY-MM-DD"));
 
+  };
+ 
   const handleChange = (position) => {
     const updatedCheckedState = checked.map((item, index) =>
-    index === position ? !item : item
-  );
-  setChecked(updatedCheckedState);
-  console.log(position)
+      index === position ? !item : item
+    );
+    setChecked(updatedCheckedState);
+    console.log(position);
   };
 
   useEffect(() => {
@@ -137,7 +139,7 @@ export const Reservations = () => {
             id: 11,
             dog_count: 3,
             date: "2022-05-27",
-            start_time: "07:00:00",
+            start_time: "19:00:00",
             end_time: "20:00:00",
             location: "1.000000",
             trainer: {
@@ -150,7 +152,7 @@ export const Reservations = () => {
             id: 11,
             dog_count: 3,
             date: "2022-05-27",
-            start_time: "23:00:00",
+            start_time: "07:00:00",
             end_time: "08:00:00",
             location: "1.000000",
             trainer: {
@@ -173,36 +175,15 @@ export const Reservations = () => {
     <div className="Reservations">
       <div className="Reservations--topText">Twoje Rezerwacje</div>
       <div className="Reservations--incomingRes">
-        <div className="Reservations--incomingResList">
-          <span className="Reservations--date">Dziś</span>
-          <p className="dot"></p>
-          <div className="Reservations--reservation">
-            Nie masz dziś zaplanowanych żadnych spacerów ani trenigów
-          </div>
-        </div>
-        <div className="Reservations--incomingResList">
-          <span className="Reservations--date">
-            Czwartek <br></br>
-            10 mar 10:15
-          </span>
-          <p className="dot"></p>
-          <div className="Reservations--reservation">
-            <div className="Reservations--info">
-              <span>Jacek Szyuła - Azor, Rocky, Maciej</span>
-              <div>
-                <Icon icon="material-symbols:pin-drop-sharp" />
-                Aleja Warszawska 107, <br></br>10-720 Olsztyn
-              </div>
-            </div>
-            <div className="Reservations--infoButtons">
-              <button>Anuluj</button>
-              <button type="button" onClick={handleOpen}>
-                Szczegóły
-              </button>
-              <BasicModal open={open} onClose={handleClose} />
-            </div>
-          </div>
-        </div>
+      {currentWalk
+            .filter(
+              (walk) =>
+              moment(walk.date).isSameOrAfter(currentDate) 
+            )
+            .sort((a, b) => (a.start_time > b.start_time) ? 1 : ((b.start_time > a.start_time) ? -1 : 0))
+            .map((walk) => (
+              <IncomingRes {...walk} />
+            ))}
       </div>
       <div className="Reservations--history">
         <h4>Historia</h4>
@@ -213,13 +194,13 @@ export const Reservations = () => {
               id="date"
               type="date"
               onChange={changeDate}
-              value={selectedDate}
+              defaultValue={selectedDate}
               sx={{ width: 220 }}
               InputLabelProps={{
                 shrink: true,
               }}
               inputProps={{
-                max: "2022-05-27",
+                max: currentDate,
               }}
             />
           </div>
@@ -255,19 +236,6 @@ export const Reservations = () => {
                   </li>
                 </ul>
               ))}
-              {/* {dog.map((dog, i) => (
-                <div key={i}>
-                  <label htmlFor="">
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={handleChange}
-                      value={dog.id}
-                    />
-                    {dog.name}
-                  </label>
-                </div>
-              ))} */}
             </div>
           </Popover>
           <button className="tooltip Reservations--filterButton">
@@ -281,9 +249,11 @@ export const Reservations = () => {
         <div className="Reservations--hisList">
           {currentWalk
             .filter(
-              (walk) => moment(walk.date).isSameOrBefore(currentDate)
-              // && moment(walk.end_time).isSameOrBefore(currentTime)
-              // || moment(walk.date).isSame(selectedDate)
+              (walk) =>
+                moment(walk.date).isBefore(currentDate) 
+                // &&
+                // (moment(walk.date).isSame(currentDate) &&
+                //   moment(walk.end_time).isSameOrBefore(currentTime))
             )
             .sort((a, b) => (a.date < b.date ? 1 : b.date < a.date ? -1 : 0))
             .map((walk) => (
