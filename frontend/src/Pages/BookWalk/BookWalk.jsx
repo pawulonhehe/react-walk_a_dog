@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./BookWalk.scss";
-import { Icon } from "@iconify/react";
 import axios from "axios";
 import Select from "react-select";
 import TextField from "@mui/material/TextField";
@@ -12,22 +11,32 @@ export const BookWalk = () => {
   const [user, setUser] = useState([]);
   const [dog, setDogs] = useState([]);
   const [selectedDog, setSelectedDog] = useState([]);
-  const [selectedTrainer, setSelectedTrainer] = useState("");
+  const [selectedTrainer, setSelectedTrainer] = useState("Dowolny");
   const [walk, setWalk] = useState([]);
   const [currentWalk, setCurrentWalk] = useState([]);
   const [myDate, setMyDate] = useState([
-    moment(new Date()).locale("pl").format("MMM Do YY"),
+    moment(new Date()).locale("pl").format("dddd, DD MMMM yyyy "),
   ]);
   const token = sessionStorage.getItem("token");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
-  let selectedDate = moment(new Date()).locale("pl").format("MMM Do YY");
+  let selectedDateFormat = moment(new Date())
+    .locale("pl")
+    .format("dddd, DD MMMM yyyy ");
+  let chosenDate = moment(new Date()).format("YYYY-MM-DD");
 
-  function changeDate(event) {
-    selectedDate = moment(event.target.value).locale("pl").format("MMM Do YY");
-    setMyDate(selectedDate);
-  }
+  const changeDate = (event) => {
+    selectedDateFormat = moment(event.target.value)
+      .locale("pl")
+      .format("dddd, DD MMMM yyyy ");
+    setMyDate(selectedDateFormat);
+
+    chosenDate = moment(event.target.value).format("YYYY-MM-DD");
+    setSelectedDate(chosenDate);
+  };
 
   const changeTrainer = (event) => setSelectedTrainer(event.target.value);
+
+  console.log('trener: ', (selectedTrainer));
 
   useEffect(() => {
     axios
@@ -69,7 +78,6 @@ export const BookWalk = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
 
-        //TODO
         const data = res.data;
 
         setWalk(data);
@@ -102,7 +110,7 @@ export const BookWalk = () => {
     changeDog(selectedOption);
   };
 
-  function changeDog(selectedOption) {
+  const changeDog = (selectedOption) => {
     setCurrentWalk(walk);
     setCurrentWalk(
       walk.filter((w) => 3 - w.dogs.length >= selectedOption.length)
@@ -138,7 +146,7 @@ export const BookWalk = () => {
             id="trainer-selection"
             onChange={changeTrainer}
           >
-            <option value="Dowolny">Dowolny</option>
+            <option value="Dowolny">Dowolny trener</option>
             {user.map((user) => (
               <option value={walk.trainer} key={user.first_name}>
                 {user.first_name + " " + user.last_name}
@@ -159,12 +167,14 @@ export const BookWalk = () => {
         </div>
       </div>
       <div className="BookWalk--availableWalks">
-        <span>{myDate}</span>
+        {/* <span>{myDate}</span> */}
         {currentWalk
           .filter(
             (walk) =>
               walk.trainer.first_name + " " + walk.trainer.last_name ===
-                selectedTrainer || selectedTrainer === "Dowolny"
+                selectedTrainer ||
+              selectedTrainer === "Dowolny" &&
+              moment(walk.date).isSame(selectedDate)
           )
           .map((walk) => (
             <Walk {...walk} onClick={() => applyForWalk}/>
