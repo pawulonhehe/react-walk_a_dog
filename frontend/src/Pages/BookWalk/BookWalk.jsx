@@ -17,10 +17,11 @@ export const BookWalk = () => {
   const [myDate, setMyDate] = useState([
     moment(new Date()).locale("pl").format("dddd, DD MMMM yyyy "),
   ]);
-  const [selectedDate, setSelectedDate] = useState([]);
+  const currentDate = moment(new Date()).format("YYYY-MM-DD");
+  const [selectedDate, setSelectedDate] = useState(currentDate);
 
   const token = sessionStorage.getItem("token");
-  const currentDate = moment(new Date()).format("YYYY-MM-DD");
+
   let selectedDateFormat = moment(new Date())
     .locale("pl")
     .format("dddd, DD MMMM yyyy ");
@@ -37,8 +38,6 @@ export const BookWalk = () => {
   };
 
   const changeTrainer = (event) => setSelectedTrainer(event.target.value);
-
-  console.log('trener: ', (selectedTrainer));
 
   useEffect(() => {
     axios
@@ -120,7 +119,6 @@ export const BookWalk = () => {
   //   );
   // };
   // console.log(selectedDog);
-  // console.log(user);
 
   return (
     <div className="BookWalk">
@@ -176,10 +174,10 @@ export const BookWalk = () => {
         {currentWalk
           .filter(
             (walk) =>
-              walk.trainer.first_name + " " + walk.trainer.last_name ===
+              moment(walk.date).isSame(selectedDate) &&
+              (walk.trainer.first_name + " " + walk.trainer.last_name ===
                 selectedTrainer ||
-              selectedTrainer === "Dowolny" &&
-              moment(walk.date).isSame(selectedDate)
+                selectedTrainer === "Dowolny")
           )
           .map((walk) => (
             <Walk {...walk} />
