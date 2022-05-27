@@ -11,7 +11,7 @@ export const BookWalk = () => {
   const [user, setUser] = useState([]);
   const [dog, setDogs] = useState([]);
   const [selectedDog, setSelectedDog] = useState([]);
-  const [selectedTrainer, setSelectedTrainer] = useState("");
+  const [selectedTrainer, setSelectedTrainer] = useState("Dowolny");
   const [walk, setWalk] = useState([]);
   const [currentWalk, setCurrentWalk] = useState([]);
   const [myDate, setMyDate] = useState([
@@ -37,6 +37,8 @@ export const BookWalk = () => {
   };
 
   const changeTrainer = (event) => setSelectedTrainer(event.target.value);
+
+  console.log('trener: ', (selectedTrainer));
 
   useEffect(() => {
     axios
@@ -170,14 +172,14 @@ export const BookWalk = () => {
         </div>
       </div>
       <div className="BookWalk--availableWalks">
-        <span>{myDate}</span>
+        {/* <span>{myDate}</span> */}
         {currentWalk
           .filter(
             (walk) =>
               walk.trainer.first_name + " " + walk.trainer.last_name ===
                 selectedTrainer ||
               selectedTrainer === "Dowolny" ||
-              walk.date === selectedDate
+              moment(walk.date).isSame(selectedDate)
           )
           .map((walk) => (
             <Walk {...walk} />

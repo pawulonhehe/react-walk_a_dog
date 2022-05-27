@@ -199,4 +199,6 @@ $lightblue: #aec7ea;
 .popover {
   padding: 0.25rem;
   min-width: 5rem;
+  display: flex;
+  flex-direction: column;
 }

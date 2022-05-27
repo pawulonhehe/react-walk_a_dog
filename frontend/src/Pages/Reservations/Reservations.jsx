@@ -15,8 +15,11 @@ import TextField from "@mui/material/TextField";
 export const Reservations = () => {
   const token = sessionStorage.getItem("token");
   const [walk, setWalk] = useState([]);
+  const [user, setUser] = useState([]);
+  const [dog, setDogs] = useState([]);
   const [currentWalk, setCurrentWalk] = useState([]);
   const navigate = useNavigate();
+  const [checked, setChecked] = React.useState(true);
   const switchToBook = () => navigate("/bookwalk");
 
   const [open, setOpen] = useState(false);
@@ -43,6 +46,44 @@ export const Reservations = () => {
     setSelectedDate(event.target.value);
     console.log(selectedDate);
   };
+
+  
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
+
+  useEffect(() => {
+    axios
+      .get("/trainers/", {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setUser(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("/dogs/", {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setDogs(
+          res.data.filter(
+            ({ owner }) => +`${sessionStorage.getItem("user")}` === owner.id
+          )
+        );
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -198,10 +239,15 @@ export const Reservations = () => {
             }}
           >
             <div className="popover">
+            {dog.map((dog) => (
               <label htmlFor="">
-                <input type="checkbox" name="" id="" />
-                Azor
-              </label>
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={handleChange}
+                />
+                {dog.name}
+              </label> ))}
             </div>
           </Popover>
           <button className="tooltip Reservations--filterButton">
@@ -216,8 +262,8 @@ export const Reservations = () => {
           {currentWalk
             .filter(
               (walk) => moment(walk.date).isSameOrBefore(currentDate)
-             
-              || moment(walk.date).isSame(selectedDate)
+              // && moment(walk.end_time).isSameOrBefore(currentTime)
+              // || moment(walk.date).isSame(selectedDate)
             )
             .sort((a, b) => (a.date < b.date ? 1 : b.date < a.date ? -1 : 0))
             .map((walk) => (

@@ -8,6 +8,7 @@ export const Walk = (props) => {
     <div className="Walk">
       <div className="BookWalk--availableWalksChoose">
         <div>
+          {props.date} <br></br>
           {props.start_time.substr(0, 5)} <br></br>
           {props.end_time.substr(0, 5)}
         </div>
