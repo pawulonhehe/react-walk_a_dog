@@ -1,6 +1,7 @@
 import React from "react";
 import { Icon } from "@iconify/react";
 import "./Walk.scss";
+import moment from "moment";
 
 export const Walk = (props) => {
   console.log(props);
@@ -8,7 +9,7 @@ export const Walk = (props) => {
     <div className="Walk">
       <div className="BookWalk--availableWalksChoose">
         <div>
-          {props.date} <br></br>
+          {moment(props.date).locale("pl").format("DD.MM.YY")} <br></br>
           {props.start_time.substr(0, 5)} <br></br>
           {props.end_time.substr(0, 5)}
         </div>

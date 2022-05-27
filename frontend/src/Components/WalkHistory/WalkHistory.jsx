@@ -31,9 +31,6 @@ export const WalkHistory = (props) => {
           <div>
             {props.trainer.first_name + " " + props.trainer.last_name}
             <br></br> {props.dogs} 
-            {
-
-            }
           </div>
         </div>
         <div className="Reservations--infoButtons">
