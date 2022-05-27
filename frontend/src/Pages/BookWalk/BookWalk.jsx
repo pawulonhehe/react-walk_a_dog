@@ -178,7 +178,7 @@ export const BookWalk = () => {
             (walk) =>
               walk.trainer.first_name + " " + walk.trainer.last_name ===
                 selectedTrainer ||
-              selectedTrainer === "Dowolny" ||
+              selectedTrainer === "Dowolny" &&
               moment(walk.date).isSame(selectedDate)
           )
           .map((walk) => (
