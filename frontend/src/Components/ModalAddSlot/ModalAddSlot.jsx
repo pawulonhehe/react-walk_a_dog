@@ -6,50 +6,77 @@ import axios from "axios";
 
 export const ModalAddSlot = () => {
   const calculateWalkEndTime = (time) => {
-    let [hours, minutes] = time.split(":");
+    let [hours, minutes, seconds] = time.split(":");
     hours = +hours + 1;
-    return moment(new Date()).set({ hours, minutes }).format("HH:mm");
+    return moment(new Date())
+      .set({ hours, minutes, seconds })
+      .format("HH:mm:ss");
   };
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
-  const currentTime = moment(new Date()).format("HH:mm");
+  const currentTime = moment(new Date()).format("HH:mm:ss");
   const [selectedDate, setSelectedDate] = useState(currentDate);
-  const [selectedTime, setSelectedTime] = useState(currentTime);
+
+  const [walkStartTime, setWalkStartTime] = useState(currentTime);
   const [walkEndTime, setWalkEndTime] = useState(
     calculateWalkEndTime(currentTime)
   );
+
   const [myDate, setMyDate] = useState([
     moment(new Date()).locale("pl").format("MMM Do YY"),
   ]);
   const changeDate = (event) => {
     setSelectedDate(event.target.value);
   };
+  const [walk, setWalk] = useState({
+    trainer: sessionStorage.getItem("user"),
+    date: selectedDate,
+    start_time: walkStartTime,
+    end_time: walkEndTime,
+    location: 0,
+    dogs: [],
+  });
+  const addStartTime = (time) => setWalk({ ...walk, start_time: time });
 
-  const changeTime = (event) => {
+  const addEndTime = (time) => setWalk({ ...walk, end_time: time });
+
+  const [selectedDogs, setSelectedDogs] = useState([]);
+  const token = sessionStorage.getItem("token");
+  const selectDogsaddDogs = (e) => {
+    setWalk({ ...walk, dogs: e.target.value });
+  };
+
+  const changeStartTime = (event) => {
+    setWalkStartTime(event.target.value);
+  };
+  const changeEndTime = (event) => {
     setWalkEndTime(calculateWalkEndTime(event.target.value));
   };
+  const addDate = (date_str) => setWalk({ ...walk, date: date_str });
 
-  const [selectedDog, setSelectedDog] = useState([]);
-  const token = sessionStorage.getItem("token");
-
-  const selectDog = (selectedOption) => {
-    setSelectedDog(selectedOption);
-    // console.log(selectedOption.target.value);
-  };
+  // const addDogs = (selectedDog) =>
+  //   setWalk({ ...walk, dogs: selectedDog.value });
 
   const addWalk = (event) => {
-    event.preventDefault();
-
-    axios.post(
-      "/walks/new/",
-      {
-        trainer: sessionStorage.getItem("user"),
-      },
-      {
-        headers: { Authorization: `Token ${token}` },
-      }
-    );
+    axios
+      .post(
+        "/walks/new/",
+        {
+          trainer: sessionStorage.getItem("user"),
+          date: walk.date,
+          start_time: walk.start_time,
+          end_time: walk.end_time,
+          dogs: [],
+          location: 1,
+        },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err.response.data));
   };
-
   return (
     <div className="ModalAddSlot">
       <div className="AddSlotForm">
@@ -61,7 +88,10 @@ export const ModalAddSlot = () => {
             id="date"
             type="date"
             label="Wybierz date"
-            onChange={changeDate}
+            onChange={(e) => {
+              changeDate(e);
+              addDate(e.target.value);
+            }}
             defaultValue={currentDate}
             sx={{ width: 280 }}
             inputLabelProps={{ shrink: true }}
@@ -72,7 +102,12 @@ export const ModalAddSlot = () => {
             id="time"
             type="time"
             label="Wybierz czas rozpoczęcia"
-            onChange={changeTime}
+            onChange={(e) => {
+              changeStartTime(e);
+              changeEndTime(e);
+              addStartTime(e.target.value);
+              addEndTime(calculateWalkEndTime(e.target.value));
+            }}
             defaultValue={currentTime}
             sx={{ width: 280 }}
             inputLabelProps={{ shrink: true }}
@@ -85,14 +120,17 @@ export const ModalAddSlot = () => {
             id="dog-selection"
             name="dogs"
             label="dogs"
-            onChange={selectDog}
+            onChange={selectDogsaddDogs}
+            defaultValue={1}
           >
             <option value={1}>1</option>
             <option value={2}>2</option>
             <option value={3}>3</option>
           </select>
         </div>
-        <button className="AddWalkButton">Zatwierdź</button>
+        <button type="button" className="AddWalkButton" onClick={addWalk}>
+          Zatwierdź
+        </button>
       </div>
     </div>
   );

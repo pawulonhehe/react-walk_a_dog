@@ -15,17 +15,18 @@ export const StartWork = () => {
       })
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
-        const data = res.data;
-        setWalk(data);
-        res.data.filter(
+        console.log(res);
+        let data = res.data.filter(
           ({ trainer }) => +`${sessionStorage.getItem("user")}` === trainer.id
         );
+        setWalk(data);
+
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, []);
-
+  console.log(walk);
   return (
     <div className="StartWork">
       <div className="welcomeMessage">Witaj trenerze!</div>
@@ -37,8 +38,6 @@ export const StartWork = () => {
       </div>
 
       <div className="mainContainer">
-        {/* ZROBIC MODAL W KTORYM PODAJE DANE NA NOWY WALK
-        WYSWIETLANIE ISTNIEJACYCH WALKOW TRENERA */}
         <div className="ContainerTopText">twoje istniejące sloty</div>
         {walk.map((walk) => (
           <Walk {...walk} />
