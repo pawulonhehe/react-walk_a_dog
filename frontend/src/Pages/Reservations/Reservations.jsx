@@ -228,7 +228,6 @@ export const Reservations = () => {
                     <label htmlFor="">
                       <input
                         type="checkbox"
-                        // checked={checked}
                         onChange={handleChange}
                       />
                       {dog.name}
@@ -251,9 +250,9 @@ export const Reservations = () => {
             .filter(
               (walk) =>
                 moment(walk.date).isBefore(currentDate) 
-                // &&
-                // (moment(walk.date).isSame(currentDate) &&
-                //   moment(walk.end_time).isSameOrBefore(currentTime))
+                ||
+                (moment(walk.date).isSame(currentDate) &&
+                  moment(walk.end_time).isSameOrBefore(currentTime))
             )
             .sort((a, b) => (a.date < b.date ? 1 : b.date < a.date ? -1 : 0))
             .map((walk) => (
