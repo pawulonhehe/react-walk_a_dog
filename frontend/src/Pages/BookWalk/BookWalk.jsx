@@ -18,7 +18,6 @@ export const BookWalk = () => {
   const [myDate, setMyDate] = useState([
     moment(new Date()).locale("pl").format("MMM Do YY"),
   ]);
-
   const token = sessionStorage.getItem("token");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
   let selectedDate = moment(new Date()).locale("pl").format("MMM Do YY");
@@ -81,6 +80,22 @@ export const BookWalk = () => {
         console.log(error.response);
       });
   }, []);
+  const [choosenDogs, setChoosenDogs] = useState([]);
+
+  const applyForWalk = (event) => {
+    const obj = {
+      dogs: [choosenDogs],
+    };
+    console.group(obj);
+    axios
+    .patch("/walks/{id}/", obj, {
+    headers: { Authorization: `Token ${token}` },
+    })
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => console.log(err.response.data));
+  };
 
   const selectDog = (selectedOption) => {
     setSelectedDog(selectedOption);
@@ -93,25 +108,6 @@ export const BookWalk = () => {
       walk.filter((w) => 3 - w.dogs.length >= selectedOption.length)
     );
   }
-  // const walkTrainer = (event) =>
-  //   setWalk({ ...walk, trainer: event.target.value });
-  // const walkDogs = (event) => setWalk({ ...walk, dog: event.target.value });
-
-  // const bookWalk = (event) => {
-  //   event.preventDefault();
-  //   axios.post(
-  //     "/walks/new/",
-  //     {
-  //       trainer: walk.trainer,
-  //       dog: walk.dog,
-  //     },
-  //     {
-  //       headers: { Authorization: `Token ${token}` },
-  //     }
-  //   );
-  // };
-  // console.log(selectedDog);
-  // console.log(user);
   console.log(selectedTrainer);
   return (
     <div className="BookWalk">
@@ -171,7 +167,7 @@ export const BookWalk = () => {
                 selectedTrainer || selectedTrainer === "Dowolny"
           )
           .map((walk) => (
-            <Walk {...walk} />
+            <Walk {...walk} onClick={() => applyForWalk}/>
           ))}
       </div>
     </div>
