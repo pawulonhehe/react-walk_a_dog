@@ -89,6 +89,22 @@ export const BookWalk = () => {
         console.log(error.response);
       });
   }, []);
+  const [choosenDogs, setChoosenDogs] = useState([]);
+
+  const applyForWalk = (event) => {
+    const obj = {
+      dogs: [choosenDogs],
+    };
+    console.group(obj);
+    axios
+    .patch("/walks/{id}/", obj, {
+    headers: { Authorization: `Token ${token}` },
+    })
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => console.log(err.response.data));
+  };
 
   const selectDog = (selectedOption) => {
     setSelectedDog(selectedOption);
@@ -180,7 +196,7 @@ export const BookWalk = () => {
                 selectedTrainer === "Dowolny")
           )
           .map((walk) => (
-            <Walk {...walk} />
+            <Walk {...walk} onClick={() => applyForWalk}/>
           ))}
       </div>
     </div>

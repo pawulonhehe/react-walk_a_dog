@@ -13,21 +13,12 @@ const calculateWalkEndTime = (time) => {
 export const ModalAddSlot = ({ open, onClose }) => {
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
   const currentTime = moment(new Date()).format("HH:mm:ss");
-
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [walkStartTime, setWalkStartTime] = useState(currentTime);
   const [walkEndTime, setWalkEndTime] = useState(
     calculateWalkEndTime(currentTime)
   );
-
   const token = sessionStorage.getItem("token");
-
-  // const addDogs = (selectedDog) =>
-  //   setWalk({ ...walk, dogs: selectedDog.value });
-
-  // const addDogs = (selectedDog) =>
-  //   setWalk({ ...walk, dogs: selectedDog.value });
-
   const addWalk = (event) => {
     const obj = {
       trainer: sessionStorage.getItem("user"),
@@ -87,7 +78,6 @@ export const ModalAddSlot = ({ open, onClose }) => {
           Koniec spaceru:
           <div className="endTimeTime">{walkEndTime}</div>
         </div>
-
         <button type="button" className="AddWalkButton" onClick={addWalk}>
           Zatwierdź
         </button>
