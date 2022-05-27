@@ -10,7 +10,7 @@ const calculateWalkEndTime = (time) => {
   return moment(new Date()).set({ hours, minutes, seconds }).format("HH:mm:ss");
 };
 
-export const ModalAddSlot = () => {
+export const ModalAddSlot = ({ open, onClose }) => {
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
   const currentTime = moment(new Date()).format("HH:mm:ss");
 
@@ -39,19 +39,20 @@ export const ModalAddSlot = () => {
     };
     console.log(obj);
     axios
-      .post(
-        "/walks/new/",
-         obj ,
-        { headers: { Authorization: `Token ${token}` } }
-      )
+      .post("/walks/new/", obj, {
+        headers: { Authorization: `Token ${token}` },
+      })
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err.response.data));
   };
+  
+  if (!open) return null;
   return (
     <div className="ModalAddSlot">
       <div className="AddSlotForm">
+        <div className="CloseModal" onClick={onClose}>X</div>
         <div className="AddSlotForm--title">
           <h2>Dodaj Slot</h2>
         </div>
@@ -82,7 +83,10 @@ export const ModalAddSlot = () => {
             inputLabelProps={{ shrink: true }}
           />
         </div>
-        <div className="endtime">Koniec spaceru {walkEndTime}</div>
+        <div className="endtime">
+          Koniec spaceru:
+          <div className="endTimeTime">{walkEndTime}</div>
+        </div>
 
         <button type="button" className="AddWalkButton" onClick={addWalk}>
           Zatwierdź
