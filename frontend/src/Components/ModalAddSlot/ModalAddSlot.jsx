@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import "./ModalAddSlot.scss";
 import * as moment from "moment";
 import axios from "axios";
+
 const calculateWalkEndTime = (time) => {
   let [hours, minutes, seconds] = time.split(":");
   hours = +hours + 1;
   return moment(new Date()).set({ hours, minutes, seconds }).format("HH:mm:ss");
 };
+
 export const ModalAddSlot = () => {
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
   const currentTime = moment(new Date()).format("HH:mm:ss");
@@ -17,7 +19,6 @@ export const ModalAddSlot = () => {
   const [walkEndTime, setWalkEndTime] = useState(
     calculateWalkEndTime(currentTime)
   );
-  const [selectedDogs, setSelectedDogs] = useState([]);
 
   const token = sessionStorage.getItem("token");
 
@@ -36,10 +37,11 @@ export const ModalAddSlot = () => {
       dogs: [],
       location: 1,
     };
+    console.log(obj);
     axios
       .post(
         "/walks/new/",
-        { obj },
+         obj ,
         { headers: { Authorization: `Token ${token}` } }
       )
       .then((res) => {
