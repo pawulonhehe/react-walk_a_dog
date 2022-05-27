@@ -15,17 +15,16 @@ export const StartWork = () => {
       })
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
-        const data = res.data;
-        setWalk(data);
-        res.data.filter(
+        console.log(res);
+        let data = res.data.filter(
           ({ trainer }) => +`${sessionStorage.getItem("user")}` === trainer.id
         );
+        setWalk(data);
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, []);
-
   console.log(walk);
   return (
     <div className="StartWork">

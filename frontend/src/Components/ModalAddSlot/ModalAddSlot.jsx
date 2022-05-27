@@ -15,44 +15,48 @@ export const ModalAddSlot = () => {
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
   const currentTime = moment(new Date()).format("HH:mm:ss");
   const [selectedDate, setSelectedDate] = useState(currentDate);
-  const [selectedTime, setSelectedTime] = useState(currentTime);
+
+  const [walkStartTime, setWalkStartTime] = useState(currentTime);
   const [walkEndTime, setWalkEndTime] = useState(
     calculateWalkEndTime(currentTime)
   );
+
   const [myDate, setMyDate] = useState([
     moment(new Date()).locale("pl").format("MMM Do YY"),
   ]);
   const changeDate = (event) => {
     setSelectedDate(event.target.value);
   };
-  const changeTime = (event) => {
-    setWalkEndTime(calculateWalkEndTime(event.target.value));
-  };
+  const [walk, setWalk] = useState({
+    trainer: sessionStorage.getItem("user"),
+    date: selectedDate,
+    start_time: walkStartTime,
+    end_time: walkEndTime,
+    location: 0,
+    dogs: [],
+  });
+  const addStartTime = (time) => setWalk({ ...walk, start_time: time });
+
+  const addEndTime = (time) => setWalk({ ...walk, end_time: time });
+
   const [selectedDogs, setSelectedDogs] = useState([]);
   const token = sessionStorage.getItem("token");
   const selectDogsaddDogs = (e) => {
     setWalk({ ...walk, dogs: e.target.value });
   };
 
-  const [walk, setWalk] = useState({
-    trainer: sessionStorage.getItem("user"),
-    date: selectedDate,
-    start_time: selectedTime,
-    end_time: walkEndTime,
-    dogs: 1,
-    location: 0,
-  });
+  const changeStartTime = (event) => {
+    setWalkStartTime(event.target.value);
+  };
+  const changeEndTime = (event) => {
+    setWalkEndTime(calculateWalkEndTime(event.target.value));
+  };
+  const addDate = (date_str) => setWalk({ ...walk, date: date_str });
 
-  const addDate = (event) => setWalk({ ...walk, date: event.target.value });
-  const addStartTime = (event) =>
-    setWalk({ ...walk, start_time: event.target.value });
-  const addEndTime = (event) =>
-    setWalk({ ...walk, end_time: event.target.value });
   // const addDogs = (selectedDog) =>
   //   setWalk({ ...walk, dogs: selectedDog.value });
 
   const addWalk = (event) => {
-    event.preventDefault();
     axios
       .post(
         "/walks/new/",
@@ -61,18 +65,18 @@ export const ModalAddSlot = () => {
           date: walk.date,
           start_time: walk.start_time,
           end_time: walk.end_time,
-          dogs: [walk.dogs],
+          dogs: [],
           location: 1,
         },
         {
           headers: { Authorization: `Token ${token}` },
         }
       )
+      .then((res) => {
+        console.log(res.data);
+      })
       .catch((err) => console.log(err.response.data));
   };
-  console.log(currentTime);
-  console.log(walkEndTime);
-  console.log(walk);
   return (
     <div className="ModalAddSlot">
       <div className="AddSlotForm">
@@ -84,7 +88,10 @@ export const ModalAddSlot = () => {
             id="date"
             type="date"
             label="Wybierz date"
-            onChange={changeDate + addDate}
+            onChange={(e) => {
+              changeDate(e);
+              addDate(e.target.value);
+            }}
             defaultValue={currentDate}
             sx={{ width: 280 }}
             inputLabelProps={{ shrink: true }}
@@ -95,7 +102,12 @@ export const ModalAddSlot = () => {
             id="time"
             type="time"
             label="Wybierz czas rozpoczęcia"
-            onChange={changeTime + addStartTime + addEndTime}
+            onChange={(e) => {
+              changeStartTime(e);
+              changeEndTime(e);
+              addStartTime(e.target.value);
+              addEndTime(calculateWalkEndTime(e.target.value));
+            }}
             defaultValue={currentTime}
             sx={{ width: 280 }}
             inputLabelProps={{ shrink: true }}
@@ -116,7 +128,7 @@ export const ModalAddSlot = () => {
             <option value={3}>3</option>
           </select>
         </div>
-        <button className="AddWalkButton" onClick={addWalk}>
+        <button type="button" className="AddWalkButton" onClick={addWalk}>
           Zatwierdź
         </button>
       </div>
