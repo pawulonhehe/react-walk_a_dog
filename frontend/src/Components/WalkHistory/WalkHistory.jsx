@@ -26,7 +26,7 @@ export const WalkHistory = (props) => {
         <div className="Reservations--bottomInfo">
           <div className="Reservations--Avatar">
             <img src={pudzilla} alt="awatar" />
-            {/* <img src={walk.trainer.image} alt="awatar" /> */}
+            {/* <img src={props.trainer.image} alt="awatar" /> */}
           </div>
           <div>
             {props.trainer.first_name + " " + props.trainer.last_name}

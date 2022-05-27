@@ -47,8 +47,6 @@ export const Reservations = () => {
     console.log(selectedDate);
   };
 
-  
-
   const handleChange = () => {
     setChecked(!checked);
   };
@@ -103,8 +101,8 @@ export const Reservations = () => {
             end_time: "14:00:00",
             location: "1.000000",
             trainer: {
-              first_name: 1,
-              last_name: 2,
+              first_name: "Jan",
+              last_name: "Kowalski",
             },
             dogs: [15],
           },
@@ -142,8 +140,8 @@ export const Reservations = () => {
             end_time: "20:00:00",
             location: "1.000000",
             trainer: {
-              first_name: 3,
-              last_name: 4,
+              first_name: "Jan",
+              last_name: "Kowalski",
             },
             dogs: [15],
           },
@@ -155,8 +153,8 @@ export const Reservations = () => {
             end_time: "08:00:00",
             location: "1.000000",
             trainer: {
-              first_name: 3,
-              last_name: 4,
+              first_name: "Jan",
+              last_name: "Kowalski",
             },
             dogs: [15],
           },
@@ -239,15 +237,19 @@ export const Reservations = () => {
             }}
           >
             <div className="popover">
-            {dog.map((dog) => (
-              <label htmlFor="">
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  onChange={handleChange}
-                />
-                {dog.name}
-              </label> ))}
+              {dog.map((dog, i) => (
+                <div key={i}>
+                  <label htmlFor="">
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={handleChange}
+                      value={dog.id}
+                    />
+                    {dog.name}
+                  </label>
+                </div>
+              ))}
             </div>
           </Popover>
           <button className="tooltip Reservations--filterButton">
