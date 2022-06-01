@@ -2,13 +2,12 @@
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import permissions
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.generics import ListAPIView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import datetime
-import time
 
 # Project
 from accounts.models import CustomUser
@@ -17,11 +16,12 @@ from accounts.models import CustomUser
 from .models import Dog
 from .models import Slot
 from .models import Trainer
-from .serializers import CustomUserSerializer
+from .serializers import CustomUserSerializer, SlotHistorySerializer
 from .serializers import DogCreateSerializer
 from .serializers import DogSerializer
 from .serializers import SlotSerializer, SlotListSerializer
 from django.utils.dateparse import parse_datetime
+
 
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
@@ -62,7 +62,7 @@ class DogCreateView(CreateAPIView):
 
 
 class SlotListView(ListAPIView):
-    name = 'Slot-list'
+    name = 'slot-list'
     queryset = Slot.objects.all()
     serializer_class = SlotListSerializer
     permission_classes = [permissions.AllowAny]
@@ -74,7 +74,7 @@ class SlotListView(ListAPIView):
         qs_filter = qs.filter(date__gte=current_date)
         id_list = []
         for obj in qs_filter:
-            date_time2 = f'{obj.date}T{obj.start_time}' 
+            date_time2 = f'{obj.date}T{obj.start_time}'
             date_time2 = parse_datetime(date_time2)
             if date_time2 < date_time:
                 id_list.append(obj.id)
@@ -83,14 +83,14 @@ class SlotListView(ListAPIView):
 
 
 class SlotDetailView(RetrieveUpdateDestroyAPIView):
-    name = 'Slot-detail'
+    name = 'slot-detail'
     queryset = Slot.objects.all()
     serializer_class = SlotSerializer
     permission_classes = [permissions.AllowAny]
 
 
 class SlotCreateView(CreateAPIView):
-    name = 'Slot-create'
+    name = 'slot-create'
     serializer_class = SlotSerializer
     permission_classes = [permissions.AllowAny]
 
@@ -124,3 +124,13 @@ class SlotCountView(APIView):
 
         slots = Slot.objects.filter(date=datetime.date.today(), trainer=trainer)
         return Response({'count': 5 - slots.count()})
+
+
+class TrainerWalkHistory(ListAPIView):
+    name = 'walk-history'
+    serializer_class = SlotHistorySerializer
+
+    def get_queryset(self):
+
+        slots = Slot.objects.filter(trainer=self.kwargs.get('pk'))
+        return slots

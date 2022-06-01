@@ -27,8 +27,9 @@ class Dog(models.Model):  # noqa: D101
     owner = models.ForeignKey(
         CustomUser,
         verbose_name='Właściciel',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         default=None,
+        null=True,
         related_name='dogs',
     )
 

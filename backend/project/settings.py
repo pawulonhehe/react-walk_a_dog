@@ -200,7 +200,3 @@ options = DATABASES['default'].get('OPTIONS', {})
 options.pop('sslmode', None)
 
 
-try:
-    from .settings_local import *
-except ImportError:
-    pass

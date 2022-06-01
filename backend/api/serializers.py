@@ -151,12 +151,22 @@ class SlotSerializer(serializers.ModelSerializer):
             attrs["dog_count"] = len(dogs)
         if dogs and pk:
             for i in range(len(dogs)):
-                if Slot.objects.filter(dogs=dogs[i], date=date, end_time__gte=start_time, start_time__lte=end_time).exclude(pk=pk).exists():  # noqa: E501
-                    raise serializers.ValidationError(f'Pies {dogs[i]} jest już na innym spacerze w tym czasie.')  # noqa: E501
+                if Slot.objects.filter(dogs=dogs[i], date=date, end_time__gte=start_time,
+                                       start_time__lte=end_time).exclude(
+                        pk=pk).exists():  # noqa: E501
+                    raise serializers.ValidationError(
+                        f'Pies {dogs[i]} jest już na innym spacerze w tym czasie.')  # noqa: E501
 
         if dogs and pk and date and start_time and end_time:
-            if trainer.slot_set.filter(date=date, end_time__gte=start_time, start_time__lte=end_time).exclude(pk=pk).exists():
+            if trainer.slot_set.filter(date=date, end_time__gte=start_time,
+                                       start_time__lte=end_time).exclude(pk=pk).exists():
                 raise serializers.ValidationError(
                     'Trener jest już na innym spacerze w tym czasie.')
 
         return attrs
+
+
+class SlotHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Slot
+        exclude = ('id',)

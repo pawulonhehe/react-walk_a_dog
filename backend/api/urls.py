@@ -7,7 +7,7 @@ from django.urls import path
 from allauth.account.views import confirm_email
 
 # Local
-from .views import CustomUserDetailView, SlotCountView
+from .views import CustomUserDetailView, SlotCountView, TrainerWalkHistory
 from .views import CustomUserListView
 from .views import DogCreateView
 from .views import DogDetailView
@@ -84,8 +84,14 @@ urlpatterns = [
         name=TrainerDetailView.name,
     ),
     path(
+        'trainers/<int:pk>/walk-history/',
+        TrainerWalkHistory.as_view(),
+        name=TrainerWalkHistory.name,
+    ),
+    path(
         'slots/<int:trainer_id>/',
         SlotCountView.as_view(),
         name=SlotCountView.name,
-        )
+    ),
+
 ]
