@@ -7,6 +7,7 @@ import "./StartWork.scss";
 export const StartWork = () => {
   const [walk, setWalk] = useState([]);
   const token = sessionStorage.getItem("token");
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     axios
@@ -41,9 +42,11 @@ export const StartWork = () => {
         {walk.map((walk) => (
           <Walk {...walk} />
         ))}
-        <button className="addWalkButton">Dodaj slot</button>
+        <button className="addWalkButton" onClick={() => setOpenModal(true)}>
+          Dodaj slot
+        </button>
       </div>
-      <ModalAddSlot />
+      <ModalAddSlot open={openModal} onClose={() => setOpenModal(false)} />
     </div>
   );
 };
