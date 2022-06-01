@@ -1,3 +1,5 @@
+"""Api admin file."""
+
 # Django
 from django.contrib import admin
 
@@ -7,7 +9,7 @@ from .models import Slot
 
 
 @admin.register(Dog)
-class DogADmin(admin.ModelAdmin):
+class DogADmin(admin.ModelAdmin):  # noqa: D101
     list_display = (
         'name',
         'breed',
@@ -16,7 +18,7 @@ class DogADmin(admin.ModelAdmin):
 
 
 @admin.register(Slot)
-class SlotAdmin(admin.ModelAdmin):
+class SlotAdmin(admin.ModelAdmin):  # noqa: D101
     list_display = (
         'date',
     )

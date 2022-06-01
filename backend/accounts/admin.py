@@ -1,10 +1,17 @@
+"""Accounts admin."""
+
 # Django
 from django.contrib import admin
 from django.contrib.auth import get_user_model
+
+# Project
 from api.models import Trainer
-User = get_user_model()
+
 # Local
 from .models import UserAddress
+
+User = get_user_model()
+# Local
 
 
 @admin.register(User)
@@ -16,10 +23,12 @@ class UserAdmin(admin.ModelAdmin):  # noqa: D101
         'is_staff',
     )
 
+
 @admin.register(UserAddress)
-class UserAddressAdmin(admin.ModelAdmin):
+class UserAddressAdmin(admin.ModelAdmin):  # noqa: D101
     pass
 
+
 @admin.register(Trainer)
-class TrainerAdmin(admin.ModelAdmin):
+class TrainerAdmin(admin.ModelAdmin):  # noqa: D101
     pass
