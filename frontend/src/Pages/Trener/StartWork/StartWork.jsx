@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Walk } from "../../../Components/Walk/Walk";
+import { WalkTrainer } from "../../../Components/WalkTrainer/WalkTrainer";
 import { ModalAddSlot } from "../../../Components/ModalAddSlot/ModalAddSlot";
 import "./StartWork.scss";
 
@@ -40,7 +40,7 @@ export const StartWork = () => {
       <div className="mainContainer">
         <div className="ContainerTopText">twoje istniejące sloty</div>
         {walk.map((walk) => (
-          <Walk {...walk} />
+          <WalkTrainer {...walk} />
         ))}
         <button className="addWalkButton" onClick={() => setOpenModal(true)}>
           Dodaj slot

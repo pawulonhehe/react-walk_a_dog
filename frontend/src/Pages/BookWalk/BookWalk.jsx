@@ -17,8 +17,11 @@ export const BookWalk = () => {
   const [myDate, setMyDate] = useState([
     moment(new Date()).locale("pl").format("dddd, DD MMMM yyyy "),
   ]);
-  const token = sessionStorage.getItem("token");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
+  const [selectedDate, setSelectedDate] = useState([currentDate]);
+
+  const token = sessionStorage.getItem("token");
+
   let selectedDateFormat = moment(new Date())
     .locale("pl")
     .format("dddd, DD MMMM yyyy ");
@@ -35,8 +38,6 @@ export const BookWalk = () => {
   };
 
   const changeTrainer = (event) => setSelectedTrainer(event.target.value);
-
-  console.log('trener: ', (selectedTrainer));
 
   useEffect(() => {
     axios
@@ -88,22 +89,6 @@ export const BookWalk = () => {
         console.log(error.response);
       });
   }, []);
-  const [choosenDogs, setChoosenDogs] = useState([]);
-
-  const applyForWalk = (event) => {
-    const obj = {
-      dogs: [choosenDogs],
-    };
-    console.group(obj);
-    axios
-    .patch("/walks/{id}/", obj, {
-    headers: { Authorization: `Token ${token}` },
-    })
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => console.log(err.response.data));
-  };
 
   const selectDog = (selectedOption) => {
     setSelectedDog(selectedOption);
@@ -115,8 +100,27 @@ export const BookWalk = () => {
     setCurrentWalk(
       walk.filter((w) => 3 - w.dogs.length >= selectedOption.length)
     );
-  }
-  console.log(selectedTrainer);
+  };
+  // const walkTrainer = (event) =>
+  //   setWalk({ ...walk, trainer: event.target.value });
+  // const walkDogs = (event) => setWalk({ ...walk, dog: event.target.value });
+
+  // const bookWalk = (event) => {
+  //   event.preventDefault();
+  //   axios.post(
+  //     "/walks/new/",
+  //     {
+  //       trainer: walk.trainer,
+  //       dog: walk.dog,
+  //     },
+  //     {
+  //       headers: { Authorization: `Token ${token}` },
+  //     }
+  //   );
+  // };
+  // console.log(selectedDog);
+  // console.log(user);
+
   return (
     <div className="BookWalk">
       <div className="BookWalk--topText">
@@ -173,11 +177,11 @@ export const BookWalk = () => {
             (walk) =>
               walk.trainer.first_name + " " + walk.trainer.last_name ===
                 selectedTrainer ||
-              selectedTrainer === "Dowolny" &&
-              moment(walk.date).isSame(selectedDate)
+              (selectedTrainer === "Dowolny" &&
+                moment(walk.date).isSame(selectedDate))
           )
           .map((walk) => (
-            <Walk {...walk} onClick={() => applyForWalk}/>
+            <Walk {...walk} />
           ))}
       </div>
     </div>
