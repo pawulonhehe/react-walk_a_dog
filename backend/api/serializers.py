@@ -1,3 +1,5 @@
+"""Api serializers."""
+
 # 3rd-party
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
@@ -9,23 +11,22 @@ from accounts.models import UserAddress
 # Local
 from .models import Dog
 from .models import Slot
-from .models import Trainer
 
 
-class TokenSerializer(serializers.ModelSerializer):
-    class Meta:
+class TokenSerializer(serializers.ModelSerializer):  # noqa: D101
+    class Meta:  # noqa: D106
         model = Token
-        fields = ('key', 'user',)
+        fields = ('key', 'user')
 
 
-class UserAddressSerializer(serializers.ModelSerializer):
-    class Meta:
+class UserAddressSerializer(serializers.ModelSerializer):  # noqa: D101
+    class Meta:  # noqa: D106
         model = UserAddress
         fields = '__all__'
 
 
-class OwnerSerializer(serializers.ModelSerializer):
-    class Meta:
+class OwnerSerializer(serializers.ModelSerializer):  # noqa: D101
+    class Meta:  # noqa: D106
         model = CustomUser
         fields = (
             'id',
@@ -35,31 +36,31 @@ class OwnerSerializer(serializers.ModelSerializer):
         )
 
 
-class DogSerializer(serializers.ModelSerializer):
+class DogSerializer(serializers.ModelSerializer):  # noqa: D101
     owner = OwnerSerializer(read_only=True)
 
-    class Meta:
+    class Meta:  # noqa: D106
         model = Dog
         fields = '__all__'
 
 
-class DogCreateSerializer(serializers.ModelSerializer):
-    class Meta:
+class DogCreateSerializer(serializers.ModelSerializer):  # noqa: D101
+    class Meta:  # noqa: D106
         model = Dog
         fields = '__all__'
 
 
-class CustomUserDogSerializer(serializers.ModelSerializer):
+class CustomUserDogSerializer(serializers.ModelSerializer):  # noqa: D101
 
-    class Meta:
+    class Meta:  # noqa: D106
         model = Dog
         exclude = ('owner',)
 
 
-class CustomUserSerializer(serializers.ModelSerializer):
+class CustomUserSerializer(serializers.ModelSerializer):  # noqa: D101
     dogs = CustomUserDogSerializer(many=True, read_only=True)
 
-    class Meta:
+    class Meta:  # noqa: D106
         model = CustomUser
         fields = (
             'id',
@@ -72,8 +73,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
         )
 
 
-class TrainerSerializer(serializers.ModelSerializer):
-    class Meta:
+class TrainerSerializer(serializers.ModelSerializer):  # noqa: D101
+    class Meta:  # noqa: D106
         model = CustomUser
         fields = (
             'id',
@@ -85,22 +86,22 @@ class TrainerSerializer(serializers.ModelSerializer):
         )
 
 
-class SlotListSerializer(serializers.ModelSerializer):
+class SlotListSerializer(serializers.ModelSerializer):  # noqa: D101
     dogs = CustomUserDogSerializer(many=True, read_only=True)
     trainer = TrainerSerializer(read_only=True)
 
-    class Meta:
+    class Meta:  # noqa: D106
         model = Slot
         fields = '__all__'
 
 
-class SlotSerializer(serializers.ModelSerializer):
+class SlotSerializer(serializers.ModelSerializer):  # noqa: D101
     dog_count = serializers.SerializerMethodField()
 
-    def get_dog_count(self, obj):
+    def get_dog_count(self, obj):  # noqa: D102
         return obj.dogs.count()
 
-    class Meta:
+    class Meta:  # noqa: D106
         model = Slot
         fields = '__all__'
 
@@ -120,12 +121,12 @@ class SlotSerializer(serializers.ModelSerializer):
             id_list.append(dog.owner_id)
         return instance
 
-    def validate_dogs(self, value):
+    def validate_dogs(self, value):  # noqa: D102
         if len(value) > 3:
             raise serializers.ValidationError('Na jednym spacerze mogą być maksymalnie 3 psy.')
         return value
 
-    def validate(self, attrs):
+    def validate(self, attrs):  # noqa: D102
         try:
             pk = self.context['pk']
         except KeyError:
@@ -148,15 +149,25 @@ class SlotSerializer(serializers.ModelSerializer):
 
         dogs = attrs.get('dogs')
         if dogs:
-            attrs["dog_count"] = len(dogs)
+            attrs['dog_count'] = len(dogs)
         if dogs and pk:
             for i in range(len(dogs)):
-                if Slot.objects.filter(dogs=dogs[i], date=date, end_time__gte=start_time, start_time__lte=end_time).exclude(pk=pk).exists():  # noqa: E501
-                    raise serializers.ValidationError(f'Pies {dogs[i]} jest już na innym spacerze w tym czasie.')  # noqa: E501
+                if Slot.objects.filter(dogs=dogs[i], date=date, end_time__gte=start_time,
+                                       start_time__lte=end_time).exclude(
+                        pk=pk).exists():  # noqa: E501
+                    raise serializers.ValidationError(
+                        f'Pies {dogs[i]} jest już na innym spacerze w tym czasie.')  # noqa: E501
 
         if dogs and pk and date and start_time and end_time:
-            if trainer.slot_set.filter(date=date, end_time__gte=start_time, start_time__lte=end_time).exclude(pk=pk).exists():
+            if trainer.slot_set.filter(date=date, end_time__gte=start_time,
+                                       start_time__lte=end_time).exclude(pk=pk).exists():
                 raise serializers.ValidationError(
                     'Trener jest już na innym spacerze w tym czasie.')
 
         return attrs
+
+
+class SlotHistorySerializer(serializers.ModelSerializer):  # noqa: D101
+    class Meta:  # noqa: D106
+        model = Slot
+        exclude = ('id',)

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./WalkHistory.scss";
 import moment from "moment";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
-import BasicModal from "../../Pages/BasicModal/BasicModal";
+import BasicModal from "../BasicModal/BasicModal";
 
 export const WalkHistory = (props) => {
   const [open, setOpen] = useState(false);
@@ -26,7 +26,7 @@ export const WalkHistory = (props) => {
         <div className="Reservations--bottomInfo">
           <div className="Reservations--Avatar">
             <img src={pudzilla} alt="awatar" />
-            {/* <img src={walk.trainer.image} alt="awatar" /> */}
+            {/* <img src={props.trainer.image} alt="awatar" /> */}
           </div>
           <div>
             {props.trainer.first_name + " " + props.trainer.last_name}

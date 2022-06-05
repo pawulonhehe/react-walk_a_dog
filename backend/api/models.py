@@ -1,8 +1,27 @@
+"""Api models."""
+
 # Django
+from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
 from django.db import models
 
 # Project
 from accounts.models import CustomUser
+
+
+class Rating(models.Model):  # noqa: D101
+    rating = models.FloatField(
+        validators=[
+            MinValueValidator(0.0),
+            MaxValueValidator(5.0),
+        ],
+    )
+
+    comment = models.TextField(blank=True, null=True)
+    trainer = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='ratings')
+
+    def __str__(self):  # noqa: D105
+        return f'{self.trainer.get_full_name()}'
 
 
 class Dog(models.Model):  # noqa: D101
@@ -27,35 +46,36 @@ class Dog(models.Model):  # noqa: D101
     owner = models.ForeignKey(
         CustomUser,
         verbose_name='Właściciel',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         default=None,
+        null=True,
         related_name='dogs',
     )
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = 'Pies'
         verbose_name_plural = 'Psy'
 
-    def __str__(self):
+    def __str__(self):  # noqa: D105
         return f'{self.name} - {self.owner}'
 
 
-class Trainer(models.Model):
+class Trainer(models.Model):  # noqa: D101
     user = models.OneToOneField(
         CustomUser,
         on_delete=models.CASCADE,
         primary_key=True,
     )
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = 'Trener'
         verbose_name_plural = 'Trenerzy'
 
-    def __str__(self):
+    def __str__(self):  # noqa: D105
         return self.user.get_full_name()
 
 
-class Slot(models.Model):
+class Slot(models.Model):  # noqa: D101
     date = models.DateField(verbose_name='Data')
     start_time = models.TimeField(verbose_name='Początek')
     end_time = models.TimeField(verbose_name='Koniec')
@@ -82,9 +102,9 @@ class Slot(models.Model):
         default=0,
     )
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = 'Spacer'
         verbose_name_plural = 'Spacery'
 
-    def __str__(self):
+    def __str__(self):  # noqa: D105
         return f'{self.date} {self.start_time}-{self.end_time}'

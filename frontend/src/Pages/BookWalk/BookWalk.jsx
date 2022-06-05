@@ -139,6 +139,9 @@ export const BookWalk = () => {
               InputLabelProps={{
                 shrink: true,
               }}
+              inputProps={{
+                min: currentDate,
+              }}
             />
           </div>
         </div>
@@ -175,7 +178,8 @@ export const BookWalk = () => {
         {currentWalk
           .filter(
             (walk) =>
-              walk.trainer.first_name + " " + walk.trainer.last_name ===
+              moment(walk.date).isSame(selectedDate) &&
+              (walk.trainer.first_name + " " + walk.trainer.last_name ===
                 selectedTrainer ||
               (selectedTrainer === "Dowolny" &&
                 moment(walk.date).isSame(selectedDate))

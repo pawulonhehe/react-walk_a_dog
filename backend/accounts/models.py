@@ -1,3 +1,5 @@
+"""Accounts models."""
+
 # Django
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.base_user import BaseUserManager
@@ -8,13 +10,11 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 
-class UserManager(BaseUserManager):
+class UserManager(BaseUserManager):  # noqa: D101
     use_in_migrations = True
 
-    def _create_user(self, email, password, **extra_fields):
-        """Create and save a user with the given email and
-        password.
-        """
+    def _create_user(self, email, password, **extra_fields):  # noqa: D105
+        """Create and save a user with the given email and password."""
         if not email:
             raise ValueError('The given email must be set')
 
@@ -24,28 +24,28 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, email, password=None, **extra_fields):  # noqa: D102
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
         return self._create_user(email, password, **extra_fields)
 
-    def create_superuser(self, email, password, **extra_fields):
+    def create_superuser(self, email, password, **extra_fields):  # noqa: D102
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError(
-                'Superuser must have is_staff=True.'
+                'Superuser must have is_staff=True.',
             )
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(
-                'Superuser must have is_superuser=True.'
+                'Superuser must have is_superuser=True.',
             )
 
         return self._create_user(email, password, **extra_fields)
 
 
-class UserAddress(models.Model):
+class UserAddress(models.Model):  # noqa: D101
     city = models.CharField(
         'Miasto',
         max_length=40,
@@ -55,10 +55,10 @@ class UserAddress(models.Model):
         max_length=6,
         validators=[
             RegexValidator(
-                regex='^\d{2}-\d{3}$',
+                regex='^\d{2}-\d{3}$',  # noqa: W605
                 message='Kod pocztowy musi być w formacie XX-XXX',
             ),
-        ]
+        ],
     )
     street = models.CharField(
         'Ulica',
@@ -74,12 +74,12 @@ class UserAddress(models.Model):
         blank=True,
     )
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = 'Adres'
         verbose_name_plural = 'Adresy'
 
 
-class CustomUser(AbstractBaseUser, PermissionsMixin):
+class CustomUser(AbstractBaseUser, PermissionsMixin):  # noqa: D101
     phone_number = models.CharField(
         'Numer telefonu',
         max_length=20,
@@ -116,7 +116,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         default=False,
         help_text=_(
             'Designates whether the user can log into '
-            'this admin site.'
+            'this admin site.',
         ),
     )
     is_active = models.BooleanField(
@@ -125,7 +125,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         help_text=_(
             'Designates whether this user should be '
             'treated as active. Unselect this instead '
-            'of deleting accounts.'
+            'of deleting accounts.',
         ),
     )
     date_joined = models.DateTimeField(
@@ -141,12 +141,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = 'Użytkownik'
         verbose_name_plural = 'Użytkownicy'
 
-    def get_full_name(self):
+    def get_full_name(self):  # noqa: D102
         return f'{self.first_name} {self.last_name}'
 
-    def __str__(self):
+    def __str__(self):  # noqa: D105
         return self.get_full_name()

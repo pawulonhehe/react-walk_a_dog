@@ -34,7 +34,7 @@ const BasicModal = (props) => {
           >
             <p>Data: 10.03.2022 10:15 </p>
             <p> Trener: Jacek Szyuła</p>
-            <p> Trener: Jacek Szyuła</p>
+            <p> Psy: Azor, Rocky, Maciej</p>
             <p> Odbiór psa: 11:15</p>
             <p> Aleja Warszawska 107 - Parking</p>
           </Typography>
