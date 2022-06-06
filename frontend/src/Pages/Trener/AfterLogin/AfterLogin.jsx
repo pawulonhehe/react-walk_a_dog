@@ -2,11 +2,13 @@ import React from "react";
 import "./AfterLogin.scss";
 import pudzilla from "../../../Assets/Images/pudzilla.jpg";
 import { Icon } from "@iconify/react";
+import { WalkAfterLogin } from "../../../Components/WalkAfterLogin/WalkAfterLogin";
 // import { Link } from "react-router-dom";
 
 export const TrenerAfterLogin = () => {
   return (
     <div className="AfterLogin">
+      <WalkAfterLogin />
       <div className="Avatar">
         <img src={pudzilla} alt="Pudzilla" width="140" height="140" />
       </div>
