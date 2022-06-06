@@ -72,9 +72,6 @@ export const EditAccount = () => {
         >
           Regulamin
         </button>
-        <button type="submit" className="RightSideButton">
-          Zgłoś usterkę
-        </button>
       </div>
     </div>
   );
