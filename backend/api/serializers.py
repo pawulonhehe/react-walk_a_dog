@@ -149,16 +149,13 @@ class SlotSerializer(serializers.ModelSerializer):  # noqa: D101
                 raise serializers.ValidationError('Na jednym spacerze mogą być maksymalnie 3 psy.')
             filters = {
                 'date': date,
-                'start_time': start_time,
-                'end_time': end_time,
+                'start_time__lte': end_time,
+                'end_time__gte': start_time,
                 'trainer': trainer,
             }
             for dog in dogs:
-                if Slot.objects.filter(dogs=dog.id,**filters).exclude(pk=walk_id).exists():
+                if Slot.objects.filter(dogs=dog.id, **filters).exclude(pk=walk_id).exists():
                     raise serializers.ValidationError('Pies znajduje się już w innym spacerze.')
-                if Slot.objects.filter(dogs=dog.id,**filters, pk=walk_id).exists():
-                    raise serializers.ValidationError('Pies znajduje się już w tym spacerze.')
-
 
         walks_count = trainer.slot_set.filter(
             date=date,
