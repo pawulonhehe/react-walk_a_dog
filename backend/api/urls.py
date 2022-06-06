@@ -21,6 +21,7 @@ from .views import SlotListView
 from .views import TrainerDetailView
 from .views import TrainerListView
 from .views import TrainerWalkHistory
+from .views import UserWalksListAPIView
 
 # from .views import FacebookLogin
 app_name = 'api'
@@ -38,6 +39,11 @@ urlpatterns = [
         'users/',
         CustomUserListView.as_view(),
         name=CustomUserListView.name,
+    ),
+    path(
+        'users/<int:pk>/active-walks/',
+        UserWalksListAPIView.as_view(),
+        name=UserWalksListAPIView.name,
     ),
     path(
         'users/<int:pk>/',
@@ -101,5 +107,5 @@ urlpatterns = [
         'walks/active/<int:pk>/',
         DogInWalkAPIView.as_view(),
         name=DogInWalkAPIView.name,
-         )
+    ),
 ]

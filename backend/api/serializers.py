@@ -182,3 +182,9 @@ class DogInWalkSerializer(serializers.ModelSerializer):  # noqa: D101
     class Meta:  # noqa: D106
         model = Slot
         fields = '__all__'
+
+class UserWalksSerializer(serializers.ModelSerializer):  # noqa: D101
+    dogs = DogCreateSerializer(many=True, read_only=True)
+    class Meta:  # noqa: D106
+        model = Slot
+        fields = '__all__'

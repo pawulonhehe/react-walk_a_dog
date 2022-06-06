@@ -30,7 +30,7 @@ from .serializers import DogCreateSerializer
 from .serializers import DogSerializer
 from .serializers import SlotHistorySerializer
 from .serializers import SlotListSerializer
-from .serializers import SlotSerializer
+from .serializers import SlotSerializer, UserWalksSerializer
 
 
 class FacebookLogin(SocialLoginView):  # noqa: D101
@@ -156,3 +156,15 @@ class DogInWalkAPIView(ListAPIView):
             end_time__gte=datetime.datetime.now(),
             start_time__lte=datetime.datetime.now()
         ).distinct()
+
+class UserWalksListAPIView(ListAPIView):
+    name = 'user-walks'
+    serializer_class = UserWalksSerializer
+
+    def get_queryset(self):  # noqa: D102
+        return Slot.objects.filter(
+            dogs__owner_id=self.kwargs['pk'],
+            date__gte=datetime.date.today(),
+            end_time__gte=datetime.datetime.now(),
+            start_time__lte=datetime.datetime.now(),
+            ).distinct()
