@@ -4,6 +4,9 @@
 import datetime
 
 # Django
+import json
+from pprint import pprint
+
 from django.utils.dateparse import parse_datetime
 
 # 3rd-party
@@ -139,3 +142,17 @@ class TrainerWalkHistory(ListAPIView):  # noqa: D101
 
         slots = Slot.objects.filter(trainer=self.kwargs.get('pk'))
         return slots
+
+
+class DogInWalkAPIView(ListAPIView):
+    name = 'dog-in-walk'
+
+    serializer_class = SlotSerializer
+
+    def get_queryset(self):  # noqa: D102
+        return Slot.objects.filter(
+            dogs__owner_id=self.kwargs['pk'],
+            date=datetime.date.today(),
+            end_time__gte=datetime.datetime.now(),
+            start_time__lte=datetime.datetime.now()
+        ).distinct()

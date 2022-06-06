@@ -9,7 +9,7 @@ from django.urls import path
 from allauth.account.views import confirm_email
 
 # Local
-from .views import CustomUserDetailView
+from .views import CustomUserDetailView, DogInWalkAPIView
 from .views import CustomUserListView
 from .views import DogCreateView
 from .views import DogDetailView
@@ -97,5 +97,9 @@ urlpatterns = [
         SlotCountView.as_view(),
         name=SlotCountView.name,
     ),
-
+    path(
+        'walks/active/<int:pk>/',
+        DogInWalkAPIView.as_view(),
+        name=DogInWalkAPIView.name,
+         )
 ]

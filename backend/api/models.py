@@ -18,7 +18,7 @@ class Rating(models.Model):  # noqa: D101
     )
 
     comment = models.TextField(blank=True, null=True)
-    trainer = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='ratings')
+    trainer = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='ratings', null=True)
 
     def __str__(self):  # noqa: D105
         return f'{self.trainer.get_full_name()}'

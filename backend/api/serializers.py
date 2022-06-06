@@ -1,5 +1,5 @@
 """Api serializers."""
-
+from pprint import pprint
 # 3rd-party
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
@@ -127,14 +127,39 @@ class SlotSerializer(serializers.ModelSerializer):  # noqa: D101
         return value
 
     def validate(self, attrs):  # noqa: D102
-        try:
-            pk = self.context['pk']
-        except KeyError:
-            pk = None
-        date = attrs.get('date')
-        start_time = attrs.get('start_time')
-        end_time = attrs.get('end_time')
-        trainer = attrs.get('trainer')
+        walk_id = self.context['request'].parser_context['kwargs']['pk']
+        walk = Slot.objects.get(id=walk_id)
+        
+        date = walk.date
+        start_time = walk.start_time
+        end_time = walk.end_time
+        trainer = walk.trainer
+
+        if attrs.get('date'):
+            date = attrs.get('date')
+        if attrs.get('start_time'):
+            start_time = attrs.get('start_time')
+        if attrs.get('end_time'):
+            end_time = attrs.get('end_time')
+        if attrs.get('trainer'):
+            trainer = CustomUser.objects.get(id=attrs.get('trainer'))
+        if attrs.get('dogs'):
+            dogs = attrs.get('dogs')
+            if len(dogs) > 3:
+                raise serializers.ValidationError('Na jednym spacerze mogą być maksymalnie 3 psy.')
+            filters = {
+                'date': date,
+                'start_time': start_time,
+                'end_time': end_time,
+                'trainer': trainer,
+            }
+            for dog in dogs:
+                if Slot.objects.filter(dogs=dog.id,**filters).exclude(pk=walk_id).exists():
+                    raise serializers.ValidationError('Pies znajduje się już w innym spacerze.')
+                if Slot.objects.filter(dogs=dog.id,**filters, pk=walk_id).exists():
+                    raise serializers.ValidationError('Pies znajduje się już w tym spacerze.')
+
+
         walks_count = trainer.slot_set.filter(
             date=date,
         )
@@ -147,23 +172,6 @@ class SlotSerializer(serializers.ModelSerializer):  # noqa: D101
                 raise serializers.ValidationError(
                     'Czas zakończenia musi być późniejszy niż czas rozpoczęcia.')
 
-        dogs = attrs.get('dogs')
-        if dogs:
-            attrs['dog_count'] = len(dogs)
-        if dogs and pk:
-            for i in range(len(dogs)):
-                if Slot.objects.filter(dogs=dogs[i], date=date, end_time__gte=start_time,
-                                       start_time__lte=end_time).exclude(
-                        pk=pk).exists():  # noqa: E501
-                    raise serializers.ValidationError(
-                        f'Pies {dogs[i]} jest już na innym spacerze w tym czasie.')  # noqa: E501
-
-        if dogs and pk and date and start_time and end_time:
-            if trainer.slot_set.filter(date=date, end_time__gte=start_time,
-                                       start_time__lte=end_time).exclude(pk=pk).exists():
-                raise serializers.ValidationError(
-                    'Trener jest już na innym spacerze w tym czasie.')
-
         return attrs
 
 
@@ -171,3 +179,9 @@ class SlotHistorySerializer(serializers.ModelSerializer):  # noqa: D101
     class Meta:  # noqa: D106
         model = Slot
         exclude = ('id',)
+
+
+class DogInWalkSerializer(serializers.ModelSerializer):  # noqa: D101
+    class Meta:  # noqa: D106
+        model = Slot
+        fields = '__all__'

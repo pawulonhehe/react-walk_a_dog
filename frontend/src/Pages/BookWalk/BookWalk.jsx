@@ -84,7 +84,6 @@ export const BookWalk = () => {
 
         setWalk(data);
         setCurrentWalk(data);
-        console.log([]);
       })
       .catch((error) => {
         console.log(error.response);
@@ -104,15 +103,23 @@ export const BookWalk = () => {
   };
 
   const bookSingleWalk = (id) => {
+    let dogsInWalk = walk.find((w) => w.id === id).dogs;
+    dogsInWalk = dogsInWalk.map((d) => d.id);
+    let dogs = [...selectedDog.map(d => d.value), ...dogsInWalk];
     axios.patch(
       `walks/${id}/`,
       {
-        dogs: [...selectedDog.map((d) => d.value), ...walk.find(({ id }) => id === id).dogs],
+        dogs: dogs,
       },
       {
         headers: { Authorization: `Token ${token}` },
       }
-    );
+    ).catch((error) => {
+      let errors = error.response.data;
+      for (const [key, value] of Object.entries(errors)) {
+        console.log(key, value);
+      }
+    });
   };
 
   // const walkTrainer = (event) =>
@@ -132,7 +139,6 @@ export const BookWalk = () => {
   //     }
   //   );
   // };
-  console.log(selectedDog);
   // console.log(user);
   return (
     <div className="BookWalk">
