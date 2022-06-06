@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import "./Walk.scss";
 import moment from "moment";
+import { useNavigate } from "react-router";
+import axios from "axios";
 
 export const Walk = (props) => {
+  const [crntWalk, setCrntWalk] = useState([]);
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem("token");
+  const bookSingleWalk = () => props.handleBook(props.id);
+
   console.log(props);
   return (
     <div className="Walk">
@@ -26,7 +33,7 @@ export const Walk = (props) => {
             </div>
           </div>
           <div className="BookWalk--button">
-            <button>Zapisz się</button>
+            <button onClick={bookSingleWalk}>Zapisz się</button>
           </div>
         </div>
       </div>

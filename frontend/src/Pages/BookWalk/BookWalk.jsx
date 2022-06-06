@@ -5,6 +5,7 @@ import Select from "react-select";
 import TextField from "@mui/material/TextField";
 import { Walk } from "../../Components/Walk/Walk";
 import * as moment from "moment";
+import { OpinionModal } from "../../Components/OpinionModal/OpinionModal";
 require("moment/min/locales.min");
 
 export const BookWalk = () => {
@@ -101,6 +102,19 @@ export const BookWalk = () => {
       walk.filter((w) => 3 - w.dogs.length >= selectedOption.length)
     );
   };
+
+  const bookSingleWalk = (id) => {
+    axios.patch(
+      `walks/${id}/`,
+      {
+        dogs: [...selectedDog.map((d) => d.value), ...walk.find(({ id }) => id === id).dogs],
+      },
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    );
+  };
+
   // const walkTrainer = (event) =>
   //   setWalk({ ...walk, trainer: event.target.value });
   // const walkDogs = (event) => setWalk({ ...walk, dog: event.target.value });
@@ -118,9 +132,8 @@ export const BookWalk = () => {
   //     }
   //   );
   // };
-  // console.log(selectedDog);
+  console.log(selectedDog);
   // console.log(user);
-
   return (
     <div className="BookWalk">
       <div className="BookWalk--topText">
@@ -174,19 +187,23 @@ export const BookWalk = () => {
         </div>
       </div>
       <div className="BookWalk--availableWalks">
+        {walk.map((walk) => (
+          <Walk {...walk} handleBook={bookSingleWalk} />
+        ))}
         {/* <span>{myDate}</span> */}
-        {currentWalk
-          .filter(
-            (walk) =>
-              moment(walk.date).isSame(selectedDate) &&
-              (walk.trainer.first_name + " " + walk.trainer.last_name ===
+        {/* {currentWalk.filter(
+          (walk) =>
+            moment(walk.date).isSame(selectedDate) &&
+            (
+              walk.trainer.first_name + " " + walk.trainer.last_name ===
                 selectedTrainer ||
               (selectedTrainer === "Dowolny" &&
                 moment(walk.date).isSame(selectedDate))
-          )
-          .map((walk) => (
-            <Walk {...walk} />
-          ))}
+            ).map((walk) => <Walk {...walk} />)
+        )} */}
+        {/* nie wiem, nie dzialaja te filtry to zakomentowalem */}
+        {/* <OpinionModal /> */}
+        {/* no to jest kurcze ten modal z opinia nie wiem gdzie wdupcyc, niech sie wyswietla po skonczonym treningu/spacerze */}
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { User } from "../../Models/Users";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { WalkModal } from "../../Components/WalkModal/WalkModal";
 // import { Link } from "react-router-dom";
 
 export const AfterLogin = () => {
@@ -33,6 +34,7 @@ export const AfterLogin = () => {
 
   return (
     <div className="AfterLoginsss">
+      <WalkModal />
       <div className="AfterLogin">
         <div className="Avatar">
           <img src={pudzilla} alt="Pudzilla" width="140" height="140" />
