@@ -6,8 +6,6 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 
 export const Walk = (props) => {
-  const [crntWalk, setCrntWalk] = useState([]);
-  const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
   const bookSingleWalk = () => props.handleBook(props.id);
 

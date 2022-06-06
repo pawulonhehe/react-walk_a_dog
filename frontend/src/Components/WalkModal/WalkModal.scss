@@ -1,3 +1,45 @@
+$blue: #3498db;
+$black: #000;
+$white: #fff;
+$lightblue: #aec7ea;
+$darkgreen: #42945e;
+$green: #6ecc8e;
+$darkpink: #de38b9;
+$pink: #eeafe0;
+
 .WalkModal {
-  background-color: grey;
+  background-color: $lightblue;
+  width: 100%;
+  position: absolute;
+  height: 2.7%;
+  display: flex;
+  flex-direction: row;
+  font-family: "Montserrat", sans-serif;
+  .walk-date {
+    margin-top: 1%;
+    margin-left: 3%;
+    font-size: 12px;
+  }
+  .walk-time {
+    margin-top: 1%;
+    margin-left: 5%;
+    font-size: 12px;
+    width: 20%;
+  }
+  .walk-trainer {
+    margin-top: 1%;
+    margin-left: 2%;
+    font-size: 12px;
+    width: 35%;
+  }
+  .walk-details {
+    background-color: $blue;
+    color: #fff;
+    border-radius: 4px;
+    width: 18%;
+    height: 85%;
+    margin-left: -1%;
+    margin-top: 0.5%;
+    font-size: 12px;
+  }
 }
