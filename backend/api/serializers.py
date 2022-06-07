@@ -1,6 +1,5 @@
 """Api serializers."""
 # Standard Library
-from pprint import pprint
 
 # 3rd-party
 from rest_framework import serializers
@@ -192,6 +191,7 @@ class DogInWalkSerializer(serializers.ModelSerializer):  # noqa: D101
         model = Slot
         fields = '__all__'
 
+
 class ActiveWalksTrainerSerializer(serializers.ModelSerializer):  # noqa: D101
     class Meta:  # noqa: D106
         model = CustomUser
@@ -201,9 +201,50 @@ class ActiveWalksTrainerSerializer(serializers.ModelSerializer):  # noqa: D101
             'last_name',
         )
 
+
 class UserWalksSerializer(serializers.ModelSerializer):  # noqa: D101
     dogs = DogCreateSerializer(many=True, read_only=True)
     trainer = ActiveWalksTrainerSerializer(read_only=True)
+
+    class Meta:  # noqa: D106
+        model = Slot
+        fields = '__all__'
+
+
+class IncomingWalksOwnerSerializer(serializers.ModelSerializer):  # noqa: D101
+    class Meta:  # noqa: D106
+        model = CustomUser
+        fields = (
+            'id',
+        )
+
+
+class IncomingWalksDogSerializer(serializers.ModelSerializer):  # noqa: D101
+    owner = IncomingWalksOwnerSerializer(read_only=True)
+
+    class Meta:  # noqa: D106
+        model = Dog
+        fields = (
+            'id',
+            'name',
+            'owner',
+        )
+
+
+class IncomingWalksTrainerSerializer(serializers.ModelSerializer):  # noqa: D101
+    class Meta:  # noqa: D106
+        model = CustomUser
+        fields = (
+            'id',
+            'first_name',
+            'last_name',
+        )
+
+
+class IncomingWalksSerializer(serializers.ModelSerializer):  # noqa: D101
+    dogs = IncomingWalksDogSerializer(many=True, read_only=True)
+    trainer = IncomingWalksTrainerSerializer(read_only=True)
+
     class Meta:  # noqa: D106
         model = Slot
         fields = '__all__'

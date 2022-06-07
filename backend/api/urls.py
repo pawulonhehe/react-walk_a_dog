@@ -22,6 +22,7 @@ from .views import TrainerDetailView
 from .views import TrainerListView
 from .views import TrainerWalkHistory
 from .views import UserWalksHistoryAPIView
+from .views import UserWalksIncomingAPIView
 from .views import UserWalksListAPIView
 
 # from .views import FacebookLogin
@@ -45,6 +46,11 @@ urlpatterns = [
         'users/<int:pk>/active-walks/',
         UserWalksListAPIView.as_view(),
         name=UserWalksListAPIView.name,
+    ),
+    path(
+        'users/<int:pk>/incoming-walks/',
+        UserWalksIncomingAPIView.as_view(),
+        name=UserWalksIncomingAPIView.name,
     ),
     path(
         'users/<int:pk>/walk-history/',

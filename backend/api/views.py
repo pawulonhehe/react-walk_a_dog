@@ -2,8 +2,6 @@
 
 # Standard Library
 import datetime
-import json
-from pprint import pprint
 
 # Django
 from django.utils.dateparse import parse_datetime
@@ -27,6 +25,7 @@ from .models import Slot
 from .serializers import CustomUserSerializer
 from .serializers import DogCreateSerializer
 from .serializers import DogSerializer
+from .serializers import IncomingWalksSerializer
 from .serializers import SlotHistorySerializer
 from .serializers import SlotListSerializer
 from .serializers import SlotSerializer
@@ -144,7 +143,7 @@ class TrainerWalkHistory(ListAPIView):  # noqa: D101
         return slots
 
 
-class DogInWalkAPIView(ListAPIView):
+class DogInWalkAPIView(ListAPIView):  # noqa: D101
     name = 'dog-in-walk'
 
     serializer_class = SlotSerializer
@@ -154,7 +153,7 @@ class DogInWalkAPIView(ListAPIView):
             dogs__owner_id=self.kwargs['pk'],
             date=datetime.date.today(),
             end_time__gte=datetime.datetime.now(),
-            start_time__lte=datetime.datetime.now()
+            start_time__lte=datetime.datetime.now(),
         ).distinct()
 
 
@@ -181,3 +180,23 @@ class UserWalksHistoryAPIView(ListAPIView):  # noqa: D101
             date__lt=datetime.date.today(),
             date__gte=datetime.date.today() - datetime.timedelta(days=30),
         ).distinct()
+
+
+class UserWalksIncomingAPIView(ListAPIView):  # noqa: D101
+    name = 'user-walks-incoming'
+    serializer_class = IncomingWalksSerializer
+
+    def get_queryset(self):  # noqa: D102
+        qs = Slot.objects.filter(
+            dogs__owner_id=self.kwargs['pk'],
+            date__gte=datetime.date.today(),
+        )
+        date_time = datetime.datetime.now()
+        id_list = []
+        for obj in qs:
+            date_time2 = f'{obj.date}T{obj.start_time}'
+            date_time2 = parse_datetime(date_time2)
+            if date_time2 < date_time:
+                id_list.append(obj.id)
+        qs_exclude = qs.exclude(id__in=id_list)
+        return qs_exclude.distinct().order_by('date', 'start_time')
