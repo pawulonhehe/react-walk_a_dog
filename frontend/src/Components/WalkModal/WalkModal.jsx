@@ -10,7 +10,7 @@ export const WalkModal = (props) => {
   return (
     <div className="WalkModal">
       <div className="walk-date">{props.date}</div>
-      <div className="walk-time">{props.start_time + "" + props.end_time}</div>
+      <div className="walk-time">{props.start_time + "-" + props.end_time}</div>
       <div className="walk-trainer">
         {props.trainer.first_name + " " + props.trainer.last_name}
       </div>

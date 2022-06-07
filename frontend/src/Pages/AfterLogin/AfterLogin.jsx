@@ -123,12 +123,12 @@ export const AfterLogin = () => {
       </div>
       <div style={{ height: "100vh", width: "100%" }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyAyOgCp9cy7G2rg1uP-00bGEpVNKsZ-eek" }}
+          bootstrapURLKeys={{ key: "AIzaSyALjeUJOIthg6G-Yk6dJnOjaWd5Y9CjkVg" }}
           defaultCenter={{
             lat: 59.95,
             lng: 30.33,
           }}
-          defaultZoom={11}
+          defaultZoom={25}
         >
           {/* <div className="cos" lat={59.955413} lng={30.337844}>
             JD
@@ -139,3 +139,4 @@ export const AfterLogin = () => {
     </div>
   );
 };
+// AIzaSyAyOgCp9cy7G2rg1uP-00bGEpVNKsZ-eek
