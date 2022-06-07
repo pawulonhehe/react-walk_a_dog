@@ -19,9 +19,9 @@ export const Reservations = () => {
   const [dog, setDogs] = useState([]);
   const [currentWalk, setCurrentWalk] = useState([]);
   const navigate = useNavigate();
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = useState([]);
   const switchToBook = () => navigate("/bookwalk");
-
+  const userId = sessionStorage.getItem("user");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
@@ -36,20 +36,24 @@ export const Reservations = () => {
   const id = show ? "simple-popover" : undefined;
 
   const [selectedDate, setSelectedDate] = useState(0);
-  console.log("data: ", selectedDate);
 
   const changeDate = (event) => {
     setSelectedDate(event.target.value);
-    console.log("datechange: ", moment(selectedDate).format("YYYY-MM-DD"));
   };
 
-  const handleChange = (position) => {
-    const updatedCheckedState = checked.map((item, index) =>
-      index === position ? !item : item
-    );
-    setChecked(updatedCheckedState);
-    console.log(position);
+
+  const handleCheck = (event) => {
+    var updatedList = [...checked];
+    if (event.target.checked) {
+      updatedList = [...checked, event.target.value];
+    } else {
+      updatedList.splice(checked.indexOf(event.target.value), 1);
+    }
+    setChecked(updatedList);
+
+    console.log(updatedList)
   };
+
 
   useEffect(() => {
     axios
@@ -83,6 +87,7 @@ export const Reservations = () => {
       });
   }, []);
 
+  
   useEffect(() => {
     axios
       .get("/walks/", {
@@ -103,7 +108,7 @@ export const Reservations = () => {
 
   useEffect(() => {
     axios
-      .get("/users/1/walk-history/", {
+      .get(`/users/${userId}/walk-history/`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((res) => {
@@ -167,15 +172,13 @@ export const Reservations = () => {
           >
             <div className="popover">
               {dog.map((dog, index) => (
-                <ul>
-                  <li key={index}>
-                    <label htmlFor="">
-                      <input type="checkbox" onChange={handleChange} />
-                      {dog.name}
-                    </label>
-                  </li>
-                </ul>
+                <div key={index}>
+                  <input value={dog.name} type="checkbox" onChange={handleCheck} />
+                  <span>{dog.name}</span>
+                </div>
               ))}
+
+
             </div>
           </Popover>
           <button className="tooltip Reservations--filterButton">
