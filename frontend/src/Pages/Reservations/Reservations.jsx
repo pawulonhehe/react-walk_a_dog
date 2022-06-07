@@ -8,7 +8,7 @@ import axios from "axios";
 import moment from "moment";
 import TextField from "@mui/material/TextField";
 import { IncomingRes } from "../../Components/IncomingRes/IncomingRes";
-
+import { RateTrainer } from "../../Components/RateTrainer/RateTrainer";
 // import { Link } from "react-router-dom";
 
 export const Reservations = () => {
@@ -31,6 +31,7 @@ export const Reservations = () => {
   const handleCloseP = () => {
     setAnchorEl(null);
   };
+  
 
   const show = Boolean(anchorEl);
   const id = show ? "simple-popover" : undefined;
@@ -42,6 +43,7 @@ export const Reservations = () => {
   };
 
 
+  
   const handleCheck = (event) => {
     var updatedList = [...checked];
     if (event.target.checked) {
@@ -211,6 +213,7 @@ export const Reservations = () => {
       <div className="Reservations--book">
         <button onClick={switchToBook}>Rezerwuj spacer</button>
       </div>
+
     </div>
   );
 };

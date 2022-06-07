@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import "./RateTrainer.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import Rating from "@mui/material/Rating";
-import Modal from "@mui/material/Modal";
+import { Modal } from "@mui/material";
 
-export const RateTrainer = () => {
-  const [value, setValue] = React.useState(2);
-  const [showR, setOpenR] = useState(false);
-  const handleOpen = () => setOpenR(true);
-  const handleCloseR = () => setOpenR(false);
+
+export const RateTrainer = (props) => {
+  const [value, setValue] = useState(2);
+
 
   return (
-
-    <div className="RateTrainer">
+    <Modal open={props.open} onClose={props.onClose}>
+       <div className="RateTrainer" >
       <div className="RateTrainer--content">
         <img src={pudzilla} alt="pudzilla" />
         <h2>Dzięki za skorzystanie z usługi!</h2>
@@ -35,5 +34,7 @@ export const RateTrainer = () => {
         </div>
       </div>
     </div>
+    </Modal>
+   
   );
 };
