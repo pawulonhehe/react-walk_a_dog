@@ -1,0 +1,63 @@
+$blue: #3498db;
+$black: #000;
+$white: #fff;
+$lightblue: #aec7ea;
+$darkgreen: #42945e;
+$green: #6ecc8e;
+$darkpink: #de38b9;
+$pink: #eeafe0;
+
+.TrainerHistWalk {
+  background-color: $lightblue;
+  width: 99%;
+  margin-left: 0.5%;
+  display: flex;
+  height: 14%;
+  margin-top: 0.5%;
+
+  .walk-date {
+    margin-top: 3%;
+    margin-left: 3%;
+    font-size: 14px;
+    width: 20%;
+  }
+  .walk-time {
+    margin-top: 9%;
+    margin-left: -18%;
+    font-size: 14px;
+    width: 15%;
+  }
+  .line {
+    margin: 0.6rem 2rem;
+    border-right: 2px solid $blue;
+    height: 4rem;
+  }
+  .title {
+    font-weight: bold;
+    margin-top: 2%;
+  }
+  .trener {
+    margin-top: 8%;
+    margin-left: -13%;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.5);
+    width: 27%;
+    text-align: left;
+  }
+  .pieski {
+    margin-top: 14%;
+    margin-left: -26.7%;
+    font-size: 14px;
+  }
+  .trainerhist-btn {
+    background-color: $blue;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    width: 20%;
+    height: 50%;
+    margin-left: 5%;
+    margin-top: 4.8%;
+    border: solid transparent;
+    border-radius: 8px;
+  }
+}
