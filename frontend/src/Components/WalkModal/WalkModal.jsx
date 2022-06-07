@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import "./WalkModal.scss";
 
-export const WalkModal = () => {
-  const token = sessionStorage.getItem("token");
+export const WalkModal = (props) => {
+  const navigate = useNavigate();
+  const switchToDetails = () => navigate(`/walkdetails/${props.id}`);
   const [walk, setWalk] = useState([]);
+  const token = sessionStorage.getItem("token");
 
   useEffect(() => {
     axios
@@ -28,10 +31,12 @@ export const WalkModal = () => {
 
   return (
     <div className="WalkModal">
-      <div className="walk-date">06.06.2022</div>
-      <div className="walk-time">15:00-16:00</div>
-      <div className="walk-trainer">Jacek Oooo</div>
-      <div className="walk-details">Szczegóły..</div>
+      <div className="walk-date">{props.date}</div>
+      <div className="walk-time">{props.start_time + " " + props.end_time}</div>
+      <div className="walk-trainer">{props.trainer}</div>
+      <div className="walk-details" onClick={switchToDetails}>
+        Szczegóły..
+      </div>
     </div>
   );
 };

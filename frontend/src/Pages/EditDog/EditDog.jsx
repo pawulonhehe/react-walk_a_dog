@@ -66,7 +66,7 @@ export const EditDog = () => {
           <img src={pies} alt="pies" width="100" height="100"></img>
         </div>
         <div className="LeftSideBar--buttonContainer">
-          <Link to="/editprofile">
+          <Link to={`/editDog/${dog.id}`}>
             <button type="submit" className="LeftSideBar-button">
               Profil
             </button>
@@ -126,7 +126,7 @@ export const EditDog = () => {
             className="RightSideContainer--deleteButton"
             onClick={deleteDog}
           >
-            Usuń pieska
+            Usuń
           </button>
         </form>
       </div>

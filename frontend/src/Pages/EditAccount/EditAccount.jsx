@@ -42,12 +42,12 @@ export const EditAccount = () => {
               Profil
             </button>
           </Link>
-          <Link to="/editavatar">
+          <Link to={`/editavatar/${sessionStorage.getItem("user")}`}>
             <button type="submit" className="LeftSideBar-button">
               Zdjęcie
             </button>
           </Link>
-          <Link to="/editaccount">
+          <Link to={`/editaccount/${sessionStorage.getItem("user")}`}>
             <button type="submit" className="LeftSideBar-button">
               Konto
             </button>

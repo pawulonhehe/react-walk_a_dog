@@ -11,13 +11,12 @@ import { WalkModal } from "../../Components/WalkModal/WalkModal";
 
 export const AfterLogin = () => {
   const navigate = useNavigate();
-  const switchToMyProfile = () => navigate("/editaccount");
+  const switchToMyProfile = () => navigate(`/editaccount/${sessionStorage.getItem("user")}`);
   const switchToMyDogs = () => navigate("/mydogs");
   const switchToReservations = () => navigate("/reservations");
   const switchToTrainers = () => navigate("/trainers");
   const token = sessionStorage.getItem("token");
   const [user, setUser] = useState();
-
   useEffect(() => {
     axios
       .get(`/users/${sessionStorage.getItem("user")}`, {

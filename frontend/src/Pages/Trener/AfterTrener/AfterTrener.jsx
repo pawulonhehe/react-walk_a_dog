@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 export const AfterTrener = () => {
   const navigate = useNavigate();
-  const switchToMyProfile = () => navigate("/editaccount");
+  const switchToMyProfile = () =>
+    navigate(`/editaccount/${sessionStorage.getItem("user")}`);
   const switchToYourClients = () => navigate("/yourclients/");
   const switchToStartWork = () => navigate("/startwork");
 
