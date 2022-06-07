@@ -38,12 +38,14 @@ export const ModalAddSlot = ({ open, onClose }) => {
       })
       .catch((err) => console.log(err.response.data));
   };
-  
+
   if (!open) return null;
   return (
     <div className="ModalAddSlot">
       <div className="AddSlotForm">
-        <div className="CloseModal" onClick={onClose}>X</div>
+        <div className="CloseModal" onClick={onClose}>
+          X
+        </div>
         <div className="AddSlotForm--title">
           <h2>Dodaj Slot</h2>
         </div>
@@ -57,7 +59,7 @@ export const ModalAddSlot = ({ open, onClose }) => {
             }}
             defaultValue={currentDate}
             sx={{ width: 280 }}
-            inputLabelProps={{ shrink: true }}
+            inputlabelprops={{ shrink: true }}
           />
         </div>
         <div className="starttime">
@@ -71,7 +73,7 @@ export const ModalAddSlot = ({ open, onClose }) => {
             }}
             defaultValue={currentTime}
             sx={{ width: 280 }}
-            inputLabelProps={{ shrink: true }}
+            inputlabelprops={{ shrink: true }}
           />
         </div>
         <div className="endtime">

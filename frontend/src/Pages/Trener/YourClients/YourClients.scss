@@ -22,7 +22,7 @@
   }
   .Clients--oneClient {
     background-color: rgb(255, 255, 255);
-    width: 80%;
+    width: 90%;
     margin-left: 5%;
     margin-top: 5%;
     height: 20%;
@@ -51,11 +51,12 @@
         display: flex;
         margin-left: 16%;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-start;
         width: 38%;
         .imgpies {
           width: 30px;
           height: 30px;
+          margin-left: 5%;
         }
       }
 

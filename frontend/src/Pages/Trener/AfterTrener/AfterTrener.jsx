@@ -11,7 +11,8 @@ export const AfterTrener = () => {
   const navigate = useNavigate();
   const switchToMyProfile = () =>
     navigate(`/editaccount/${sessionStorage.getItem("user")}`);
-  const switchToYourClients = () => navigate("/yourclients/");
+  const switchToYourClients = () =>
+    navigate(`/yourclients/${sessionStorage.getItem("user")}`);
   const switchToStartWork = () => navigate("/startwork");
 
   const token = sessionStorage.getItem("token");

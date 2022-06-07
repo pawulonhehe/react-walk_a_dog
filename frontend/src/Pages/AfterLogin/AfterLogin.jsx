@@ -7,11 +7,15 @@ import { User } from "../../Models/Users";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { WalkModal } from "../../Components/WalkModal/WalkModal";
+import GoogleMapReact from "google-map-react";
 // import { Link } from "react-router-dom";
+
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export const AfterLogin = () => {
   const navigate = useNavigate();
-  const switchToMyProfile = () => navigate(`/editaccount/${sessionStorage.getItem("user")}`);
+  const switchToMyProfile = () =>
+    navigate(`/editaccount/${sessionStorage.getItem("user")}`);
   const switchToMyDogs = () => navigate("/mydogs");
   const switchToReservations = () => navigate("/reservations");
   const switchToTrainers = () => navigate("/trainers");
@@ -31,9 +35,28 @@ export const AfterLogin = () => {
       });
   }, []);
 
+  const [walk, setWalk] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`/users/${sessionStorage.getItem("user")}/active-walks`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setWalk(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+
+  console.log(walk);
+
   return (
     <div className="AfterLoginsss">
-      <WalkModal />
+      {walk.map((walk) => (
+        <WalkModal {...walk} />
+      ))}
       <div className="AfterLogin">
         <div className="Avatar">
           <img src={pudzilla} alt="Pudzilla" width="140" height="140" />
@@ -98,6 +121,22 @@ export const AfterLogin = () => {
           </div>
         </div>
       </div>
+      <div style={{ height: "100vh", width: "100%" }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyALjeUJOIthg6G-Yk6dJnOjaWd5Y9CjkVg" }}
+          defaultCenter={{
+            lat: 59.95,
+            lng: 30.33,
+          }}
+          defaultZoom={25}
+        >
+          {/* <div className="cos" lat={59.955413} lng={30.337844}>
+            JD
+          </div> */}
+          <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
+        </GoogleMapReact>
+      </div>
     </div>
   );
 };
+// AIzaSyAyOgCp9cy7G2rg1uP-00bGEpVNKsZ-eek
