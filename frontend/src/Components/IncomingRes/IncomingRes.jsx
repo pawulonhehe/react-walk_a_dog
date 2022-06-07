@@ -19,8 +19,8 @@ export const IncomingRes = (props) => {
       <div className="Reservations--reservation">
         <div className="Reservations--info">
           <span>
-            {props.trainer.first_name + " " + props.trainer.last_name} - Azor,
-            Rocky, Maciej
+            {props.trainer.first_name + " " + props.trainer.last_name + " - "} 
+            {props.dogs.map(element => element.name + ", ")}
           </span>
           <div>
             <Icon icon="material-symbols:pin-drop-sharp" />
