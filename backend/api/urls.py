@@ -9,7 +9,7 @@ from django.urls import path
 from allauth.account.views import confirm_email
 
 # Local
-from .views import CustomUserDetailView, DogInWalkAPIView
+from .views import CustomUserDetailView
 from .views import CustomUserListView
 from .views import DogCreateView
 from .views import DogDetailView
@@ -21,6 +21,7 @@ from .views import SlotListView
 from .views import TrainerDetailView
 from .views import TrainerListView
 from .views import TrainerWalkHistory
+from .views import UserWalksHistoryAPIView
 from .views import UserWalksListAPIView
 
 # from .views import FacebookLogin
@@ -44,6 +45,11 @@ urlpatterns = [
         'users/<int:pk>/active-walks/',
         UserWalksListAPIView.as_view(),
         name=UserWalksListAPIView.name,
+    ),
+    path(
+        'users/<int:pk>/walk-history/',
+        UserWalksHistoryAPIView.as_view(),
+        name=UserWalksHistoryAPIView.name,
     ),
     path(
         'users/<int:pk>/',
@@ -102,10 +108,5 @@ urlpatterns = [
         'slots/<int:trainer_id>/',
         SlotCountView.as_view(),
         name=SlotCountView.name,
-    ),
-    path(
-        'walks/active/<int:pk>/',
-        DogInWalkAPIView.as_view(),
-        name=DogInWalkAPIView.name,
     ),
 ]

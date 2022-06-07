@@ -2,11 +2,10 @@
 
 # Standard Library
 import datetime
-
-# Django
 import json
 from pprint import pprint
 
+# Django
 from django.utils.dateparse import parse_datetime
 
 # 3rd-party
@@ -30,7 +29,8 @@ from .serializers import DogCreateSerializer
 from .serializers import DogSerializer
 from .serializers import SlotHistorySerializer
 from .serializers import SlotListSerializer
-from .serializers import SlotSerializer, UserWalksSerializer
+from .serializers import SlotSerializer
+from .serializers import UserWalksSerializer
 
 
 class FacebookLogin(SocialLoginView):  # noqa: D101
@@ -157,7 +157,8 @@ class DogInWalkAPIView(ListAPIView):
             start_time__lte=datetime.datetime.now()
         ).distinct()
 
-class UserWalksListAPIView(ListAPIView):
+
+class UserWalksListAPIView(ListAPIView):  # noqa: D101
     name = 'user-walks'
     serializer_class = UserWalksSerializer
 
@@ -167,4 +168,16 @@ class UserWalksListAPIView(ListAPIView):
             date=datetime.date.today(),
             end_time__gte=datetime.datetime.now(),
             start_time__lte=datetime.datetime.now(),
-            ).distinct()
+        ).distinct()
+
+
+class UserWalksHistoryAPIView(ListAPIView):  # noqa: D101
+    name = 'user-walks-history'
+    serializer_class = UserWalksSerializer
+
+    def get_queryset(self):  # noqa: D102
+        return Slot.objects.filter(
+            dogs__owner_id=self.kwargs['pk'],
+            date__lt=datetime.date.today(),
+            date__gte=datetime.date.today() - datetime.timedelta(days=30),
+        ).distinct()

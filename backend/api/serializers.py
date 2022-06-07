@@ -1,5 +1,7 @@
 """Api serializers."""
+# Standard Library
 from pprint import pprint
+
 # 3rd-party
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
@@ -127,13 +129,19 @@ class SlotSerializer(serializers.ModelSerializer):  # noqa: D101
         return value
 
     def validate(self, attrs):  # noqa: D102
-        walk_id = self.context['request'].parser_context['kwargs']['pk']
-        walk = Slot.objects.get(id=walk_id)
-        
-        date = walk.date
-        start_time = walk.start_time
-        end_time = walk.end_time
-        trainer = walk.trainer
+        try:
+            walk_id = self.context['request'].parser_context['kwargs']['pk']
+            walk = Slot.objects.get(id=walk_id)
+
+            date = walk.date
+            start_time = walk.start_time
+            end_time = walk.end_time
+            trainer = walk.trainer
+        except KeyError:
+            date = ''
+            start_time = ''
+            end_time = ''
+            trainer = ''
 
         if attrs.get('date'):
             date = attrs.get('date')
@@ -142,8 +150,9 @@ class SlotSerializer(serializers.ModelSerializer):  # noqa: D101
         if attrs.get('end_time'):
             end_time = attrs.get('end_time')
         if attrs.get('trainer'):
-            trainer = CustomUser.objects.get(id=attrs.get('trainer'))
+            trainer = attrs.get('trainer')
         if attrs.get('dogs'):
+            print('jest pies')
             dogs = attrs.get('dogs')
             if len(dogs) > 3:
                 raise serializers.ValidationError('Na jednym spacerze mogą być maksymalnie 3 psy.')
@@ -183,8 +192,18 @@ class DogInWalkSerializer(serializers.ModelSerializer):  # noqa: D101
         model = Slot
         fields = '__all__'
 
+class ActiveWalksTrainerSerializer(serializers.ModelSerializer):  # noqa: D101
+    class Meta:  # noqa: D106
+        model = CustomUser
+        fields = (
+            'id',
+            'first_name',
+            'last_name',
+        )
+
 class UserWalksSerializer(serializers.ModelSerializer):  # noqa: D101
     dogs = DogCreateSerializer(many=True, read_only=True)
+    trainer = ActiveWalksTrainerSerializer(read_only=True)
     class Meta:  # noqa: D106
         model = Slot
         fields = '__all__'
