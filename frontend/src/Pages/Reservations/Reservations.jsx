@@ -54,6 +54,9 @@ export const Reservations = () => {
     console.log(updatedList)
   };
 
+  const clearFilters = () => {
+    setSelectedDate(0);
+  }
 
   useEffect(() => {
     axios
@@ -185,7 +188,7 @@ export const Reservations = () => {
             <Icon icon="material-symbols:person" />
             Trener
           </button>
-          <button className="Reservations--filtersClean">
+          <button className="Reservations--filtersClean" onClick={clearFilters}>
             <Icon icon="bi:x-lg" />
           </button>
         </div>
