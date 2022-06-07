@@ -45,17 +45,19 @@ export const Reservations = () => {
   const handleCheck = (event) => {
     var updatedList = [...checked];
     if (event.target.checked) {
-      updatedList = [...checked, event.target.value];
+      updatedList.indexOf(event.target.value) === -1 ? updatedList.push(event.target.value) : updatedList.splice(checked.indexOf(event.target.value), 1);
     } else {
       updatedList.splice(checked.indexOf(event.target.value), 1);
     }
     setChecked(updatedList);
 
     console.log(updatedList)
+
+
   };
 
   const clearFilters = () => {
-    setSelectedDate(0);
+    setSelectedDate(0)
   }
 
   useEffect(() => {
@@ -120,12 +122,14 @@ export const Reservations = () => {
         const walkData = res.data;
 
         setWalkHistory(walkData);
+        
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, []);
 
+  
   return (
     <div className="Reservations">
       <div className="Reservations--topText">Twoje Rezerwacje</div>
@@ -197,6 +201,7 @@ export const Reservations = () => {
             .filter(
               (walk) =>
                 moment(walk.date).isSame(selectedDate) || selectedDate === 0
+                
             )
             .sort((a, b) => (a.date < b.date ? 1 : b.date < a.date ? -1 : 0))
             .map((walk) => (
