@@ -3,9 +3,14 @@ import "./AfterLogin.scss";
 import pudzilla from "../../../Assets/Images/pudzilla.jpg";
 import { Icon } from "@iconify/react";
 import { WalkAfterLogin } from "../../../Components/WalkAfterLogin/WalkAfterLogin";
+import { useNavigate } from "react-router";
 // import { Link } from "react-router-dom";
 
 export const TrenerAfterLogin = () => {
+  const navigate = useNavigate();
+  const switchToMyProfile = () =>
+    navigate(`/editaccount/${sessionStorage.getItem("user")}`);
+
   return (
     <div className="AfterLogin">
       <WalkAfterLogin />
@@ -14,7 +19,7 @@ export const TrenerAfterLogin = () => {
       </div>
       <div className="MainContainer">
         <div className="WelcomeMessage">Witaj Mariusz!</div>
-        <div className="NiceButton">
+        <div className="NiceButton" onClick={switchToMyProfile}>
           <div className="Icon">
             <Icon
               icon="material-symbols:manage-accounts"

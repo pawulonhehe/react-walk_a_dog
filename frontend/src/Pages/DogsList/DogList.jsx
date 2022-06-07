@@ -13,6 +13,21 @@ export const DogList = () => {
   const navigate = useNavigate();
   const switchToAddDog = () => navigate("/addDog");
   const token = sessionStorage.getItem("token");
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    axios
+      .get(`/users/${sessionStorage.getItem("user")}`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setUser(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -31,14 +46,15 @@ export const DogList = () => {
         console.log(error.response);
       });
   }, []);
-
   return (
     <div className="MyDogs">
       <div className="MyDogs--topText">Twoje Pieski</div>
       <div className="MyDogs--avatar">
         <img src={pudzilla} alt="Pudzilla" width="100" height="100"></img>
       </div>
-      <div className="MyDogs--Text">Mariusz Pudzianowski</div>
+      <div className="MyDogs--Text">
+        {/* {user.first_name}  xdd, to raz dziala raz nie to komentuje*/}
+      </div>
       <div className="MyDogs--dogsContainer">
         {dogs.map((dog) => (
           <Dog {...dog} />

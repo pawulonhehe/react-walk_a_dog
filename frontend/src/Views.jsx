@@ -23,6 +23,8 @@ import { Trainers } from "./Pages/Trainers/Trainers";
 import { TrainerDetails } from "./Pages/TrainerDetails/TrainerDetails";
 import { TrainerDetailsHist } from "./Pages/TrainerDetailsHist/TrainerDetailsHist";
 import { StartWork } from "./Pages/Trener/StartWork/StartWork";
+import { WalkDetails } from "./Pages/WalkDetails/WalkDetails";
+import { TrainerHist } from "./Pages/Trener/TrainerHist/TrainerHist";
 import React from "react";
 
 const Views = () => {
@@ -44,8 +46,8 @@ const Views = () => {
         <Route element={<ProtectedRoutes auth={isAuth} />}>
           <Route path="/afterlogin" element={<AfterLogin />} />
           <Route path="/editprofile/:id" element={<EditProfile />} />
-          <Route path="/editavatar" element={<EditDogAvatar />} />
-          <Route path="/editaccount" element={<EditAccount />} />
+          <Route path="/editavatar/:id" element={<EditDogAvatar />} />
+          <Route path="/editaccount/:id" element={<EditAccount />} />
           <Route path="/mydogs" element={<DogList />} />
           <Route path="/addDog" element={<AddDog />} />
           <Route path="/reservations" element={<Reservations />} />
@@ -56,14 +58,16 @@ const Views = () => {
           <Route path="/trainers" element={<Trainers />} />
           <Route path="/trainerdetails/:id" element={<TrainerDetails />} />
           <Route path="/trainerdetailshist" element={<TrainerDetailsHist />} />
+          <Route path="/walkdetails/:id" element={<WalkDetails />} />
 
           {/* nizej trener */}
 
           <Route path="/owner" element={<Owner />} />
           <Route path="/dog" element={<Dog />} />
           <Route path="/aftertrener" element={<AfterTrener />} />
-          <Route path="/yourclients:id" element={<YourClients />} />
+          <Route path="/yourclients/:id" element={<YourClients />} />
           <Route path="/startwork" element={<StartWork />} />
+          <Route path="/trainerhist/:id" element={<TrainerHist />} />
         </Route>
         <Route path="*" element={<h1>404 Not Found!</h1>} />
       </Routes>

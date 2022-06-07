@@ -3,11 +3,15 @@ import React, { useEffect, useState } from "react";
 import { WalkTrainer } from "../../../Components/WalkTrainer/WalkTrainer";
 import { ModalAddSlot } from "../../../Components/ModalAddSlot/ModalAddSlot";
 import "./StartWork.scss";
+import { useNavigate } from "react-router";
 
 export const StartWork = () => {
   const [walk, setWalk] = useState([]);
   const token = sessionStorage.getItem("token");
   const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate();
+  const switchToHistory = () =>
+    navigate(`/trainerhist/${sessionStorage.getItem("user")}`);
 
   useEffect(() => {
     axios
@@ -44,6 +48,9 @@ export const StartWork = () => {
         ))}
         <button className="addWalkButton" onClick={() => setOpenModal(true)}>
           Dodaj slot
+        </button>
+        <button className="histButton" onClick={switchToHistory}>
+          Twoja Historia
         </button>
       </div>
       <ModalAddSlot open={openModal} onClose={() => setOpenModal(false)} />
