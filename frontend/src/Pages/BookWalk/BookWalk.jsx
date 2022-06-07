@@ -19,7 +19,7 @@ export const BookWalk = () => {
     moment(new Date()).locale("pl").format("dddd, DD MMMM yyyy "),
   ]);
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
-  const [selectedDate, setSelectedDate] = useState([currentDate]);
+  const [selectedDate, setSelectedDate] = useState(currentDate);
 
   const token = sessionStorage.getItem("token");
 
@@ -105,21 +105,23 @@ export const BookWalk = () => {
   const bookSingleWalk = (id) => {
     let dogsInWalk = walk.find((w) => w.id === id).dogs;
     dogsInWalk = dogsInWalk.map((d) => d.id);
-    let dogs = [...selectedDog.map(d => d.value), ...dogsInWalk];
-    axios.patch(
-      `walks/${id}/`,
-      {
-        dogs: dogs,
-      },
-      {
-        headers: { Authorization: `Token ${token}` },
-      }
-    ).catch((error) => {
-      let errors = error.response.data;
-      for (const [key, value] of Object.entries(errors)) {
-        console.log(key, value);
-      }
-    });
+    let dogs = [...selectedDog.map((d) => d.value), ...dogsInWalk];
+    axios
+      .patch(
+        `walks/${id}/`,
+        {
+          dogs: dogs,
+        },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .catch((error) => {
+        let errors = error.response.data;
+        for (const [key, value] of Object.entries(errors)) {
+          console.log(key, value);
+        }
+      });
   };
 
   // const walkTrainer = (event) =>
@@ -193,20 +195,21 @@ export const BookWalk = () => {
         </div>
       </div>
       <div className="BookWalk--availableWalks">
-        {walk.map((walk) => (
+        {/* {walk.map((walk) => (
           <Walk {...walk} handleBook={bookSingleWalk} />
-        ))}
+        ))} */}
         {/* <span>{myDate}</span> */}
-        {/* {currentWalk.filter(
-          (walk) =>
-            moment(walk.date).isSame(selectedDate) &&
-            (
-              walk.trainer.first_name + " " + walk.trainer.last_name ===
+        {currentWalk
+          .filter(
+            (walk) =>
+              moment(walk.date).isSame(selectedDate) &&
+              (walk.trainer.first_name + " " + walk.trainer.last_name ===
                 selectedTrainer ||
-              (selectedTrainer === "Dowolny" &&
-                moment(walk.date).isSame(selectedDate))
-            ).map((walk) => <Walk {...walk} />)
-        )} */}
+                selectedTrainer === "Dowolny")
+          )
+          .map((walk) => (
+            <Walk {...walk} handleBook={bookSingleWalk} />
+          ))}
         {/* nie wiem, nie dzialaja te filtry to zakomentowalem */}
         {/* <OpinionModal /> */}
         {/* no to jest kurcze ten modal z opinia nie wiem gdzie wdupcyc, niech sie wyswietla po skonczonym treningu/spacerze */}
