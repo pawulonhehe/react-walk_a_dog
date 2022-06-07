@@ -6,7 +6,8 @@ import BasicModal from "../BasicModal/BasicModal";
 
 export const WalkHistory = (props) => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = (event) => setOpen(true);
+
   const handleClose = () => setOpen(false);
 
   return (
@@ -30,15 +31,14 @@ export const WalkHistory = (props) => {
           </div>
           <div>
             {props.trainer.first_name + " " + props.trainer.last_name}
-            <br></br> {props.dogs.map(element => element.name + ", ")} 
-            
+            <br></br> { props.dogs.map(d => d.name).join(', ')}
           </div>
         </div>
         <div className="Reservations--infoButtons">
-          <button type="button" onClick={handleOpen}>
+          <button type="button" onClick={handleOpen} >
             Szczegóły
           </button>
-          <BasicModal open={open} onClose={handleClose} />
+          <BasicModal open={open} onClose={handleClose} {...props} />
           <button>Oceń</button>
         </div>
       </div>

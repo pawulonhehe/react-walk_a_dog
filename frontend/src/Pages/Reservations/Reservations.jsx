@@ -94,8 +94,9 @@ export const Reservations = () => {
 
   
   useEffect(() => {
+  
     axios
-      .get("/walks/", {
+      .get( `/users/${userId}/incoming-walks/`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((res) => {
@@ -122,14 +123,12 @@ export const Reservations = () => {
         const walkData = res.data;
 
         setWalkHistory(walkData);
-        
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, []);
 
-  
   return (
     <div className="Reservations">
       <div className="Reservations--topText">Twoje Rezerwacje</div>

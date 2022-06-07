@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import "./BasicModal.scss";
+import moment from "moment";
 
 const style = {
   position: "absolute",
@@ -15,6 +16,20 @@ const style = {
 };
 
 const BasicModal = (props) => {
+
+  let getDate = (date) => {
+    if(props.date) {
+      let _date =  moment(props.date).locale("pl").format("DD-MM-YYYY")
+      let startTime =  props.start_time ? props.start_time.substr(0, 5) : ''
+
+      return ` ${_date} - ${startTime}`
+    }
+
+
+    return ''
+  }
+  
+
   return (
     <div>
       <Modal
@@ -32,10 +47,14 @@ const BasicModal = (props) => {
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
-            <p>Data: 10.03.2022 10:15 </p>
-            <p> Trener: Jacek Szyuła</p>
-            <p> Psy: Azor, Rocky, Maciej</p>
-            <p> Odbiór psa: 11:15</p>
+            <p>
+              Data: {getDate()}
+          
+            </p>
+            <p> Trener: {props.trainer ? props.trainer.first_name : ''} {" "}
+            {props.trainer ? props.trainer.last_name : ''} </p>
+            <p> Psy: {props.dogs ? props.dogs.map(d => d.name).join(', ') : ''}</p>
+            <p> Odbiór psa: {props.end_time}</p>
             <p> Aleja Warszawska 107 - Parking</p>
           </Typography>
         </Box>
