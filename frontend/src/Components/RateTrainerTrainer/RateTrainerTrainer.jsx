@@ -4,7 +4,7 @@ import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import Rating from "@mui/material/Rating";
 import { Modal } from "@mui/material";
 
-export const RateTrainer = (props) => {
+export const RateTrainerTrainer = (props) => {
   const [value, setValue] = useState(2);
   const [comment, setComment] = useState([]);
 
