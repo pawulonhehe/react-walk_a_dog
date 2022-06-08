@@ -17,18 +17,6 @@ const style = {
 
 const WalkDetailsTrainer = (props) => {
 
-  let getDate = (date) => {
-    if(props.date) {
-      let _date =  moment(props.date).locale("pl").format("DD-MM-YYYY")
-      let startTime =  props.start_time ? props.start_time.substr(0, 5) : ''
-
-      return ` ${_date} - ${startTime}`
-    }
-
-
-    return ''
-  }
-  
 
   return (
     <div>
@@ -47,7 +35,7 @@ const WalkDetailsTrainer = (props) => {
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
-            <p>
+            {/* <p>
               Data: {getDate()}
           
             </p>
@@ -55,7 +43,7 @@ const WalkDetailsTrainer = (props) => {
             {props.trainer ? props.trainer.last_name : ''} </p>
             <p> Psy: {props.dogs ? props.dogs.map(d => d.name).join(', ') : ''}</p>
             <p> Odbiór psa: {props.end_time}</p>
-            <p> Aleja Warszawska 107 - Parking</p>
+            <p> Aleja Warszawska 107 - Parking</p> */}
           </Typography>
         </Box>
       </Modal>
