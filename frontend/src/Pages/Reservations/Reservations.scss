@@ -88,7 +88,8 @@ $lightblue: #aec7ea;
     margin: 0 0 0 0.5rem;
     background-color: #ffffff;
     cursor: pointer;
-    width: 4rem;
+    min-width: 5rem;
+    // max-width: 7rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -196,23 +197,10 @@ $lightblue: #aec7ea;
   }
 
 }
-.popover {
-  padding: 0.25rem;
-  min-width: 5rem;
-  display: flex;
-  flex-direction: column;
+
+select{
+  appearance: none;
+  text-align: center;
 }
 
-.popover ul li{
-  list-style: none;
-  margin: 0;
-}
-.popover ul{
-  margin: 0;
-  padding: 0;
-}
-.popover li{
-  margin: 0;
-  padding: 0;
-}
 

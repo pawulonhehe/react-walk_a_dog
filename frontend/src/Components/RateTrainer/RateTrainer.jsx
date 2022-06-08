@@ -12,9 +12,6 @@ export const RateTrainer = (props) => {
     setComment(event.target.value);
   };
 
-  console.log("stars: ", value);
-  console.log("comment: ", comment);
-
   return (
     <Modal open={props.open} onClose={props.onClose}>
       <div className="RateTrainer">

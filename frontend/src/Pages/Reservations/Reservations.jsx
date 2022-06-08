@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./Reservations.scss";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
-import Popover from "@mui/material/Popover";
 import { WalkHistory } from "../../Components/WalkHistory/WalkHistory";
 import axios from "axios";
 import moment from "moment";
 import TextField from "@mui/material/TextField";
 import { IncomingRes } from "../../Components/IncomingRes/IncomingRes";
-import { RateTrainer } from "../../Components/RateTrainer/RateTrainer";
 // import { Link } from "react-router-dom";
 
 export const Reservations = () => {
@@ -23,18 +21,6 @@ export const Reservations = () => {
   const switchToBook = () => navigate("/bookwalk");
   const userId = sessionStorage.getItem("user");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleCloseP = () => {
-    setAnchorEl(null);
-  };
-  
-
-  const show = Boolean(anchorEl);
-  const id = show ? "simple-popover" : undefined;
 
   const [selectedDate, setSelectedDate] = useState(0);
 
@@ -42,25 +28,23 @@ export const Reservations = () => {
     setSelectedDate(event.target.value);
   };
 
+  const [selectedDog, setSelectedDog] = useState("all");
+  const [selectedTrainer, setSelectedTrainer] = useState("all");
 
-  
-  const handleCheck = (event) => {
-    var updatedList = [...checked];
-    if (event.target.checked) {
-      updatedList.indexOf(event.target.value) === -1 ? updatedList.push(event.target.value) : updatedList.splice(checked.indexOf(event.target.value), 1);
-    } else {
-      updatedList.splice(checked.indexOf(event.target.value), 1);
-    }
-    setChecked(updatedList);
-
-    console.log(updatedList)
-
-
+  const changeDog = (event) => {
+    setSelectedDog(event.target.value);
   };
 
+  const changeTrainer = (event) => {
+    setSelectedTrainer(event.target.value);
+  };
+
+
   const clearFilters = () => {
-    setSelectedDate(0)
-  }
+    setSelectedDate(0);
+    setSelectedDog("all");
+    setSelectedTrainer("all");
+  };
 
   useEffect(() => {
     axios
@@ -94,11 +78,9 @@ export const Reservations = () => {
       });
   }, []);
 
-  
   useEffect(() => {
-  
     axios
-      .get( `/users/${userId}/incoming-walks/`, {
+      .get(`/users/${userId}/incoming-walks/`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((res) => {
@@ -137,7 +119,6 @@ export const Reservations = () => {
       <div className="Reservations--incomingRes">
         {currentWalk
           .filter((walk) => moment(walk.date).isSameOrAfter(currentDate))
-          // .sort((a, b) => (a.start_time < b.start_time) ? 1 : ((b.start_time < a.start_time) ? -1 : 0))
           .map((walk) => (
             <IncomingRes {...walk} />
           ))}
@@ -161,38 +142,36 @@ export const Reservations = () => {
               }}
             />
           </div>
-          <button
+          <select
+            name=""
+            id=""
             className="tooltip Reservations--filterButton"
-            onClick={handleClick}
+            value={selectedDog}
+            onChange={changeDog}
           >
-            <Icon icon="material-symbols:sound-detection-dog-barking" />
-            Pies
-          </button>
-          <Popover
-            id={id}
-            open={show}
-            anchorEl={anchorEl}
-            onClose={handleCloseP}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
+            <option value="all" selected>
+              Pies
+            </option>
+            {dog.map((dog) => (
+              <option value={dog.name}>{dog.name}</option>
+            ))}
+          </select>
+          <select
+            name=""
+            id=""
+            className="tooltip Reservations--filterButton"
+            value={selectedTrainer}
+            onChange={changeTrainer}
           >
-            <div className="popover">
-              {dog.map((dog, index) => (
-                <div key={index}>
-                  <input value={dog.name} type="checkbox" onChange={handleCheck} />
-                  <span>{dog.name}</span>
-                </div>
-              ))}
-
-
-            </div>
-          </Popover>
-          <button className="tooltip Reservations--filterButton">
-            <Icon icon="material-symbols:person" />
-            Trener
-          </button>
+            <option value="all" selected>
+              Trener
+            </option>
+            {user.map((trainer) => (
+              <option value={trainer.first_name + " " + trainer.last_name}>
+                {trainer.first_name + " " + trainer.last_name}
+              </option>
+            ))}
+          </select>
           <button className="Reservations--filtersClean" onClick={clearFilters}>
             <Icon icon="bi:x-lg" />
           </button>
@@ -201,8 +180,14 @@ export const Reservations = () => {
           {walkHistory
             .filter(
               (walk) =>
-                moment(walk.date).isSame(selectedDate) || selectedDate === 0
-                
+                (moment(walk.date).isSame(selectedDate) ||
+                selectedDate === 0) &&
+                  (walk.dogs.filter( val => val['name'] === {selectedDog}).length >
+                    0 ||
+                    selectedDog === "all") &&
+                  (walk.trainer.first_name + " " + walk.trainer.last_name ===
+                    selectedTrainer ||
+                    selectedTrainer === "all")
             )
             .sort((a, b) => (a.date < b.date ? 1 : b.date < a.date ? -1 : 0))
             .map((walk) => (
@@ -213,7 +198,6 @@ export const Reservations = () => {
       <div className="Reservations--book">
         <button onClick={switchToBook}>Rezerwuj spacer</button>
       </div>
-
     </div>
   );
 };
