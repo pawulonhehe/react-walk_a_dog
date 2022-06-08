@@ -47,7 +47,7 @@ export const WalkHistory = (props) => {
           <button type="button" onClick={handleOpenR}>
             Oceń
           </button>
-          <RateTrainer open={showR} onClose={handleCloseR} />
+          <RateTrainer open={showR} onClose={handleCloseR} {...props}  />
         </div>
       </div>
     </div>
