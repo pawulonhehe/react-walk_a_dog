@@ -1,7 +1,9 @@
 import React from "react";
 import "./TrainerHistWalk.scss";
+import { RateTrainerTrainer } from "../../Components/RateTrainerTrainer/RateTrainerTrainer";
 
 export const TrainerHistWalk = (props) => {
+  
   return (
     <div className="TrainerHistWalk">
       <div className="walk-date">{props.date}</div>
