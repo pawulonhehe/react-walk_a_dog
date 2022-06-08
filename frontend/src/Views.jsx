@@ -11,7 +11,6 @@ import { DogList } from "./Pages/DogsList/DogList";
 import { AddDog } from "./Pages/AddDog/AddDog";
 import { Reservations } from "./Pages/Reservations/Reservations";
 import { Statute } from "./Pages/Statute/Statute";
-import { Mapa } from "./Pages/Mapa/Mapa";
 import { EditDog } from "./Pages/EditDog/EditDog";
 import { Users } from "./Models/Users";
 import { Owner } from "./Pages/Trener/Owner/Owner";
@@ -51,7 +50,6 @@ const Views = () => {
           <Route path="/mydogs" element={<DogList />} />
           <Route path="/addDog" element={<AddDog />} />
           <Route path="/reservations" element={<Reservations />} />
-          <Route path="/testymapa" element={<Mapa />} />
           <Route path="/statute" element={<Statute />} />
           <Route path="/editdog/:id" element={<EditDog />} />
           <Route path="/bookwalk" element={<BookWalk />} />
