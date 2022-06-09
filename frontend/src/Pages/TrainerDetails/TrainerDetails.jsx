@@ -31,11 +31,14 @@ export const TrainerDetails = () => {
         <div className="MidContainer--Title">
           Opinie na temat trenera
         </div>
-        <Opinion />
-        <Opinion />
-        <Opinion />
-        <Opinion />
-        <Opinion />
+        <div className="opinions">
+          <Opinion />
+          <Opinion />
+          <Opinion />
+          <Opinion />
+          <Opinion />
+        </div>
+
 
         {/* <button
           type="submit"

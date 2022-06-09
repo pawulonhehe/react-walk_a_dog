@@ -47,16 +47,18 @@
   .TrainerDetails--MidContainer {
     background-color: rgba(0, 0, 0, 0.2);
     margin: 1rem;
-    padding: 5rem 0 .5rem 0;
-    // max-height: 40%;
+    padding: .5rem 0;
+    max-height: 40%;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: scroll;
-    max-height: calc(100% - 60%);
+    // max-height: calc(100% - 60%);
 
-
+    .opinions{
+      overflow: scroll;
+      padding: 1rem 0;
+    }
     .Opinion--button {
       // width: 5rem;
       margin: .25rem 5rem;
