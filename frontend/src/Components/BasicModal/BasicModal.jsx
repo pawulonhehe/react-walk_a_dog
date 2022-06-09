@@ -54,7 +54,7 @@ const BasicModal = (props) => {
             <p> Trener: {props.trainer ? props.trainer.first_name : ''} {" "}
             {props.trainer ? props.trainer.last_name : ''} </p>
             <p> Psy: {props.dogs ? props.dogs.map(d => d.name).join(', ') : ''}</p>
-            <p> Odbiór psa: {props.end_time}</p>
+            <p> Odbiór psa: {props.end_time ? props.end_time.substr(0, 5) : ''}</p>
             <p> Aleja Warszawska 107 - Parking</p>
           </Typography>
         </Box>

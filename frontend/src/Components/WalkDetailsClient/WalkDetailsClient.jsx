@@ -36,9 +36,16 @@ const WalkDetailsClient = (props) => {
             sx={{ mt: 2 }}
           >
             <div className="walkDetails">
-              
+              <p>Data: {moment(props.date).locale("pl").format("DD-MM-YYYY")} </p>
+              <p>Start: {props.start_time.substr(0, 5)}</p>
+              <p> Koniec: {props.end_time.substr(0, 5)}</p>
+              <p> Psy: {props.dogs ? props.dogs.map(d => d.name).join(', ') : ''}</p>
+              <p>Miejsce odbioru psa: Aleja Warszawska 107 - Parking</p>
+
             </div>
-            <p>{props.start_time}</p>
+            <div className="map">
+              mapa
+            </div>
           </Typography>
         </Box>
       </Modal>
