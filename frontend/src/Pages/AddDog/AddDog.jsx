@@ -111,7 +111,7 @@ export const AddDog = () => {
           <div className="MiddleForm--lowerText">Wybierz rasę psa</div>
           <Select options={options2} onChange={addBreed} />
           <button type="submit" className="AddDog" onClick={addDog}>
-            Prześlij
+            Dodaj
           </button>
         </div>
       </div>

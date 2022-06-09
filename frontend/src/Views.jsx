@@ -25,6 +25,7 @@ import { StartWork } from "./Pages/Trener/StartWork/StartWork";
 import { WalkDetails } from "./Pages/WalkDetails/WalkDetails";
 import { TrainerHist } from "./Pages/Trener/TrainerHist/TrainerHist";
 import { EditDogAvatar } from "./Pages/EditDogAvatar/EditDogAvatar";
+import { MyOpinions } from "./Pages/Trener/MyOpinions/MyOpinions";
 import React from "react";
 
 const Views = () => {
@@ -68,6 +69,7 @@ const Views = () => {
           <Route path="/yourclients/:id" element={<YourClients />} />
           <Route path="/startwork" element={<StartWork />} />
           <Route path="/trainerhist/:id" element={<TrainerHist />} />
+          <Route path="/myopinions/:id" element={<MyOpinions />} />
         </Route>
         <Route path="*" element={<h1>404 Not Found!</h1>} />
       </Routes>
