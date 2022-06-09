@@ -4,7 +4,8 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
-from django.core.validators import RegexValidator
+from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -45,38 +46,11 @@ class UserManager(BaseUserManager):  # noqa: D101
         return self._create_user(email, password, **extra_fields)
 
 
-class UserAddress(models.Model):  # noqa: D101
-    city = models.CharField(
-        'Miasto',
-        max_length=40,
-    )
-    postal_code = models.CharField(
-        'Kod pocztowy',
-        max_length=6,
-        validators=[
-            RegexValidator(
-                regex='^\d{2}-\d{3}$',  # noqa: W605
-                message='Kod pocztowy musi być w formacie XX-XXX',
-            ),
-        ],
-    )
-    street = models.CharField(
-        'Ulica',
-        max_length=100,
-    )
-    house_number = models.CharField(
-        'Numer domu',
-        max_length=10,
-    )
-    flat_number = models.CharField(
-        'Numer mieszkania',
-        max_length=10,
-        blank=True,
-    )
+class VisibleManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(hidden=False, deleted=False)
 
-    class Meta:  # noqa: D106
-        verbose_name = 'Adres'
-        verbose_name_plural = 'Adresy'
+
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):  # noqa: D101
@@ -100,7 +74,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):  # noqa: D101
         max_length=255,
         blank=False,
     )
-
     first_name = models.CharField(
         _('first name'),
         max_length=30,

@@ -1,32 +1,13 @@
 """Api models."""
 
 # Django
-from django.core.validators import MaxValueValidator
-from django.core.validators import MinValueValidator
+
+# Django
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 # Project
 from accounts.models import CustomUser
-
-
-class Rating(models.Model):  # noqa: D101
-    rating = models.FloatField(
-        validators=[
-            MinValueValidator(0.0),
-            MaxValueValidator(5.0),
-        ],
-    )
-
-    comment = models.TextField(blank=True, null=True)
-    trainer = models.ForeignKey(
-        CustomUser,
-        on_delete=models.SET_NULL,
-        related_name='ratings',
-        null=True,
-    )
-
-    def __str__(self):  # noqa: D105
-        return f'{self.trainer.get_full_name()}'
 
 
 class Dog(models.Model):  # noqa: D101
@@ -34,20 +15,30 @@ class Dog(models.Model):  # noqa: D101
         ('M', 'Samiec'),
         ('F', 'Samica'),
     )
+    deleted = models.BooleanField(
+        verbose_name='Usunięty',
+        default=False,
+        blank=True,
+    )
     name = models.CharField(
         verbose_name='Nazwa',
         max_length=100,
+        default='',
     )
     breed = models.CharField(
         verbose_name='Rasa',
         max_length=100,
+        default='',
     )
     gender = models.CharField(
         verbose_name='Płeć',
         choices=GENDER_CHOICES,
         max_length=6,
+        default='',
     )
-    weight = models.PositiveIntegerField('Waga')
+    weight = models.PositiveIntegerField(
+        verbose_name='Waga', default=0,
+    )
     owner = models.ForeignKey(
         CustomUser,
         verbose_name='Właściciel',
@@ -65,29 +56,61 @@ class Dog(models.Model):  # noqa: D101
         return f'{self.name} - {self.owner}'
 
 
-class Trainer(models.Model):  # noqa: D101
-    user = models.OneToOneField(
-        CustomUser,
-        on_delete=models.CASCADE,
-        primary_key=True,
+class TrainerRating(models.Model):  # noqa: D101
+    value = models.FloatField(
+        validators=[
+            MinValueValidator(0.0),
+            MaxValueValidator(5.0),
+        ],
     )
-
-    class Meta:  # noqa: D106
-        verbose_name = 'Trener'
-        verbose_name_plural = 'Trenerzy'
-
-    def __str__(self):  # noqa: D105
-        return self.user.get_full_name()
+    comment = models.TextField(
+        verbose_name='Komentarz',
+        blank=True,
+        null=True,
+        default='',
+    )
+    trainer = models.ForeignKey(
+        CustomUser,
+        verbose_name='Trener',
+        on_delete=models.SET_NULL,
+        related_name='trainer_ratings',
+        null=True,
+        default=None,
+    )
+    evaluator = models.ForeignKey(
+        CustomUser,
+        verbose_name='Oceniający',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
 
 
 class Slot(models.Model):  # noqa: D101
+    finished = models.BooleanField(
+        verbose_name='Zakończony',
+        default=False,
+        blank=True,
+    )
+    deleted = models.BooleanField(
+        verbose_name='Usunięty',
+        default=False,
+        blank=True,
+    )
     date = models.DateField(verbose_name='Data')
     start_time = models.TimeField(verbose_name='Początek')
     end_time = models.TimeField(verbose_name='Koniec')
-    location = models.DecimalField(
-        verbose_name='Aktualna lokalizacja',
+    latitude = models.DecimalField(
+        verbose_name='Szerokość',
         max_digits=9,
         decimal_places=6,
+        default=0.0,
+    )
+    longitude = models.DecimalField(
+        verbose_name='Długość',
+        max_digits=9,
+        decimal_places=6,
+        default=0.0,
     )
     dogs = models.ManyToManyField(
         Dog,
@@ -98,8 +121,9 @@ class Slot(models.Model):  # noqa: D101
     trainer = models.ForeignKey(
         CustomUser,
         verbose_name='Trener',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         default=None,
+        null=True,
     )
     dog_count = models.PositiveSmallIntegerField(
         'Liczba zapisanych psów',
@@ -113,3 +137,44 @@ class Slot(models.Model):  # noqa: D101
 
     def __str__(self):  # noqa: D105
         return f'{self.date} {self.start_time}-{self.end_time}'
+
+
+class DogRating(models.Model):  # noqa: D101
+    value = models.FloatField(
+        validators=[
+            MinValueValidator(0.0),
+            MaxValueValidator(5.0),
+        ],
+    )
+    comment = models.TextField(
+        verbose_name='Komentarz',
+        blank=True,
+        null=True,
+        default='',
+    )
+    walk = models.ForeignKey(
+        Slot,
+        verbose_name='Spacer',
+        on_delete=models.SET_NULL,
+        default=None,
+        null=True,
+    )
+    dog = models.ForeignKey(
+        Dog,
+        verbose_name='Pies',
+        on_delete=models.SET_NULL,
+        related_name='ratings',
+        null=True,
+        default=None,
+
+    )
+    evaluator = models.ForeignKey(
+        CustomUser,
+        verbose_name='Oceniający',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return f'{self.dog} - {self.evaluator}'
