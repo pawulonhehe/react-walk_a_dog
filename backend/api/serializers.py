@@ -7,10 +7,9 @@ from rest_framework.authtoken.models import Token
 
 # Project
 from accounts.models import CustomUser
-from accounts.models import UserAddress
 
 # Local
-from .models import Dog
+from .models import Dog, DogRating, TrainerRating
 from .models import Slot
 
 
@@ -18,12 +17,6 @@ class TokenSerializer(serializers.ModelSerializer):  # noqa: D101
     class Meta:  # noqa: D106
         model = Token
         fields = ('key', 'user')
-
-
-class UserAddressSerializer(serializers.ModelSerializer):  # noqa: D101
-    class Meta:  # noqa: D106
-        model = UserAddress
-        fields = '__all__'
 
 
 class OwnerSerializer(serializers.ModelSerializer):  # noqa: D101
@@ -181,6 +174,7 @@ class SlotSerializer(serializers.ModelSerializer):  # noqa: D101
 
 
 class SlotHistorySerializer(serializers.ModelSerializer):  # noqa: D101
+    dogs = CustomUserDogSerializer(many=True, read_only=True)
     class Meta:  # noqa: D106
         model = Slot
         exclude = ('id',)
@@ -248,3 +242,32 @@ class IncomingWalksSerializer(serializers.ModelSerializer):  # noqa: D101
     class Meta:  # noqa: D106
         model = Slot
         fields = '__all__'
+
+
+class DogRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DogRating
+        fields = '__all__'
+
+    def create(self, validated_data):
+        dog = validated_data.get('dog')
+        walk = validated_data.get('walk')
+        evaluator = validated_data.get('evaluator')
+        if DogRating.objects.filter(dog=dog, walk=walk, evaluator=evaluator).exists():
+            raise serializers.ValidationError('Już oceniono psa w tym spacerze.')
+        return super().create(validated_data)
+
+
+class TrainerRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrainerRating
+        fields = '__all__'
+
+    def create(self, validated_data):
+        trainer = validated_data.get('trainer')
+        evaluator = validated_data.get('evaluator')
+        if trainer == evaluator:
+            raise serializers.ValidationError('Nie możesz ocenić samego siebie.')
+        if TrainerRating.objects.filter(trainer=trainer, evaluator=evaluator).exists():
+            raise serializers.ValidationError('Już oceniłeś trenera.')
+        return super().create(validated_data)
