@@ -6,7 +6,7 @@ export const Trainer = (props) => {
   const navigate = useNavigate();
   
   const switchToDetails = () =>
-    navigate(`/trainerdetails/${props.id}`);
+    navigate(`/trainerdetails/${props.id}`, {state:{userId: `${props.id}`,}});
 
   return (
     <div className="Trainers--midContainer__trainer">

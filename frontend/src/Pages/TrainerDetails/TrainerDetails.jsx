@@ -1,26 +1,52 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import "./TrainerDetails.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import { useNavigate } from "react-router-dom";
 import { Rating } from "@mui/material";
 import { Opinion } from "../../Components/Opinion/Opinion";
 import { RateTrainer } from "../../Components/RateTrainer/RateTrainer";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 export const TrainerDetails = (props, route) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [user, setUser] = useState([]);
+  const token = sessionStorage.getItem("token");
+
   const switchToBook = () => navigate("/bookwalk");
   const switchToHist = () => navigate("/trainerdetailshist");
 
   const [showR, setOpenR] = useState(false);
   const handleOpenR = () => setOpenR(true);
   const handleCloseR = () => setOpenR(false);
-  
+
+  const userId = location.state.userId;
+
+
+
+  useEffect(() => {
+    axios
+      .get(`/trainers/${userId}/`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setUser(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+
 
   return (
     <div className="TrainerDetails">
       <div className="TrainerDetails--topText">Szczegóły trenera</div>
       <div className="TrainerDetails--topCointainer">
-        <div className="topContainer--Title">Jacek Szyuła</div>
+        <div className="topContainer--Title">
+          {user.first_name + " " + user.last_name}
+          </div>
         <div className="topContainer--Stars">
           <Rating name="simple-controlled" value="5" />
         </div>
@@ -35,16 +61,13 @@ export const TrainerDetails = (props, route) => {
         </div>
       </div>
 
-          <button className="rateButton" type="button" onClick={handleOpenR}>
-            Oceń
-          </button>
-          <RateTrainer open={showR} onClose={handleCloseR}  />
-
+      <button className="rateButton" type="button" onClick={handleOpenR}>
+        Oceń
+      </button>
+      <RateTrainer open={showR} onClose={handleCloseR} />
 
       <div className="TrainerDetails--MidContainer">
-        <div className="MidContainer--Title">
-          Opinie na temat trenera
-        </div>
+        <div className="MidContainer--Title">Opinie na temat trenera</div>
         <div className="opinions">
           <Opinion />
           <Opinion />
@@ -59,10 +82,7 @@ export const TrainerDetails = (props, route) => {
           className="BottomContainer--lbutton"
           onClick={switchToBook}
         >
-          Zamów
-        </button>
-        <button type="submit" className="BottomContainer--rbutton">
-          Następny
+          Rezerwuj
         </button>
       </div>
     </div>
