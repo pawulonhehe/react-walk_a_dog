@@ -71,7 +71,7 @@ export const EditDog = () => {
               Profil
             </button>
           </Link>
-          <Link to="/editavatar">
+          <Link to={`/editdogavatar/${dog.id}`}>
             <button type="submit" className="LeftSideBar-button">
               Zdjęcie
             </button>
