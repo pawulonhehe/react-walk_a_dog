@@ -5,7 +5,7 @@ import { Register } from "./Pages/Register/Register";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { AfterLogin } from "./Pages/AfterLogin/AfterLogin";
 import { EditProfile } from "./Pages/EditProfile/EditProfile";
-import { EditDogAvatar } from "./Pages/EditDogAvatar/EditDogAvatar";
+import { EditAvatar } from "./Pages/EditAvatar/EditAvatar";
 import { EditAccount } from "./Pages/EditAccount/EditAccount";
 import { DogList } from "./Pages/DogsList/DogList";
 import { AddDog } from "./Pages/AddDog/AddDog";
@@ -24,6 +24,7 @@ import { TrainerDetailsHist } from "./Pages/TrainerDetailsHist/TrainerDetailsHis
 import { StartWork } from "./Pages/Trener/StartWork/StartWork";
 import { WalkDetails } from "./Pages/WalkDetails/WalkDetails";
 import { TrainerHist } from "./Pages/Trener/TrainerHist/TrainerHist";
+import { EditDogAvatar } from "./Pages/EditDogAvatar/EditDogAvatar";
 import React from "react";
 
 const Views = () => {
@@ -45,7 +46,7 @@ const Views = () => {
         <Route element={<ProtectedRoutes auth={isAuth} />}>
           <Route path="/afterlogin" element={<AfterLogin />} />
           <Route path="/editprofile/:id" element={<EditProfile />} />
-          <Route path="/editavatar/:id" element={<EditDogAvatar />} />
+          <Route path="/editavatar/:id" element={<EditAvatar />} />
           <Route path="/editaccount/:id" element={<EditAccount />} />
           <Route path="/mydogs" element={<DogList />} />
           <Route path="/addDog" element={<AddDog />} />
@@ -57,6 +58,7 @@ const Views = () => {
           <Route path="/trainerdetails/:id" element={<TrainerDetails />} />
           <Route path="/trainerdetailshist" element={<TrainerDetailsHist />} />
           <Route path="/walkdetails/:id" element={<WalkDetails />} />
+          <Route path="/editdogavatar/:id" element={<EditDogAvatar />} />
 
           {/* nizej trener */}
 
