@@ -11,9 +11,12 @@ from django.utils.dateparse import parse_datetime
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import permissions
-from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView
 from rest_framework.generics import ListAPIView
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
+from rest_framework.parsers import FormParser
+from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -21,15 +24,19 @@ from rest_framework.views import APIView
 from accounts.models import CustomUser
 
 # Local
-from .models import Dog, DogRating, TrainerRating
+from .models import Dog
+from .models import DogRating
 from .models import Slot
-from .serializers import CustomUserSerializer, DogRatingSerializer, TrainerRatingSerializer
+from .models import TrainerRating
+from .serializers import CustomUserSerializer
 from .serializers import DogCreateSerializer
+from .serializers import DogRatingSerializer
 from .serializers import DogSerializer
 from .serializers import IncomingWalksSerializer
 from .serializers import SlotHistorySerializer
 from .serializers import SlotListSerializer
 from .serializers import SlotSerializer
+from .serializers import TrainerRatingSerializer
 from .serializers import UserWalksSerializer
 
 
@@ -49,6 +56,7 @@ class CustomUserDetailView(RetrieveUpdateDestroyAPIView):  # noqa: D101
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     permission_classes = [permissions.AllowAny]
+    parser_classes = (MultiPartParser, FormParser)
 
 
 class DogListView(ListAPIView):  # noqa: D101

@@ -4,8 +4,10 @@
 from django.contrib import admin
 
 # Local
-from .models import Dog, DogRating, TrainerRating
+from .models import Dog
+from .models import DogRating
 from .models import Slot
+from .models import TrainerRating
 
 
 @admin.register(Dog)

@@ -9,8 +9,10 @@ from rest_framework.authtoken.models import Token
 from accounts.models import CustomUser
 
 # Local
-from .models import Dog, DogRating, TrainerRating
+from .models import Dog
+from .models import DogRating
 from .models import Slot
+from .models import TrainerRating
 
 
 class TokenSerializer(serializers.ModelSerializer):  # noqa: D101
@@ -177,7 +179,7 @@ class SlotHistorySerializer(serializers.ModelSerializer):  # noqa: D101
     dogs = CustomUserDogSerializer(many=True, read_only=True)
     class Meta:  # noqa: D106
         model = Slot
-        exclude = ('id',)
+        fields = '__all__'
 
 
 class DogInWalkSerializer(serializers.ModelSerializer):  # noqa: D101

@@ -14,7 +14,7 @@ export const TrainerDetails = (props, route) => {
   const [user, setUser] = useState([]);
   const token = sessionStorage.getItem("token");
 
-  const switchToBook = () => navigate("/bookwalk");
+  const switchToBook = () => navigate("/bookwalk/");
   const switchToHist = () => navigate("/trainerdetailshist");
 
   const [showR, setOpenR] = useState(false);
@@ -22,6 +22,7 @@ export const TrainerDetails = (props, route) => {
   const handleCloseR = () => setOpenR(false);
 
   const userId = location.state.userId;
+  const [trainerRating, setTrainerRating] = useState([]);
 
   useEffect(() => {
     axios
@@ -31,6 +32,23 @@ export const TrainerDetails = (props, route) => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/trainers/2/rating/`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+
+        const ratingData = res.data;
+
+        setTrainerRating(ratingData);
       })
       .catch((error) => {
         console.log(error.response);
@@ -64,11 +82,15 @@ export const TrainerDetails = (props, route) => {
       <button className="rateButton" type="button" onClick={handleOpenR}>
         Oceń
       </button>
-      <RateTrainer open={showR} onClose={handleCloseR} />
+      <RateTrainer open={showR} onClose={handleCloseR} {...user}/>
 
       <div className="TrainerDetails--MidContainer">
         <div className="MidContainer--Title">Opinie na temat trenera</div>
         <div className="opinions">
+          {/* {trainerRating.map( user => {
+            <p>{user.rating}</p>
+            
+          })} */}
           <Opinion />
           <Opinion />
           <Opinion />

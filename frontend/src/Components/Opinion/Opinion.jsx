@@ -2,7 +2,7 @@ import React from "react";
 import "./Opinion.scss";
 import { Rating } from "@mui/material";
 
-export const Opinion = () => {
+export const Opinion = (props) => {
   return (
     <div className="MidContainer--Opinion">
     <div className="flex">

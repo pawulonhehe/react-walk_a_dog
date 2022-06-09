@@ -3,7 +3,8 @@
 # Django
 
 # Django
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
 from django.db import models
 
 # Project

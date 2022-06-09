@@ -9,12 +9,16 @@ from django.urls import path
 from allauth.account.views import confirm_email
 
 # Local
-from .views import CustomUserDetailView, GetDogRating, AddDogRating, AddTrainerRating, \
-    GetTrainerRating, DogReviews, TrainerWalksList
+from .views import AddDogRating
+from .views import AddTrainerRating
+from .views import CustomUserDetailView
 from .views import CustomUserListView
 from .views import DogCreateView
 from .views import DogDetailView
 from .views import DogListView
+from .views import DogReviews
+from .views import GetDogRating
+from .views import GetTrainerRating
 from .views import SlotCountView
 from .views import SlotCreateView
 from .views import SlotDetailView
@@ -22,6 +26,7 @@ from .views import SlotListView
 from .views import TrainerDetailView
 from .views import TrainerListView
 from .views import TrainerWalkHistory
+from .views import TrainerWalksList
 from .views import UserWalksHistoryAPIView
 from .views import UserWalksIncomingAPIView
 from .views import UserWalksListAPIView
