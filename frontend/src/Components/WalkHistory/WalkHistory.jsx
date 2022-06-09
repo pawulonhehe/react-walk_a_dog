@@ -11,9 +11,9 @@ export const WalkHistory = (props) => {
 
   const handleClose = () => setOpen(false);
 
-  const [showR, setOpenR] = useState(false);
-  const handleOpenR = () => setOpenR(true);
-  const handleCloseR = () => setOpenR(false);
+  // const [showR, setOpenR] = useState(false);
+  // const handleOpenR = () => setOpenR(true);
+  // const handleCloseR = () => setOpenR(false);
 
   return (
     <div className="Reservations--incomingResList">
@@ -44,10 +44,10 @@ export const WalkHistory = (props) => {
             Szczegóły
           </button>
           <BasicModal open={open} onClose={handleClose} {...props} />
-          <button type="button" onClick={handleOpenR}>
+          {/* <button type="button" onClick={handleOpenR}>
             Oceń
           </button>
-          <RateTrainer open={showR} onClose={handleCloseR} {...props}  />
+          <RateTrainer open={showR} onClose={handleCloseR} {...props}  /> */}
         </div>
       </div>
     </div>

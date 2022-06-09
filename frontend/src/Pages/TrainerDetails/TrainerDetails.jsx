@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TrainerDetails.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import { useNavigate } from "react-router-dom";
 import { Rating } from "@mui/material";
 import { Opinion } from "../../Components/Opinion/Opinion";
+import { RateTrainer } from "../../Components/RateTrainer/RateTrainer";
 
 export const TrainerDetails = () => {
   const navigate = useNavigate();
   const switchToBook = () => navigate("/bookwalk");
   const switchToHist = () => navigate("/trainerdetailshist");
+
+  const [showR, setOpenR] = useState(false);
+  const handleOpenR = () => setOpenR(true);
+  const handleCloseR = () => setOpenR(false);
+
   return (
     <div className="TrainerDetails">
       <div className="TrainerDetails--topText">Szczegóły trenera</div>
@@ -27,6 +33,13 @@ export const TrainerDetails = () => {
           <img src={pudzilla} alt="pudzilla" />
         </div>
       </div>
+
+          <button className="rateButton" type="button" onClick={handleOpenR}>
+            Oceń
+          </button>
+          <RateTrainer open={showR} onClose={handleCloseR}  />
+
+
       <div className="TrainerDetails--MidContainer">
         <div className="MidContainer--Title">
           Opinie na temat trenera

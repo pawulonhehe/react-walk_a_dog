@@ -35,15 +35,10 @@ const WalkDetailsClient = (props) => {
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
-            {/* <p>
-              Data: {getDate()}
-          
-            </p>
-            <p> Trener: {props.trainer ? props.trainer.first_name : ''} {" "}
-            {props.trainer ? props.trainer.last_name : ''} </p>
-            <p> Psy: {props.dogs ? props.dogs.map(d => d.name).join(', ') : ''}</p>
-            <p> Odbiór psa: {props.end_time}</p>
-            <p> Aleja Warszawska 107 - Parking</p> */}
+            <div className="walkDetails">
+              
+            </div>
+            <p>{props.start_time}</p>
           </Typography>
         </Box>
       </Modal>

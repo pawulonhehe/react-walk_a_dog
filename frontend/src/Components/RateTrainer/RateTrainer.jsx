@@ -21,7 +21,7 @@ export const RateTrainer = (props) => {
           <div className="RateTrainer--rate">
             <h3>
               Jak oceniasz trening z trenerem{" "}
-              {props.trainer.first_name + " " + props.trainer.last_name}?{" "}
+              {/* {props.trainer.first_name + " " + props.trainer.last_name}?{" "} */}
             </h3>
             <div className="RateTrainer--stars">
               <Rating
