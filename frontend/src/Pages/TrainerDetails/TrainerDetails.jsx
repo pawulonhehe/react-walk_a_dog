@@ -52,15 +52,6 @@ export const TrainerDetails = (props, route) => {
           <Opinion />
           <Opinion />
         </div>
-
-
-        {/* <button
-          type="submit"
-          className="Opinion--button"
-          onClick={switchToHist}
-        >
-          Zobacz całą historię
-        </button> */}
       </div>
       <div className="TrainerDetails--BottomContainer">
         <button
