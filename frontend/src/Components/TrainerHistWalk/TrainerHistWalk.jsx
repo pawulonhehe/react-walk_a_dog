@@ -9,6 +9,7 @@ export const TrainerHistWalk = (props) => {
   // const handleCloseR = () => setOpenR(false);
   const navigate = useNavigate();
   const GoToDetails = navigate("/");
+
   return (
     <div className="TrainerHistWalk">
       <div className="walk-date">{props.date}</div>
@@ -16,7 +17,7 @@ export const TrainerHistWalk = (props) => {
       <div className="line"></div>
       <div className="title">Spacer</div>
       <div className="trener">{props.trainer}</div>
-      <div className="pieski">Jason, Mamoa, Reksio</div>
+      <div className="pieski">{props.dogs.map((d) => d.name).join(", ")}</div>
       <button className="trainerhist-btn" onClick={GoToDetails}>
         Szczegóły
       </button>
