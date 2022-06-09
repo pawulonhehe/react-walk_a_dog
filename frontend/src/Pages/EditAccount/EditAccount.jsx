@@ -14,7 +14,7 @@ export const EditAccount = () => {
 
   useEffect(() => {
     axios
-      .get("/auth/user/", {
+      .get(`/users/${sessionStorage.getItem("user")}/`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((res) => {

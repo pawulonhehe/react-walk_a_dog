@@ -49,7 +49,7 @@ const Views = () => {
           <Route path="/editprofile/:id" element={<EditProfile />} />
           <Route path="/editavatar/:id" element={<EditAvatar />} />
           <Route path="/editaccount/:id" element={<EditAccount />} />
-          <Route path="/mydogs" element={<DogList />} />
+          <Route path="/mydogs/" element={<DogList />} />
           <Route path="/addDog" element={<AddDog />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/statute" element={<Statute />} />

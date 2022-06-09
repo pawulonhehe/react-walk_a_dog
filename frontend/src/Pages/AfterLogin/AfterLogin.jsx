@@ -21,14 +21,17 @@ export const AfterLogin = () => {
   const switchToTrainers = () => navigate("/trainers");
   const token = sessionStorage.getItem("token");
   const [user, setUser] = useState();
+  const [actualPicture, setActualPicture] = useState();
+
   useEffect(() => {
     axios
-      .get(`/users/${sessionStorage.getItem("user")}`, {
+      .get(`/users/${sessionStorage.getItem("user")}/`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
+        setActualPicture(res.data.image);
       })
       .catch((error) => {
         console.log(error.response);
@@ -85,7 +88,7 @@ export const AfterLogin = () => {
               />
             </div>
             <div className="title">
-              <h3>Psy</h3>
+              <h3>Moje psy</h3>
             </div>
             <div className="subtitle">
               Dodaj i zaaktualizuj dane swojego zwierzaka

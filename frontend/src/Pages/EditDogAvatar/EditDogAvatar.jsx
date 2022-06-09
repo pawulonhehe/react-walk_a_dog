@@ -1,15 +1,16 @@
 import "./EditDogAvatar.scss";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import pies from "../../Assets/Images/pies.jpg";
+import { notify } from "../../helpers";
 
 export const EditDogAvatar = () => {
   const [dog, setDog] = useState([]);
   const params = useParams();
   const token = sessionStorage.getItem("token");
+  const [profilePicture, setProfilePicture] = useState([]);
+  const [actualPicture, setActualPicture] = useState();
 
   useEffect(() => {
     axios
@@ -25,12 +26,49 @@ export const EditDogAvatar = () => {
       });
   }, []);
 
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setProfilePicture(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let formData = new FormData();
+    const imageFile = document.querySelector("#avatar_url");
+    formData.append("id", dog.id);
+    imageFile.files[0]
+      ? formData.append("image", imageFile.files[0])
+      : formData.append("image", "");
+
+    axios
+      .patch(`/dogs/${params.id}/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          accept: "application/json",
+          Authorization: `Token ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setActualPicture(res.data.image);
+        notify("success", "Zdjęcie zostało zaktualizowane");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="EditAvatar">
       <div className="EditAvatar--topText">Edycja Zdjęcia</div>
       <div className="LeftSideBardog">
         <div className="LeftSideBar--avatar">
-          <img src={pies} alt="pies" width="100" height="100"></img>
+          <img
+            src={actualPicture || dog.image}
+            alt="Pudzilla"
+            width="100"
+            height="100"
+          ></img>
         </div>
         <div className="LeftSideBar--buttonContainer">
           <Link to={`/editDog/${dog.id}`}>
@@ -48,22 +86,29 @@ export const EditDogAvatar = () => {
       <div className="RightSideContainer">
         <h3>Podgląd</h3>
         <div className="RightSideContainer--avatar">
-          <img src={pies} alt="pies" width="100" height="100"></img>
+          <img
+            src={profilePicture.length ? profilePicture : dog.image}
+            alt="Pudzilla"
+            width="100"
+            height="100"
+          ></img>
         </div>
         <div className="RightSideContainer--form">
-          <form>
-            <input
-              type="text"
-              name=""
-              id=""
-              className="RightSideContainer--url"
-              placeholder="wpisz url..."
-            />
-            <p>lub</p>
+          <form onSubmit={handleSubmit}>
             <label className="RightSideContainer--fileUpload">
-              <input type="file" id="avatar" name="avatar" />
+              <input
+                name="avatar_url"
+                id="avatar_url"
+                className="button"
+                type="file"
+                onChange={onImageChange}
+                accept="image/png, image/gif, image/jpeg"
+              />
               Załącz...
             </label>
+            <button className="sendjpg-dogbutton" type="submit">
+              Wyślij
+            </button>
           </form>
         </div>
       </div>

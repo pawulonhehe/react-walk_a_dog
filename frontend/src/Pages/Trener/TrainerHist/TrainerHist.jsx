@@ -5,21 +5,21 @@ import "./TrainerHist.scss";
 
 export const TrainerHist = () => {
   const token = sessionStorage.getItem("token");
-  const [walk, setWalk] = useState();
-
-  const getTrainerHistory = async () => {
-    let response = await axios.get(
-      `/trainers/${sessionStorage.getItem("user")}/walk-history/`,
-      {
-        headers: { Authorization: `Token ${sessionStorage.getItem("token")}` },
-      }
-    );
-    let data = await response.data;
-    sessionStorage.setItem("data", JSON.stringify(data));
-    setWalk(data);
-  };
+  const [walk, setWalk] = useState([]);
 
   useEffect(() => {
+    const getTrainerHistory = async () => {
+      const response = await axios.get(
+        `/trainers/${sessionStorage.getItem("user")}/walk-history/`,
+        {
+          headers: {
+            Authorization: `Token ${sessionStorage.getItem("token")}`,
+          },
+        }
+      );
+      sessionStorage.setItem("data", JSON.stringify(response.data));
+      setWalk(response.data);
+    };
     getTrainerHistory();
   }, []);
 

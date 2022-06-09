@@ -63,7 +63,7 @@ export const EditDog = () => {
       <div className="EditDog--topText">Edycja Profilu Psa</div>
       <div className="LeftSideBar">
         <div className="LeftSideBar--avatar">
-          <img src={pies} alt="pies" width="100" height="100"></img>
+          <img src={dog.image} alt="pies" width="100" height="100"></img>
         </div>
         <div className="LeftSideBar--buttonContainer">
           <Link to={`/editDog/${dog.id}`}>
