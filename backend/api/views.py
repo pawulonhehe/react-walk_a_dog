@@ -4,13 +4,14 @@
 import datetime
 
 # Django
+from django.db.models import Avg
 from django.utils.dateparse import parse_datetime
 
 # 3rd-party
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import permissions
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.generics import ListAPIView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
@@ -20,9 +21,9 @@ from rest_framework.views import APIView
 from accounts.models import CustomUser
 
 # Local
-from .models import Dog
+from .models import Dog, DogRating, TrainerRating
 from .models import Slot
-from .serializers import CustomUserSerializer
+from .serializers import CustomUserSerializer, DogRatingSerializer, TrainerRatingSerializer
 from .serializers import DogCreateSerializer
 from .serializers import DogSerializer
 from .serializers import IncomingWalksSerializer
@@ -200,3 +201,73 @@ class UserWalksIncomingAPIView(ListAPIView):  # noqa: D101
                 id_list.append(obj.id)
         qs_exclude = qs.exclude(id__in=id_list)
         return qs_exclude.distinct().order_by('date', 'start_time')
+
+
+class AddDogRating(CreateAPIView):
+    name = 'dog-rating-add'
+    serializer_class = DogRatingSerializer
+    queryset = DogRating.objects.all()
+
+
+class GetDogRating(APIView):
+    name = 'dog-rating-get'
+
+    def get(self, request, pk):
+        try:
+            dog = Dog.objects.get(id=pk)
+            ratings = DogRating.objects.filter(dog=dog)
+            rating = ratings.aggregate(Avg('value'))['value__avg']
+            return Response({'rating': rating})
+        except Dog.DoesNotExist:
+            return Response({'error': 'Pies nie znaleziony.'}, status=404)
+
+
+class AddTrainerRating(CreateAPIView):
+    name = 'trainer-rating-add'
+    serializer_class = TrainerRatingSerializer
+    queryset = TrainerRating.objects.all()
+
+
+class GetTrainerRating(APIView):
+    name = 'trainer-rating-get'
+
+    def get(self, request, pk):
+        try:
+            trainer = CustomUser.objects.get(id=pk, is_trainer=True)
+            ratings = TrainerRating.objects.filter(trainer=trainer)
+            rating = ratings.aggregate(Avg('value'))['value__avg']
+            return Response({'rating': rating})
+        except CustomUser.DoesNotExist:
+            return Response({'error': 'Trener nie znaleziony.'}, status=404)
+
+
+class TrainerWalksList(ListAPIView):
+    name = 'trainer-walks'
+    serializer_class = SlotSerializer
+
+    def get_queryset(self):
+        return Slot.objects.filter(
+            trainer=self.kwargs['pk'],
+            date=datetime.date.today(),
+            end_time__gte=datetime.datetime.now(),
+            start_time__lte=datetime.datetime.now() + datetime.timedelta(hours=1),
+        ).distinct()
+
+
+class DogReviews(ListAPIView):
+    name = 'dog-walk-reviews'
+    serializer_class = DogRatingSerializer
+
+    def get_queryset(self):
+        return DogRating.objects.filter(dog=self.kwargs['pk'])
+
+
+class DogFromWalkReview(RetrieveAPIView):
+    name = 'dog-walk-review'
+    serializer_class = DogRatingSerializer
+
+    def get_queryset(self):
+        return DogRating.objects.filter(dog=self.kwargs['pk'])
+
+# widok z listą opinii, które trener wystawił psom
+# widok z listą opinii, które użytkownik wystawił trenerowi
