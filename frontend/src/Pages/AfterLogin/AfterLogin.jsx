@@ -13,6 +13,7 @@ import GoogleMapReact from "google-map-react";
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export const AfterLogin = () => {
+  {/*część usera*/}
   const navigate = useNavigate();
   const switchToMyProfile = () =>
     navigate(`/editaccount/${sessionStorage.getItem("user")}`);

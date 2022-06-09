@@ -19,6 +19,7 @@ from rest_framework.parsers import FormParser
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.authtoken.views import ObtainAuthToken
 
 # Project
 from accounts.models import CustomUser
@@ -42,7 +43,6 @@ from .serializers import UserWalksSerializer
 
 class FacebookLogin(SocialLoginView):  # noqa: D101
     adapter_class = FacebookOAuth2Adapter
-
 
 class CustomUserListView(ListAPIView):  # noqa: D101
     name = 'customuser-list'
@@ -71,6 +71,7 @@ class DogDetailView(RetrieveUpdateDestroyAPIView):  # noqa: D101
     serializer_class = DogSerializer
     queryset = Dog.objects.all()
     permission_classes = [permissions.AllowAny]
+    parser_classes = (MultiPartParser, FormParser)
 
 
 class DogCreateView(CreateAPIView):  # noqa: D101
@@ -276,6 +277,14 @@ class DogFromWalkReview(RetrieveAPIView):
 
     def get_queryset(self):
         return DogRating.objects.filter(dog=self.kwargs['pk'])
+
+
+class TrainerReviews(ListAPIView):
+    name = 'trainer-walk-reviews'
+    serializer_class = TrainerRatingSerializer
+
+    def get_queryset(self):
+        return TrainerRating.objects.filter(trainer=self.kwargs['pk'])
 
 # widok z listą opinii, które trener wystawił psom
 # widok z listą opinii, które użytkownik wystawił trenerowi

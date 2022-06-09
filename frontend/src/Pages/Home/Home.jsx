@@ -1,8 +1,9 @@
-import React from "react";
 import "./Home.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 export const Home = () => {
+  
   const handleLogout = () => {
     axios.post("auth/logout/").then(() => {
       sessionStorage.removeItem("token");
@@ -10,21 +11,7 @@ export const Home = () => {
     });
   };
 
-  if (sessionStorage.getItem("token"))
-    return (
-      <div className="home">
-        <div className="home__container">
-          <div className="home__container__title">
-            <h1>Welcome to the Home Page</h1>
-            <h2>Dashboard</h2>
-          </div>
-          <div>
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-        </div>
-      </div>
-    );
-  else
+  if (!sessionStorage.getItem("token"))
     return (
       <div className="home">
         <div className="hometitle--container">
@@ -46,4 +33,11 @@ export const Home = () => {
         </div>
       </div>
     );
+  else {
+    if (sessionStorage.getItem("is_trainer") === "true" && sessionStorage.getItem("token")) {
+      return <Navigate to={"/aftertrener"} />;
+    } else {
+      return <Navigate to={"/afterlogin"} />;
+    }
+  }
 };

@@ -18,8 +18,12 @@ export const Login = () => {
       .then((res) => {
         sessionStorage.setItem("token", res.data.key);
         sessionStorage.setItem("user", res.data.user);
-        navigate("/");
-        console.log(res.data);
+        sessionStorage.setItem("is_trainer", res.data.is_trainer);
+        if (res.data.user.is_trainer) {
+          navigate("/aftertrener");
+        } else {
+          navigate("/afterlogin");
+        }
         notify("succes", "Poprawnie zalogowano");
       })
       .catch((error) => {

@@ -48,6 +48,12 @@ class Dog(models.Model):  # noqa: D101
         null=True,
         related_name='dogs',
     )
+    image = models.ImageField(
+        'Zdjęcie profilowe',
+        upload_to='dog_images',
+        blank=True,
+        default='',
+    )
 
     class Meta:  # noqa: D106
         verbose_name = 'Pies'

@@ -16,9 +16,14 @@ from .models import TrainerRating
 
 
 class TokenSerializer(serializers.ModelSerializer):  # noqa: D101
+    is_trainer = serializers.SerializerMethodField()
+
     class Meta:  # noqa: D106
         model = Token
-        fields = ('key', 'user')
+        fields = ('key', 'user', 'is_trainer')
+
+    def get_is_trainer(self, obj):
+        return obj.user.is_trainer
 
 
 class OwnerSerializer(serializers.ModelSerializer):  # noqa: D101
@@ -65,6 +70,7 @@ class CustomUserSerializer(serializers.ModelSerializer):  # noqa: D101
             'last_name',
             'phone_number',
             'image',
+            'is_trainer',
             'dogs',
         )
 
@@ -177,6 +183,7 @@ class SlotSerializer(serializers.ModelSerializer):  # noqa: D101
 
 class SlotHistorySerializer(serializers.ModelSerializer):  # noqa: D101
     dogs = CustomUserDogSerializer(many=True, read_only=True)
+
     class Meta:  # noqa: D106
         model = Slot
         fields = '__all__'

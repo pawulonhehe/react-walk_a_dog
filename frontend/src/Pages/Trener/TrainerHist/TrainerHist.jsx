@@ -5,7 +5,7 @@ import "./TrainerHist.scss";
 
 export const TrainerHist = () => {
   const token = sessionStorage.getItem("token");
-  const [walk, setWalk] = useState();
+  const [walk, setWalk] = useState([]);
 
   const getTrainerHistory = async () => {
     let response = await axios.get(

@@ -9,7 +9,7 @@ from django.urls import path
 from allauth.account.views import confirm_email
 
 # Local
-from .views import AddDogRating
+from .views import AddDogRating, TrainerReviews
 from .views import AddTrainerRating
 from .views import CustomUserDetailView
 from .views import CustomUserListView
@@ -151,5 +151,10 @@ urlpatterns = [
         DogReviews.as_view(),
         name=DogReviews.name,
     ),
+    path(
+        'trainers/<int:pk>/reviews/',
+        TrainerReviews.as_view(),
+        name=TrainerReviews.name,
+    )
 
 ]

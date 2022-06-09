@@ -51,8 +51,6 @@ class VisibleManager(models.Manager):
         return super().get_queryset().filter(hidden=False, deleted=False)
 
 
-
-
 class CustomUser(AbstractBaseUser, PermissionsMixin):  # noqa: D101
     phone_number = models.CharField(
         'Numer telefonu',

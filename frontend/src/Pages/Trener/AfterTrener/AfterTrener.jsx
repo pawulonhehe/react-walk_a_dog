@@ -33,7 +33,7 @@ export const AfterTrener = () => {
       .catch((error) => {
         console.log(error.response);
       });
-  }, []);
+  }, [token]);
 
   return (
     <div className="AfterLogin">

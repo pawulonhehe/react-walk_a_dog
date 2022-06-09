@@ -30,19 +30,12 @@ import React from "react";
 
 const Views = () => {
   const isAuth = sessionStorage.getItem("token") !== null;
-  // const isAuth = true;
+  const isTrainer = sessionStorage.getItem("is_trainer") === "true";
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/login"
-          element={isAuth ? <Navigate to={"/"} /> : <Login />}
-        />
-        <Route
-          path="/register"
-          element={isAuth ? <Navigate to={"/"} /> : <Register />}
-        />
+
         <Route path="/get-users" element={<Users />} />
         <Route element={<ProtectedRoutes auth={isAuth} />}>
           <Route path="/afterlogin" element={<AfterLogin />} />
@@ -71,6 +64,14 @@ const Views = () => {
           <Route path="/trainerhist/:id" element={<TrainerHist />} />
           <Route path="/myopinions/:id" element={<MyOpinions />} />
         </Route>
+        <Route
+          path="/login"
+          element={isAuth ? <Navigate to={"/"} /> : <Login />}
+        />
+        <Route
+          path="/register"
+          element={isAuth ? <Navigate to={"/"} /> : <Register />}
+        />
         <Route path="*" element={<h1>404 Not Found!</h1>} />
       </Routes>
     </BrowserRouter>
