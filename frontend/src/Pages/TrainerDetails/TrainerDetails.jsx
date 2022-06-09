@@ -23,8 +23,6 @@ export const TrainerDetails = (props, route) => {
 
   const userId = location.state.userId;
 
-
-
   useEffect(() => {
     axios
       .get(`/trainers/${userId}/`, {
@@ -39,27 +37,29 @@ export const TrainerDetails = (props, route) => {
       });
   }, []);
 
-
   return (
     <div className="TrainerDetails">
-      <div className="TrainerDetails--topText">Szczegóły trenera</div>
+      {/* <div className="TrainerDetails--topText">Szczegóły trenera</div> */}
       <div className="TrainerDetails--topCointainer">
-        <div className="topContainer--Title">
-          {user.first_name + " " + user.last_name}
+        <div className="content">
+          <div className="topContainer--Title">
+            {user.first_name + " " + user.last_name}
           </div>
-        <div className="topContainer--Stars">
-          <Rating name="simple-controlled" value="5" />
+          <div className="topContainer--Stars">
+            <Rating name="simple-controlled" value="5" />
+          </div>
+          <div className="info">
+            Doświadczenie: 3 lata
+          </div>
         </div>
-        <div className="topContainer--LData">
-          wiek<br></br>płeć<br></br>doświadczenie<br></br>dostępność
-        </div>
-        <div className="topContainer--RData">
-          25 lat<br></br>mężczyzna<br></br>3 lata<br></br>sloty
-        </div>
+
         <div className="topContainer--Avatar">
           <img src={pudzilla} alt="pudzilla" />
         </div>
       </div>
+      {/* <div className="info">
+        
+      </div> */}
 
       <button className="rateButton" type="button" onClick={handleOpenR}>
         Oceń
