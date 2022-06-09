@@ -42,6 +42,10 @@
     .topContainer--Avatar {
       margin-top: -30%;
       margin-left: 63%;
+      border-radius: 50%;
+    }
+    .topContainer--Avatar img{
+      border-radius: 50%;
     }
   }
   .TrainerDetails--MidContainer {

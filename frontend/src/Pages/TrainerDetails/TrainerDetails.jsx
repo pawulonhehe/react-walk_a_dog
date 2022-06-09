@@ -6,7 +6,7 @@ import { Rating } from "@mui/material";
 import { Opinion } from "../../Components/Opinion/Opinion";
 import { RateTrainer } from "../../Components/RateTrainer/RateTrainer";
 
-export const TrainerDetails = () => {
+export const TrainerDetails = (props, route) => {
   const navigate = useNavigate();
   const switchToBook = () => navigate("/bookwalk");
   const switchToHist = () => navigate("/trainerdetailshist");
@@ -14,6 +14,7 @@ export const TrainerDetails = () => {
   const [showR, setOpenR] = useState(false);
   const handleOpenR = () => setOpenR(true);
   const handleCloseR = () => setOpenR(false);
+  
 
   return (
     <div className="TrainerDetails">
