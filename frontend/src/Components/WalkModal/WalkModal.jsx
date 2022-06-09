@@ -7,7 +7,6 @@ import WalkDetailsClient from "../WalkDetailsClient/WalkDetailsClient";
 export const WalkModal = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-
   const handleClose = () => setOpen(false);
 
   return (
@@ -20,7 +19,7 @@ export const WalkModal = (props) => {
       <div className="walk-details" onClick={handleOpen}>
         Szczegóły
       </div>
-      <WalkDetailsClient open={open} onClose={handleClose} {...props}/>
+      <WalkDetailsClient open={open} onClose={handleClose} {...props} />
     </div>
   );
 };

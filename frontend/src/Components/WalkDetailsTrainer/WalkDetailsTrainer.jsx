@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import "./WalkDetailsTrainer.scss";
 import moment from "moment";
+import GoogleMapReact from "google-map-react";
 
 const style = {
   position: "absolute",
@@ -11,13 +12,13 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "60%",
+  height: "40%",
   boxShadow: 24,
   p: 4,
 };
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-const WalkDetailsTrainer = (props) => {
-
-
+export const WalkDetailsTrainer = (props) => {
   return (
     <div>
       <Modal
@@ -35,19 +36,42 @@ const WalkDetailsTrainer = (props) => {
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
-            {/* <p>
-              Data: {getDate()}
-          
+            <p>Data: {props.date}</p>
+            <p>
+              {" "}
+              Psy: {props.dogs ? props.dogs.map((d) => d.name).join(", ") : ""}
             </p>
-            <p> Trener: {props.trainer ? props.trainer.first_name : ''} {" "}
-            {props.trainer ? props.trainer.last_name : ''} </p>
-            <p> Psy: {props.dogs ? props.dogs.map(d => d.name).join(', ') : ''}</p>
             <p> Odbiór psa: {props.end_time}</p>
-            <p> Aleja Warszawska 107 - Parking</p> */}
+            <p> Lokalizacja - Parking</p>
           </Typography>
+          <div className="Modal--map">
+            <div style={{ height: "20vh", width: "100%" }}>
+              <GoogleMapReact
+                bootstrapURLKeys={{
+                  key: "AIzaSyAyOgCp9cy7G2rg1uP-00bGEpVNKsZ-eek",
+                }}
+                defaultCenter={{
+                  lat: 53.7753,
+                  lng: 20.49,
+                }}
+                defaultZoom={15}
+              >
+                <div className="pin1" lat={53.7753} lng={20.49}>
+                  .
+                </div>
+                <AnyReactComponent
+                  lat={59.955413}
+                  lng={30.337844}
+                  text="My Marker"
+                />
+              </GoogleMapReact>
+              <button className="loc-trainer-btn">
+                Wyślij aktualną lokalizacje
+              </button>
+            </div>
+          </div>
         </Box>
       </Modal>
     </div>
   );
 };
-export default WalkDetailsTrainer;

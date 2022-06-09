@@ -13,15 +13,18 @@ export const TrainerDetails = (props, route) => {
   const location = useLocation();
   const [user, setUser] = useState([]);
   const token = sessionStorage.getItem("token");
+  const clientId = sessionStorage.getItem("user");
 
   const switchToBook = () => navigate("/bookwalk/");
   const switchToHist = () => navigate("/trainerdetailshist");
 
   const [showR, setOpenR] = useState(false);
+  const [btnDisabled, setDisabled] = useState(false)
   const handleOpenR = () => setOpenR(true);
   const handleCloseR = () => setOpenR(false);
 
   const userId = location.state.userId;
+  const [trainerReview, setTrainerReview] = useState([]);
   const [trainerRating, setTrainerRating] = useState([]);
 
   useEffect(() => {
@@ -40,7 +43,7 @@ export const TrainerDetails = (props, route) => {
 
   useEffect(() => {
     axios
-      .get(`/trainers/2/rating/`, {
+      .get(`/trainers/${userId}/reviews/`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((res) => {
@@ -48,12 +51,35 @@ export const TrainerDetails = (props, route) => {
 
         const ratingData = res.data;
 
-        setTrainerRating(ratingData);
+        if (ratingData.map((d) => d.evaluator.toString()).includes(clientId.toString())) {
+          setDisabled(true) ;
+        }
+
+        setTrainerReview(ratingData);
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/trainers/${userId}/rating/`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+
+        const rate = res.data;
+
+        setTrainerRating(rate);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+
+  const rateValue = trainerRating.rating ? trainerRating.rating : " ";
 
   return (
     <div className="TrainerDetails">
@@ -64,11 +90,9 @@ export const TrainerDetails = (props, route) => {
             {user.first_name + " " + user.last_name}
           </div>
           <div className="topContainer--Stars">
-            <Rating name="simple-controlled" value="5" />
+            <Rating name="simple-controlled" value={rateValue} />
           </div>
-          <div className="info">
-            Doświadczenie: 3 lata
-          </div>
+          <div className="info">Doświadczenie: 3 lata</div>
         </div>
 
         <div className="topContainer--Avatar">
@@ -79,23 +103,23 @@ export const TrainerDetails = (props, route) => {
         
       </div> */}
 
-      <button className="rateButton" type="button" onClick={handleOpenR}>
+      <button
+        disabled={btnDisabled ? true : false}
+        className={btnDisabled ? 'disabledButton' : 'rateButton'}
+        // className="rateButton"
+        type="button"
+        onClick={handleOpenR}
+      >
         Oceń
       </button>
-      <RateTrainer open={showR} onClose={handleCloseR} {...user}/>
+      <RateTrainer open={showR} onClose={handleCloseR} {...user} />
 
       <div className="TrainerDetails--MidContainer">
         <div className="MidContainer--Title">Opinie na temat trenera</div>
         <div className="opinions">
-          {/* {trainerRating.map( user => {
-            <p>{user.rating}</p>
-            
-          })} */}
-          <Opinion />
-          <Opinion />
-          <Opinion />
-          <Opinion />
-          <Opinion />
+          {trainerReview.map((rating) => (
+            <Opinion {...rating} />
+          ))}
         </div>
       </div>
       <div className="TrainerDetails--BottomContainer">

@@ -91,14 +91,16 @@
       .sendjpg-button {
         background-color: #3498db;
         border: solid transparent;
-        width: 40%;
-        margin-top: 8%;
+        width: 25%;
+        margin-top: 5%;
+        margin-left: -12.5%;
         border-radius: 5px;
         color: #fff;
         font-size: 1rem;
         font-family: "Montserrat", sans-serif;
         text-align: center;
         font-weight: bold;
+        position: absolute;
       }
     }
 
@@ -111,17 +113,16 @@
     }
     .RightSideContainer--fileUpload {
       cursor: pointer;
-      margin-top: 3rem;
+      margin-top: 2rem;
       background-color: #dcdcdc;
       padding: 0.25rem;
       border-radius: 0.25rem;
     }
-    .RightSideContainer--url {
-      background-color: #dcdcdc;
-      padding: 0.25rem;
-      border-radius: 0.25rem;
-      border: none;
-      font-family: "Montserrat", sans-serif;
+    .Container--form__zalacz {
+      align-items: center;
+      text-align: center;
+      margin-top: 25%;
+      padding: 0.5rem;
     }
   }
 }
