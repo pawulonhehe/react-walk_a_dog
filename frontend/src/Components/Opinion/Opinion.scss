@@ -1,0 +1,41 @@
+
+
+
+    .MidContainer--Title {
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      color: rgba(0, 0, 0, 0.5);
+      padding: .5rem;
+    }
+
+    .MidContainer--Opinion {
+      background-color: #fff;
+      margin: .5rem 1rem;
+      border-radius: 8px;
+      // display: flex;
+    
+      .flex{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: .5rem;
+        align-items: center;
+      }
+
+      .Opinion__Title {
+        font-weight: bold;
+        font-family: "Montserrat", sans-serif;
+        color: rgba(0, 0, 0, 0.4);
+
+      }
+
+      .Opinion__Article {
+        text-align: left;
+        font-size: 14px;
+        padding: 0 .5rem .5rem .5rem;
+        // margin-top: 8%;
+        // margin-left: -31%;
+      }
+    }
+    
+  

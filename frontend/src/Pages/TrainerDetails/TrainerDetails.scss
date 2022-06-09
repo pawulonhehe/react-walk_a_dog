@@ -46,57 +46,23 @@
   }
   .TrainerDetails--MidContainer {
     background-color: rgba(0, 0, 0, 0.2);
-    width: 95%;
-    margin: 0 auto;
-    height: 40%;
+    margin: 1rem;
+    padding: 5rem 0 .5rem 0;
+    // max-height: 40%;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    overflow: scroll;
+    max-height: calc(100% - 60%);
 
-    .MidContainer--Title {
-      font-family: "Montserrat", sans-serif;
-      font-weight: bold;
-      color: rgba(0, 0, 0, 0.5);
-      margin-top: 1%;
-    }
 
-    .MidContainer--Opinion {
-      background-color: #fff;
-      width: 95%;
-      height: 24%;
-      margin-left: 2.5%;
-      margin-top: 3%;
-      border-radius: 8px;
-      display: flex;
-
-      .Opinion__Title {
-        font-weight: bold;
-        font-family: "Montserrat", sans-serif;
-        color: rgba(0, 0, 0, 0.4);
-        text-align: left;
-        margin-left: 3%;
-        margin-top: 2%;
-      }
-
-      .Opinion__Stars {
-        text-align: right;
-        position: absolute;
-        margin-left: 68%;
-        margin-top: 1%;
-      }
-      .Opinion__Article {
-        text-align: left;
-        font-size: 14px;
-        margin-top: 8%;
-        margin-left: -31%;
-      }
-    }
     .Opinion--button {
-      width: 50%;
+      // width: 5rem;
+      margin: .25rem 5rem;
+      // width: 50%;
       border-radius: 5px;
       border: solid transparent;
-      margin-left: 25%;
-      margin-top: 2%;
       background-color: #3498db;
       color: #fff;
       font-family: "Montserrat", sans-serif;

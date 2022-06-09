@@ -2,6 +2,8 @@ import React from "react";
 import "./TrainerDetails.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import { useNavigate } from "react-router-dom";
+import { Rating } from "@mui/material";
+import { Opinion } from "../../Components/Opinion/Opinion";
 
 export const TrainerDetails = () => {
   const navigate = useNavigate();
@@ -12,7 +14,9 @@ export const TrainerDetails = () => {
       <div className="TrainerDetails--topText">Szczegóły trenera</div>
       <div className="TrainerDetails--topCointainer">
         <div className="topContainer--Title">Jacek Szyuła</div>
-        <div className="topContainer--Stars">gwiazdki</div>
+        <div className="topContainer--Stars">
+          <Rating name="simple-controlled" value="5" />
+        </div>
         <div className="topContainer--LData">
           wiek<br></br>płeć<br></br>doświadczenie<br></br>dostępność
         </div>
@@ -25,30 +29,21 @@ export const TrainerDetails = () => {
       </div>
       <div className="TrainerDetails--MidContainer">
         <div className="MidContainer--Title">
-          Trzy ostatnie opinie na temat trenera
+          Opinie na temat trenera
         </div>
-        <div className="MidContainer--Opinion">
-          <div className="Opinion__Title">Jan Kowalski</div>
-          <div className="Opinion__Stars">gwiazdki</div>
-          <div className="Opinion__Article">lorem ipsum cos tam cos</div>
-        </div>
-        <div className="MidContainer--Opinion">
-          <div className="Opinion__Title">Jan Kowalski</div>
-          <div className="Opinion__Stars">gwiazdki</div>
-          <div className="Opinion__Article">lorem ipsum cos tam cos</div>
-        </div>
-        <div className="MidContainer--Opinion">
-          <div className="Opinion__Title">Jan Kowalski</div>
-          <div className="Opinion__Stars">gwiazdki</div>
-          <div className="Opinion__Article">lorem ipsum cos tam cos</div>
-        </div>
-        <button
+        <Opinion />
+        <Opinion />
+        <Opinion />
+        <Opinion />
+        <Opinion />
+
+        {/* <button
           type="submit"
           className="Opinion--button"
           onClick={switchToHist}
         >
           Zobacz całą historię
-        </button>
+        </button> */}
       </div>
       <div className="TrainerDetails--BottomContainer">
         <button

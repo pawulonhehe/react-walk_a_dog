@@ -3,7 +3,7 @@ import "./YourClients.scss";
 import pudzilla from "../../../Assets/Images/pudzilla.jpg";
 import pies from "../../../Assets/Images/pies.jpg";
 import axios from "axios";
-import WalkDetailsTrainer from "../../../Components/WalkDetailsTrainer/WalkDetailsTrainer";
+import ClientDetails from "../../../Components/ClientDetails/ClientDetails";
 
 export const YourClients = () => {
   const [clients, setClients] = useState([]);
@@ -54,7 +54,7 @@ export const YourClients = () => {
               <button type="submit" className="ZobaczZlecenie" onClick={handleOpen}>
                 Zobacz zlecenie
               </button>
-              <WalkDetailsTrainer open={open} onClose={handleClose}  />
+              <ClientDetails open={open} onClose={handleClose}  />
             </div>
           </div>
         ))}

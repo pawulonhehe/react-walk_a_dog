@@ -46,6 +46,8 @@ export const Reservations = () => {
     setSelectedTrainer("all");
   };
 
+
+
   useEffect(() => {
     axios
       .get("/trainers/", {
@@ -182,7 +184,7 @@ export const Reservations = () => {
               (walk) =>
                 (moment(walk.date).isSame(selectedDate) ||
                 selectedDate === 0) &&
-                  (walk.dogs.filter( val => val['name'] === {selectedDog}).length >
+                  (walk.dogs.filter(e => e.name === selectedDog).length >
                     0 ||
                     selectedDog === "all") &&
                   (walk.trainer.first_name + " " + walk.trainer.last_name ===

@@ -5,7 +5,7 @@ import Select from "react-select";
 import TextField from "@mui/material/TextField";
 import { Walk } from "../../Components/Walk/Walk";
 import * as moment from "moment";
-import { OpinionModal } from "../../Components/OpinionModal/OpinionModal";
+import { OpinionModal } from "../../Components/Opinion/Opinion";
 require("moment/min/locales.min");
 
 export const BookWalk = () => {
