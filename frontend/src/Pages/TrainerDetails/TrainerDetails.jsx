@@ -105,7 +105,8 @@ export const TrainerDetails = (props, route) => {
 
       <button
         disabled={btnDisabled ? true : false}
-        className="rateButton"
+        className={btnDisabled ? 'disabledButton' : 'rateButton'}
+        // className="rateButton"
         type="button"
         onClick={handleOpenR}
       >
