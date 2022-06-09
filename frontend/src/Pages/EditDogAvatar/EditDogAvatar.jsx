@@ -28,7 +28,7 @@ export const EditDogAvatar = () => {
   return (
     <div className="EditAvatar">
       <div className="EditAvatar--topText">Edycja Zdjęcia</div>
-      <div className="LeftSideBar">
+      <div className="LeftSideBardog">
         <div className="LeftSideBar--avatar">
           <img src={pies} alt="pies" width="100" height="100"></img>
         </div>
