@@ -7,16 +7,22 @@ export const TrainerHist = () => {
   const token = sessionStorage.getItem("token");
   const [walk, setWalk] = useState();
 
-  useEffect(() => {
-    axios
-      .get(`/trainers/${sessionStorage.getItem("user")}/walk-history/`, {
+  const getTrainerHistory = async () => {
+    let response = await axios.get(
+      `/trainers/${sessionStorage.getItem("user")}/walk-history/`,
+      {
         headers: { Authorization: `Token ${sessionStorage.getItem("token")}` },
-      })
-      .then((res) => {
-        sessionStorage.setItem("data", JSON.stringify(res.data));
-        setWalk(res.data);
-      });
+      }
+    );
+    let data = await response.data;
+    sessionStorage.setItem("data", JSON.stringify(data));
+    setWalk(data);
+  };
+
+  useEffect(() => {
+    getTrainerHistory();
   }, []);
+
   console.log(walk);
   return (
     <div className="TrainerHist">

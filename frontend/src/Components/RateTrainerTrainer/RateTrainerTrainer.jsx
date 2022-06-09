@@ -2,35 +2,51 @@ import React, { useState } from "react";
 import "./RateTrainerTrainer.scss";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import Rating from "@mui/material/Rating";
-import { Modal } from "@mui/material";
+import { Modal, Select } from "@mui/material";
+import { useNavigate } from "react-router";
+import axios from "axios";
 
 export const RateTrainerTrainer = (props) => {
-  const [value, setValue] = useState(2); 
+  const [value, setValue] = useState(2);
   const [comment, setComment] = useState([]);
   const token = sessionStorage.getItem("token");
+  const [selectedDog, setSelectedDog] = useState("");
+  const [walk, setWalk] = useState("");
+
+  const changeDog = (event) => {
+    setSelectedDog(event.target.value);
+  };
 
   const changeComment = (event) => {
     setComment(event.target.value);
   };
 
-  // console.log("stars: ", value);
-  // console.log("comment: ", comment);
+  console.log("stars: ", value);
+  console.log("comment: ", comment);
+  console.log(props);
 
-  /* useEffect(() => {
-    axios
-    .post("/dogs/rating/add/",
-    {
-      value: opinion.stars,
-      comment: opinion.comment,
-      evaluator: opinion.trainer,
+  const navigate = useNavigate();
+
+  const addOpinion = (event) => {
+    event.preventDefault();
+    let data = {
+      value: value,
+      comment: comment,
       walk: props.id,
-      dog: props.dog,
-    },
-    {
-      headers: { Authorization: `Token ${token}` },
-    }
-    })) */
-
+      dog: +selectedDog,
+      evaluator: +sessionStorage.getItem("user"),
+    };
+    axios
+      .post("/dogs/rating/add/", data, {
+        headers: {
+          Authorization: `Token ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then(() => {
+        navigate(`/trainerhist/${sessionStorage.getItem("user")}`);
+        setSelectedDog("");
+      });
+  };
   return (
     <Modal open={props.open} onClose={props.onClose}>
       <div className="RateTrainer">
@@ -51,7 +67,14 @@ export const RateTrainerTrainer = (props) => {
                 }}
               />
             </div>
-
+            <div className="selectHolder">
+              <select onChange={changeDog}>
+                <option value="">Wybierz psa</option>
+                {props.dogs.map((dog) => (
+                  <option value={dog.id}>{dog.name}</option>
+                ))}
+              </select>
+            </div>
             <textarea
               placeholder=" Pozostaw komentarz..."
               name=""
@@ -61,10 +84,14 @@ export const RateTrainerTrainer = (props) => {
               value={comment}
               onChange={changeComment}
             ></textarea>
-            <button>Prześlij</button>
+            <button onClick={addOpinion}>Prześlij</button>
           </div>
         </div>
       </div>
     </Modal>
   );
 };
+// props.dogs.map((dog) => ({
+//   label: dog.name,
+//   value: dog.id,
+// }));
