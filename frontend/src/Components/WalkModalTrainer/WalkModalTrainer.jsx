@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./WalkModalTrainer.scss";
 import { WalkDetailsTrainer } from "../WalkDetailsTrainer/WalkDetailsTrainer";
 
+
 export const WalkModalTrainerxd = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);

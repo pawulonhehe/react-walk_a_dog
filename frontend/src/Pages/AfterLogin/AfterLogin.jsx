@@ -124,7 +124,7 @@ export const AfterLogin = () => {
       </div>
       <div style={{ height: "100vh", width: "100%" }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyALjeUJOIthg6G-Yk6dJnOjaWd5Y9CjkVg" }}
+          bootstrapURLKeys={{ key: "AIzaSyAyOgCp9cy7G2rg1uP-00bGEpVNKsZ-eek" }}
           defaultCenter={{
             lat: 59.95,
             lng: 30.33,
