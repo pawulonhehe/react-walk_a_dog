@@ -14,6 +14,8 @@ export const AfterTrener = () => {
   const switchToYourClients = () =>
     navigate(`/yourclients/${sessionStorage.getItem("user")}`);
   const switchToStartWork = () => navigate("/startwork");
+  const switchToMyOpinions = () =>
+    navigate(`/myopinions/${sessionStorage.getItem("user")}`);
 
   const token = sessionStorage.getItem("token");
   const [trainer, setTrainer] = useState();
@@ -54,7 +56,7 @@ export const AfterTrener = () => {
             Zaaktualizuj swoje dane kontaktowe i inne szczegóły
           </div>
         </div>
-        <div className="NiceButton">
+        <div className="NiceButton" onClick={switchToMyOpinions}>
           <div className="Icon">
             <Icon
               icon="material-symbols:calendar-month-outline"
@@ -62,10 +64,10 @@ export const AfterTrener = () => {
             />
           </div>
           <div className="title">
-            <h3>Rezerwacje</h3>
+            <h3>Opinie</h3>
           </div>
           <div className="subtitle">
-            Zobacz swoje nadchodzące usługi lub rezerwuj nowe
+            Zobacz opinie wystawione przez klientów na twój temat
           </div>
         </div>
         <div className="NiceButton" onClick={switchToYourClients}>
