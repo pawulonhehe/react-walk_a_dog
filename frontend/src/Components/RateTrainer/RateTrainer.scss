@@ -1,21 +1,26 @@
 
+
 .RateTrainer {
-    background-color: #f3f3f3;
-    background-image: url(https://c8.alamy.com/zooms/9/6bf51adac82a4e2288fe3c64028a11c3/2g8a8tc.jpg);
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
+    width: 100%;
     .RateTrainer--content{
-        padding-top: 50%;
-        padding: 40% 1rem;
-        background-color: rgba(0, 0, 0, 0.5);
-        height: 100vh;
+        position: absolute;;
+        top: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     .RateTrainer--content h2{
         margin: 0 0 2rem 0;
-        font-size: 1rem;
+        font-size: 1.25rem;
         width: 100%;
+        color: white;
+        text-shadow: 2px 2px #3498db;
+        text-align: center;
     }
     .RateTrainer--rate{
         background-color: #E7E7E7;
@@ -32,6 +37,7 @@
         margin: 0;
         padding: .25rem;
         font-weight: 600;
+        text-align: center;
     }
     textarea{
         border: transparent;
@@ -48,5 +54,8 @@
         width: 4rem;
     }
 
+    img{
+        border-radius: 50%;
+    }
   }
   

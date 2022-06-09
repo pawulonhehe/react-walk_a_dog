@@ -5,13 +5,12 @@ import { Register } from "./Pages/Register/Register";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { AfterLogin } from "./Pages/AfterLogin/AfterLogin";
 import { EditProfile } from "./Pages/EditProfile/EditProfile";
-import { EditDogAvatar } from "./Pages/EditDogAvatar/EditDogAvatar";
+import { EditAvatar } from "./Pages/EditAvatar/EditAvatar";
 import { EditAccount } from "./Pages/EditAccount/EditAccount";
 import { DogList } from "./Pages/DogsList/DogList";
 import { AddDog } from "./Pages/AddDog/AddDog";
 import { Reservations } from "./Pages/Reservations/Reservations";
 import { Statute } from "./Pages/Statute/Statute";
-import { Mapa } from "./Pages/Mapa/Mapa";
 import { EditDog } from "./Pages/EditDog/EditDog";
 import { Users } from "./Models/Users";
 import { Owner } from "./Pages/Trener/Owner/Owner";
@@ -25,6 +24,8 @@ import { TrainerDetailsHist } from "./Pages/TrainerDetailsHist/TrainerDetailsHis
 import { StartWork } from "./Pages/Trener/StartWork/StartWork";
 import { WalkDetails } from "./Pages/WalkDetails/WalkDetails";
 import { TrainerHist } from "./Pages/Trener/TrainerHist/TrainerHist";
+import { EditDogAvatar } from "./Pages/EditDogAvatar/EditDogAvatar";
+import { MyOpinions } from "./Pages/Trener/MyOpinions/MyOpinions";
 import React from "react";
 
 const Views = () => {
@@ -46,12 +47,11 @@ const Views = () => {
         <Route element={<ProtectedRoutes auth={isAuth} />}>
           <Route path="/afterlogin" element={<AfterLogin />} />
           <Route path="/editprofile/:id" element={<EditProfile />} />
-          <Route path="/editavatar/:id" element={<EditDogAvatar />} />
+          <Route path="/editavatar/:id" element={<EditAvatar />} />
           <Route path="/editaccount/:id" element={<EditAccount />} />
           <Route path="/mydogs" element={<DogList />} />
           <Route path="/addDog" element={<AddDog />} />
           <Route path="/reservations" element={<Reservations />} />
-          <Route path="/testymapa" element={<Mapa />} />
           <Route path="/statute" element={<Statute />} />
           <Route path="/editdog/:id" element={<EditDog />} />
           <Route path="/bookwalk" element={<BookWalk />} />
@@ -59,6 +59,7 @@ const Views = () => {
           <Route path="/trainerdetails/:id" element={<TrainerDetails />} />
           <Route path="/trainerdetailshist" element={<TrainerDetailsHist />} />
           <Route path="/walkdetails/:id" element={<WalkDetails />} />
+          <Route path="/editdogavatar/:id" element={<EditDogAvatar />} />
 
           {/* nizej trener */}
 
@@ -68,6 +69,7 @@ const Views = () => {
           <Route path="/yourclients/:id" element={<YourClients />} />
           <Route path="/startwork" element={<StartWork />} />
           <Route path="/trainerhist/:id" element={<TrainerHist />} />
+          <Route path="/myopinions/:id" element={<MyOpinions />} />
         </Route>
         <Route path="*" element={<h1>404 Not Found!</h1>} />
       </Routes>

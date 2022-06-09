@@ -5,7 +5,7 @@ import Select from "react-select";
 import TextField from "@mui/material/TextField";
 import { Walk } from "../../Components/Walk/Walk";
 import * as moment from "moment";
-import { OpinionModal } from "../../Components/OpinionModal/OpinionModal";
+import { OpinionModal } from "../../Components/Opinion/Opinion";
 require("moment/min/locales.min");
 
 export const BookWalk = () => {
@@ -195,10 +195,6 @@ export const BookWalk = () => {
         </div>
       </div>
       <div className="BookWalk--availableWalks">
-        {/* {walk.map((walk) => (
-          <Walk {...walk} handleBook={bookSingleWalk} />
-        ))} */}
-        {/* <span>{myDate}</span> */}
         {currentWalk
           .filter(
             (walk) =>
@@ -210,9 +206,6 @@ export const BookWalk = () => {
           .map((walk) => (
             <Walk {...walk} handleBook={bookSingleWalk} />
           ))}
-        {/* nie wiem, nie dzialaja te filtry to zakomentowalem */}
-        {/* <OpinionModal /> */}
-        {/* no to jest kurcze ten modal z opinia nie wiem gdzie wdupcyc, niech sie wyswietla po skonczonym treningu/spacerze */}
       </div>
     </div>
   );

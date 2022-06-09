@@ -88,7 +88,8 @@ $lightblue: #aec7ea;
     margin: 0 0 0 0.5rem;
     background-color: #ffffff;
     cursor: pointer;
-    width: 4rem;
+    min-width: 5rem;
+    // max-width: 7rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -101,6 +102,7 @@ $lightblue: #aec7ea;
     display: flex;
     flex-direction: column;
     align-items: center;
+
   }
   .Reservations--hisDate p {
     margin: 0;
@@ -120,6 +122,13 @@ $lightblue: #aec7ea;
     align-items: center;
   }
 
+  .Reservations--book{
+    position: fixed;
+    bottom: 2%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
   .Reservations--book button {
     border: none;
     background-color: #2f89c6;
@@ -130,6 +139,8 @@ $lightblue: #aec7ea;
     cursor: pointer;
     margin-bottom: 0.5rem;
     font-weight: 700;
+    margin-top: .5rem;
+
   }
   .Reservations--book button:hover {
     background-color: #2c7eb5;
@@ -138,6 +149,8 @@ $lightblue: #aec7ea;
   .Reservations--hisList {
     display: flex;
     flex-direction: column;
+    max-height: 38rem;
+    overflow: scroll;
   }
   .Reservations--hisReservation p {
     margin: 0;
@@ -166,53 +179,37 @@ $lightblue: #aec7ea;
     display: flex;
     justify-content: center;
   }
-  .calendar input{
+  .calendar input {
     display: flex;
     justify-content: center;
     // margin: 0 .25rem;
   }
-  #date{
+  #date {
     border: transparent;
     background-color: $white;
     border-radius: 0.5rem;
-    padding:0.25rem;
+    padding: 0.25rem;
     width: 100%;
     font-size: 0.75rem;
   }
 
-  .MuiOutlinedInput-notchedOutline{
+  .MuiOutlinedInput-notchedOutline {
     border: none;
   }
-  .MuiFormControl-root{
+  .MuiFormControl-root {
     width: 6.5rem;
     margin: 0 0 0 1rem;
   }
-  .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+  .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
     padding: 0;
 
     display: flex;
     align-items: center;
     justify-content: space-around;
   }
-
-}
-.popover {
-  padding: 0.25rem;
-  min-width: 5rem;
-  display: flex;
-  flex-direction: column;
 }
 
-.popover ul li{
-  list-style: none;
-  margin: 0;
+.Reservations--filters select {
+  appearance: none;
+  text-align: center;
 }
-.popover ul{
-  margin: 0;
-  padding: 0;
-}
-.popover li{
-  margin: 0;
-  padding: 0;
-}
-

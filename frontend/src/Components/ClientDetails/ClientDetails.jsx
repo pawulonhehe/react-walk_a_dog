@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import "./BasicModal.scss";
+import "./ClientDetails.scss";
 import moment from "moment";
 
 const style = {
@@ -15,20 +15,8 @@ const style = {
   p: 4,
 };
 
-const BasicModal = (props) => {
+const ClientDetails = (props) => {
 
-  let getDate = (date) => {
-    if(props.date) {
-      let _date =  moment(props.date).locale("pl").format("DD-MM-YYYY")
-      let startTime =  props.start_time ? props.start_time.substr(0, 5) : ''
-
-      return ` ${_date} - ${startTime}`
-    }
-
-
-    return ''
-  }
-  
 
   return (
     <div>
@@ -40,26 +28,26 @@ const BasicModal = (props) => {
       >
         <Box sx={style} className="Modal">
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Szczegóły spaceru
+            Klient
           </Typography>
           <Typography
             className="Modal--walkInfo"
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
-            <p>
+            {/* <p>
               Data: {getDate()}
           
             </p>
             <p> Trener: {props.trainer ? props.trainer.first_name : ''} {" "}
             {props.trainer ? props.trainer.last_name : ''} </p>
             <p> Psy: {props.dogs ? props.dogs.map(d => d.name).join(', ') : ''}</p>
-            <p> Odbiór psa: {props.end_time ? props.end_time.substr(0, 5) : ''}</p>
-            <p> Aleja Warszawska 107 - Parking</p>
+            <p> Odbiór psa: {props.end_time}</p>
+            <p> Aleja Warszawska 107 - Parking</p> */}
           </Typography>
         </Box>
       </Modal>
     </div>
   );
 };
-export default BasicModal;
+export default ClientDetails;

@@ -3,11 +3,17 @@ import "./WalkHistory.scss";
 import moment from "moment";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import BasicModal from "../BasicModal/BasicModal";
+import { RateTrainer } from "../RateTrainer/RateTrainer";
 
 export const WalkHistory = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
+
+  // const [showR, setOpenR] = useState(false);
+  // const handleOpenR = () => setOpenR(true);
+  // const handleCloseR = () => setOpenR(false);
 
   return (
     <div className="Reservations--incomingResList">
@@ -30,15 +36,18 @@ export const WalkHistory = (props) => {
           </div>
           <div>
             {props.trainer.first_name + " " + props.trainer.last_name}
-            <br></br> {props.dogs} 
+            <br></br> {props.dogs.map((d) => d.name).join(", ")}
           </div>
         </div>
         <div className="Reservations--infoButtons">
           <button type="button" onClick={handleOpen}>
             Szczegóły
           </button>
-          <BasicModal open={open} onClose={handleClose} />
-          <button>Oceń</button>
+          <BasicModal open={open} onClose={handleClose} {...props} />
+          {/* <button type="button" onClick={handleOpenR}>
+            Oceń
+          </button>
+          <RateTrainer open={showR} onClose={handleCloseR} {...props}  /> */}
         </div>
       </div>
     </div>

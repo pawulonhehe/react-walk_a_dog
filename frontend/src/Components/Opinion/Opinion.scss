@@ -1,0 +1,45 @@
+$blue: #3498db;
+$black: #000;
+$white: #fff;
+$lightblue: #aec7ea;
+$darkgreen: #42945e;
+$green: #6ecc8e;
+$darkpink: #de38b9;
+$pink: #eeafe0;
+
+.MidContainer--Title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+}
+
+.MidContainer--Opinion {
+  background-color: $lightblue;
+  margin: 0.5rem 1rem;
+  border-radius: 8px;
+  padding: .25rem;
+  // display: flex;
+
+  .flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0.5rem;
+    align-items: center;
+  }
+
+  .Opinion__Title {
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  .Opinion__Article {
+    text-align: left;
+    font-size: 14px;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    // margin-top: 8%;
+    // margin-left: -31%;
+  }
+}

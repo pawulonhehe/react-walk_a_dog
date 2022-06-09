@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TrainerHistWalk.scss";
+import { RateTrainerTrainer } from "../../Components/RateTrainerTrainer/RateTrainerTrainer";
+import { useNavigate } from "react-router";
 
 export const TrainerHistWalk = (props) => {
+  // const [showR, setOpenR] = useState(false);
+  // const handleOpenR = () => setOpenR(true);
+  // const handleCloseR = () => setOpenR(false);
+  const navigate = useNavigate();
+  const GoToDetails = navigate("/");
+
   return (
     <div className="TrainerHistWalk">
       <div className="walk-date">{props.date}</div>
@@ -9,8 +17,11 @@ export const TrainerHistWalk = (props) => {
       <div className="line"></div>
       <div className="title">Spacer</div>
       <div className="trener">{props.trainer}</div>
-      <div className="pieski">Jason, Mamoa, Reksio</div>
-      <button className="trainerhist-btn">Stwórz raport</button>
+      <div className="pieski">{props.dogs.map((d) => d.name).join(", ")}</div>
+      <button className="trainerhist-btn" onClick={GoToDetails}>
+        Szczegóły
+      </button>
+      {/* <RateTrainerTrainer open={showR} onClose={handleCloseR} {...props}  /> */}
     </div>
   );
 };

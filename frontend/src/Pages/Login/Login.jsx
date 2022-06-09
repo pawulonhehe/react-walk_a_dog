@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Login.scss";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { notify } from "../../helpers";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -19,9 +20,12 @@ export const Login = () => {
         sessionStorage.setItem("user", res.data.user);
         navigate("/");
         console.log(res.data);
+        notify("succes", "Poprawnie zalogowano");
       })
       .catch((error) => {
         console.log(error.response);
+        console.log("dupa");
+        notify("warning", "Niepoprawne dane logowania");
       })
       .finally(() => {});
   };

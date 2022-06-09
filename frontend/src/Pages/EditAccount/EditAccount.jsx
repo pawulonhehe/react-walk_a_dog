@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 
 export const EditAccount = () => {
   const navigate = useNavigate();
-  const switchToMyDogs = () => navigate("/mydogs");
   const switchToStatute = () => navigate("/statute");
   const token = sessionStorage.getItem("token");
   const [user, setUser] = useState();
@@ -55,16 +54,6 @@ export const EditAccount = () => {
         </div>
       </div>
       <div className="RightSideContainer">
-        <button
-          type="submit"
-          className="RightSideButton"
-          onClick={switchToMyDogs}
-        >
-          Twoje Pieski
-        </button>
-        <button type="submit" className="RightSideButton">
-          Twoja historia
-        </button>
         <button
           type="submit"
           className="RightSideButton"

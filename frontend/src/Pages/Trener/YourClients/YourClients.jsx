@@ -3,10 +3,17 @@ import "./YourClients.scss";
 import pudzilla from "../../../Assets/Images/pudzilla.jpg";
 import pies from "../../../Assets/Images/pies.jpg";
 import axios from "axios";
+import ClientDetails from "../../../Components/ClientDetails/ClientDetails";
 
 export const YourClients = () => {
   const [clients, setClients] = useState([]);
   const token = sessionStorage.getItem("token");
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => setOpen(false);
+
 
   useEffect(() => {
     axios
@@ -44,14 +51,14 @@ export const YourClients = () => {
                 <img src={pies} alt="pies" className="imgpies" />
                 <img src={pies} alt="pies" className="imgpies" />
               </div>
-              <button type="submit" className="ZobaczZlecenie">
+              <button type="submit" className="ZobaczZlecenie" onClick={handleOpen}>
                 Zobacz zlecenie
               </button>
+              <ClientDetails open={open} onClose={handleClose}  />
             </div>
           </div>
         ))}
       </div>
-      tu jeszcze scroll jakis po prawej dodac trzeba
     </div>
   );
 };
