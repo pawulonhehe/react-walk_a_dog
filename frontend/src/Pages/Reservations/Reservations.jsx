@@ -39,14 +39,11 @@ export const Reservations = () => {
     setSelectedTrainer(event.target.value);
   };
 
-
   const clearFilters = () => {
     setSelectedDate(0);
     setSelectedDog("all");
     setSelectedTrainer("all");
   };
-
-
 
   useEffect(() => {
     axios
@@ -183,13 +180,12 @@ export const Reservations = () => {
             .filter(
               (walk) =>
                 (moment(walk.date).isSame(selectedDate) ||
-                selectedDate === 0) &&
-                  (walk.dogs.filter(e => e.name === selectedDog).length >
-                    0 ||
-                    selectedDog === "all") &&
-                  (walk.trainer.first_name + " " + walk.trainer.last_name ===
-                    selectedTrainer ||
-                    selectedTrainer === "all")
+                  selectedDate === 0) &&
+                (walk.dogs.filter((e) => e.name === selectedDog).length > 0 ||
+                  selectedDog === "all") &&
+                (walk.trainer.first_name + " " + walk.trainer.last_name ===
+                  selectedTrainer ||
+                  selectedTrainer === "all")
             )
             .sort((a, b) => (a.date < b.date ? 1 : b.date < a.date ? -1 : 0))
             .map((walk) => (

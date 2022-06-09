@@ -7,6 +7,7 @@ import { Modal } from "@mui/material";
 export const RateTrainerTrainer = (props) => {
   const [value, setValue] = useState(2);
   const [comment, setComment] = useState([]);
+  const token = sessionStorage.getItem("token");
 
   const changeComment = (event) => {
     setComment(event.target.value);
@@ -14,6 +15,21 @@ export const RateTrainerTrainer = (props) => {
 
   console.log("stars: ", value);
   console.log("comment: ", comment);
+
+  /* useEffect(() => {
+    axios
+    .post("/dogs/rating/add/",
+    {
+      value: opinion.stars,
+      comment: opinion.comment,
+      evaluator: opinion.trainer,
+      walk: props.id,
+      dog: props.dog,
+    },
+    {
+      headers: { Authorization: `Token ${token}` },
+    }
+    })) */
 
   return (
     <Modal open={props.open} onClose={props.onClose}>

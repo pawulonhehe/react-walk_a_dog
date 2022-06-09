@@ -54,9 +54,6 @@ export const EditAccount = () => {
         </div>
       </div>
       <div className="RightSideContainer">
-        <button type="submit" className="RightSideButton">
-          Twoja historia
-        </button>
         <button
           type="submit"
           className="RightSideButton"

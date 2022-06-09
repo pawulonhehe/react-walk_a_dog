@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./TrainerHistWalk.scss";
 import { RateTrainerTrainer } from "../../Components/RateTrainerTrainer/RateTrainerTrainer";
+import { useNavigate } from "react-router";
 
 export const TrainerHistWalk = (props) => {
-  const [showR, setOpenR] = useState(false);
-  const handleOpenR = () => setOpenR(true);
-  const handleCloseR = () => setOpenR(false);
-
+  // const [showR, setOpenR] = useState(false);
+  // const handleOpenR = () => setOpenR(true);
+  // const handleCloseR = () => setOpenR(false);
+  const navigate = useNavigate();
+  const GoToDetails = navigate("/");
   return (
     <div className="TrainerHistWalk">
       <div className="walk-date">{props.date}</div>
@@ -15,8 +17,10 @@ export const TrainerHistWalk = (props) => {
       <div className="title">Spacer</div>
       <div className="trener">{props.trainer}</div>
       <div className="pieski">Jason, Mamoa, Reksio</div>
-      <button className="trainerhist-btn" onClick={handleOpenR}>Stwórz raport</button>
-      <RateTrainerTrainer open={showR} onClose={handleCloseR} {...props}  />
+      <button className="trainerhist-btn" onClick={GoToDetails}>
+        Szczegóły
+      </button>
+      {/* <RateTrainerTrainer open={showR} onClose={handleCloseR} {...props}  /> */}
     </div>
   );
 };
