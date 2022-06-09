@@ -4,11 +4,11 @@ import { RateTrainerTrainer } from "../../Components/RateTrainerTrainer/RateTrai
 import { useNavigate } from "react-router";
 
 export const TrainerHistWalk = (props) => {
-  // const [showR, setOpenR] = useState(false);
-  // const handleOpenR = () => setOpenR(true);
-  // const handleCloseR = () => setOpenR(false);
-  const navigate = useNavigate();
-  const GoToDetails = navigate("/");
+  const [showR, setOpenR] = useState(false);
+  const handleOpenR = () => setOpenR(true);
+  const handleCloseR = () => setOpenR(false);
+  // const navigate = useNavigate();
+  // const GoToDetails = navigate("/");
 
   return (
     <div className="TrainerHistWalk">
@@ -18,10 +18,10 @@ export const TrainerHistWalk = (props) => {
       <div className="title">Spacer</div>
       <div className="trener">{props.trainer}</div>
       <div className="pieski">{props.dogs.map((d) => d.name).join(", ")}</div>
-      <button className="trainerhist-btn" onClick={GoToDetails}>
+      <button className="trainerhist-btn" onClick={handleOpenR}>
         Szczegóły
       </button>
-      {/* <RateTrainerTrainer open={showR} onClose={handleCloseR} {...props}  /> */}
+      <RateTrainerTrainer open={showR} onClose={handleCloseR} {...props}  />
     </div>
   );
 };

@@ -48,6 +48,7 @@ export const EditAvatar = () => {
               Załącz...
             </label>
           </form>
+          <button className="sendjpg-button">Wyślij</button>
         </div>
       </div>
     </div>
