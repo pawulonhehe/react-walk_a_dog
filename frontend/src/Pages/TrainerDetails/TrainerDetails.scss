@@ -103,5 +103,16 @@
     font-weight: bold;
     color: #fff;
   }
+
+  .disabledButton {
+    border: solid transparent;
+    width: 45%;
+    background-color: rgb(218, 215, 215);
+    border-radius: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    color: rgb(180, 180, 180);
+  }
+
 }
 

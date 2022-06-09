@@ -10,7 +10,7 @@ export const Trainer = (props) => {
   const token = sessionStorage.getItem("token");
 
   const userId = props.id;
-  console.log("id", userId);
+
   
   const switchToDetails = () =>
     navigate(`/trainerdetails/${props.id}`, {state:{userId: `${props.id}`,}});
