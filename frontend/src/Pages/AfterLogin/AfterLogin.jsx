@@ -21,7 +21,6 @@ export const AfterLogin = () => {
   const switchToTrainers = () => navigate("/trainers");
   const token = sessionStorage.getItem("token");
   const [user, setUser] = useState();
-  const [actualPicture, setActualPicture] = useState();
 
   useEffect(() => {
     axios
@@ -31,7 +30,6 @@ export const AfterLogin = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
-        setActualPicture(res.data.image);
       })
       .catch((error) => {
         console.log(error.response);

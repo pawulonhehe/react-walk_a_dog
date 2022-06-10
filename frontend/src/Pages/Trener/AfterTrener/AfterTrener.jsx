@@ -5,6 +5,7 @@ import { Icon } from "@iconify/react";
 import { Slots } from "../../../Components/Slots/Slots";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { WalkModalTrainerxd } from "../../../Components/WalkModalTrainer/WalkModalTrainer";
 // import { Link } from "react-router-dom";
 
 export const AfterTrener = () => {
@@ -20,9 +21,24 @@ export const AfterTrener = () => {
   const token = sessionStorage.getItem("token");
   const [trainer, setTrainer] = useState();
   console.log(sessionStorage.getItem("user"));
+
+  const [walk, setWalk] = useState([]);
   useEffect(() => {
     axios
+      .get(`/trainers/${sessionStorage.getItem("user")}/active-walks`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setWalk(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
 
+  useEffect(() => {
+    axios
       .get(`/trainers/${sessionStorage.getItem("user")}`, {
         headers: { Authorization: `Token ${token}` },
       })
@@ -35,8 +51,13 @@ export const AfterTrener = () => {
       });
   }, []);
 
+  console.log(walk);
+
   return (
     <div className="AfterLogin">
+      {walk.map((walk) => (
+        <WalkModalTrainerxd {...walk} />
+      ))}
       <div className="Avatar">
         <img src={pudzilla} alt="Pudzilla" width="140" height="140" />
       </div>

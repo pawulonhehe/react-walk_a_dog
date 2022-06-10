@@ -15,7 +15,7 @@ const style = {
   p: 4,
 };
 
-const WalkDetailsTrainer = (props) => {
+export const WalkDetailsTrainer = (props) => {
 
 
   return (
@@ -50,4 +50,4 @@ const WalkDetailsTrainer = (props) => {
     </div>
   );
 };
-export default WalkDetailsTrainer;
+
