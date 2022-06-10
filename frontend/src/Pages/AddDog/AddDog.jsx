@@ -61,17 +61,12 @@ export const AddDog = () => {
 
   const addDog = (event) => {
     event.preventDefault();
-    const imageFile = document.querySelector("#avatar_url");
     let form_data = new FormData();
     form_data.append("name", dog.name);
     form_data.append("breed", dog.breed);
     form_data.append("weight", dog.weight);
     form_data.append("gender", dog.gender);
     form_data.append("owner", sessionStorage.getItem("user"));
-    imageFile.files[0]
-      ? form_data.append("image", imageFile.files[0])
-      : form_data.append("image", "");
-
     axios
       .post("/dogs/create/", form_data, {
         headers: {
