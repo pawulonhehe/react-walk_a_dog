@@ -24,7 +24,9 @@ export const AfterLogin = () => {
   const switchToMyDogs = () => navigate("/mydogs");
   const switchToReservations = () => navigate("/reservations");
   const switchToTrainers = () => navigate("/trainers");
-  {/* active walks*/}
+  {
+    /* active walks*/
+  }
   useEffect(() => {
     if (is_trainer === "true") {
       axios
@@ -66,6 +68,13 @@ export const AfterLogin = () => {
         console.log(error.response);
       });
   }, []);
+
+  const handleLogout = () => {
+    axios.post("auth/logout/").then(() => {
+      sessionStorage.removeItem("token");
+      window.location.reload();
+    });
+  };
 
   if (is_trainer === "false") {
     return (
@@ -135,28 +144,10 @@ export const AfterLogin = () => {
                 Przeglądaj profile potenclajnych trenerów
               </div>
             </div>
+            <button className="logoutAfterLogin" onClick={handleLogout}>
+              Wyloguj
+            </button>
           </div>
-        </div>
-        <div style={{ height: "100vh", width: "100%" }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: "AIzaSyAyOgCp9cy7G2rg1uP-00bGEpVNKsZ-eek",
-            }}
-            defaultCenter={{
-              lat: 59.95,
-              lng: 30.33,
-            }}
-            defaultZoom={25}
-          >
-            {/* <div className="cos" lat={59.955413} lng={30.337844}>
-              JD
-            </div> */}
-            <AnyReactComponent
-              lat={59.955413}
-              lng={30.337844}
-              text="My Marker"
-            />
-          </GoogleMapReact>
         </div>
       </div>
     );
@@ -225,6 +216,9 @@ export const AfterLogin = () => {
             onClick={switchToStartWork}
           >
             Zacznij pracę!
+          </button>
+          <button className="logoutAfterLogin" onClick={handleLogout}>
+            Wyloguj
           </button>
           {/* <div className="sloty"><Slots /></div> */}
         </div>
