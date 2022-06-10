@@ -279,3 +279,11 @@ class DogFromWalkReview(RetrieveAPIView):
 
 # widok z listą opinii, które trener wystawił psom
 # widok z listą opinii, które użytkownik wystawił trenerowi
+
+class TrainerReviews(ListAPIView):
+    name = 'trainer-reviews'
+    serializer_class = TrainerRatingSerializer
+
+    def get_queryset(self):
+        return TrainerRating.objects.filter(trainer=self.kwargs['pk'])
+        

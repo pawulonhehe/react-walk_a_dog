@@ -12,7 +12,7 @@ from allauth.account.views import confirm_email
 from .views import AddDogRating
 from .views import AddTrainerRating
 from .views import CustomUserDetailView
-from .views import CustomUserListView
+from .views import CustomUserListView, TrainerReviews
 from .views import DogCreateView
 from .views import DogDetailView
 from .views import DogListView
@@ -151,5 +151,10 @@ urlpatterns = [
         DogReviews.as_view(),
         name=DogReviews.name,
     ),
+    path(
+        'trainers/<int:pk>/reviews/',
+        TrainerReviews.as_view(),
+        name=TrainerReviews.name,
+    )
 
 ]
