@@ -38,15 +38,16 @@ export const Trainer = (props) => {
   return (
     <div className="Trainers--midContainer__trainer">
       <div className="midContainer__trainer--Avatar">
-        <img src={pudzilla} alt="pudzilla" />
+        <img src={props.image ? props.image : pudzilla} alt="pudzilla" />
       </div>
       <div className="container">
         <div className="trainer--Title">
           {props.first_name} {props.last_name}
+          
         </div>
-        <div className="trainer--Stars">
+        {/* <div className="trainer--Stars">
           <Rating name="simple-controlled" value="5" />
-        </div>
+        </div> */}
         <button
           type="submit"
           className="trainersbutton"

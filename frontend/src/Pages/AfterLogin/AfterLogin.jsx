@@ -14,17 +14,23 @@ import { WalkModalTrainerxd } from "../../Components/WalkModalTrainer/WalkModalT
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export const AfterLogin = () => {
+  
   const is_trainer = sessionStorage.getItem("is_trainer");
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
   const [user, setUser] = useState();
   const [walk, setWalk] = useState([]);
+  const [imageUrl, setImageUrl] = useState(pudzilla);
+
   const switchToMyProfile = () =>
     navigate(`/editaccount/${sessionStorage.getItem("user")}`);
   const switchToMyDogs = () => navigate("/mydogs");
   const switchToReservations = () => navigate("/reservations");
   const switchToTrainers = () => navigate("/trainers");
-  {/* active walks*/}
+
+  {
+    /* active walks*/
+  }
   useEffect(() => {
     if (is_trainer === "true") {
       axios
@@ -61,11 +67,22 @@ export const AfterLogin = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
+        setImageUrl(res.data.image ? res.data.image : pudzilla)
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, []);
+
+  const handleLogout = () => {
+    axios.post("auth/logout/").then(() => {
+      sessionStorage.removeItem("token");
+      window.location.reload();
+    });
+  };
+
+
+
 
   if (is_trainer === "false") {
     return (
@@ -75,7 +92,7 @@ export const AfterLogin = () => {
         ))}
         <div className="AfterLogin">
           <div className="Avatar">
-            <img src={pudzilla} alt="Pudzilla" width="140" height="140" />
+            <img src={imageUrl} alt="Pudzilla" width="140" height="140" />
           </div>
           <div className="MainContainer">
             <div className="WelcomeMessage">Witaj {user?.first_name}!</div>
@@ -135,28 +152,10 @@ export const AfterLogin = () => {
                 Przeglądaj profile potenclajnych trenerów
               </div>
             </div>
+            <button className="logoutAfterLogin" onClick={handleLogout}>
+              Wyloguj
+            </button>
           </div>
-        </div>
-        <div style={{ height: "100vh", width: "100%" }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: "AIzaSyAyOgCp9cy7G2rg1uP-00bGEpVNKsZ-eek",
-            }}
-            defaultCenter={{
-              lat: 59.95,
-              lng: 30.33,
-            }}
-            defaultZoom={25}
-          >
-            {/* <div className="cos" lat={59.955413} lng={30.337844}>
-              JD
-            </div> */}
-            <AnyReactComponent
-              lat={59.955413}
-              lng={30.337844}
-              text="My Marker"
-            />
-          </GoogleMapReact>
         </div>
       </div>
     );
@@ -173,7 +172,7 @@ export const AfterLogin = () => {
           <WalkModalTrainerxd {...walk} />
         ))}
         <div className="Avatar">
-          <img src={pudzilla} alt="Pudzilla" width="140" height="140" />
+          <img src={imageUrl} alt="Pudzilla" width="140" height="140" />
         </div>
         <div className="MainContainer">
           <div className="WelcomeMessage">Witaj {user?.first_name}!</div>
@@ -225,6 +224,9 @@ export const AfterLogin = () => {
             onClick={switchToStartWork}
           >
             Zacznij pracę!
+          </button>
+          <button className="logoutAfterLogin" onClick={handleLogout}>
+            Wyloguj
           </button>
           {/* <div className="sloty"><Slots /></div> */}
         </div>
