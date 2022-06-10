@@ -5,7 +5,7 @@ import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import BasicModal from "../BasicModal/BasicModal";
 import { RateTrainer } from "../RateTrainer/RateTrainer";
 import axios from "axios";
-
+import HisModal from "../HisModal/HisModal";
 
 export const WalkHistory = (props) => {
   const token = sessionStorage.getItem("token");
@@ -15,7 +15,7 @@ export const WalkHistory = (props) => {
   const handleClose = () => setOpen(false);
   const [user, setUser] = useState();
 
-  const [imageUrl, setImageUrl] = useState("pudzilla");
+  const [imageUrl, setImageUrl] = useState(pudzilla);
 
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const WalkHistory = (props) => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
-        setImageUrl(res.data.image ? res.data.image : "pudzilla")
+        setImageUrl(res.data.image ? res.data.image : pudzilla)
       })
       .catch((error) => {
         console.log(error.response);
@@ -62,7 +62,7 @@ export const WalkHistory = (props) => {
           <button type="button" onClick={handleOpen}>
             Szczegóły
           </button>
-          <BasicModal open={open} onClose={handleClose} {...props} />
+          <HisModal open={open} onClose={handleClose} {...props} />
           {/* <button type="button" onClick={handleOpenR}>
             Oceń
           </button>
