@@ -19,6 +19,7 @@ export const Login = () => {
         sessionStorage.setItem("token", res.data.key);
         sessionStorage.setItem("user", res.data.user);
         sessionStorage.setItem("is_trainer", res.data.is_trainer);
+        console.log(sessionStorage.getItem("is_trainer"));
         navigate("/afterlogin");
         notify("succes", "Poprawnie zalogowano");
       })

@@ -61,7 +61,7 @@ class CustomUserDetailView(RetrieveUpdateDestroyAPIView):  # noqa: D101
 
 class DogListView(ListAPIView):  # noqa: D101
     name = 'dog-list'
-    queryset = Dog.objects.all()
+    queryset = Dog.objects.filter(deleted=False)
     serializer_class = DogSerializer
     permission_classes = [permissions.AllowAny]
 

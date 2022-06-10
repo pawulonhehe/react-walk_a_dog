@@ -39,24 +39,22 @@ export const AddDog = () => {
 
   const addDog = (event) => {
     event.preventDefault();
-
+    let form_data = new FormData();
+    form_data.append("name", dog.name);
+    form_data.append("breed", dog.breed);
+    form_data.append("weight", dog.weight);
+    form_data.append("gender", dog.gender);
+    form_data.append("owner", sessionStorage.getItem("user"));
     axios
-      .post(
-        "/dogs/create/",
-        {
-          owner: sessionStorage.getItem("user"),
-          name: dog.name,
-          breed: dog.breed,
-          weight: dog.weight,
-          gender: dog.gender,
+      .post("/dogs/create/", form_data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          accept: "application/json",
+          Authorization: `Token ${token}`,
         },
-        {
-          headers: { Authorization: `Token ${token}` },
-        }
-      )
+      })
       .then(() => navigate("/mydogs"));
   };
-  console.log(dog);
   return (
     <div className="AddDog">
       <div className="AddDog--topText">Dodaj pieska</div>

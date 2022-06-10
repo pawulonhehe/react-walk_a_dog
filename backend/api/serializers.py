@@ -16,9 +16,13 @@ from .models import TrainerRating
 
 
 class TokenSerializer(serializers.ModelSerializer):  # noqa: D101
+    is_trainer = serializers.SerializerMethodField()
     class Meta:  # noqa: D106
         model = Token
-        fields = ('key', 'user')
+        fields = ('key', 'user', 'is_trainer')
+
+    def get_is_trainer(self, obj):  # noqa: D102
+        return obj.user.is_trainer
 
 
 class OwnerSerializer(serializers.ModelSerializer):  # noqa: D101
