@@ -27,6 +27,10 @@ export const AfterLogin = () => {
   const switchToMyDogs = () => navigate("/mydogs");
   const switchToReservations = () => navigate("/reservations");
   const switchToTrainers = () => navigate("/trainers");
+<<<<<<< HEAD
+=======
+
+>>>>>>> cf64f2cc3822464a29ebf07fc9ed9c5fbf2ad9b4
   {
     /* active walks*/
   }
