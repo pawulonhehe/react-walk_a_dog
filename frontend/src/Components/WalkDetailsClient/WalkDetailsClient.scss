@@ -3,21 +3,29 @@ $black: #000;
 $white: #fff;
 $lightblue: #aec7ea;
 
-.Modal{
-    background-color: $lightblue;
-    border-radius: .5em;
-    color: $white;
-    .Modal--walkInfo{
-        font-size: small;
+.Modal {
+  background-color: $lightblue;
+  border-radius: 0.5em;
+  color: $white;
+  .Modal--walkInfo {
+    font-size: small;
+  }
+  .Modal--walkInfo p {
+    margin: 0;
+    padding: 0;
+  }
+  .map {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .Modal--map {
+    margin-top: 5%;
+    .trainer-position {
+      font-family: "montserrat", sans-serif;
+      font-weight: bold;
+      margin-left: 5%;
     }
-    .Modal--walkInfo p{
-        margin: 0;
-        padding: 0;
-    }
-    .map{
-        padding: .5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  }
 }
