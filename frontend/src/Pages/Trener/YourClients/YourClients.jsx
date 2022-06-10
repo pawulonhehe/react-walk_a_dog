@@ -48,32 +48,46 @@ export const YourClients = () => {
         console.log(error.response);
       });
   }, []);
-  console.log(clients);
 
   return (
     <div className="Clients">
       <div className="Clients--topText">Twoi Klienci</div>
       <div className="Clients--clientsContainer">
-        {clients.map((client) => (
+        {user
+        .filter( (user) => 
+          user.is_trainer === false
+      )
+        .map((user) => (
           <div className="Clients--oneClient">
             <div className="Clients--oneClient__avatar">
               <img src={pudzilla} alt="pudzilla" />
             </div>
             <div className="Clients--oneClient__infoCointainer">
               <div className="oneClient__infoContainer__title">
-                {client.trainer.first_name + " " + client.trainer.last_name}
+                {user.first_name + " " + user.last_name}
               </div>
               <div className="oneClient__infoContainer__dogs">
-                <img src={pies} alt="pies" className="imgpies" />
-                <img src={pies} alt="pies" className="imgpies" />
+                {/* <img src={pies} alt="pies" className="imgpies" />
+                <img src={pies} alt="pies" className="imgpies" /> */}
+                { user.dogs
+                .map(d =>
+                  <div className="doggies"> 
+                   <p>{d.name}</p>
+                    {d.breed}  <br></br>
+                    {d.weight + "kg"} 
+                    </div>
+                 
+                 )}
               </div>
-              <button type="submit" className="ZobaczZlecenie" onClick={handleOpen}>
+              <div>{"Nr tel: " + user.phone_number}</div>
+              {/* <button type="submit" className="ZobaczZlecenie" onClick={handleOpen}>
                 Zobacz zlecenie
-              </button>
+              </button> */}
               <ClientDetails open={open} onClose={handleClose}  />
             </div>
           </div>
         ))}
+        
       </div>
     </div>
   );
