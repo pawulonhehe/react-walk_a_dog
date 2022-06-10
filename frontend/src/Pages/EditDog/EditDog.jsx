@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { notify } from "../../helpers";
+import { MenuItem, Select } from "@mui/material";
 
 export const EditDog = () => {
   const [dog, setDog] = useState([]);
@@ -35,18 +37,22 @@ export const EditDog = () => {
 
   const editProfile = (event) => {
     event.preventDefault();
-    axios.patch(
-      `/dogs/${params.id}/`,
-      {
-        name: dog.name,
-        breed: dog.breed,
-        weight: dog.weight,
-        gender: dog.gender,
-      },
-      {
+    let form_data = new FormData();
+    form_data.append("name", dog.name);
+    form_data.append("weight", dog.weight);
+    form_data.append("breed", dog.breed);
+    form_data.append("gender", dog.gender);
+    form_data.append("id", params.id);
+
+    axios
+      .patch(`/dogs/${params.id}/`, form_data, {
+        "Content-Type": "multipart/form-data",
+        accept: "application/json",
         headers: { Authorization: `Token ${token}` },
-      }
-    );
+      })
+      .then((res) => {
+        notify("success", "Pies został zaktualizowany.");
+      });
   };
 
   const deleteDog = (event) => {
@@ -108,13 +114,11 @@ export const EditDog = () => {
             />
           </label>
           <label>
-            Płeć:
-            <input
-              type="text"
-              name="sex"
-              value={dog.gender}
-              onChange={changeGender}
-            />
+            Płeć:<br/>
+            <select onChange={changeGender} value={dog.gender}>
+              <option value={"M"}>Samiec</option>
+              <option value={"F"}>Samica</option>
+            </select>
           </label>
           <button
             className="RightSideContainer--changeButton"
