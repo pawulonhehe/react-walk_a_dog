@@ -50,6 +50,7 @@ export const YourClients = () => {
       });
   }, []);
 
+  console.log(user.is_trainer)
   return (
     <div className="Clients">
       <div className="Clients--topText">Twoi Klienci</div>
@@ -66,6 +67,7 @@ export const YourClients = () => {
             <div className="Clients--oneClient__infoCointainer">
               <div className="oneClient__infoContainer__title">
                 {user.first_name + " " + user.last_name}
+
               </div>
               <div className="oneClient__infoContainer__dogs">
                 {/* <img src={pies} alt="pies" className="imgpies" />

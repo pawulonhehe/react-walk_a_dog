@@ -16,7 +16,9 @@ export const TrainerDetails = (props, route) => {
   const clientId = sessionStorage.getItem("user");
   const [imageUrl, setImageUrl] = useState("pudzilla");
 
-  const switchToBook = () => navigate("/bookwalk/");
+  const switchToBook = () => navigate("/bookwalk/", {
+      state: {id: clientId}});
+
   const switchToHist = () => navigate("/trainerdetailshist");
 
   const [showR, setOpenR] = useState(false);
