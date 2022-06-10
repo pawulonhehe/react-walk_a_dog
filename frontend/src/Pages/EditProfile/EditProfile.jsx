@@ -8,6 +8,7 @@ export const EditProfile = () => {
   const [user, setUser] = useState([]);
   const token = sessionStorage.getItem("token");
   const params = useParams();
+  const [imageUrl, setImageUrl] = useState("pudzilla");
 
   const changeFirstName = (event) =>
     setUser({ ...user, first_name: event.target.value });
@@ -42,6 +43,7 @@ export const EditProfile = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
+        setImageUrl(res.data.image ? res.data.image : "pudzilla")
       })
       .catch((error) => {
         console.log(error.response);
@@ -54,7 +56,7 @@ export const EditProfile = () => {
       <div className="EditProfile--topText">Edycja Profilu</div>
       <div className="LeftSideBar">
         <div className="LeftSideBar--avatar">
-          <img src={pudzilla} alt="Pudzilla" width="100" height="100"></img>
+          <img src={imageUrl} alt="Pudzilla" width="100" height="100"></img>
         </div>
         <div className="LeftSideBarr--buttonContainer">
         <Link to={`/editprofile/${sessionStorage.getItem("user")}`}>

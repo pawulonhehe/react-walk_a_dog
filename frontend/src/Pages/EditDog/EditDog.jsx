@@ -11,6 +11,7 @@ export const EditDog = () => {
   const token = sessionStorage.getItem("token");
   const params = useParams();
   const navigate = useNavigate();
+  const [imageUrl, setImageUrl] = useState("pudzilla");
 
   useEffect(() => {
     axios
@@ -20,6 +21,7 @@ export const EditDog = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setDog(res.data);
+        setImageUrl(res.data.image ? res.data.image : "pudzilla")
       })
       .catch((error) => {
         console.log(error.response);
@@ -63,7 +65,7 @@ export const EditDog = () => {
       <div className="EditDog--topText">Edycja Profilu Psa</div>
       <div className="LeftSideBar">
         <div className="LeftSideBar--avatar">
-          <img src={dog.image} alt="pies" width="100" height="100"></img>
+          <img src={imageUrl} alt="pies" width="100" height="100"></img>
         </div>
         <div className="LeftSideBar--buttonContainer">
           <Link to={`/editDog/${dog.id}`}>
