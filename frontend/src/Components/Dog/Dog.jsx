@@ -2,6 +2,7 @@ import React from "react";
 import "./Dog.scss";
 import pies from "../../Assets/Images/pies.jpg";
 import { useNavigate } from "react-router-dom";
+import { genderDics } from "../../helpers";
 
 export const Dog = (props) => {
   const navigate = useNavigate();
@@ -18,8 +19,8 @@ export const Dog = (props) => {
         Rasa <br></br> Wiek <br></br>Płeć <br></br>Waga
       </div>
       <div className="MyDogs--dog__Rtext">
-        {props.breed} <br></br> 5 lat <br></br> {props.gender} <br></br>{" "}
-        {props.weight} kg
+        {props.breed} <br></br> 5 lat <br></br> {genderDics[props.gender]}{" "}
+        <br></br> {props.weight} kg
       </div>
       <button className="MyDogs--dog__button" onClick={switchToEditDog}>
         Edytuj
