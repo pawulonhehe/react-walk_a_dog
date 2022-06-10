@@ -52,6 +52,8 @@ export const AfterLogin = () => {
   }, []);
 
   console.log(walk);
+  let imageUrl = user.image ? user.image : " "
+  console.log("img: ",imageUrl);
 
   return (
     <div className="AfterLoginsss">
@@ -60,7 +62,7 @@ export const AfterLogin = () => {
       ))}
       <div className="AfterLogin">
         <div className="Avatar">
-          <img src={pudzilla} alt="Pudzilla" width="140" height="140" />
+          <img src={imageUrl} alt="Pudzilla" width="140" height="140" />
         </div>
         <div className="MainContainer">
           <div className="WelcomeMessage">Witaj {user?.first_name}!</div>

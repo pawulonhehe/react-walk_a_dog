@@ -55,14 +55,20 @@ export const EditAvatar = () => {
     if (event.target.files && event.target.files[0]) {
       setProfilePicture(URL.createObjectURL(event.target.files[0]));
     }
+    
   };
+
+  let imageUrl = user.image ? user.image : " "
+  console.log("prof: ",profilePicture);
+  console.log("img: ",imageUrl);
+
   return (
     <div className="EditAvatar">
       <div className="EditAvatar--topText">Edycja Zdjęcia</div>
       <div className="LeftSideBar">
         <div className="LeftSideBar--avatar">
           <img
-            src={actualPicture || user.image}
+            src={profilePicture.length ? profilePicture : imageUrl}
             alt="Pudzilla"
             width="100"
             height="100"
@@ -90,7 +96,7 @@ export const EditAvatar = () => {
         <h3>Podgląd</h3>
         <div className="RightSideContainer--avatar">
           <img
-            src={profilePicture.length ? profilePicture : user.image}
+            src={profilePicture.length ? profilePicture : imageUrl}
             alt="Pudzilla"
             width="100"
             height="100"
