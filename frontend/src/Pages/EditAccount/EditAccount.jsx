@@ -12,6 +12,8 @@ export const EditAccount = () => {
   const token = sessionStorage.getItem("token");
   const [user, setUser] = useState();
 
+  const [imageUrl, setImageUrl] = useState("pudzilla");
+
   useEffect(() => {
     axios
       .get(`/users/${sessionStorage.getItem("user")}/`, {
@@ -22,6 +24,7 @@ export const EditAccount = () => {
         setUser(res.data);
         console.log(user);
         console.log(res);
+        setImageUrl(res.data.image ? res.data.image : "pudzilla")
       })
       .catch((error) => {
         console.log(error.response);
@@ -33,7 +36,7 @@ export const EditAccount = () => {
       <div className="EditAccount--topText">Edycja Konta</div>
       <div className="LeftSideBar">
         <div className="LeftSideBar--avatar">
-          <img src={pudzilla} alt="Pudzilla" width="100" height="100"></img>
+          <img src={imageUrl} alt="Pudzilla" width="100" height="100"></img>
         </div>
         <div className="LeftSideBar--buttonContainer">
           <Link to={`/editprofile/${sessionStorage.getItem("user")}`}>

@@ -1,19 +1,38 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import "./WalkHistory.scss";
 import moment from "moment";
 import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import BasicModal from "../BasicModal/BasicModal";
 import { RateTrainer } from "../RateTrainer/RateTrainer";
+import axios from "axios";
+
 
 export const WalkHistory = (props) => {
+  const token = sessionStorage.getItem("token");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
 
   const handleClose = () => setOpen(false);
+  const [user, setUser] = useState();
 
-  // const [showR, setOpenR] = useState(false);
-  // const handleOpenR = () => setOpenR(true);
-  // const handleCloseR = () => setOpenR(false);
+  const [imageUrl, setImageUrl] = useState("pudzilla");
+
+
+  useEffect(() => {
+    axios
+      .get(`/users/${props.trainer.id}/`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setUser(res.data);
+        setImageUrl(res.data.image ? res.data.image : "pudzilla")
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+
 
   return (
     <div className="Reservations--incomingResList">
@@ -31,7 +50,7 @@ export const WalkHistory = (props) => {
       <div className="Reservations--hisReservation">
         <div className="Reservations--bottomInfo">
           <div className="Reservations--Avatar">
-            <img src={pudzilla} alt="awatar" />
+            <img src={imageUrl} alt="awatar" />
             {/* <img src={props.trainer.image} alt="awatar" /> */}
           </div>
           <div>

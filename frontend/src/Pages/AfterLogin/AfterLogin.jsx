@@ -14,11 +14,14 @@ import { WalkModalTrainerxd } from "../../Components/WalkModalTrainer/WalkModalT
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export const AfterLogin = () => {
+  
   const is_trainer = sessionStorage.getItem("is_trainer");
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
   const [user, setUser] = useState();
   const [walk, setWalk] = useState([]);
+  const [imageUrl, setImageUrl] = useState(pudzilla);
+
   const switchToMyProfile = () =>
     navigate(`/editaccount/${sessionStorage.getItem("user")}`);
   const switchToMyDogs = () => navigate("/mydogs");
@@ -63,6 +66,7 @@ export const AfterLogin = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
+        setImageUrl(res.data.image ? res.data.image : pudzilla)
       })
       .catch((error) => {
         console.log(error.response);
@@ -84,7 +88,7 @@ export const AfterLogin = () => {
         ))}
         <div className="AfterLogin">
           <div className="Avatar">
-            <img src={pudzilla} alt="Pudzilla" width="140" height="140" />
+            <img src={imageUrl} alt="Pudzilla" width="140" height="140" />
           </div>
           <div className="MainContainer">
             <div className="WelcomeMessage">Witaj {user?.first_name}!</div>
@@ -164,7 +168,7 @@ export const AfterLogin = () => {
           <WalkModalTrainerxd {...walk} />
         ))}
         <div className="Avatar">
-          <img src={pudzilla} alt="Pudzilla" width="140" height="140" />
+          <img src={imageUrl} alt="Pudzilla" width="140" height="140" />
         </div>
         <div className="MainContainer">
           <div className="WelcomeMessage">Witaj {user?.first_name}!</div>

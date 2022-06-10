@@ -14,6 +14,7 @@ export const TrainerDetails = (props, route) => {
   const [user, setUser] = useState([]);
   const token = sessionStorage.getItem("token");
   const clientId = sessionStorage.getItem("user");
+  const [imageUrl, setImageUrl] = useState("pudzilla");
 
   const switchToBook = () => navigate("/bookwalk/");
   const switchToHist = () => navigate("/trainerdetailshist");
@@ -35,6 +36,7 @@ export const TrainerDetails = (props, route) => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
+        setImageUrl(res.data.image ? res.data.image : pudzilla)
       })
       .catch((error) => {
         console.log(error.response);
@@ -96,7 +98,7 @@ export const TrainerDetails = (props, route) => {
         </div>
 
         <div className="topContainer--Avatar">
-          <img src={pudzilla} alt="pudzilla" />
+          <img src={imageUrl} alt="pudzilla" />
         </div>
       </div>
       {/* <div className="info">
