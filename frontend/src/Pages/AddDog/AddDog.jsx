@@ -12,9 +12,29 @@ const options = [
 ];
 
 const options2 = [
-  { value: "owczarek", label: "Owczarek" },
-  { value: "jamnik", label: "Jamnik" },
-  { value: "labrador", label: "Labrador" },
+  { value: "Owczarek", label: "Owczarek" },
+  { value: "Jamnik", label: "Jamnik" },
+  { value: "Labrador", label: "Labrador" },
+  { value: "Rottweiler", label: "Bokser" },
+  { value: "Husky", label: "Husky" },
+  { value: "Pudel", label: "Pudel" },
+  { value: "Bulldog", label: "Bulldog" },
+  { value: "Basset", label: "Basset" },
+  { value: "Chart", label: "Chart" },
+  { value: "Chihuahua", label: "Chihuauha" },
+  { value: "Doberman", label: "Doberman" },
+  { value: "Dogo", label: "Dogo" },
+  { value: "Mastiff", label: "Mastiff" },
+  { value: "Pug", label: "Pug" },
+  { value: "Puli", label: "Puli" },
+  { value: "Schnauzer", label: "Schnauzer" },
+  { value: "Shiba", label: "Shiba" },
+  { value: "ShihTzu", label: "ShihTzu" },
+  { value: "Spaniel", label: "Spaniel" },
+  { value: "Terrier", label: "Terrier" },
+  { value: "Weimaraner", label: "Weimaraner" },
+  { value: "Yorkshire", label: "Yorkshire" },
+  { value: "Other", label: "Inne" },
 ];
 
 export const AddDog = () => {
@@ -61,6 +81,7 @@ export const AddDog = () => {
 
   const addDog = (event) => {
     event.preventDefault();
+    const imageFile = document.querySelector("#avatar_url");
     let form_data = new FormData();
     form_data.append("name", dog.name);
     form_data.append("breed", dog.breed);
@@ -68,6 +89,9 @@ export const AddDog = () => {
     form_data.append("gender", dog.gender);
     form_data.append("deleted", false);
     form_data.append("owner", sessionStorage.getItem("user"));
+    imageFile.files[0]
+      ? form_data.append("image", imageFile.files[0])
+      : form_data.append("image", "");
     axios
       .post("/dogs/create/", form_data, {
         headers: {
