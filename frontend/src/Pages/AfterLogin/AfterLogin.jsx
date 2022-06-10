@@ -22,6 +22,11 @@ export const AfterLogin = () => {
   const token = sessionStorage.getItem("token");
   const [user, setUser] = useState();
 
+  const [imageUrl, setImageUrl] = useState("pudzilla");
+
+
+  console.log(imageUrl)
+
   useEffect(() => {
     axios
       .get(`/users/${sessionStorage.getItem("user")}/`, {
@@ -30,6 +35,8 @@ export const AfterLogin = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
+        setImageUrl(res.data.image ? res.data.image : "pudzilla")
+        console.log("img: ",imageUrl);
       })
       .catch((error) => {
         console.log(error.response);
@@ -51,9 +58,10 @@ export const AfterLogin = () => {
       });
   }, []);
 
-  console.log(walk);
-  let imageUrl = user.image ? user.image : " "
-  console.log("img: ",imageUrl);
+  
+  // console.log(walk);
+  // let imageUrl = user.image ? user.image : "pudzilla"
+  console.log("imgafter: ",imageUrl);
 
   return (
     <div className="AfterLoginsss">
