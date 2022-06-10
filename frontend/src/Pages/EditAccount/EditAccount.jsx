@@ -1,5 +1,5 @@
 import "./EditAccount.scss";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../Assets/Images/pudzilla.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../Models/Users";

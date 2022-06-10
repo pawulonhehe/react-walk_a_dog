@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./RateTrainer.scss";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../Assets/Images/pudzilla.png";
 import Rating from "@mui/material/Rating";
 import { Modal } from "@mui/material";
 import axios from "axios";

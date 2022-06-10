@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./TrainerDetails.scss";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../Assets/Images/pudzilla.png";
 import { useNavigate } from "react-router-dom";
 import { Rating } from "@mui/material";
 import { Opinion } from "../../Components/Opinion/Opinion";

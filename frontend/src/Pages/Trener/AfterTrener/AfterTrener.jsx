@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./AfterTrener.scss";
-import pudzilla from "../../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../../Assets/Images/pudzilla.png";
 import { Icon } from "@iconify/react";
 import { Slots } from "../../../Components/Slots/Slots";
 import axios from "axios";

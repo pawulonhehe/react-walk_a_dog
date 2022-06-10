@@ -1,6 +1,6 @@
 import React from "react";
 import "./TrainerDetailsHist.scss";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../Assets/Images/pudzilla.png";
 import pies from "../../Assets/Images/pies.jpg";
 
 export const TrainerDetailsHist = () => {

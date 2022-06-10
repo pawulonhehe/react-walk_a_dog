@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./WalkHistory.scss";
 import moment from "moment";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../Assets/Images/pudzilla.png";
 import BasicModal from "../BasicModal/BasicModal";
 import { RateTrainer } from "../RateTrainer/RateTrainer";
 import axios from "axios";

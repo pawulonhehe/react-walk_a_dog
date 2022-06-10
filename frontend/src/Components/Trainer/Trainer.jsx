@@ -1,5 +1,5 @@
 import "./Trainer.scss";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../Assets/Images/pudzilla.png";
 import { useNavigate } from "react-router-dom";
 import { Rating } from "@mui/material";
 import { useState, useEffect } from "react";

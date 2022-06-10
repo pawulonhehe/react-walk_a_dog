@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./Trainers.scss";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../Assets/Images/pudzilla.png";
 import { useNavigate } from "react-router-dom";
 import { Trainer } from "../../Components/Trainer/Trainer";
 import axios from "axios";

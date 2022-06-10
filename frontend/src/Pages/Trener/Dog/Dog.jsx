@@ -1,6 +1,6 @@
 import "./Dog.scss";
 import pies from "../../../Assets/Images/pies.jpg";
-import pudzilla from "../../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../../Assets/Images/pudzilla.png";
 
 export const Dog = () => {
   return (

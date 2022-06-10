@@ -1,6 +1,6 @@
 import React from "react";
 import "./AfterLogin.scss";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../Assets/Images/pudzilla.png";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../Models/Users";

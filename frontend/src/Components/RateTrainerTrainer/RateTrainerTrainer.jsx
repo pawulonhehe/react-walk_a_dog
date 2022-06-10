@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./RateTrainerTrainer.scss";
-import pudzilla from "../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../Assets/Images/pudzilla.png";
 import Rating from "@mui/material/Rating";
 import { Modal, Select } from "@mui/material";
 import { useNavigate } from "react-router";

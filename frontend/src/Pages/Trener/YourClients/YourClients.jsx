@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./YourClients.scss";
-import pudzilla from "../../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../../Assets/Images/pudzilla.png";
 import pies from "../../../Assets/Images/pies.jpg";
 import axios from "axios";
 import ClientDetails from "../../../Components/ClientDetails/ClientDetails";

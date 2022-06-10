@@ -1,5 +1,5 @@
 import "./Owner.scss";
-import pudzilla from "../../../Assets/Images/pudzilla.jpg";
+import pudzilla from "../../../Assets/Images/pudzilla.png";
 import pies from "../../../Assets/Images/pies.jpg";
 import { useNavigate } from "react-router-dom";
 
