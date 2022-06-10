@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -17,10 +17,12 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 export const WalkDetailsTrainer = (props) => {
   const token = sessionStorage.getItem("token");
-  const sendLocByTrainer = () => {
+
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       axios.patch(
         `/walks/${props.id}/`,
@@ -35,7 +37,8 @@ export const WalkDetailsTrainer = (props) => {
       console.log("Latitude is :", position.coords.latitude);
       console.log("Longitude is :", position.coords.longitude);
     });
-  };
+  }, []);
+
   return (
     <div>
       <Modal
@@ -82,9 +85,6 @@ export const WalkDetailsTrainer = (props) => {
                   text="My Marker"
                 />
               </GoogleMapReact>
-              <button className="loc-trainer-btn" onClick={sendLocByTrainer}>
-                Wyślij aktualną lokalizacje
-              </button>
             </div>
           </div>
         </Box>

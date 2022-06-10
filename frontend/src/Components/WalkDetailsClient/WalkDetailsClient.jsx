@@ -20,6 +20,11 @@ const style = {
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const WalkDetailsClient = (props) => {
+  const defaultCenter = {
+    lat: +props.latitude,
+    lng: +props.longitude,
+  };
+  console.log(props);
   return (
     <div>
       <Modal
@@ -58,13 +63,14 @@ const WalkDetailsClient = (props) => {
                 bootstrapURLKeys={{
                   key: "AIzaSyAyOgCp9cy7G2rg1uP-00bGEpVNKsZ-eek",
                 }}
-                defaultCenter={{
-                  lat: 53.7753,
-                  lng: 20.49,
-                }}
+                defaultCenter={defaultCenter}
                 defaultZoom={15}
               >
-                <div className="pin1" lat={53.7753} lng={20.49}>
+                <div
+                  className="pin1"
+                  lat={props.latitude}
+                  lng={props.longitude}
+                >
                   .
                 </div>
                 <AnyReactComponent
