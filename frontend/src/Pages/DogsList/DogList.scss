@@ -46,6 +46,7 @@
     justify-content: center;
     border-radius: 15px;
     margin-top: 10%;
+    overflow: auto;
   }
 
   .MyDogs--dog {
@@ -72,7 +73,6 @@
     .MyDogs--dog__image {
       display: flex;
       justify-content: flex-start;
-      position: absolute;
       margin-left: 3.5%;
       margin-top: -1.5%;
     }

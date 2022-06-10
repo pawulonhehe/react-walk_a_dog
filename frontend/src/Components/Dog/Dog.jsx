@@ -1,6 +1,6 @@
 import React from "react";
 import "./Dog.scss";
-import pies from "../../Assets/Images/pies.jpg";
+import pies from "../../Assets/Images/psy/defaultdog.jpg";
 import { useNavigate } from "react-router-dom";
 import { genderDics } from "../../helpers";
 
@@ -9,11 +9,17 @@ export const Dog = (props) => {
   const switchToEditDog = () => navigate(`/editDog/${props.id}`);
   const switchToEditDogAvatar = () => navigate(`/editDogAvatar/${props.id}`);
 
+  console.log(props);
   return (
     <div className="MyDogs--dog">
       <div className="MyDogs--dog__title">{props.name}</div>
       <div className="MyDogs--dog__image">
-        <img src={props.image} alt="pies" width="100" height="100"></img>
+        <img
+          src={props.image || pies}
+          alt="pies"
+          width="100"
+          height="100"
+        ></img>
       </div>
       <div className="MyDogs--dog__Ltext">
         Rasa <br></br> Wiek <br></br>Płeć <br></br>Waga

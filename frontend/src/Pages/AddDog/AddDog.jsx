@@ -132,7 +132,7 @@ export const AddDog = () => {
           <input
             type="text"
             name="dogweight"
-            placeholder="waga"
+            placeholder="waga (kg)"
             onChange={addWeight}
             value={dog.weight}
           />

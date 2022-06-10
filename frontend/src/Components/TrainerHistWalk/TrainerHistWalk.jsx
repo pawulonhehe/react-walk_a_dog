@@ -3,6 +3,7 @@ import "./TrainerHistWalk.scss";
 import { RateTrainerTrainer } from "../../Components/RateTrainerTrainer/RateTrainerTrainer";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import moment from "react-moment";
 
 export const TrainerHistWalk = (props) => {
   const [showR, setOpenR] = useState(false);
