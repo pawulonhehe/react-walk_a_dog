@@ -51,6 +51,13 @@ export const AfterTrener = () => {
       });
   }, []);
 
+  const handleLogout = () => {
+    axios.post("auth/logout/").then(() => {
+      sessionStorage.removeItem("token");
+      window.location.reload();
+    });
+  };
+
   console.log(walk);
 
   return (
@@ -107,6 +114,9 @@ export const AfterTrener = () => {
         </div>
         <button type="submit" className="startWork" onClick={switchToStartWork}>
           Zacznij pracę!
+        </button>
+        <button className="logoutAfterLogin" onClick={handleLogout}>
+          Wyloguj
         </button>
         {/* <div className="sloty"><Slots /></div> */}
       </div>
