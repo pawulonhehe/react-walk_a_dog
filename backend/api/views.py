@@ -89,7 +89,7 @@ class SlotListView(ListAPIView):  # noqa: D101
         qs = super().get_queryset()
         date_time = datetime.datetime.now()
         current_date = datetime.date.today()
-        qs_filter = qs.filter(date__gte=current_date)
+        qs_filter = qs.filter(date__gte=current_date, dog_count__lt=3)
         id_list = []
         for obj in qs_filter:
             date_time2 = f'{obj.date}T{obj.start_time}'
@@ -286,4 +286,3 @@ class TrainerReviews(ListAPIView):
 
     def get_queryset(self):
         return TrainerRating.objects.filter(trainer=self.kwargs['pk'])
-        

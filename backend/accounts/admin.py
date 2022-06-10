@@ -15,4 +15,5 @@ class UserAdmin(admin.ModelAdmin):  # noqa: D101
     list_display = (
         'email',
         'is_staff',
+        'is_trainer',
     )

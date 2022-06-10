@@ -23,6 +23,7 @@ class DogAdmin(admin.ModelAdmin):  # noqa: D101
 class SlotAdmin(admin.ModelAdmin):  # noqa: D101
     list_display = (
         'date',
+        'dog_count',
     )
 
 

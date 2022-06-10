@@ -1,6 +1,7 @@
 """Api serializers."""
 # Standard Library
-
+from django.utils.dateparse import parse_datetime
+import datetime
 # 3rd-party
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
@@ -14,6 +15,10 @@ from .models import DogRating
 from .models import Slot
 from .models import TrainerRating
 
+class DogsInWalkSerializer(serializers.ModelSerializer):  # noqa: D101
+    class Meta:  # noqa: D106
+        model = Dog
+        fields = ('id','name',)
 
 class TokenSerializer(serializers.ModelSerializer):  # noqa: D101
     is_trainer = serializers.SerializerMethodField()
@@ -68,6 +73,7 @@ class CustomUserSerializer(serializers.ModelSerializer):  # noqa: D101
             'first_name',
             'last_name',
             'phone_number',
+            'is_trainer',
             'image',
             'dogs',
         )
@@ -82,6 +88,7 @@ class TrainerSerializer(serializers.ModelSerializer):  # noqa: D101
             'first_name',
             'last_name',
             'phone_number',
+            'is_trainer',
             'image',
         )
 
@@ -97,7 +104,6 @@ class SlotListSerializer(serializers.ModelSerializer):  # noqa: D101
 
 class SlotSerializer(serializers.ModelSerializer):  # noqa: D101
     dog_count = serializers.SerializerMethodField()
-
     def get_dog_count(self, obj):  # noqa: D102
         return obj.dogs.count()
 
@@ -154,16 +160,16 @@ class SlotSerializer(serializers.ModelSerializer):  # noqa: D101
             dogs = attrs.get('dogs')
             if len(dogs) > 3:
                 raise serializers.ValidationError('Na jednym spacerze mogą być maksymalnie 3 psy.')
+            attrs['dog_count'] = len(dogs)
             filters = {
                 'date': date,
                 'start_time__lte': end_time,
                 'end_time__gte': start_time,
-                'trainer': trainer,
             }
             for dog in dogs:
                 if Slot.objects.filter(dogs=dog.id, **filters).exclude(pk=walk_id).exists():
                     raise serializers.ValidationError('Pies znajduje się już w innym spacerze.')
-
+            
         walks_count = trainer.slot_set.filter(
             date=date,
         )
@@ -193,6 +199,7 @@ class DogInWalkSerializer(serializers.ModelSerializer):  # noqa: D101
 
 
 class ActiveWalksTrainerSerializer(serializers.ModelSerializer):  # noqa: D101
+
     class Meta:  # noqa: D106
         model = CustomUser
         fields = (
