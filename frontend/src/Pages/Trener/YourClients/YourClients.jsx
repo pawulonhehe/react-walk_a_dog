@@ -7,6 +7,8 @@ import ClientDetails from "../../../Components/ClientDetails/ClientDetails";
 
 export const YourClients = () => {
   const [clients, setClients] = useState([]);
+  const [user, setUser] = useState([]);
+
   const token = sessionStorage.getItem("token");
 
   const [open, setOpen] = useState(false);
@@ -14,6 +16,20 @@ export const YourClients = () => {
 
   const handleClose = () => setOpen(false);
 
+
+  useEffect(() => {
+    axios
+      .get("/users/", {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        sessionStorage.setItem("data", JSON.stringify(res.data));
+        setUser(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
 
   useEffect(() => {
     axios
