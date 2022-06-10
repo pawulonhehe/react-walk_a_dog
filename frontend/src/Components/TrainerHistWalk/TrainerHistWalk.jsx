@@ -20,7 +20,7 @@ export const TrainerHistWalk = (props) => {
       <div className="trener">Psy:</div>
       <div className="pieski">{props.dogs.map((d) => d.name).join(", ")}</div>
       <button className="trainerhist-btn" onClick={handleOpenR}>
-        Szczegóły
+        Sporządź raport
       </button>
       <RateTrainerTrainer open={showR} onClose={handleCloseR} {...props} />
     </div>
