@@ -23,6 +23,9 @@ export const BookWalk = () => {
 
   const token = sessionStorage.getItem("token");
 
+
+
+  
   let selectedDateFormat = moment(new Date())
     .locale("pl")
     .format("dddd, DD MMMM yyyy ");
