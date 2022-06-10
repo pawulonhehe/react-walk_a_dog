@@ -23,7 +23,7 @@ export const EditDog = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setDog(res.data);
-        setImageUrl(res.data.image ? res.data.image : "pudzilla")
+        setImageUrl(res.data.image ? res.data.image : "pudzilla");
       })
       .catch((error) => {
         console.log(error.response);
@@ -116,11 +116,14 @@ export const EditDog = () => {
             />
           </label>
           <label>
-            Płeć:<br/>
-            <select onChange={changeGender} value={dog.gender}>
-              <option value={"M"}>Samiec</option>
-              <option value={"F"}>Samica</option>
-            </select>
+            Płeć:
+            <br />
+            <div className="selectPlecPies">
+              <select onChange={changeGender} value={dog.gender}>
+                <option value={"M"}>Samiec</option>
+                <option value={"F"}>Samica</option>
+              </select>
+            </div>
           </label>
           <button
             className="RightSideContainer--changeButton"

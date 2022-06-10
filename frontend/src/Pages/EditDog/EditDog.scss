@@ -89,6 +89,22 @@
     color: rgba(0, 0, 0, 0.4);
   }
 
+  .selectPlecPies {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 5%;
+    border: solid transparent;
+
+    select {
+      text-align: center;
+      font-family: "Montserrat", sans-serif;
+      box-shadow: none;
+      border: solid transparent;
+      border-radius: 10px;
+    }
+  }
+
   .RightSideContainer--changeButton {
     border: solid transparent;
     background-color: #3498db;
