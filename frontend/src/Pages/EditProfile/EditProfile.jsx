@@ -3,6 +3,7 @@ import pudzilla from "../../Assets/Images/pudzilla.jpg";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { notify } from "../../helpers";
 
 export const EditProfile = () => {
   const [user, setUser] = useState([]);
@@ -21,18 +22,24 @@ export const EditProfile = () => {
 
   const editProfile = (event) => {
     event.preventDefault();
+    let form_data = new FormData();
+    form_data.append("first_name", user.first_name);
+    form_data.append("last_name", user.last_name);
+    form_data.append("phone_number", user.phone_number);
+    form_data.append("email", user.email);
+
     axios.patch(
       `/users/${params.id}/`,
+      form_data,
       {
-        first_name: user.first_name,
-        last_name: user.last_name,
-        phone_number: user.phone_number,
-        email: user.email,
-      },
-      {
+        "Content-Type": "multipart/form-data",
+          accept: "application/json",
         headers: { Authorization: `Token ${token}` },
       }
-    );
+    )
+    .then((res) => {
+      notify("success", "Profil został zaktualizowany");
+    });
   };
   console.log(user);
   useEffect(() => {
@@ -49,7 +56,6 @@ export const EditProfile = () => {
         console.log(error.response);
       });
   }, []);
-  console.log(user);
 
   return (
     <div className="EditProfile">
