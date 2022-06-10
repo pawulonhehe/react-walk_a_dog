@@ -37,24 +37,57 @@ export const AddDog = () => {
     setDog({ ...dog, gender: selectedOption.value });
   const addAge = (event) => setDog({ ...dog, age: event.target.value });
 
+  // const addDog = (event) => {
+  //   event.preventDefault();
+
+  //   axios
+  //     .post(
+  //       "/dogs/create/",
+  //       {
+  //         owner: sessionStorage.getItem("user"),
+  //         name: dog.name,
+  //         breed: dog.breed,
+  //         weight: dog.weight,
+  //         gender: dog.gender,
+  //       },
+  //       {
+  //         headers: { Authorization: `Token ${token}` },
+  //       }
+  //     )
+  //     .then(() => navigate("/mydogs"));
+  // };
+
+  console.log(sessionStorage.getItem("user"));
+
   const addDog = (event) => {
     event.preventDefault();
+    const imageFile = document.querySelector("#avatar_url");
+    let form_data = new FormData();
+    form_data.append("name", dog.name);
+    form_data.append("breed", dog.breed);
+    form_data.append("weight", dog.weight);
+    form_data.append("gender", dog.gender);
+    form_data.append("owner", sessionStorage.getItem("user"));
+    imageFile.files[0]
+      ? form_data.append("image", imageFile.files[0])
+      : form_data.append("image", "");
 
     axios
-      .post(
-        "/dogs/create/",
-        {
-          owner: sessionStorage.getItem("user"),
-          name: dog.name,
-          breed: dog.breed,
-          weight: dog.weight,
-          gender: dog.gender,
+      .post("/dogs/create/", form_data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          accept: "application/json",
+          Authorization: `Token ${token}`,
         },
-        {
-          headers: { Authorization: `Token ${token}` },
-        }
-      )
+      })
       .then(() => navigate("/mydogs"));
+  };
+  const [profilePicture, setProfilePicture] = useState([]);
+
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setProfilePicture(URL.createObjectURL(event.target.files[0]));
+    }
   };
   console.log(dog);
   return (
@@ -91,20 +124,17 @@ export const AddDog = () => {
       <div className="MiddleForm--container">
         <div className="MiddleForm--addDogImg__text">Dodaj zdjęcie psa</div>
         <div className="MiddleForm--addDogImg__form">
-          <div className="MiddleForm--addDogImg__fileurl">
-            <input
-              type="text"
-              name=""
-              id=""
-              className="RightSideContainer--url"
-              placeholder="wpisz url..."
-            />
-          </div>
           <div className="MiddleForm-addDogImg__fileattach">
-            lub<br></br> <br></br>
             <label className="RightSideContainer--fileUpload">
-              <input type="file" id="avatar" name="avatar" />
-              Załącz...
+              <input
+                name="avatar_url"
+                id="avatar_url"
+                className="button"
+                type="file"
+                onChange={onImageChange}
+                accept="image/png, image/gif, image/jpeg"
+              />
+              Załącz..
             </label>
           </div>
           <img src={pies2} alt="pies2" width="100" height="100"></img>

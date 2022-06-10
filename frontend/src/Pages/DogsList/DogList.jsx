@@ -46,6 +46,7 @@ export const DogList = () => {
         console.log(error.response);
       });
   }, []);
+  
   console.log(user);
   return (
     <div className="MyDogs">

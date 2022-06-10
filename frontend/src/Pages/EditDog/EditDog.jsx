@@ -59,9 +59,16 @@ export const EditDog = () => {
 
   const deleteDog = (event) => {
     event.preventDefault();
+    let form_data = new FormData();
+    form_data.append("id", params.id);
+    form_data.append("deleted", true);
     axios
-      .delete(`/dogs/${params.id}/`, {
-        headers: { Authorization: `Token ${token}` },
+      .patch(`/dogs/${params.id}/`, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          accept: "application/json",
+          Authorization: `Token ${sessionStorage.getItem("token")}`,
+        },
       })
       .then(() => navigate("/mydogs"));
   };

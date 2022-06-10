@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import "./WalkDetailsTrainer.scss";
 import moment from "moment";
 import GoogleMapReact from "google-map-react";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -17,8 +18,24 @@ const style = {
   p: 4,
 };
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
 export const WalkDetailsTrainer = (props) => {
+  const token = sessionStorage.getItem("token");
+  const sendLocByTrainer = () => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      axios.patch(
+        `/walks/${props.id}/`,
+        {
+          latitude: +position.coords.latitude.toFixed(6),
+          longitude: +position.coords.longitude.toFixed(6),
+        },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      );
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  };
   return (
     <div>
       <Modal
@@ -65,7 +82,7 @@ export const WalkDetailsTrainer = (props) => {
                   text="My Marker"
                 />
               </GoogleMapReact>
-              <button className="loc-trainer-btn">
+              <button className="loc-trainer-btn" onClick={sendLocByTrainer}>
                 Wyślij aktualną lokalizacje
               </button>
             </div>

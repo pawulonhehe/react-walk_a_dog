@@ -1,6 +1,11 @@
 import { red } from "@mui/material/colors";
 import { toast } from "react-toastify";
 
+export const genderDics = {
+  F: "Samica",
+  M: "Samiec",
+};
+
 export const notify = (type, message) => {
   toast(message, {
     type,
