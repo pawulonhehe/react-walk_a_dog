@@ -17,8 +17,6 @@ export const EditProfile = () => {
     setUser({ ...user, last_name: event.target.value });
   const changePhoneNumber = (event) =>
     setUser({ ...user, phone_number: event.target.value });
-  const changeEmail = (event) =>
-    setUser({ ...user, email: event.target.value });
 
   const editProfile = (event) => {
     event.preventDefault();
@@ -28,20 +26,16 @@ export const EditProfile = () => {
     form_data.append("phone_number", user.phone_number);
     form_data.append("email", user.email);
 
-    axios.patch(
-      `/users/${params.id}/`,
-      form_data,
-      {
+    axios
+      .patch(`/users/${params.id}/`, form_data, {
         "Content-Type": "multipart/form-data",
-          accept: "application/json",
+        accept: "application/json",
         headers: { Authorization: `Token ${token}` },
-      }
-    )
-    .then((res) => {
-      notify("success", "Profil został zaktualizowany");
-    });
+      })
+      .then((res) => {
+        notify("success", "Profil został zaktualizowany");
+      });
   };
-  console.log(user);
   useEffect(() => {
     axios
       .get(`/users/${params.id}`, {
@@ -50,7 +44,7 @@ export const EditProfile = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
-        setImageUrl(res.data.image ? res.data.image : "pudzilla")
+        setImageUrl(res.data.image ? res.data.image : "pudzilla");
       })
       .catch((error) => {
         console.log(error.response);
@@ -65,7 +59,7 @@ export const EditProfile = () => {
           <img src={imageUrl} alt="Pudzilla" width="100" height="100"></img>
         </div>
         <div className="LeftSideBarr--buttonContainer">
-        <Link to={`/editprofile/${sessionStorage.getItem("user")}`}>
+          <Link to={`/editprofile/${sessionStorage.getItem("user")}`}>
             <button type="submit" className="LeftSideBar-button">
               Profil
             </button>
@@ -109,15 +103,6 @@ export const EditProfile = () => {
               name="phone"
               value={user.phone_number}
               onChange={changePhoneNumber}
-            />
-          </label>
-          <label>
-            <br></br>e-mail:<br></br>
-            <input
-              type="text"
-              name="email"
-              value={user.email}
-              onChange={changeEmail}
             />
           </label>
           <button
