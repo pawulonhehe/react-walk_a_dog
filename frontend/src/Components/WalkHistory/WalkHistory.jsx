@@ -15,7 +15,7 @@ export const WalkHistory = (props) => {
   const handleClose = () => setOpen(false);
   const [user, setUser] = useState();
 
-  const [imageUrl, setImageUrl] = useState("pudzilla");
+  const [imageUrl, setImageUrl] = useState(pudzilla);
 
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const WalkHistory = (props) => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
-        setImageUrl(res.data.image ? res.data.image : "pudzilla")
+        setImageUrl(res.data.image ? res.data.image : pudzilla)
       })
       .catch((error) => {
         console.log(error.response);

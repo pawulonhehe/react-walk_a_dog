@@ -56,8 +56,8 @@ const HisModal = (props) => {
 
   
   
-  console.log("id:", props.id)
-  console.log(review)
+  // console.log("id:", props.id)
+  // console.log(review)
 
   return (
     <div>

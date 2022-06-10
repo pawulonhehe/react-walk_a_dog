@@ -18,6 +18,8 @@ $lightblue: #aec7ea;
   .Reservations--incomingRes {
     display: flex;
     flex-direction: column;
+    max-height: 10rem;
+    overflow: scroll;
   }
   .Reservations--incomingResList {
     display: flex;
