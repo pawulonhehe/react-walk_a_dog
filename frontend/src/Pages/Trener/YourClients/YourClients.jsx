@@ -16,6 +16,7 @@ export const YourClients = () => {
 
   const handleClose = () => setOpen(false);
 
+  // const [imageUrl, setImageUrl] = useState("pudzilla");
 
   useEffect(() => {
     axios
@@ -60,7 +61,7 @@ export const YourClients = () => {
         .map((user) => (
           <div className="Clients--oneClient">
             <div className="Clients--oneClient__avatar">
-              <img src={pudzilla} alt="pudzilla" />
+              <img src={user.image ? user.image : pudzilla} alt="pudzilla" />
             </div>
             <div className="Clients--oneClient__infoCointainer">
               <div className="oneClient__infoContainer__title">
@@ -72,9 +73,8 @@ export const YourClients = () => {
                 { user.dogs
                 .map(d =>
                   <div className="doggies"> 
-                   <p>{d.name}</p>
-                    {d.breed}  <br></br>
-                    {d.weight + "kg"} 
+                   <p>{d.name + " - " + d.breed}</p> 
+                    <p>{d.weight + "kg"} </p>
                     </div>
                  
                  )}

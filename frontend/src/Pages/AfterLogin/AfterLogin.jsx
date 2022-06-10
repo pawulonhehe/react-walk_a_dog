@@ -11,10 +11,7 @@ import GoogleMapReact from "google-map-react";
 import { WalkModalTrainerxd } from "../../Components/WalkModalTrainer/WalkModalTrainer";
 // import { Link } from "react-router-dom";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
 export const AfterLogin = () => {
-  
   const is_trainer = sessionStorage.getItem("is_trainer");
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
@@ -27,10 +24,7 @@ export const AfterLogin = () => {
   const switchToMyDogs = () => navigate("/mydogs");
   const switchToReservations = () => navigate("/reservations");
   const switchToTrainers = () => navigate("/trainers");
-
-  {
-    /* active walks*/
-  }
+  /* active walks*/
   useEffect(() => {
     if (is_trainer === "true") {
       axios
@@ -67,7 +61,7 @@ export const AfterLogin = () => {
       .then((res) => {
         sessionStorage.setItem("data", JSON.stringify(res.data));
         setUser(res.data);
-        setImageUrl(res.data.image ? res.data.image : pudzilla)
+        setImageUrl(res.data.image ? res.data.image : pudzilla);
       })
       .catch((error) => {
         console.log(error.response);
@@ -80,7 +74,6 @@ export const AfterLogin = () => {
       window.location.reload();
     });
   };
-
 
   if (is_trainer === "false") {
     return (
