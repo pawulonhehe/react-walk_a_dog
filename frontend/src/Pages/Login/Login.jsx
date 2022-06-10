@@ -19,11 +19,7 @@ export const Login = () => {
         sessionStorage.setItem("token", res.data.key);
         sessionStorage.setItem("user", res.data.user);
         sessionStorage.setItem("is_trainer", res.data.is_trainer);
-        if (res.data.user.is_trainer) {
-          navigate("/aftertrener");
-        } else {
-          navigate("/afterlogin");
-        }
+        navigate("/mydogs");
         notify("succes", "Poprawnie zalogowano");
       })
       .catch((error) => {
@@ -31,7 +27,6 @@ export const Login = () => {
         console.log("dupa");
         notify("warning", "Niepoprawne dane logowania");
       })
-      .finally(() => {});
   };
 
   return (
