@@ -6,6 +6,8 @@ export const Home = () => {
   const handleLogout = () => {
     axios.post("auth/logout/").then(() => {
       sessionStorage.removeItem("token");
+      sessionStorage.removeItem("is_trainer");
+      sessionStorage.removeItem("user");
       window.location.reload();
     });
   };
