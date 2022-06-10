@@ -66,6 +66,7 @@ export const AddDog = () => {
     form_data.append("breed", dog.breed);
     form_data.append("weight", dog.weight);
     form_data.append("gender", dog.gender);
+    form_data.append("deleted", false);
     form_data.append("owner", sessionStorage.getItem("user"));
     axios
       .post("/dogs/create/", form_data, {
